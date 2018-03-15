@@ -1,0 +1,50 @@
+{
+  "name": "house-tyrell",
+  "version": "1.0.0",
+  "description": "Thesis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/server.js open client src/index.jsx",
+    "react-dev": "webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/House-Tyrell/House-Tyrell.git"
+  },
+  "author": "House-Tyrell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/House-Tyrell/House-Tyrell/issues"
+  },
+  "homepage": "https://github.com/House-Tyrell/House-Tyrell#readme",
+  "dependencies": {
+    "aws-sdk": "^2.210.0",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "history": "^4.7.2",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.17.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2",
+    "sequelize": "^4.37.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  }
+}
