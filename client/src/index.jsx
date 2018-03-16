@@ -6,8 +6,8 @@ import { Router, Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
-import reducers from './reducers/reducers';
-import App from './components/app';
+import reducers from './reducers/reducers.js';
+import App from './components/app.jsx';
 
 const reducer = combineReducers({
   ...reducers,
