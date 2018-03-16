@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
 
   handleClick() {
@@ -22,5 +22,3 @@ class App extends React.Component {
     )
   }
 }
-
-export default App;
