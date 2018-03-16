@@ -2,15 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 export default class App extends React.Component {
-
-
-  handleClick() {
-    axios.post('/test')
-    .then((res) => {
-      console.log('hello')
-    })
-  }
-
   render() {
     return (
       <div>
@@ -19,6 +10,6 @@ export default class App extends React.Component {
           <button onClick={this.handleClick} >This is Test Button</button>
         </header>
       </div>
-    )
+    );
   }
 }
