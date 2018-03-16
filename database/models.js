@@ -16,7 +16,7 @@ const db = new Sequelize(DB_NAME, DB_UN, DB_PW, {
 const Employee = db.define('Employees', {
   employee_id: Sequelize.INTEGER,
   employee_img: Sequelize.STRING,
-  manager_password: {type: Sequelize.STRING, allowNull: false, defaultValue: NULL},
+  manager_password: Sequelize.STRING,
   manager_privilege: {type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false},
   employee_name: Sequelize.STRING
 });
@@ -64,3 +64,17 @@ const Timesheet = db.define('Timesheets', {
   check_in: Sequelize.STRING,
   check_out: Sequelize.STRING
 });
+
+
+
+db.sync({force: true}).then(() => {
+  Ingredient.create({ingredient_name: "Ground Beef", order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: "03/25/2018"});
+})
+
+exports.Employee = Employee;
+exports.Item = Item;
+exports.Category = Category;
+exports.Sale = Sale;
+exports.Ingredient = Ingredient;
+exports.Order = Order;
+exports.Timesheet = Timesheet;
