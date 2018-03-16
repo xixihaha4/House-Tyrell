@@ -1,6 +1,6 @@
 const initialState = {
-  items: []
-}
+  items: [],
+};
 
 export default function reducer(state = initialState, action) {
   return state;

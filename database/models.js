@@ -1,11 +1,7 @@
 const Sequelize = require('sequelize');
-const config = require('../config.js');
-
-const DB_NAME = config.DB_NAME;
-const DB_PORT = config.DB_PORT;
-const DB_UN = config.DB_UN;
-const DB_PW = config.DB_PW;
-const DB_URL = config.DB_URL;
+const {
+  DB_NAME, DB_PORT, DB_UN, DB_PW, DB_URL
+} = require('../config.js');
 
 const db = new Sequelize(DB_NAME, DB_UN, DB_PW, {
   host: DB_URL,
@@ -17,8 +13,8 @@ const Employee = db.define('Employees', {
   employee_id: Sequelize.INTEGER,
   employee_img: Sequelize.STRING,
   manager_password: Sequelize.STRING,
-  manager_privilege: {type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false},
-  employee_name: Sequelize.STRING
+  manager_privilege: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
+  employee_name: Sequelize.STRING,
 });
 
 const Item = db.define('Items', {
@@ -26,11 +22,11 @@ const Item = db.define('Items', {
   item_price: Sequelize.DECIMAL,
   item_image: Sequelize.STRING,
   item_ingredients: Sequelize.STRING,
-  item_category: Sequelize.INTEGER
+  item_category: Sequelize.INTEGER,
 });
 
 const Category = db.define('Categories', {
-  category_name: Sequelize.STRING
+  category_name: Sequelize.STRING,
 });
 
 const Sale = db.define('Sales', {
@@ -39,7 +35,7 @@ const Sale = db.define('Sales', {
   employee_id: Sequelize.INTEGER,
   sale_amount: Sequelize.DECIMAL,
   sale_cost: Sequelize.DECIMAL,
-  sale_discount: Sequelize.INTEGER
+  sale_discount: Sequelize.INTEGER,
 });
 
 const Ingredient = db.define('Ingredients', {
@@ -48,7 +44,7 @@ const Ingredient = db.define('Ingredients', {
   ingredient_left: Sequelize.DECIMAL,
   ingredient_initial: Sequelize.DECIMAL,
   ingredient_cost: Sequelize.DECIMAL,
-  ingredient_expire: Sequelize.STRING
+  ingredient_expire: Sequelize.STRING,
 });
 
 const Order = db.define('Orders', {
@@ -56,20 +52,21 @@ const Order = db.define('Orders', {
   order_id: Sequelize.INTEGER,
   order_initial: Sequelize.DECIMAL,
   order_left: Sequelize.DECIMAL,
-  order_price: Sequelize.DECIMAL
+  order_price: Sequelize.DECIMAL,
 });
 
 const Timesheet = db.define('Timesheets', {
   employee_id: Sequelize.INTEGER,
   check_in: Sequelize.STRING,
-  check_out: Sequelize.STRING
+  check_out: Sequelize.STRING,
 });
 
 
-
-db.sync({force: true}).then(() => {
-  Ingredient.create({ingredient_name: "Ground Beef", order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: "03/25/2018"});
-})
+db.sync({ force: true }).then(() => {
+  Ingredient.create({
+    ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',
+  });
+});
 
 exports.Employee = Employee;
 exports.Item = Item;
