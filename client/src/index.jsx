@@ -1,30 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router';
-import { createBrowserHistory } from 'history';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 
-import reducers from './reducers/reducers.js';
 import App from './components/app.jsx';
 
-const reducer = combineReducers({
-  ...reducers,
-  routing: routerReducer,
-});
-
-const store = createStore(reducer);
-
-const history = syncHistoryWithStore(createBrowserHistory(), store);
+const history = createHistory();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <div>
-      <Router history={history}>
-        <Route path="/" component={App} />
-      </Router>
-    </div>
-  </Provider>,
+  <div>
+    <Router history={history}>
+      <Route path="/" component={App} />
+    </Router>
+  </div>,
   document.getElementById('app'),
 );
