@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Item from './item.jsx';
 
 class SaleItems extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class SaleItems extends React.Component {
   }
 
   componentDidMount() {
-    this.getMenuItems();
+    // this.getMenuItems();
   }
 
   getMenuItems() {
@@ -28,14 +29,15 @@ class SaleItems extends React.Component {
     return (
       <div className="saleItemGrid">
         {
-          this.state.menuItems.map((item, i) =>
-            (<div className={`item_${i}`}>
-              <img alt="menuitem" src={item.item_image} style={{ width: '150px', height: '150px' }} />
-            </div>))
-        }
+          this.props.menuItems.map((item, i) =>
+            <Item className={`item_${i}`} item={item} itemClick={this.props.itemClick} />)}
       </div>
     );
   }
 }
 
 export default SaleItems;
+
+// (<div className={`item_${i}`}>
+//   <img alt="menuitem" src={item.item_image} style={{ width: '150px', height: '150px' }} />
+// </div>))
