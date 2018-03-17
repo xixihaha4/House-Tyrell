@@ -1,15 +1,11 @@
 import React from 'react';
-import axios from 'axios';
-
 import SaleScreen from './saleScreen.jsx';
 
-export default class App extends React.Component {
+const App = () =>
+  (
+    <div>
+      <SaleScreen />
+    </div>
+  );
 
-  render() {
-    return (
-      <div>
-        <SaleScreen />
-      </div>
-    );
-  }
-}
+export default App;
