@@ -24,6 +24,10 @@ app.get('/fetch/items', (req, res) => {
     .then((data) => {
       res.send(data);
     });
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    if (err) res.status(500).send(err);
+  });
 });
 
 app.listen(port);
