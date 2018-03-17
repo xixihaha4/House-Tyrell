@@ -8,6 +8,6 @@ const SaleScreen = () =>
       <div className="saleCategoryGrid">Categories</div>
       <div className="saleControlGrid">Grid</div>
     </div>
-);
+  );
 
 export default SaleScreen;

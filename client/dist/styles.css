@@ -35,3 +35,29 @@ body {
   grid-template-rows: 1fr 1fr;
   background-color: red;
 }
+
+.managerScreenGrid {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 40% 60%;
+}
+
+.manager-navigation {
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: orange;
+}
+
+.graphGrid {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  background-color: blue;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  background-color: pink;
+}
+
+
