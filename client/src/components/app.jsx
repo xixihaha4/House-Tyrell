@@ -9,10 +9,15 @@ export default class App extends React.Component {
       menuItems: [],
     };
     this.itemClick = this.itemClick.bind(this);
+    this.getMenuItems = this.getMenuItems.bind(this);
   }
 
 
   componentDidMount() {
+    this.getMenuItems();
+  }
+
+  getMenuItems() {
     axios.get('/fetch/items')
       .then((results) => {
         this.setState({
