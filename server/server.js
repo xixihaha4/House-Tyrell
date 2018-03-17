@@ -10,11 +10,19 @@ const port = 3000;
 app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-
+//* **************************** POST REQUESTS *********************************
 app.post('/test', (req, res) => {
   db.Category.create({ category_name: 'Test2Test' })
     .then(() => {
       res.send('success');
+    });
+});
+
+//* **************************** GET REQUESTS *********************************
+app.get('/fetch/items', (req, res) => {
+  db.Item.findAll()
+    .then((data) => {
+      res.send(data);
     });
 });
 
