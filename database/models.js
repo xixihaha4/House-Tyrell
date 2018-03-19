@@ -62,62 +62,62 @@ const Timesheet = db.define('Timesheets', {
 });
 
 
-db.sync({ force: true }).then(() => {
-  Ingredient.create({
-    ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',
-  });
-  Ingredient.create({
-    ingredient_name: 'Lettuce', order_number: 6, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.10, ingredient_expire: '03/25/2018',
-  });
-  Ingredient.create({
-    ingredient_name: 'Tomatoes', order_number: 10, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.25, ingredient_expire: '03/25/2018',
-  });
-  Ingredient.create({
-    ingredient_name: 'Onions', order_number: 9, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.15, ingredient_expire: '03/25/2018',
-  });
-  Ingredient.create({
-    ingredient_name: 'Pickles', order_number: 8, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.5, ingredient_expire: '03/25/2018',
-  });
-  Ingredient.create({
-    ingredient_name: 'Ketchup', order_number: 11, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 1, ingredient_expire: '03/25/2018',
-  });
-  Ingredient.create({
-    ingredient_name: 'Coca-Cola Cans', order_number: 12, ingredient_left: 80, ingredient_initial: 100, ingredient_cost: 0.10, ingredient_expire: '03/23/2018',
-  });
-  Category.create({
-    category_name: 'Drinks',
-  });
-  Category.create({
-    category_name: 'Burgers',
-  });
-  Category.create({
-    category_name: 'Salad',
-  });
-  Category.create({
-    category_name: 'Soup',
-  });
-  Category.create({
-    category_name: 'Steak',
-  });
-  Category.create({
-    category_name: 'Breakfast',
-  });
-  Item.create({
-    item_name: 'Hamburger', item_price: 5, item_image: 'https://www.rallys.com/wp-content/uploads/2017/03/BigBuford_Feature_1000x1000-600x600.jpg', item_ingredients: '[1, 2, 3, 4, 5, 6]', item_category: 2,
-  });
-  Item.create({
-    item_name: 'Coca-Cola', item_price: 1, item_image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY2B_5VgeOlPdpGZLz3H4SBmazfFS1gsoxtcBddF0awQux3EiY', item_ingredients: '[7]', item_category: 1,
-  });
-  Item.create({
-    item_name: 'Basic Salad', item_price: 6, item_image: 'https://recipes.heart.org/-/media/aha/recipe/recipe-images/mediterranean-salad.jpg', item_ingredients: '[2, 3, 4]', item_category: 3,
-  });
-  Item.create({
-    item_name: 'Chicken Noodle Soup', item_price: 4, item_ingredients: '[6]', item_category: 4,
-  });
-  Item.create({
-    item_name: 'Egg and Cheese Sandwich', item_price: 3, item_ingredients: '[6]', item_category: 6,
-  });
-});
+// db.sync({ force: true }).then(() => {
+//   Ingredient.create({
+//     ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',
+//   });
+//   Ingredient.create({
+//     ingredient_name: 'Lettuce', order_number: 6, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.10, ingredient_expire: '03/25/2018',
+//   });
+//   Ingredient.create({
+//     ingredient_name: 'Tomatoes', order_number: 10, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.25, ingredient_expire: '03/25/2018',
+//   });
+//   Ingredient.create({
+//     ingredient_name: 'Onions', order_number: 9, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.15, ingredient_expire: '03/25/2018',
+//   });
+//   Ingredient.create({
+//     ingredient_name: 'Pickles', order_number: 8, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.5, ingredient_expire: '03/25/2018',
+//   });
+//   Ingredient.create({
+//     ingredient_name: 'Ketchup', order_number: 11, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 1, ingredient_expire: '03/25/2018',
+//   });
+//   Ingredient.create({
+//     ingredient_name: 'Coca-Cola Cans', order_number: 12, ingredient_left: 80, ingredient_initial: 100, ingredient_cost: 0.10, ingredient_expire: '03/23/2018',
+//   });
+//   Category.create({
+//     category_name: 'Drinks',
+//   });
+//   Category.create({
+//     category_name: 'Burgers',
+//   });
+//   Category.create({
+//     category_name: 'Salad',
+//   });
+//   Category.create({
+//     category_name: 'Soup',
+//   });
+//   Category.create({
+//     category_name: 'Steak',
+//   });
+//   Category.create({
+//     category_name: 'Breakfast',
+//   });
+//   Item.create({
+//     item_name: 'Hamburger', item_price: 5, item_image: 'https://www.rallys.com/wp-content/uploads/2017/03/BigBuford_Feature_1000x1000-600x600.jpg', item_ingredients: '[1, 2, 3, 4, 5, 6]', item_category: 2,
+//   });
+//   Item.create({
+//     item_name: 'Coca-Cola', item_price: 1, item_image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY2B_5VgeOlPdpGZLz3H4SBmazfFS1gsoxtcBddF0awQux3EiY', item_ingredients: '[7]', item_category: 1,
+//   });
+//   Item.create({
+//     item_name: 'Basic Salad', item_price: 6, item_image: 'https://recipes.heart.org/-/media/aha/recipe/recipe-images/mediterranean-salad.jpg', item_ingredients: '[2, 3, 4]', item_category: 3,
+//   });
+//   Item.create({
+//     item_name: 'Chicken Noodle Soup', item_price: 4, item_ingredients: '[6]', item_category: 4,
+//   });
+//   Item.create({
+//     item_name: 'Egg and Cheese Sandwich', item_price: 3, item_ingredients: '[6]', item_category: 6,
+//   });
+// });
 
 exports.Employee = Employee;
 exports.Item = Item;
