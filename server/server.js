@@ -17,6 +17,11 @@ app.post('/test', (req, res) => {
       res.send('success');
     });
 });
+
+app.post('/completed/transaction', (req, res) => {
+  console.log(req.body);
+  res.send();
+})
 //* **************************** GET REQUESTS *********************************
 app.get('/fetch/items', (req, res) => {
   db.Item.findAll()

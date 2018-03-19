@@ -4,9 +4,9 @@ import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
 import SaleControl from './saleControl.jsx';
 
-const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, transactionRemove, filterByCategory }) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, transactionRemove, filterByCategory, transactionComplete }) =>
   (
-    <div className="saleScreenGrid">
+    <div className="saleScreenGrid animated fadeIn">
       <div><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
       <div className="saleTransactionGrid">
         <Transaction
@@ -18,7 +18,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
       </div>
       <div><SaleCategory menuCategories={menuCategories} filterByCategory={filterByCategory}/></div>
       <div className="saleControlGrid">
-        <SaleControl total={total} tax={tax} />
+        <SaleControl total={total} tax={tax} transactionComplete={transactionComplete} />
       </div>
     </div>
   );
