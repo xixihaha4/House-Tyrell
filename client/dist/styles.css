@@ -4,13 +4,13 @@ body {
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .saleItemGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 30vh 30vh 30vh 30vh;
+  grid-template-rows: 22vh 22vh 22vh 22vh;
   background-color: rgb(237, 237, 237);
   text-align: center;
 }

@@ -14,6 +14,7 @@ export default class App extends React.Component {
     this.itemClick = this.itemClick.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);
     this.getCategories = this.getCategories.bind(this);
+    this.filterByCategory = this.filterByCategory.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +40,18 @@ export default class App extends React.Component {
       });
   }
 
+  filterByCategory(category) {
+    axios.get('/filter/category', { params: { category: category.id } })
+      .then((results) => {
+        this.setState({
+          menuItems: results.data,
+        })
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+
   itemClick(item) {
     console.log('this is is item in app', item);
   }
@@ -50,6 +63,7 @@ export default class App extends React.Component {
           menuItems={this.state.menuItems}
           itemClick={this.itemClick}
           menuCategories={this.state.menuCategories}
+          filterByCategory={this.filterByCategory}
         />
       </div>
     );
