@@ -2,6 +2,7 @@ import React from 'react';
 import SaleItems from './saleItems.jsx';
 import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
+import SaleControl from './saleControl.jsx';
 
 const SaleScreen = ({menuItems, itemClick, menuCategories, transactionItems, total, tax, transactionRemove}) =>
   (
@@ -16,7 +17,9 @@ const SaleScreen = ({menuItems, itemClick, menuCategories, transactionItems, tot
         />
       </div>
       <div><SaleCategory menuCategories={menuCategories} /></div>
-      <div className="saleControlGrid"></div>
+      <div className="saleControlGrid">
+        <SaleControl total={total} tax={tax} />
+      </div>
     </div>
   );
 

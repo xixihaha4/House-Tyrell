@@ -83,13 +83,32 @@ body {
 }
 
 .saleControlGrid {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.saleGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 8vh 8vh;
   background-color: #333;
   overflow: hidden;
   padding: 0;
 }
+
+.saleGrid button:nth-child(1) {
+  background-color: #45d645;
+}
+.saleGrid button:nth-child(2) {
+  background-color: #71c9ff;
+}
+.saleGrid button:nth-child(3) {
+  background-color: #a5d8c1;
+}
+.saleGrid button:nth-child(4) {
+  background-color: #f5acef;
+}
+
 
 .managerScreenGrid {
   display: grid;
