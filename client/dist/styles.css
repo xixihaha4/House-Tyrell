@@ -1,26 +1,61 @@
 body {
   font-family: 'Catamaran', sans-serif;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .saleItemGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  background-color: pink;
+  background-color: rgb(237, 237, 237);
+  text-align: center;
+}
+
+.saleItemGrid * {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: break-word;
+  border-radius: 2%;
+}
+
+.saleItemGrid > * {
+  border: 1px solid rgb(181, 181, 181);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 2%;
+  width: 95%;
+  height: 95%;
 }
 
 .saleTransactionGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 10% 70% 20%;
-  background-color: blue;
+  background-color: white;
+  border: 1px solid rgb(181, 181, 181);
 }
 
 .saleCategoryGrid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
-  background-color: orange;
+  overflow-x: scroll;
+  white-space: nowrap;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.saleCategoryGrid button {
+  width: 25%;
+  height: 10vh;
+  background-color: rgb(52, 158, 255);
+  color: white;
+  font-size: 1.5em;
 }
 
 .saleScreenGrid {
@@ -33,7 +68,9 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  background-color: red;
+  background-color: black;
+  overflow: hidden;
+  padding: 0;
 }
 
 .managerScreenGrid {

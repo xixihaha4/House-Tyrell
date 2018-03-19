@@ -93,14 +93,29 @@ db.sync({ force: true }).then(() => {
   Category.create({
     category_name: 'Salad',
   });
-  Item.create({
-    item_name: 'Hamburger', item_price: 5, item_image: 'https://www.rallys.com/wp-content/uploads/2017/03/BigBuford_Feature_1000x1000-600x600.jpg', item_ingredients: '[5, 6, 7, 8, 9, 10, 11]', item_category: 2,
+  Category.create({
+    category_name: 'Soup',
+  });
+  Category.create({
+    category_name: 'Steak',
+  });
+  Category.create({
+    category_name: 'Breakfast',
   });
   Item.create({
-    item_name: 'Coca-Cola', item_price: 1, item_image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY2B_5VgeOlPdpGZLz3H4SBmazfFS1gsoxtcBddF0awQux3EiY', item_ingredients: '[12]', item_category: 1,
+    item_name: 'Hamburger', item_price: 5, item_image: 'https://www.rallys.com/wp-content/uploads/2017/03/BigBuford_Feature_1000x1000-600x600.jpg', item_ingredients: '[1, 2, 3, 4, 5, 6]', item_category: 2,
   });
   Item.create({
-    item_name: 'Basic Salad', item_price: 6, item_image: 'https://recipes.heart.org/-/media/aha/recipe/recipe-images/mediterranean-salad.jpg', item_ingredients: '[6, 7, 8, 9, 10]', item_category: 3,
+    item_name: 'Coca-Cola', item_price: 1, item_image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY2B_5VgeOlPdpGZLz3H4SBmazfFS1gsoxtcBddF0awQux3EiY', item_ingredients: '[7]', item_category: 1,
+  });
+  Item.create({
+    item_name: 'Basic Salad', item_price: 6, item_image: 'https://recipes.heart.org/-/media/aha/recipe/recipe-images/mediterranean-salad.jpg', item_ingredients: '[2, 3, 4]', item_category: 3,
+  });
+  Item.create({
+    item_name: 'Chicken Noodle Soup', item_price: 4, item_ingredients: '[6]', item_category: 4,
+  });
+  Item.create({
+    item_name: 'Egg and Cheese Sandwich', item_price: 3, item_ingredients: '[6]', item_category: 6,
   });
 });
 
