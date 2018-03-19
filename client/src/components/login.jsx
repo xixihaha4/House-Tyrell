@@ -1,16 +1,15 @@
 import React from 'react';
+import Alert from 'react-s-alert';
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       identification: '',
-      password: '',
-      level: '',
       pinpadOptions: [
         1, 2, 3, 4, 5, 6, 7, 8, 9,
-        'delete', 0, 'clear', 'enter'
-      ]
+        'delete', 0, 'clear', 'enter',
+      ],
     };
 
     this.verifyLogin = this.verifyLogin.bind(this);
@@ -18,25 +17,39 @@ export default class Login extends React.Component {
   }
 
   verifyLogin() {
-    if(this.state.level === 'employee' && this.state.password !== ''){
-      //axios.login.password.confirm.shibidibi
-        //.then
-        //this.props.login(employee id)
+    if(this.state.identification !== '') {
+      if (this.state.identification === '1') {
+        this.props.history.push('/managerHome');
+      } else if (this.state.identification === '2') {
+        this.props.history.push('/salesScreen');
+      } else {
+        Alert.error('Invalid Pin Number!', {
+          position: 'top-right',
+          effect: 'scale',
+          beep: false,
+          timeout: 2000,
+          onClose: function () {
+            this.setState({
+              indentification: ''
+            });
+          },
+          offset: 100
+        });
+      }
     }
-    // axios.
   }
 
   handlePin(val) {
     if (val === 'enter') {
       this.verifyLogin()
     } else if (val === 'clear') {
-      this.setState({identification: ''})
+      this.setState( {identification: ''} )
     } else if (val === 'delete') {
       var temp = this.state.identification
-      this.setState({identification: temp.slice(0, temp.length-1)})
-    } else {
+      this.setState( {identification: temp.slice(0, temp.length-1)} )
+    } else if (this.state.identification.length < 12){
       var temp = this.state.identification
-      this.setState({identification: temp + val})
+      this.setState( {identification: temp + val} )
     }
   }
 
@@ -49,45 +62,20 @@ export default class Login extends React.Component {
               e.preventDefault()
             }}
           >
-            <button
-              onClick={() => {
-                this.state.level !== 'manager' ?
-                this.setState({level: 'manager'}) :
-                this.setState({level: ''})
-              }}
-            >
-              Manager
-            </button>
-            <button
-              onClick={() => {
-                this.state.level !== 'employee' ?
-                this.setState({level: 'employee'}) :
-                this.setState({level: ''})
-              }}
-            >
-              Employee
-            </button>
-            {this.state.level === 'manager' &&
-              <Manager />
-            }
-            {this.state.level === 'employee' &&
               <div>
-                Enter your pin<br />
-                #:{this.state.identification}<br />
-                <div class="wrapper noselect">
+                <div className="logo">
+                  <span className="logo-text">House</span><i className="fas fa-circle-notch" ></i><span className="logo-text">Tyrell</span>
+                </div>
+                <div className="pinNumber-wrapper">Enter your pin <i className="fas fa-hashtag"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
+                <div className="wrapper noselect">
                   {this.state.pinpadOptions.map(option =>
-                    <div onClick={() => this.handlePin(option)}>
+                    <div className="pinpad" onClick={() => this.handlePin(option)}>
                       {option}
                     </div>
                   )}
                 </div>
+                <Alert />
               </div>
-            }
-            <div>
-              <button class="button" onClick={() => this.verifyLogin()}>
-                Log In
-              </button>
-            </div>
           </form>
         </h1>
       </div>
@@ -95,54 +83,9 @@ export default class Login extends React.Component {
   }
 }
 
-function Manager(props) {
-  return (
-    <div>
-      hi man...ager
-    </div>
-  )
-}
 
-
-// function Employee(props) {
-//   return (
-//     <div>
-//       yo..
-//     </div>
-//   )
-// }
-
-// <div>
-//   <form
-//     onSubmit={(e) => {
-//       e.preventDefault()
-//       dispatch(login(input.value))
-//       input.value = ''
-//     }}
-//   >
-//     <input ref={node => input = node}/>
-//     <button type="submit">
-//       Log in
-//     </button>
-//   </form>
-// </div> */
-
-// var pinpadOptions = [
-//   {display: '1', value: 1},
-//   {display: '2', value: 2},
-//   {display: '3', value: 3},
-//
-//   {display: '4', value: 4},
-//   {display: '5', value: 5},
-//   {display: '6', value: 6},
-//
-//   {display: '7', value: 7},
-//   {display: '8', value: 8},
-//   {display: '9', value: 9},
-//
-//   {display: 'delete', value: 'delete'},
-//   {display: '0', value: 0},
-//   {display: 'clear', value: 'clear'},
-//
-//   {display: 'enter', value: 'enter'},
-// ]
+{/* <div>
+<button class="button" onClick={() => this.verifyLogin()}>
+  Log In
+</button>
+</div> */}
