@@ -3,7 +3,7 @@ import SaleItems from './saleItems.jsx';
 import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
 
-const SaleScreen = ({menuItems, itemClick, menuCategories, transactionItems, total, tax, transactionRemove}) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, transactionRemove, filterByCategory }) =>
   (
     <div className="saleScreenGrid">
       <div><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
@@ -15,7 +15,7 @@ const SaleScreen = ({menuItems, itemClick, menuCategories, transactionItems, tot
           tax={tax}
         />
       </div>
-      <div><SaleCategory menuCategories={menuCategories} /></div>
+      <div><SaleCategory menuCategories={menuCategories} filterByCategory={filterByCategory} /></div>
       <div className="saleControlGrid"></div>
     </div>
   );

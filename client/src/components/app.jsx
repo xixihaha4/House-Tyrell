@@ -18,6 +18,7 @@ export default class App extends React.Component {
     this.getMenuItems = this.getMenuItems.bind(this);
     this.getCategories = this.getCategories.bind(this);
     this.transactionRemove = this.transactionRemove.bind(this);
+    this.filterByCategory = this.filterByCategory.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +41,18 @@ export default class App extends React.Component {
         this.setState({
           menuCategories: results.data,
         });
+      });
+  }
+
+  filterByCategory(category) {
+    axios.get('/filter/category', { params: { category: category.id } })
+      .then((results) => {
+        this.setState({
+          menuItems: results.data,
+        })
+      })
+      .catch((error) => {
+        throw error;
       });
   }
 
@@ -83,6 +96,7 @@ export default class App extends React.Component {
           total={this.state.total}
           tax={this.state.tax}
           transactionRemove={this.transactionRemove}
+          filterByCategory={this.filterByCategory}
         />
       </div>
     );

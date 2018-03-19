@@ -17,7 +17,6 @@ app.post('/test', (req, res) => {
       res.send('success');
     });
 });
-
 //* **************************** GET REQUESTS *********************************
 app.get('/fetch/items', (req, res) => {
   db.Item.findAll()
@@ -28,6 +27,17 @@ app.get('/fetch/items', (req, res) => {
 
 app.get('/fetch/categories', (req, res) => {
   db.Category.findAll()
+    .then((data) => {
+      res.send(data);
+    });
+});
+
+app.get('/filter/category', (req, res) => {
+  db.Item.findAll({
+    where: {
+      item_category: req.query.category,
+    },
+  })
     .then((data) => {
       res.send(data);
     });
