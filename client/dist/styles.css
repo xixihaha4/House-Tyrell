@@ -68,7 +68,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  background-color: black;
+  background-color: #333;
   overflow: hidden;
   padding: 0;
 }
@@ -96,5 +96,3 @@ body {
   grid-template-rows: 1fr 1fr 1fr;
   background-color: pink;
 }
-
-
