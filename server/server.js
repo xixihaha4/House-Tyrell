@@ -26,4 +26,11 @@ app.get('/fetch/items', (req, res) => {
     });
 });
 
+app.get('/fetch/categories', (req, res) => {
+  db.Category.findAll()
+    .then((data) => {
+      res.send(data);
+    });
+});
+
 app.listen(port);
