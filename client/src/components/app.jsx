@@ -1,7 +1,7 @@
 import React from 'react';
 import SaleScreen from './saleScreen.jsx';
 import axios from 'axios';
-// import ManagerHome from './managerHome.jsx';
+import Login from './login.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
