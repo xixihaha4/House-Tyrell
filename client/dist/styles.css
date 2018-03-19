@@ -1,3 +1,64 @@
 body {
   font-family: 'Catamaran', sans-serif;
 }
+
+/* variables to keep color themes constant? */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/:root */
+:root {
+  --main-highlight: red;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 30px;
+  grid-gap: 5px;
+  text-align: center;
+}
+
+.wrapper div:nth-child(2n) {
+  background-color: #aaa;
+}
+
+ .wrapper div:nth-child(13) {
+   grid-column: 1 / 4;
+   /* padding: 20px 20px; */
+   background-color: var(--main-highlight);
+ }
+
+ /* disable selection for touch interfaces */
+ .noselect {
+   -webkit-touch-callout: none; /* iOS Safari */
+     -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+         -ms-user-select: none; /* Internet Explorer/Edge */
+             user-select: none; /* Non-prefixed version, currently
+                                   supported by Chrome and Opera */
+ }
+
+ .button {
+   padding: 15px 25px;
+   font-size: 24px;
+   text-align: center;
+   cursor: pointer;
+   outline: none;
+   color: #fff;
+   background-color: #4CAF50;
+   border: none;
+   border-radius: 5px;
+   box-shadow: 0 9px #999;
+ }
+
+ .enter-button {
+   padding: 20px 100%;
+   background-color: var(--main-highlight);
+ }
+
+ .button:hover {background-color: #3e8e41}
+
+ .button:active {
+   background-color: #3e8e41;
+   box-shadow: 0 5px #666;
+   transform: translateY(4px);
+ }
