@@ -79,10 +79,14 @@ export default class App extends React.Component {
     let tempTax = (tempTotal * 0.0875).toFixed(2)
     remove.splice(index, 1);
     this.setState({
+      transactionItems: [],
+      total: 0,
+      tax: 0,
+    }, () => this.setState({
       transactionItems: remove,
       total: tempTotal,
       tax: parseFloat(tempTax),
-    })
+    }))
   }
 
   render() {

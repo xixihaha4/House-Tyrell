@@ -40,13 +40,39 @@ body {
 
 .saleTransactionGrid > div {
   text-align: center;
+  vertical-align: text-top;
 }
 
+.transactionItem {
+  grid-row: 2;
+  grid-column: 1;
+}
 
 .transactionGrid {
   display: grid;
+  grid-template-rows: 5vh 65vh 15vh;
+}
+
+.transactionGridHeader {
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 5vh;
   grid-template-columns: 5vh 15vh 15vh;
-  grid-template-rows: 5vh 65vh 5vh 5vh 5vh;
+}
+
+.transactionGridItems {
+  grid-row: 2;
+  overflow-y: scroll;
+  display:grid;
+  grid-template-rows: repeat(13, auto);
+  grid-template-columns: 5vh 15vh 15vh
+}
+
+.transactionGridFooter {
+  grid-row: 3;
+  display: grid;
+  grid-template-rows: 5vh 5vh 5vh;
+  grid-template-columns: 5vh 15vh 15vh;
 }
 
 
