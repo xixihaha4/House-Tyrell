@@ -32,6 +32,11 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
+app.get('/fetch/categories', (req, res) => {
+  db.Category.findAll()
+    .then((data) => {
+      res.send(data);
+    });
 });
+
+app.listen(port);

@@ -8,14 +8,17 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       menuItems: [],
+      menuCategories: [],
     };
     this.itemClick = this.itemClick.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);
+    this.getCategories = this.getCategories.bind(this);
   }
 
 
   componentDidMount() {
     this.getMenuItems();
+    this.getCategories();
   }
 
   getMenuItems() {
@@ -27,6 +30,15 @@ export default class App extends React.Component {
       });
   }
 
+  getCategories() {
+    axios.get('/fetch/categories')
+      .then((results) => {
+        this.setState({
+          menuCategories: results.data,
+        });
+      });
+  }
+
   itemClick(item) {
     console.log('this is is item in app', item);
   }
@@ -34,8 +46,11 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <SaleScreen menuItems={this.state.menuItems} itemClick={this.itemClick} />
-        {/* <ManagerHome /> */}
+        <SaleScreen
+          menuItems={this.state.menuItems}
+          itemClick={this.itemClick}
+          menuCategories={this.state.menuCategories}
+        />
       </div>
     );
   }
