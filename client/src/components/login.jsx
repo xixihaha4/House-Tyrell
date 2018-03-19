@@ -56,27 +56,21 @@ export default class Login extends React.Component {
   render() {
     return (
       <div>
-        <h1>
-          <form
-            onSubmit={e => {
-              e.preventDefault()
-            }}
-          >
-              <div>
-                <div className="logo">
-                  <span className="logo-text">House</span><i className="fas fa-circle-notch" ></i><span className="logo-text">Tyrell</span>
+        <h1 >
+          <div className="animated fadeIn">
+            <div className="logo">
+              <span className="logo-text">House</span><i className="fas fa-circle-notch" ></i><span className="logo-text">Tyrell</span>
+            </div>
+            <div className="pinNumber-wrapper">Enter your pin <i className="fas fa-hashtag"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
+            <div className="wrapper noselect">
+              {this.state.pinpadOptions.map(option =>
+                <div className="pinpad" onClick={() => this.handlePin(option)}>
+                  {option}
                 </div>
-                <div className="pinNumber-wrapper">Enter your pin <i className="fas fa-hashtag"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
-                <div className="wrapper noselect">
-                  {this.state.pinpadOptions.map(option =>
-                    <div className="pinpad" onClick={() => this.handlePin(option)}>
-                      {option}
-                    </div>
-                  )}
-                </div>
-                <Alert />
-              </div>
-          </form>
+              )}
+            </div>
+            <Alert />
+          </div>
         </h1>
       </div>
     );
