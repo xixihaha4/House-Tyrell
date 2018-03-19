@@ -70,7 +70,6 @@ export default class App extends React.Component {
       total: tempTotal,
       tax: parseFloat(tempTax),
     });
-
   }
 
   transactionRemove(index) {
@@ -97,6 +96,7 @@ export default class App extends React.Component {
           tax={this.state.tax}
           transactionRemove={this.transactionRemove}
           filterByCategory={this.filterByCategory}
+          transactionComplete={this.transactionComplete}
         />
       </div>
     );
