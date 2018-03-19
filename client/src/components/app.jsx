@@ -2,6 +2,7 @@ import React from 'react';
 import SaleScreen from './saleScreen.jsx';
 import axios from 'axios';
 import Login from './login.jsx';
+// import ManagerHome from './managerHome.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,7 +15,6 @@ export default class App extends React.Component {
     this.getMenuItems = this.getMenuItems.bind(this);
     this.getCategories = this.getCategories.bind(this);
   }
-
 
   componentDidMount() {
     this.getMenuItems();
