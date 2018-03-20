@@ -45,6 +45,7 @@ const Ingredient = db.define('Ingredients', {
   ingredient_initial: Sequelize.DECIMAL,
   ingredient_cost: Sequelize.DECIMAL,
   ingredient_expire: Sequelize.STRING,
+  ingredient_used: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
 });
 
 const Order = db.define('Orders', {

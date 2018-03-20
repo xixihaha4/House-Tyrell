@@ -19,6 +19,7 @@ export default class App extends React.Component {
     this.getCategories = this.getCategories.bind(this);
     this.transactionRemove = this.transactionRemove.bind(this);
     this.filterByCategory = this.filterByCategory.bind(this);
+    this.removeIng = this.removeIng.bind(this);
   }
 
   componentDidMount() {
@@ -70,6 +71,11 @@ export default class App extends React.Component {
       total: tempTotal,
       tax: parseFloat(tempTax),
     });
+  }
+
+  removeIng(ingredient, i, crossed) {
+    // will implement keeping track of crossed out ingredients later
+    console.log('this is ingredient and index of ingredient', ingredient, i, crossed);
 
   }
 
@@ -101,6 +107,7 @@ export default class App extends React.Component {
           tax={this.state.tax}
           transactionRemove={this.transactionRemove}
           filterByCategory={this.filterByCategory}
+          removeIng={this.removeIng}
         />
       </div>
     );

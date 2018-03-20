@@ -8,7 +8,6 @@ export default class CustomModal extends React.Component {
     this.state = {
       ingredients: [],
     };
-    this.removeIng = this.removeIng.bind(this);
   }
 
   componentWillMount() {
@@ -21,15 +20,13 @@ export default class CustomModal extends React.Component {
     }
   }
 
-  removeIng(ingredient, i, crossed) {
-    console.log('this is ingredient and index of ingredient', this.state.ingredients, ingredient, i, crossed)
-  }
+
 
   render() {
     return (
       <div>{this.state.ingredients.map((ingredient, i) =>
         <CustomizeIngredients
-          removeIng={this.removeIng}
+          removeIng={this.props.removeIng}
           ingredient={ingredient}
           i={i}
         />)}

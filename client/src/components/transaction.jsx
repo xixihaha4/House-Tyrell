@@ -51,7 +51,7 @@ export default class Transaction extends React.Component {
           </button>))}
           {this.props.transactionItems.map((item, i) =>
            <div style={{ 'grid-row': `${i + 1}`, 'grid-column': '2' }}>
-             <TransactionItem item={item} />
+             <TransactionItem item={item} removeIng={this.props.removeIng} />
           </div>)}
           {this.props.transactionItems.map((item, i) =>
             <div style={{ 'grid-row': `${i + 1}`, 'grid-column': '3' }}>{item.item_price}</div>)}
