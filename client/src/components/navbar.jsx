@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'react-moment';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -24,13 +25,14 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <div>
-        <span style={{fontSize:"30px", cursor:"pointer"}} onClick={() => this.openNav()}>&#9776; Menu</span>
+      <div className="navbar">
+        <span className="navbar-bars"style={{fontSize:"30px", cursor:"pointer"}} onClick={() => this.openNav()}><i className="fas fa-bars" /></span>
         <nav id="mySidenav" className="sidenav">
-          <a href="javascript:void(0)" class="closebtn" onClick={() => this.closeNav()}>&times;</a>
+          <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeNav()}>&times;</a>
           <a href="#">Alert Manager</a>
-          <a href="#">Logout</a>
+          <a href="#">Clock Out</a>
         </nav>
+        <span className="navbar-time"><Moment interval={1000} format={"MM/DD/YYYY hh:mm:ss a"} /></span>
         <span className="navbar-employee">Hi, Jane Doe</span>
       </div>
     );
