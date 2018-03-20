@@ -8,7 +8,7 @@ module.exports = {
   entry: APP_DIR + '/index.jsx',
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -18,9 +18,9 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-             query: {
-               presets: ['react', 'es2015']
-             }
+            query: {
+              presets: ['react', 'es2015'],
+            }
           }
         ]
       },
@@ -28,10 +28,10 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
           }
         ]
       }

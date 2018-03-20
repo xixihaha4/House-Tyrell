@@ -141,24 +141,37 @@ body {
 .managerScreenGrid {
   display: grid;
   grid-template-columns: 20% 80%;
-  grid-template-rows: 40% 60%;
 }
 
 .manager-navigation {
+  grid-column: 1;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-rows: 5vh 5vh 5vh 5vh;
   background-color: orange;
 }
 
-.graphGrid {
+.managerViewGrid {
+  grid-column: 2;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  background-color: blue;
+  grid-template-rows: 60% 40%;
+}
+
+.graphGrid {
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: white;
+}
+
+.graphGrid-inventory {
+  grid-row: 1;
+  display: grid;
+  background-color: white;
 }
 
 .statsGrid {
+  grid-row: 2;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
   background-color: pink;
 }
 
@@ -317,3 +330,7 @@ body {
    box-shadow: 0 5px #666;
    transform: translateY(4px);
  }
+
+.barChart {
+  padding: 20px;
+}
