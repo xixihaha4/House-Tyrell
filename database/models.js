@@ -61,8 +61,22 @@ const Timesheet = db.define('Timesheets', {
   check_out: Sequelize.STRING,
 });
 
-//
 // db.sync({ force: true }).then(() => {
+//   Employee.create({
+//     employee_id: '5', employee_name: 'Manos', manager_privilege: true,
+//   });
+//   Employee.create({
+//     employee_id: '96', employee_name: 'Eric', manager_privilege: true,
+//   });
+//   Employee.create({
+//     employee_id: '99', employee_name: 'Jerry', manager_privilege: true,
+//   });
+//   Employee.create({
+//     employee_id: '88', employee_name: 'Xixi', manager_privilege: true,
+//   });
+//   Employee.create({
+//     employee_id: '400', employee_name: 'Adam', manager_privilege: false,
+//   });
 //   Ingredient.create({
 //     ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',
 //   });
