@@ -45,7 +45,6 @@ const Ingredient = db.define('Ingredients', {
   ingredient_initial: Sequelize.DECIMAL,
   ingredient_cost: Sequelize.DECIMAL,
   ingredient_expire: Sequelize.STRING,
-  ingredient_used: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
 });
 
 const Order = db.define('Orders', {
@@ -62,7 +61,7 @@ const Timesheet = db.define('Timesheets', {
   check_out: Sequelize.STRING,
 });
 
-
+//
 // db.sync({ force: true }).then(() => {
 //   Ingredient.create({
 //     ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',
