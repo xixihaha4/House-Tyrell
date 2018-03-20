@@ -124,9 +124,11 @@ body {
 
 .saleGrid button:nth-child(1) {
   background-color: #45d645;
+  font-size: 3em;
 }
 .saleGrid button:nth-child(2) {
   background-color: #71c9ff;
+  font-size: 1.5em;
 }
 .saleGrid button:nth-child(3) {
   background-color: #a5d8c1;
@@ -158,6 +160,39 @@ body {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   background-color: pink;
+}
+
+.transactionCredit {
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(237, 237, 237);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCredit button {
+  padding: 2.5%;
+  margin: 5%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCreditConfirmed {
+  padding: 15%;
+}
+
+.transactionCreditConfirmed button {
+  font-size: 1em;
+  margin: 1.5%;
+}
+
+.sigCanvas {
+  border-bottom: 1px solid black;
 }
 
 /* variables to keep color themes constant? */

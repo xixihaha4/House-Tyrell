@@ -2,7 +2,7 @@ import React from 'react';
 import SaleScreen from './saleScreen.jsx';
 import axios from 'axios';
 import Login from './login.jsx';
-// import ManagerHome from './managerHome.jsx';
+import Alert from 'react-s-alert'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -71,12 +71,10 @@ export default class App extends React.Component {
       total: tempTotal,
       tax: parseFloat(tempTax),
     });
-  }
 
   removeIng(ingredient, i, crossed) {
     // will implement keeping track of crossed out ingredients later
     console.log('this is ingredient and index of ingredient', ingredient, i, crossed);
-
   }
 
   transactionRemove(index) {
@@ -98,6 +96,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+
         <SaleScreen
           menuItems={this.state.menuItems}
           itemClick={this.itemClick}
@@ -108,7 +107,10 @@ export default class App extends React.Component {
           transactionRemove={this.transactionRemove}
           filterByCategory={this.filterByCategory}
           removeIng={this.removeIng}
+          transactionComplete={this.transactionComplete}
+
         />
+
       </div>
     );
   }

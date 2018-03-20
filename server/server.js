@@ -19,6 +19,11 @@ app.post('/test', (req, res) => {
       res.send('success');
     });
 });
+
+app.post('/completed/transaction', (req, res) => {
+  console.log(req.body);
+  res.send();
+})
 //* **************************** GET REQUESTS *********************************
 app.get('/fetch/items', (req, res) => {
   db.Item.findAll()
@@ -47,6 +52,24 @@ app.get('/fetch/ingredients', (req, res) => {
     res.send(data)
   })
 });
+
+app.get('/fetch/employee', (req, res) => {
+  db.Employee.findAll({
+    where: {
+      employee_id: req.query.PIN
+    }
+  })
+    .then((data) => {
+      if (data.length === 0) {
+        res.status(404).send()
+      } else {
+        res.send(data)
+      }
+    })
+    .catch((error) => {
+      res.send(error)
+    })
+})
 
 app.get('/filter/category', (req, res) => {
   db.Item.findAll({
