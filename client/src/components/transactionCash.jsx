@@ -19,25 +19,29 @@ class TransactionCash extends React.Component {
       animation: 'wrapper noselect animated fadeIn',
       failedAttempts: 0,
       pinpadOn: false,
-      tendered: 0.00,
+      tendered: '',
+      completed: false,
+      decimal: false,
     };
 
     this.clear = this.clear.bind(this);
     this.transactionComplete = this.transactionComplete.bind(this);
     this.handlePin = this.handlePin.bind(this);
     this.verifyTotal = this.verifyTotal.bind(this);
+    this.togglePinpad = this.togglePinpad.bind(this);
   }
   clear() {
     this.sigCanvas.clear();
   }
 
   verifyTotal() {
-
     console.log('verifyTotal being called')
-    this.setState(
-      { tendered: parseFloat(this.state.identification) }
-      , () => this.togglePinpad()
-    );
+    this.setState({
+      tendered: (this.state.tendered === '')? '' : parseFloat(this.state.tendered).toFixed(2),
+      completed: !this.state.completed,
+      pinpadOn: !this.state.pinpadOn
+    });
+
   }
 
   transactionComplete() {
@@ -45,7 +49,8 @@ class TransactionCash extends React.Component {
   }
 
   togglePinpad() {
-    this.setState({pinpadOn: !this.state.pinpadOn})
+    console.log('hello togglepinpad being called')
+    this.setState({ pinpadOn: !this.state.pinpadOn })
   }
 
   handlePin(val) {
@@ -53,13 +58,17 @@ class TransactionCash extends React.Component {
     if (val === 'enter') {
       this.verifyTotal();
     } else if (val === 'clear') {
-      this.setState( {identification: ''} )
-    } else if (val === 'delete') {
-      var temp = this.state.identification
-      this.setState( {identification: temp.slice(0, temp.length-1)} )
-    } else if (this.state.identification.length < 12){
-      var temp = this.state.identification
-      this.setState( {identification: temp + val} )
+      this.setState({ tendered: '', decimal: false })
+    } else if (this.state.tendered.length < 12) {
+      if (val === '.') {
+        if (this.state.decimal === false) {
+          const temp = this.state.tendered;
+          this.setState({ decimal: !this.state.decimal }, () => this.setState({ tendered: temp + val }))
+        }
+      } else {
+        const temp = this.state.tendered;
+        this.setState({ tendered: temp + val })
+      }
     }
   }
 
@@ -69,30 +78,36 @@ class TransactionCash extends React.Component {
         <div>
           <h1>Total Sale</h1>
           <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.total}</h1>
+          <h1>Tendered: </h1>
+          <h1><i className="fas fa-dollar-sign" /> {this.state.tendered}</h1>
         </div>
-        <div className="transactionCashConfirmed animated fadeIn">
-          <h1>Thank you for your purchase.</h1>
-          <button type="button" onClick={() => console.log('No Email Yet')}>Email Receipt</button>
-          <button type="button" onClick={() => this.props.history.push('/salesScreen')}>Print Receipt</button>
-          <button type="button" onClick={() => this.transactionComplete()}>No Receipt</button>
-        </div>
-        {/* <div className="pinNumber-wrapper"  onClick={() => this.togglePinpad()}><i className="fas fa-dollar-sign"></i>Tendered<i className="far fa-keyboard"></i>: <span className="pinNumber">{this.state.identification}</span></div><br /> */}
-        {this.state.pinpadOn ?
-          <Pinpad
-            pinpadOptions={this.state.pinpadOptions}
-            handlePin={this.handlePin}
-            animation={this.state.animation}
-          /> :
-          <div>
-            <div className="pinNumber-wrapper"  onClick={() => this.togglePinpad()}><i className="fas fa-dollar-sign"></i>Tendered<i className="far fa-keyboard"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
-            <h1><i className="fas fa-dollar-sign" /> {this.state.tendered}</h1>
-            {/* <h1>Change: </h1> */}
-            <h1><i className="fas fa-dollar-sign" /> {parseFloat(this.state.tendered) - this.props.location.state.total}</h1>
+          <div className="transactionCashConfirmed animated fadeIn">
+            {this.state.pinpadOn ?
+              <Pinpad
+                pinpadOptions={this.state.pinpadOptions}
+                handlePin={this.handlePin}
+                animation={this.state.animation}
+              />
+              :
+              <div className="pinNumber-wrapper"  onClick={this.togglePinpad}>Tendered:<i className="far fa-keyboard"></i> <span className="pinNumber">{this.state.identification}</span></div>
+            }
           </div>
-        }
       </div>
     );
   }
 }
+/*
+
+
+this.state.pinpadOn ?
+  <Pinpad
+    pinpadOptions={this.state.pinpadOptions}
+    handlePin={this.handlePin}
+    animation={this.state.animation}/>
+
+
+
+
+*/
 
 export default withRouter(TransactionCash);
