@@ -4,13 +4,13 @@ body {
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .saleItemGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto auto auto auto;
   background-color: rgb(237, 237, 237);
   text-align: center;
 }
@@ -31,13 +31,57 @@ body {
   height: 95%;
 }
 
+
 .saleTransactionGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 10% 70% 20%;
-  background-color: white;
-  border: 1px solid rgb(181, 181, 181);
+  grid-row-start: 1;
+  grid-column-start: 2;
 }
+
+
+.saleTransactionGrid > div {
+  text-align: center;
+  vertical-align: text-top;
+}
+
+.transactionItem {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.transactionGrid {
+  display: grid;
+  grid-template-rows: 5vh 65vh 15vh;
+}
+
+.transactionGridHeader {
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 5vh;
+  grid-template-columns: 5vh 15vh 15vh;
+}
+
+.transactionGridItems {
+  grid-row: 2;
+  overflow-y: scroll;
+  display:grid;
+  grid-template-rows: repeat(13, auto);
+  grid-template-columns: 5vh 15vh 15vh
+}
+
+.transactionGridFooter {
+  grid-row: 3;
+  display: grid;
+  grid-template-rows: 5vh 5vh 5vh;
+  grid-template-columns: 5vh 15vh 15vh;
+}
+
+
+.tName {
+  grid-row-start: 1;
+  grid-column-start: 3;
+}
+
+
 
 .saleCategoryGrid {
   display: grid;
@@ -65,13 +109,34 @@ body {
 }
 
 .saleControlGrid {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.saleGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 8vh 8vh;
   background-color: #333;
   overflow: hidden;
   padding: 0;
 }
+
+.saleGrid button:nth-child(1) {
+  background-color: #45d645;
+  font-size: 3em;
+}
+.saleGrid button:nth-child(2) {
+  background-color: #71c9ff;
+  font-size: 1.5em;
+}
+.saleGrid button:nth-child(3) {
+  background-color: #a5d8c1;
+}
+.saleGrid button:nth-child(4) {
+  background-color: #f5acef;
+}
+
 
 .managerScreenGrid {
   display: grid;
@@ -110,6 +175,39 @@ body {
   background-color: pink;
 }
 
+.transactionCredit {
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(237, 237, 237);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCredit button {
+  padding: 2.5%;
+  margin: 5%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCreditConfirmed {
+  padding: 15%;
+}
+
+.transactionCreditConfirmed button {
+  font-size: 1em;
+  margin: 1.5%;
+}
+
+.sigCanvas {
+  border-bottom: 1px solid black;
+}
+
 /* variables to keep color themes constant? */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/:root */
 :root {
@@ -118,21 +216,83 @@ body {
 
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 30px;
-  grid-gap: 5px;
+  grid-template-columns: minmax(80px, 40%) minmax(80px, 40%) minmax(80px, 40%);
+  grid-template-rows: minmax(80px, 40%) minmax(80px, 40%) minmax(80px, 40%) minmax(80px, 40%);
   text-align: center;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  margin: 0;
+  transform: translate(-50%, -15%);
+  background-color: rgb(52, 158, 255);
+  color: white;
+  border: 1px solid #919191;
+  border-radius: 2%;
 }
 
-.wrapper div:nth-child(2n) {
-  background-color: #aaa;
+.wrapper * {
+  border: 1px solid #605e5e;
+  border-radius: 2%;
+}
+
+.pinpad {
+  font-size: 0.8em;
+}
+
+.pinNumber-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  /*
+  margin: 0;
+  background-color: rgb(52, 158, 255); */
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -80%);
+  opacity: 0.80;
+  display: inline-block;
+  font-size: 7.5em;
+}
+
+.logo * {
+  fill: rgb(26, 150, 240);
+}
+
+.logo-text {
+  font-size: 15%;
+  margin: 0;
+  padding: 0;
+}
+
+.pinNumber {
+  /*
+  margin: 0;
+  background-color: rgb(52, 158, 255); */
+  border-bottom: 1px solid black;
 }
 
  .wrapper div:nth-child(13) {
    grid-column: 1 / 4;
    /* padding: 20px 20px; */
    background-color: var(--main-highlight);
+   background-color: rgb(112, 198, 60);
+   padding: 10px;
  }
+
+ .wrapper div:nth-child(10) {
+   background-color: rgb(238, 153, 64);
+ }
+
+ .wrapper div:nth-child(12) {
+   background-color: rgb(240, 91, 71);
+ }
+
 
  /* disable selection for touch interfaces */
  .noselect {

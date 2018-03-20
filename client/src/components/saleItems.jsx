@@ -6,12 +6,12 @@ const SaleItems = ({ menuItems, itemClick }) => (
       menuItems.map((item, i) => {
         if (item.item_image === undefined || item.item_image === null) {
           return (
-            <div className={`item_${i}`} onClick={() => itemClick(item)}>
+            <div key={i} className={`item_${i}`} onClick={() => itemClick(item)}>
               <h3>{item.item_name}</h3>
             </div>);
         }
           return (
-            <div className={`item_${i}`}>
+            <div key={i} className={`item_${i}`}>
               <img alt={item.item_name} src={item.item_image} style={{ width: '95%', height: '95%' }} onClick={() => itemClick(item)}/>
             </div>);
       })
@@ -20,12 +20,12 @@ const SaleItems = ({ menuItems, itemClick }) => (
       menuItems.map((item, i) => {
         if (item.item_image === undefined || item.item_image === null) {
           return (
-            <div className={`item_${i}`} onClick={() => itemClick(item)}>
+            <div key={i} className={`item_${i}`} onClick={() => itemClick(item)}>
               <h3>{item.item_name}</h3>
             </div>);
         }
           return (
-            <div className={`item_${i}`}>
+            <div key={i} className={`item_${i}`}>
               <img alt={item.item_name} src={item.item_image} style={{ width: '95%', height: '95%' }} onClick={() => itemClick(item)}/>
             </div>);
       })
@@ -34,12 +34,12 @@ const SaleItems = ({ menuItems, itemClick }) => (
       menuItems.map((item, i) => {
         if (item.item_image === undefined || item.item_image === null) {
           return (
-            <div className={`item_${i}`} onClick={() => itemClick(item)}>
+            <div key={i} className={`item_${i}`} onClick={() => itemClick(item)}>
               <h3>{item.item_name}</h3>
             </div>);
         }
           return (
-            <div className={`item_${i}`}>
+            <div key={i} className={`item_${i}`}>
               <img alt={item.item_name} src={item.item_image} style={{ width: '95%', height: '95%' }} onClick={() => itemClick(item)}/>
             </div>);
       })

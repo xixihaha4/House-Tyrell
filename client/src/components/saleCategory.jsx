@@ -1,14 +1,14 @@
 import React from 'react';
 
-const SaleCategory = ({ menuCategories }) => (
+const SaleCategory = ({ menuCategories, filterByCategory }) => (
   <div className="saleCategoryGrid">
     {
       menuCategories.map((category, i) =>
-        <button type="button" className={`category_${i}`}>{category.category_name}</button>)
+        <button key={i} type="button" className={`category_${i}`} onClick={() => filterByCategory(category)}>{category.category_name}</button>)
     }
     {
       menuCategories.map((category, i) =>
-        <button type="button" className={`category_${i}`}>{category.category_name}</button>)
+        <button key={i} type="button" className={`category_${i}`} onClick={() => filterByCategory(category)}>{category.category_name}</button>)
     }
   </div>
 );

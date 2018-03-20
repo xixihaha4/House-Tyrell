@@ -1,148 +1,108 @@
 import React from 'react';
+import Alert from 'react-s-alert';
+import Pinpad from './pinpad.jsx';
+import axios from 'axios'
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       identification: '',
-      password: '',
-      level: '',
       pinpadOptions: [
         1, 2, 3, 4, 5, 6, 7, 8, 9,
-        'delete', 0, 'clear', 'enter'
-      ]
+        'delete', 0, 'clear', 'enter',
+      ],
+      animation: 'wrapper noselect animated fadeIn',
+      failedAttempts: 0,
+      pinpadOn: false
     };
 
     this.verifyLogin = this.verifyLogin.bind(this);
     this.handlePin = this.handlePin.bind(this);
   }
 
+  togglePinpad() {
+    this.setState({pinpadOn: !this.state.pinpadOn})
+  }
+
   verifyLogin() {
-    if(this.state.level === 'employee' && this.state.password !== ''){
-      //axios.login.password.confirm.shibidibi
-        //.then
-        //this.props.login(employee id)
+    if(this.state.identification !== '') {
+      if (this.state.identification === '1') {
+        this.props.history.push('/managerHome');
+      } else if (this.state.identification === '2') {
+        this.props.history.push('/salesScreen');
+      } else {
+        axios.get(`/fetch/employee?PIN=${this.state.identification}`)
+          .then(results => {
+            results.data[0].manager_privilege ?
+            this.props.history.push('/managerHome') :
+            this.props.history.push('/salesScreen');
+          })
+          .catch(error => {
+              if(this.state.failedAttempts < 2) {
+                this.setState({failedAttempts: this.state.failedAttempts + 1})
+                var str = `${this.state.failedAttempts} of 3 failed attempts`
+                Alert.warning(str, {
+                    position: 'top-right',
+                    effect: 'slide',
+                    timeout: 'none',
+                    html: true,
+                });
+              } else {
+                Alert.error('Too many attempts!', {
+                  position: 'top-right',
+                  effect: 'jelly'
+                });
+              }
+          });
+      }
     }
-    // axios.
   }
 
   handlePin(val) {
+    Alert.closeAll()
     if (val === 'enter') {
       this.verifyLogin()
     } else if (val === 'clear') {
-      this.setState({identification: ''})
+      this.setState( {identification: ''} )
     } else if (val === 'delete') {
       var temp = this.state.identification
-      this.setState({identification: temp.slice(0, temp.length-1)})
-    } else {
+      this.setState( {identification: temp.slice(0, temp.length-1)} )
+    } else if (this.state.identification.length < 12){
       var temp = this.state.identification
-      this.setState({identification: temp + val})
+      this.setState( {identification: temp + val} )
     }
+  }
+
+  componentDidMount() {
+    var hover = document.getElementById("hover");
+    hover.play();
   }
 
   render() {
     return (
       <div>
-        <h1>
-          <form
-            onSubmit={e => {
-              e.preventDefault()
-            }}
-          >
-            <button
-              onClick={() => {
-                this.state.level !== 'manager' ?
-                this.setState({level: 'manager'}) :
-                this.setState({level: ''})
-              }}
-            >
-              Manager
-            </button>
-            <button
-              onClick={() => {
-                this.state.level !== 'employee' ?
-                this.setState({level: 'employee'}) :
-                this.setState({level: ''})
-              }}
-            >
-              Employee
-            </button>
-            {this.state.level === 'manager' &&
-              <Manager />
-            }
-            {this.state.level === 'employee' &&
-              <div>
-                Enter your pin<br />
-                #:{this.state.identification}<br />
-                <div class="wrapper noselect">
-                  {this.state.pinpadOptions.map(option =>
-                    <div onClick={() => this.handlePin(option)}>
-                      {option}
-                    </div>
-                  )}
-                </div>
-              </div>
-            }
-            <div>
-              <button class="button" onClick={() => this.verifyLogin()}>
-                Log In
-              </button>
+        <audio id="hover">
+          <source src="../sounds/237422_plasterbrain_hover-1.ogg" type="audio/ogg" />
+          <source src="../sounds/237422_plasterbrain_hover-1.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+        <h1 >
+          <div className="animated fadeIn">
+            <div className="logo">
+              <span className="logo-text">House</span><i className="fas fa-circle-notch" ></i><span className="logo-text">Tyrell</span>
             </div>
-          </form>
+            <div className="pinNumber-wrapper"  onClick={() => this.togglePinpad()}><i className="far fa-keyboard"></i>Enter your pin <i className="fas fa-hashtag"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
+            {this.state.pinpadOn &&
+              <Pinpad
+              pinpadOptions={this.state.pinpadOptions}
+              handlePin={this.handlePin}
+              animation={this.state.animation}
+            />}
+            <Alert stack={{limit: 3}} />
+          </div>
         </h1>
       </div>
     );
   }
 }
-
-function Manager(props) {
-  return (
-    <div>
-      hi man...ager
-    </div>
-  )
-}
-
-
-// function Employee(props) {
-//   return (
-//     <div>
-//       yo..
-//     </div>
-//   )
-// }
-
-// <div>
-//   <form
-//     onSubmit={(e) => {
-//       e.preventDefault()
-//       dispatch(login(input.value))
-//       input.value = ''
-//     }}
-//   >
-//     <input ref={node => input = node}/>
-//     <button type="submit">
-//       Log in
-//     </button>
-//   </form>
-// </div> */
-
-// var pinpadOptions = [
-//   {display: '1', value: 1},
-//   {display: '2', value: 2},
-//   {display: '3', value: 3},
-//
-//   {display: '4', value: 4},
-//   {display: '5', value: 5},
-//   {display: '6', value: 6},
-//
-//   {display: '7', value: 7},
-//   {display: '8', value: 8},
-//   {display: '9', value: 9},
-//
-//   {display: 'delete', value: 'delete'},
-//   {display: '0', value: 0},
-//   {display: 'clear', value: 'clear'},
-//
-//   {display: 'enter', value: 'enter'},
-// ]

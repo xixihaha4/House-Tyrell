@@ -1,14 +1,26 @@
 import React from 'react';
 import SaleItems from './saleItems.jsx';
 import SaleCategory from './saleCategory.jsx';
+import Transaction from './transaction.jsx';
+import SaleControl from './saleControl.jsx';
 
-const SaleScreen = ({menuItems, itemClick, menuCategories}) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, transactionRemove, filterByCategory, removeIng, transactionComplete }) =>
   (
-    <div className="saleScreenGrid">
+    <div className="saleScreenGrid animated fadeIn">
       <div><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
-      <div className="saleTransactionGrid">Transactions</div>
-      <div><SaleCategory menuCategories={menuCategories} /></div>
-      <div className="saleControlGrid">Grid</div>
+      <div className="saleTransactionGrid">
+        <Transaction
+          removeIng={removeIng}
+          transactionRemove={transactionRemove}
+          transactionItems={transactionItems}
+          total={total}
+          tax={tax}
+        />
+      </div>
+      <div><SaleCategory menuCategories={menuCategories} filterByCategory={filterByCategory}/></div>
+      <div className="saleControlGrid">
+        <SaleControl total={total} tax={tax} transactionComplete={transactionComplete} />
+      </div>
     </div>
   );
 
