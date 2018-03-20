@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactModal from 'react-modal';
+// import ReactModal from 'react-modal';
 import CustomModal from './customModal.jsx';
 import TransactionItem from './transactionItem.jsx'
 

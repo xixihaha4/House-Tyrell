@@ -147,7 +147,14 @@ body {
   grid-column: 1;
   display: grid;
   grid-template-rows: 5vh 5vh 5vh 5vh;
-  background-color: orange;
+  background-color: #333;
+}
+
+.manager-navigation .item {
+  color: white;
+  padding: 1.5em;
+  text-decoration: none;
+  font-size: 1.4em;
 }
 
 .managerViewGrid {
@@ -159,7 +166,7 @@ body {
 .graphGrid {
   grid-row: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr; */
   background-color: white;
 }
 
@@ -333,4 +340,10 @@ body {
 
 .barChart {
   padding: 20px;
+}
+
+#chart {
+  background: #fff;
+  width: 90%;
+  margin: 4em auto;
 }
