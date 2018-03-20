@@ -3,6 +3,8 @@ const axios = require('axios');
 const parser = require('body-parser');
 const path = require('path');
 const db = require('../database/models.js');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const app = express();
 const port = 3000;
@@ -37,6 +39,20 @@ app.get('/fetch/categories', (req, res) => {
     });
 });
 
+app.get('/fetch/ingredients', (req, res) => {
+  console.log(JSON.parse(req.query.item_ingredients))
+  const ingredients = JSON.parse(req.query.item_ingredients);
+  db.Ingredient.findAll({
+    where: {
+      id: {
+        [Op.or]: ingredients
+      },
+    }
+  }).then((data) => {
+    res.send(data)
+  })
+});
+
 app.get('/fetch/employee', (req, res) => {
   db.Employee.findAll({
     where: {
@@ -54,6 +70,7 @@ app.get('/fetch/employee', (req, res) => {
       res.send(error)
     })
 })
+
 app.get('/filter/category', (req, res) => {
   db.Item.findAll({
     where: {

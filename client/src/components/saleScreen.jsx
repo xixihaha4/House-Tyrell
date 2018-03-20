@@ -4,12 +4,13 @@ import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
 import SaleControl from './saleControl.jsx';
 
-const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, transactionRemove, filterByCategory, transactionComplete }) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, transactionRemove, filterByCategory, , removeIng, transactionComplete }) =>
   (
     <div className="saleScreenGrid animated fadeIn">
       <div><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
       <div className="saleTransactionGrid">
         <Transaction
+          removeIng={removeIng}
           transactionRemove={transactionRemove}
           transactionItems={transactionItems}
           total={total}
