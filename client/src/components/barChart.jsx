@@ -1,7 +1,8 @@
 import React from 'react';
-import { scaleLinear } from 'd3-scale';
+import { scaleLinear, scaleTime } from 'd3-scale';
 import { max } from 'd3-array';
 import { select } from 'd3-selection';
+// import { axisBottom, axisLeft } from 'd3-axis';
 
 const data = [
   {
@@ -98,37 +99,40 @@ class BarChart extends React.Component {
     this.createBarChart()
   }
   createBarChart() {
-    const node = this.node
-    const dataMax = max(sampleData)
+    const node = this.node;
+    const dataMax = max(sampleData);
+    const xScale = scaleTime()
+      .range([0, 400]);
+
     const yScale = scaleLinear()
-       .domain([0, dataMax])
-       .range([0, 200])
+      .domain([0, dataMax])
+      .range([200, 0]);
   
-  select(node)
-    .selectAll('rect')
-    .data(sampleData)
-    .enter()
-    .append('rect')
- 
-  select(node)
-    .selectAll('rect')
-    .data(sampleData)
-    .exit()
-    .remove()
- 
-  select(node)
-    .selectAll('rect')
-    .data(sampleData)
-    .style('fill', '#3e8e41')
-    .attr('x', (d,i) => i * 25)
-    .attr('y', d => 200 - yScale(d))
-    .attr('height', d => yScale(d))
-    .attr('width', 25)
+    select(node)
+      .selectAll('rect')
+      .data(sampleData)
+      .enter()
+      .append('rect');
+    
+    select(node)
+      .selectAll('rect')
+      .data(sampleData)
+      .exit()
+      .remove();
+
+    select(node)
+      .selectAll('rect')
+      .data(sampleData)
+      .style('fill', '#3e8e41')
+      .attr('x', (d, i) => i * 25)
+      .attr('y', d => 300 - yScale(d))
+      .attr('height', d => yScale(d))
+      .attr('width', 20);
   }
 
   render() {
     return <svg ref={node => this.node = node}
-    width={250} height={250}>
+    width={300} height={300}>
     </svg>
   }
 }
