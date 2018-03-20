@@ -10,6 +10,7 @@ import EmployeeInfo from './components/employeeInfo.jsx';
 import SaleInfo from './components/saleInfo.jsx';
 import Login from './components/login.jsx';
 import TransactionCredit from './components/transactionCredit.jsx';
+import TransactionCash from './components/transactionCash.jsx';
 import SaleControl from './components/saleControl.jsx';
 
 const history = createHistory();
@@ -24,6 +25,7 @@ ReactDOM.render(
         <Route path="/employeeinfo" component={EmployeeInfo} />
         <Route path="/inventoryinfo" component={InventoryInfo} />
         <Route path="/saleinfo" component={SaleInfo} />
+        <Route path="/transaction/cash" component={TransactionCash} />
         <Route path="/transaction/credit" component={TransactionCredit} />
       </div>
     </Router>

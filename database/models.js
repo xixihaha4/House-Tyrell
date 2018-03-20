@@ -61,6 +61,10 @@ const Timesheet = db.define('Timesheets', {
   check_out: Sequelize.STRING,
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> featurez
 // db.sync({ force: true }).then(() => {
 //   Employee.create({
 //     employee_id: '5', employee_name: 'Manos', manager_privilege: true,
@@ -77,6 +81,10 @@ const Timesheet = db.define('Timesheets', {
 //   Employee.create({
 //     employee_id: '400', employee_name: 'Adam', manager_privilege: false,
 //   });
+<<<<<<< HEAD
+=======
+//
+>>>>>>> featurez
 //   Ingredient.create({
 //     ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',
 //   });
