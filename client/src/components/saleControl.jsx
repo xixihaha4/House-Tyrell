@@ -11,7 +11,7 @@ class SaleControl extends React.Component {
 
   render() {
     return (
-      <div className="saleGrid">
+      <div className="saleGrid" id="">
         <button type="button">
           <i className="far fa-money-bill-alt" />
         </button>

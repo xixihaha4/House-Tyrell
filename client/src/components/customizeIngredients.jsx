@@ -13,17 +13,17 @@ export default class CustomizeIngredients extends React.Component {
   crossOutItem() {
     this.setState({ crossed: !this.state.crossed },
       () => this.props.removeIng(this.props.ingredient, this.props.i, this.state.crossed),
-    )
-
+    );
   }
 
   render() {
     return (
       <div
         onClick={this.crossOutItem}
-        style={this.state.crossed ? {'text-decoration' : 'line-through'} : {}}>
+        style={this.state.crossed ? { 'text-decoration' : 'line-through' } : {}}
+      >
         {this.props.ingredient.ingredient_name}
       </div>
-    )
+    );
   }
 }
