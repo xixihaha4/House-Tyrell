@@ -2,7 +2,7 @@ import React from 'react';
 import SaleScreen from './saleScreen.jsx';
 import axios from 'axios';
 import Login from './login.jsx';
-// import ManagerHome from './managerHome.jsx';
+import Alert from 'react-s-alert'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -87,6 +87,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+
         <SaleScreen
           menuItems={this.state.menuItems}
           itemClick={this.itemClick}
@@ -98,6 +99,7 @@ export default class App extends React.Component {
           filterByCategory={this.filterByCategory}
           transactionComplete={this.transactionComplete}
         />
+
       </div>
     );
   }

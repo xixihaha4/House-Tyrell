@@ -37,6 +37,23 @@ app.get('/fetch/categories', (req, res) => {
     });
 });
 
+app.get('/fetch/employee', (req, res) => {
+  db.Employee.findAll({
+    where: {
+      employee_id: req.query.PIN
+    }
+  })
+    .then((data) => {
+      if (data.length === 0) {
+        res.status(404).send()
+      } else {
+        res.send(data)
+      }
+    })
+    .catch((error) => {
+      res.send(error)
+    })
+})
 app.get('/filter/category', (req, res) => {
   db.Item.findAll({
     where: {
