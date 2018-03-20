@@ -175,6 +175,36 @@ body {
   background-color: pink;
 }
 
+
+.transactionCash {
+  text-align: center;
+  top: 40%;
+  left: 50%;
+  position: fixed;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(237, 237, 237);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCash button {
+  padding: 2.5%;
+  margin: 5%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirmed {
+  padding: 15%;
+}
+
+.transactionCashConfirmed button {
+  font-size: 1em;
+  margin: 1.5%;
+}
+
 .transactionCredit {
   text-align: center;
   top: 50%;

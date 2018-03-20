@@ -12,7 +12,7 @@ class SaleControl extends React.Component {
   render() {
     return (
       <div className="saleGrid">
-        <button type="button">
+        <button type="button" onClick={() => this.props.history.push('/transaction/cash', { total: (this.props.total + this.props.tax).toFixed(2), test: 'hi' })}>
           <i className="far fa-money-bill-alt" />
         </button>
         <button type="button" onClick={() => this.props.history.push('/transaction/credit', { total: (this.props.total + this.props.tax).toFixed(2), test: 'hi' })}>

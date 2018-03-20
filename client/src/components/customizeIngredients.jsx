@@ -21,7 +21,7 @@ export default class CustomizeIngredients extends React.Component {
     return (
       <div
         onClick={this.crossOutItem}
-        style={this.state.crossed ? {'text-decoration' : 'line-through'} : {}}>
+        style={this.state.crossed ? {'text-decoration' : 'line-through', 'color': 'grey'} : {'color': 'grey'}}>
         {this.props.ingredient.ingredient_name}
       </div>
     )
