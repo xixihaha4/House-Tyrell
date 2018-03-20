@@ -46,6 +46,7 @@ export default class App extends React.Component {
   }
 
   filterByCategory(category) {
+    console.log(category )
     axios.get('/filter/category', { params: { category: category.id } })
       .then((results) => {
         this.setState({
@@ -71,10 +72,11 @@ export default class App extends React.Component {
       total: tempTotal,
       tax: parseFloat(tempTax),
     });
+  }
+
 
   removeIng(ingredient, i, crossed) {
-    // will implement keeping track of crossed out ingredients later
-    console.log('this is ingredient and index of ingredient', ingredient, i, crossed);
+      console.log('this is ingredient and index of ingredient', ingredient, i, crossed);
   }
 
   transactionRemove(index) {
@@ -108,7 +110,6 @@ export default class App extends React.Component {
           filterByCategory={this.filterByCategory}
           removeIng={this.removeIng}
           transactionComplete={this.transactionComplete}
-
         />
 
       </div>
