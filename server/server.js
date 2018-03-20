@@ -33,6 +33,24 @@ app.get('/fetch/categories', (req, res) => {
     });
 });
 
+app.get('/fetch/employee', (req, res) => {
+  db.Employee.findAll({
+    where: {
+      employee_id: req.query.PIN
+    }
+  })
+    .then((data) => {
+      if (data.length === 0) {
+        res.status(404).send()
+      } else {
+        res.send(data)
+      }
+    })
+    .catch((error) => {
+      res.send(error)
+    })
+})
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) res.status(500).send(err);
