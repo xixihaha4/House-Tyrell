@@ -124,7 +124,7 @@ body {
 
 .saleGrid button:nth-child(1) {
   background-color: #45d645;
-  font-size: 3em;
+  font-size: 1.5em;
 }
 .saleGrid button:nth-child(2) {
   background-color: #71c9ff;
@@ -132,9 +132,11 @@ body {
 }
 .saleGrid button:nth-child(3) {
   background-color: #a5d8c1;
+  font-size: 1.5em;
 }
 .saleGrid button:nth-child(4) {
   background-color: #f5acef;
+  font-size: 1.5em;
 }
 
 
@@ -346,8 +348,10 @@ body {
   background: #fff;
   width: 90%;
   margin: 4em auto;
+}
 
- /*NAV BAR*/
+/* NAV BAR */
+
  .sidenav {
     height: 100%;
     width: 0;
@@ -382,10 +386,24 @@ body {
     margin-left: 50px;
 }
 
+.navbar {
+  border-bottom: 1px solid #333;
+}
+
 .navbar-employee {
   position: absolute;
   left: 90%;
   top: 1%;
+}
+
+.navbar-time {
+  position: absolute;
+  left: 45%;
+  top: 1%;
+}
+
+.navbar-bars {
+  margin: 0 1%;
 }
 
 @media screen and (max-height: 450px) {
