@@ -79,7 +79,6 @@ const Timesheet = db.define('Timesheets', {
 //   Employee.create({
 //     employee_id: '400', employee_name: 'Adam', manager_privilege: false,
 //   });
-
 //   Ingredient.create({
 //     ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',
 //   });

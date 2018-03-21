@@ -92,6 +92,10 @@ class TransactionCash extends React.Component {
               <div className="pinNumber-wrapper"  onClick={this.togglePinpad}>Tendered:<i className="far fa-keyboard"></i> <span className="pinNumber">{this.state.identification}</span></div>
             }
           </div>
+        <button
+          type="button"
+          onClick={() => this.props.history.push('/transaction/cash/confirm', { total: this.props.location.state.total, tendered: this.state.tendered })}>Confirm
+        </button>
       </div>
     );
   }
