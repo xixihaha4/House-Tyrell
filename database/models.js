@@ -36,6 +36,7 @@ const Sale = db.define('Sales', {
   sale_amount: Sequelize.DECIMAL,
   sale_cost: Sequelize.DECIMAL,
   sale_discount: Sequelize.INTEGER,
+  sale_cash: Sequelize.BOOLEAN,
 });
 
 const Ingredient = db.define('Ingredients', {
@@ -160,6 +161,18 @@ const Timesheet = db.define('Timesheets', {
 //   Order.create({
 //     order_date: '3/4/2018', order_name: 'Ground Beef', order_id: 11, order_initial: 55, order_left: 2, order_price: 18, order_expire: '03/28/2018',
 //   });
+// });
+
+exports.Employee = Employee;
+exports.Item = Item;
+exports.Category = Category;
+exports.Sale = Sale;
+exports.Ingredient = Ingredient;
+exports.Order = Order;
+exports.Timesheet = Timesheet;
+
+
+
 //   Sale.create({
 //     sale_date: '3/20/2018', item_id: '[1, 2, 3]', employee_id: 88, sale_amount: 14.23, sale_cost: 7.09, sale_discount: 0,
 //   });
@@ -196,12 +209,3 @@ const Timesheet = db.define('Timesheets', {
 //   Sale.create({
 //     sale_date: '3/16/2018', item_id: '[1, 2]', employee_id: 96, sale_amount: 6.49, sale_cost: 3.06, sale_discount: 0,
 //   });
-// });
-
-exports.Employee = Employee;
-exports.Item = Item;
-exports.Category = Category;
-exports.Sale = Sale;
-exports.Ingredient = Ingredient;
-exports.Order = Order;
-exports.Timesheet = Timesheet;

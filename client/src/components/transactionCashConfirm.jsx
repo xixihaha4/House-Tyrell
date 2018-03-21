@@ -7,7 +7,7 @@ class TransactionCashConfirm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dummy: 'dummy'
+      type: 'cash'
     };
     this.finalize = this.finalize.bind(this);
   }
@@ -17,6 +17,7 @@ class TransactionCashConfirm extends React.Component {
       transactionItems: this.props.location.state.transactionItems,
       total: this.props.location.state.total,
       tendered: this.props.location.state.tendered,
+      type: this.state.type
     }).then(() => {
       this.props.history.push('/salesScreen');
     })

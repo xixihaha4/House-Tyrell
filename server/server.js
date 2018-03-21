@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const moment = require('moment');
 const parser = require('body-parser');
 const path = require('path');
 const db = require('../database/models.js');
@@ -45,9 +46,31 @@ app.post('/test', (req, res) => {
 });
 
 app.post('/completed/transaction', (req, res) => {
-  console.log(req.body);
-  console.log((JSON.stringify(new Date).substring(1, 20)));
-  res.send();
+  const itemList = [];
+  console.log(req.body.transactionItems)
+
+  for (let i = 0; i < req.body.transactionItems.length; i += 1) {
+    itemList.push(req.body.transactionItems[i].id)
+  }
+  let type;
+  if (req.body.type) {
+    type = true;
+  } else { type = false; }
+  let employee = JSON.parse(req.session.employee)
+  //let time = JSON.stringify(new Date).substring(1, 20);
+  let time = JSON.stringify(moment().format());
+
+  db.Sale.create({
+    sale_date: time,
+    item_id: JSON.stringify(itemList),
+    employee_id: employee,
+    sale_amount: parseFloat(req.body.total),
+    sale_cost: 50,
+    sale_discount: 0,
+    sale_cash: type
+  }).then(() => {
+    res.send();
+  })
 });
 
 
