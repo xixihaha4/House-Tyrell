@@ -205,8 +205,45 @@ body {
 }
 
 .transactionCash button {
-  padding: 2.0%;
-  margin: 3.5%;
+  position: absolute;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  top: 85%;
+  left: 42%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirm {
+  text-align: center;
+  height: 90%;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(237, 237, 237);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirm h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.transactionCashConfirm button {
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  top: 85%;
+  left: 42%;
   background-color: #71c9ff;
   color: white;
   border: none;
@@ -221,6 +258,8 @@ body {
 
 .transactionCashConfirmed button {
   font-size: 1em;
+  left: 50%;
+  padding: 15%;
   margin: 1.5%;
 }
 
