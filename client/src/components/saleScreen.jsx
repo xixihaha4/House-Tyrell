@@ -24,7 +24,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
         </div>
         <div><SaleCategory menuCategories={menuCategories} filterByCategory={filterByCategory}/></div>
         <div className="saleControlGrid">
-          <SaleControl total={total} tax={tax} transactionComplete={transactionComplete} />
+          <SaleControl total={total} tax={tax} transactionItems={transactionItems} />
         </div>
       </div>
     </div>
