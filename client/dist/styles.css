@@ -184,6 +184,46 @@ body {
   background-color: pink;
 }
 
+
+.transactionCash {
+  text-align: center;
+  height: 90%;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(237, 237, 237);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCash h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.transactionCash button {
+  padding: 2.0%;
+  margin: 3.5%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirmed {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+}
+
+.transactionCashConfirmed button {
+  font-size: 1em;
+  margin: 1.5%;
+}
+
 .transactionCredit {
   text-align: center;
   top: 50%;
