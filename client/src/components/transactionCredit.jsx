@@ -11,18 +11,19 @@ class TransactionCredit extends React.Component {
     };
     this.sigCanvas = {};
     this.clear = this.clear.bind(this);
-    this.transactionComplete = this.transactionComplete.bind(this);
+    this.finalize = this.finalize.bind(this);
   }
   clear() {
     this.sigCanvas.clear();
   }
 
-  transactionComplete() {
-    console.log("TESTTTT", this.props.location.state.test);
-    // axios.post('/completed/transaction', { transaction })
-    //   .then(() => {
-    //     this.props.history.push('/salesScreen');
-    //   });
+  finalize() {
+    axios.post('/completed/transaction', {
+      transactionItems: this.props.location.state.transactionItems,
+      total: this.props.location.state.total,
+    }).then(() => {
+      this.props.history.push('/salesScreen');
+    })
   }
 
   render() {
@@ -45,9 +46,9 @@ class TransactionCredit extends React.Component {
           :
             <div className="transactionCreditConfirmed animated fadeIn">
               <h1>Thank you for your purchase.</h1>
-              <button type="button" onClick={() => console.log('No Email Yet')}>Email Receipt</button>
-              <button type="button" onClick={() => this.props.history.push('/salesScreen')}>Print Receipt</button>
-              <button type="button" onClick={() => this.transactionComplete()}>No Receipt</button>
+              <button type="button" onClick={this.finalize}>Email Receipt</button>
+              <button type="button" onClick={this.finalize}>Print Receipt</button>
+              <button type="button" onClick={this.finalize}>No Receipt</button>
             </div>
         }
       </div>
