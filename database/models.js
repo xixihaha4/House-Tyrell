@@ -49,10 +49,12 @@ const Ingredient = db.define('Ingredients', {
 
 const Order = db.define('Orders', {
   order_date: Sequelize.STRING,
+  order_name: Sequelize.STRING,
   order_id: Sequelize.INTEGER,
   order_initial: Sequelize.DECIMAL,
   order_left: Sequelize.DECIMAL,
   order_price: Sequelize.DECIMAL,
+  order_expire: Sequelize.STRING,
 });
 
 const Timesheet = db.define('Timesheets', {
@@ -61,10 +63,6 @@ const Timesheet = db.define('Timesheets', {
   check_out: Sequelize.STRING,
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> featurez
 // db.sync({ force: true }).then(() => {
 //   Employee.create({
 //     employee_id: '5', employee_name: 'Manos', manager_privilege: true,
@@ -81,10 +79,7 @@ const Timesheet = db.define('Timesheets', {
 //   Employee.create({
 //     employee_id: '400', employee_name: 'Adam', manager_privilege: false,
 //   });
-<<<<<<< HEAD
-=======
-//
->>>>>>> featurez
+
 //   Ingredient.create({
 //     ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',
 //   });
@@ -138,6 +133,69 @@ const Timesheet = db.define('Timesheets', {
 //   });
 //   Item.create({
 //     item_name: 'Egg and Cheese Sandwich', item_price: 3, item_ingredients: '[6]', item_category: 6,
+//   });
+//   Order.create({
+//     order_date: '2/27/2018', order_name: 'Ground Beef', order_id: 5, order_initial: 21, order_left: 6, order_price: 18, order_expire: '03/25/2018',
+//   });
+//   Order.create({
+//     order_date: '2/27/2018', order_name: 'Lettuce', order_id: 5, order_initial: 50, order_left: 29, order_price: 1, order_expire: '03/20/2018',
+//   });
+//   Order.create({
+//     order_date: '2/27/2018', order_name: 'Pickles', order_id: 5, order_initial: 14, order_left: 2, order_price: 3.6, order_expire: '03/28/2018',
+//   });
+//   Order.create({
+//     order_date: '2/28/2018', order_name: 'Onions', order_id: 6, order_initial: 100, order_left: 70, order_price: 2.2, order_expire: '04/25/2018',
+//   });
+//   Order.create({
+//     order_date: '2/28/2018', order_name: 'Coca-Cola Cans', order_id: 6, order_initial: 90, order_left: 15, order_price: 1.8, order_expire: '05/25/2018',
+//   });
+//   Order.create({
+//     order_date: '2/28/2018', order_name: 'Ground Beef', order_id: 9, order_initial: 8, order_left: 4, order_price: 20, order_expire: '03/30/2018',
+//   });
+//   Order.create({
+//     order_date: '3/4/2018', order_name: 'Tomatoes', order_id: 10, order_initial: 35, order_left: 15, order_price: 9, order_expire: '04/05/2018',
+//   });
+//   Order.create({
+//     order_date: '3/4/2018', order_name: 'Ketchup', order_id: 11, order_initial: 200, order_left: 45, order_price: 1.5, order_expire: '06/25/2018',
+//   });
+//   Order.create({
+//     order_date: '3/4/2018', order_name: 'Ground Beef', order_id: 11, order_initial: 55, order_left: 2, order_price: 18, order_expire: '03/28/2018',
+//   });
+//   Sale.create({
+//     sale_date: '3/20/2018', item_id: '[1, 2, 3]', employee_id: 88, sale_amount: 14.23, sale_cost: 7.09, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/20/2018', item_id: '[2, 4]', employee_id: 96, sale_amount: 5.03, sale_cost: 3.29, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/19/2018', item_id: '[1, 3, 5]', employee_id: 99, sale_amount: 15.03, sale_cost: 9.26, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/19/2018', item_id: '[4]', employee_id: 99, sale_amount: 4.12, sale_cost: 2.26, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/19/2018', item_id: '[4]', employee_id: 5, sale_amount: 4.12, sale_cost: 2.26, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/18/2018', item_id: '[1, 2]', employee_id: 96, sale_amount: 6.49, sale_cost: 3.06, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/18/2018', item_id: '[1, 2, 3]', employee_id: 88, sale_amount: 14.23, sale_cost: 7.09, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/18/2018', item_id: '[2, 4]', employee_id: 96, sale_amount: 5.03, sale_cost: 3.29, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/17/2018', item_id: '[1, 3, 5]', employee_id: 99, sale_amount: 15.03, sale_cost: 9.26, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/17/2018', item_id: '[4]', employee_id: 99, sale_amount: 4.12, sale_cost: 2.26, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/16/2018', item_id: '[4]', employee_id: 5, sale_amount: 4.12, sale_cost: 2.26, sale_discount: 0,
+//   });
+//   Sale.create({
+//     sale_date: '3/16/2018', item_id: '[1, 2]', employee_id: 96, sale_amount: 6.49, sale_cost: 3.06, sale_discount: 0,
 //   });
 // });
 
