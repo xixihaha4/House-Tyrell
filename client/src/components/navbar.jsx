@@ -1,7 +1,9 @@
 import React from 'react';
 import Moment from 'react-moment';
+import axios from 'axios';
+import { withRouter } from 'react-router';
 
-export default class Navbar extends React.Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,6 +11,7 @@ export default class Navbar extends React.Component {
     }
     this.openNav = this.openNav.bind(this);
     this.closeNav = this.closeNav.bind(this);
+    this.clockout = this.clockout.bind(this);
   }
 
   openNav() {
@@ -23,6 +26,16 @@ export default class Navbar extends React.Component {
     document.body.style.backgroundColor = "white";
   }
 
+  clockout() {
+    axios.post('/clockout')
+      .then(() => {
+        this.props.history.push('/');
+      })
+      .catch((error) => {
+        throw error;
+      })
+  }
+
   render() {
     return (
       <div className="navbar">
@@ -30,7 +43,7 @@ export default class Navbar extends React.Component {
         <nav id="mySidenav" className="sidenav">
           <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeNav()}>&times;</a>
           <a href="#">Alert Manager</a>
-          <a href="#">Clock Out</a>
+          <a onClick={() => this.clockout()}>Clock Out</a>
         </nav>
         <span className="navbar-time"><Moment interval={1000} format={"MM/DD/YYYY hh:mm:ss a"} /></span>
         <span className="navbar-employee">Hi, Jane Doe</span>
@@ -38,3 +51,5 @@ export default class Navbar extends React.Component {
     );
   }
 }
+
+export default withRouter(Navbar);

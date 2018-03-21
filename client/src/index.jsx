@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRedirect } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
 
 import App from './components/app.jsx';
@@ -20,7 +20,7 @@ ReactDOM.render(
   <div>
     <Router history={history}>
       <div>
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={Login} status={401} />
         <Route path="/salesScreen" component={App} />
         <Route path="/managerhome" component={ManagerHome} />
         <Route path="/employeeinfo" component={EmployeeInfo} />
