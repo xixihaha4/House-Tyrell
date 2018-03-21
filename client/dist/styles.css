@@ -8,11 +8,14 @@ body {
 }
 
 .saleItemGrid {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-template-rows: auto auto auto auto;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   background-color: rgb(237, 237, 237);
   text-align: center;
+  min-height: 30vh;
+  max-height: 86vh;
+  overflow-y: scroll;
 }
 
 .saleItemGrid * {

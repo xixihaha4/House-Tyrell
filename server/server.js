@@ -12,11 +12,12 @@ const app = express();
 
 const sess = {
   secret: 'tyrell',
-  resave: true,
+  resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 10000,
+    expires: false,
   },
+  rolling: true,
 };
 
 app.use(session(sess));
@@ -31,9 +32,10 @@ let auth = function(req, res, next) {
   if (req.session.employee) {
     next();
   } else {
-    res.status(401).redirect('/')
+    res.status(401).send();
   }
-}
+};
+
 //* **************************** POST REQUESTS *********************************
 app.post('/test', (req, res) => {
   db.Category.create({ category_name: 'Test2Test' })
@@ -43,14 +45,16 @@ app.post('/test', (req, res) => {
 });
 
 app.post('/completed/transaction', (req, res) => {
-  console.log(req.body);
   res.send();
 });
+
+app.post('/clockout', (req, res) => {
+  req.session.destroy();
+  res.status(200).send();
+});
+
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist'))
-})
 
 app.get('/fetch/items', (req, res) => {
   db.Item.findAll()
@@ -92,7 +96,6 @@ app.get('/fetch/employee', (req, res) => {
       } else {
         req.session.regenerate(() => {
           req.session.employee = req.query.PIN;
-          console.log("LINE 90", req.session)
           res.send(data);
         });
       }
@@ -103,9 +106,6 @@ app.get('/fetch/employee', (req, res) => {
 });
 
 app.get('/filter/category', auth, (req, res) => {
-// app.get('/filter/category', (req, res) => {
-
-  console.log("FUCKING MANOSKO",req.session);
   db.Item.findAll({
     where: {
       item_category: req.query.category,
@@ -117,10 +117,15 @@ app.get('/filter/category', auth, (req, res) => {
 });
 
 app.get('/*', (req, res) => {
-  // Session.touch() here?
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     if (err) res.status(500).send(err);
   });
 });
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+//     if (err) res.status(500).send(err);
+//   });
+// });
 
 app.listen(port);
