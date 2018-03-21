@@ -45,13 +45,17 @@ app.post('/test', (req, res) => {
 });
 
 app.post('/completed/transaction', (req, res) => {
+  console.log(req.body);
+  console.log((JSON.stringify(new Date).substring(1, 20)));
   res.send();
 });
+
 
 app.post('/clockout', (req, res) => {
   req.session.destroy();
   res.status(200).send();
 });
+
 
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
