@@ -10,6 +10,7 @@ const SaleInfo = () => (
         <div className="lineChart">
           <SalesLine />
         </div>
+        <button>By Employee</button>
       </div>
       <div className="statsGrid">Sale Info Stats</div>
     </div>

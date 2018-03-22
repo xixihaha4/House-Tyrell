@@ -162,17 +162,10 @@ body {
 .managerViewGrid {
   grid-column: 2;
   display: grid;
-  grid-template-rows: 60% 40%;
+  grid-template-rows: 40% 60%;
 }
 
 .graphGrid {
-  grid-row: 1;
-  display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; */
-  background-color: white;
-}
-
-.graphGrid-inventory {
   grid-row: 1;
   display: grid;
   background-color: white;
@@ -183,7 +176,6 @@ body {
   display: grid;
   background-color: pink;
 }
-
 
 .transactionCash {
   text-align: center;
@@ -426,7 +418,12 @@ body {
 #chart {
   background: #fff;
   width: 90%;
-  margin: 4em auto;
+  margin: 2em auto;
+}
+
+.dropDown {
+  font-size: 15px;
+  
 }
 
 /* NAV BAR */
