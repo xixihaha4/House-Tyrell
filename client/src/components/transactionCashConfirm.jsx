@@ -17,6 +17,7 @@ class TransactionCashConfirm extends React.Component {
       transactionItems: this.props.location.state.transactionItems,
       total: this.props.location.state.total,
       tendered: this.props.location.state.tendered,
+      discount: this.props.location.state.discount,
       type: this.state.type
     }).then(() => {
       this.props.history.push('/salesScreen');
