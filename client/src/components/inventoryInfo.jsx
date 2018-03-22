@@ -1,6 +1,8 @@
 import React from 'react';
 import Navigation from './managerNav.jsx';
-import InventoryUsageBar from './inventoryBar.jsx';
+import InventoryUsagePie from './inventoryUsagePie.jsx';
+import InventoryCostLine from './inventoryCostLine.jsx';
+import InventoryWastePie from './inventoryWastePie.jsx'
 
 class InventoryInfo extends React.Component {
   constructor(props) {
@@ -16,12 +18,16 @@ class InventoryInfo extends React.Component {
   }
 
   render() {
+    const type = this.state.viewType;
     return (
       <div className="managerScreenGrid">
         <div className="manager-navigation"><Navigation /></div>
         <div className="managerViewGrid">
           <div className="graphGrid">
-            <div className="barChart"><InventoryUsageBar /></div>
+            {type === 'usage' ? (<div className="graph"><InventoryUsagePie /></div>) : (
+              type === 'cost' ? (<div className="graph"><InventoryCostLine /></div>) : (<div className="graph"><InventoryWastePie /></div>)
+            )}
+            
             <div>
               <select value={this.state.viewType} onChange={this.handleChange} className="dropDown">
                 <option value="usage">Usage</option>

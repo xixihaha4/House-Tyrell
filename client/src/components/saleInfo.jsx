@@ -7,7 +7,7 @@ const SaleInfo = () => (
     <div className="manager-navigation"><Navigation /></div>
     <div className="managerViewGrid">
       <div className="graphGrid">
-        <div className="lineChart">
+        <div className="graph">
           <SalesLine />
         </div>
         <button>By Employee</button>
