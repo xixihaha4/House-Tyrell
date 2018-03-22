@@ -126,6 +126,32 @@ app.get('/fetch/inventory', (req, res) => {
   });
 });
 
+app.get('/fetch/ordercost', (req, res) => {
+  db.Order.findAll({
+    attributes: ['order_date', 'order_total'],
+    order: [['order_date', 'DESC']],
+  }).then((data) => {
+    res.send(data);
+  });
+});
+
+app.get('/fetch/inventorycost', (req, res) => {
+  db.Ingredient.findAll({
+    attributes: ['order_date', 'ingredient_total'],
+    order: [['order_date', 'DESC']],
+  }).then((data) => {
+    res.send(data);
+  });
+});
+
+app.get('/fetch/waste', (req, res) => {
+  db.Order.findAll({
+    attributes: ['order_name', 'order_initial', 'order_left', 'order_used'],
+  }).then((data) => {
+    res.send(data);
+  });
+});
+
 app.get('/fetch/employee', (req, res) => {
   db.Employee.findAll({
     where: {

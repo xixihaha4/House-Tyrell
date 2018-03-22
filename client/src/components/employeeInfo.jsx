@@ -7,7 +7,7 @@ const EmployeeInfo = () => (
     <div className="manager-navigation"><Navigation /></div>
     <div className="managerViewGrid">
       <div className="graphGrid">
-        <div className="barChart"><EmployeeBar /></div>
+        <div className="graph"><EmployeeBar /></div>
       </div>
       <div className="statsGrid">Employee Info Stats</div>
     </div>
