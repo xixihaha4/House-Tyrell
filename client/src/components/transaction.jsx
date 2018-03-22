@@ -2,6 +2,7 @@ import React from 'react';
 // import ReactModal from 'react-modal';
 import CustomModal from './customModal.jsx';
 import TransactionItem from './transactionItem.jsx'
+import SaleControl from './saleControl.jsx';
 
 
 
@@ -38,43 +39,53 @@ export default class Transaction extends React.Component {
   render() {
     let showDiscount = null;
     if (this.props.discount > 0) {
-      showDiscount = <div style={{ 'grid-row': '4', 'grid-column': '3', color: 'rgb(149, 152, 150)' }}>{(this.props.discount)}% Discount</div>;
+      showDiscount = <div style={{ 'gridRow': '4', 'gridColumn': '4', color: 'rgb(149, 152, 150)' }}>{(this.props.discount)}% Discount</div>;
     }
     return (
 
       <div className='transactionGrid'>
         <div className='transactionGridHeader'>
-          <div style={{ 'grid-row': '1', 'grid-column': '2' }}>Name</div>
-          <div style={{ 'grid-row': '1', 'grid-column': '3' }}>Price</div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Name</div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '3' }}>Price</div>
         </div>
 
         <div className='transactionGridItems'>
           {this.props.transactionItems.map((item, i) =>
-          (<button
-            onClick={() => {this.props.transactionRemove(i)}}
-            style={{ 'grid-row': `${i + 1}`, 'grid-column': '1', 'vertical-align': 'top' }}
-            >X
-          </button>))}
+          (
+            <div
+              onClick={() => {this.props.transactionRemove(i)}}
+              style={{ gridRow: `${i + 1}`, gridColumn: '1', verticalAlign: 'top' }}
+            >
+              <i className="fas fa-times-circle" style={{ color: 'rgb(224, 94, 94)' }} />
+            </div>
+          ))}
           {this.props.transactionItems.map((item, i) =>
-           <div style={{ 'grid-row': `${i + 1}`, 'grid-column': '2' }}>
+           <div style={{ 'gridRow': `${i + 1}`, 'gridColumn': '2' }}>
              <TransactionItem item={item} removeIng={this.props.removeIng} />
           </div>)}
           {this.props.transactionItems.map((item, i) =>
-            <div style={{ 'grid-row': `${i + 1}`, 'grid-column': '3' }}>{item.item_price}</div>)}
+            <div style={{ 'gridRow': `${i + 1}`, 'grid-Column': '3' }}>{item.item_price}</div>)}
         </div>
-
+        <div className="saleControlGrid">
+          <SaleControl
+            total={this.props.total}
+            tax={this.props.tax}
+            discount={this.props.discount}
+            openDiscountModal={this.props.openDiscountModal}
+            transactionComplete={this.props.transactionComplete}
+            transactionItems={this.props.transactionItems}
+          />
+        </div>
         <div className='transactionGridFooter'>
-          <div style={{ 'grid-row': '1', 'grid-column': '3' }}>{this.props.tax.toFixed(2)} Tax</div>
-          <div style={{ 'grid-row': '2', 'grid-column': '3' }}>{this.props.total.toFixed(2)} subTotal</div>
-          <div style={{ 'grid-row': '3', 'grid-column': '3' }}>{(this.props.total + this.props.tax - ((this.props.total + this.props.tax) * (this.props.discount / 100))).toFixed(2)} Total</div>
+          <div style={{ gridRow: '1', gridColumn: '4' }}>{this.props.tax.toFixed(2)} Tax </div>
+          <div style={{ gridRow: '2', gridColumn: '4' }}>{this.props.total.toFixed(2)} subTotal </div>
+          <div style={{ gridRow: '3', gridColumn: '4' }}>{(this.props.total + this.props.tax - ((this.props.total + this.props.tax) * (this.props.discount / 100))).toFixed(2)} Total </div>
           {showDiscount}
         </div>
       </div>
     )
   }
 }
-
-
 
 // (<ReactModal
 //                 isOpen={this.state.modalIsOpen}

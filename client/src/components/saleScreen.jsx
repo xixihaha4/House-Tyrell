@@ -9,7 +9,7 @@ import Select from 'react-select';
 const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openDiscountModal, closeDiscountModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete }) =>
   (
     <div>
-      <div>
+      <div className="navbar">
         <Navbar />
       </div>
       <div className="saleScreenGrid animated fadeIn">
@@ -38,22 +38,15 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             total={total}
             tax={tax}
             discount={discount}
-          />
-        </div>
-        <div>
-          <SaleCategory
-            menuCategories={menuCategories}
-            filterByCategory={filterByCategory} />
-        </div>
-        <div className="saleControlGrid">
-          <SaleControl
-            total={total}
-            tax={tax}
-            discount={discount}
             openDiscountModal={openDiscountModal}
             transactionComplete={transactionComplete}
             transactionItems={transactionItems}
           />
+        </div>
+        <div className="saleCategoryGrid">
+          <SaleCategory
+            menuCategories={menuCategories}
+            filterByCategory={filterByCategory} />
         </div>
       </div>
     </div>
