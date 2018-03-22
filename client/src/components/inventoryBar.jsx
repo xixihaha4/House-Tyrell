@@ -68,13 +68,13 @@ class InventoryUsageBar extends React.Component {
     return [initial, left];
   }
   hasExpired(date) {
-    var mm = Number(date.slice(0, 2));
-    var dd = Number(date.slice(3, 5));
-    var yyyy = Number(date.slice(6));
-    var today = new Date(Date.now()).toLocaleString();
-    var month = Number(today.slice(0, 1));
-    var day = Number(today.slice(2, 4));
-    var year = Number(today.slice(-4));
+    const mm = Number(date.slice(0, 2));
+    const dd = Number(date.slice(3, 5));
+    const yyyy = Number(date.slice(6));
+    const today = new Date(Date.now()).toLocaleString();
+    const month = Number(today.slice(0, 1));
+    const day = Number(today.slice(2, 4));
+    const year = Number(today.slice(-4));
 
     if (year > yyyy) {
       return true;
