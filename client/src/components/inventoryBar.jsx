@@ -1,41 +1,114 @@
 import React from 'react';
+import axios from 'axios';
 
 const c3 = require('c3/c3.js');
 
 const columns = [
-  ['Ingredient_Left', 30, 20, 70, 6, 105, 23],
-  ['Ingredients_Initial', 50, 20, 100, 40, 150, 25],
+  ['Inventory_Current', 30, 20, 70, 6, 105, 23],
+  ['Inventory_Initial', 50, 20, 100, 40, 150, 25],
 ];
 
-class InventoryBar extends React.Component {
+class InventoryUsageBar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      initial: '',
+      left: '',
+    };
     this.updateChart = this.updateChart.bind(this);
+    this.getInventory1 = this.getInventory1.bind(this);
+    this.getInventory2 = this.getInventory2.bind(this);
+    this.getInventoryData = this.getInventoryData.bind(this);
+    this.calculateInventory1 = this.calculateInventory1.bind(this);
+    this.calculateInventory2 = this.calculateInventory2.bind(this);
+    this.hasExpired = this.hasExpired.bind(this);
   }
-  componentDidMount() {
+  componentWillMount() {
+    this.getInventoryData();
     this.updateChart();
   }
   componentDidUpdate() {
     this.updateChart();
   }
+  getInventory1() {
+    return axios.get('/fetch/currentInventory');
+  }
+  getInventory2() {
+    return axios.get('/fetch/inventory');
+  }
+  getInventoryData() {
+    axios.all([this.getInventory1(), this.getInventory2()])
+      .then(axios.spread((data1, data2) => {
+        const result1 = this.calculateInventory1(data1.data);
+        const result2 = this.calculateInventory2(data2.data);
+        this.setState({
+          initial: result1[0] + result2[0],
+          left: result1[1] + result2[1],
+        }, () => { console.log(this.state); });
+    }));
+  }
+  calculateInventory1(data) {
+    // need to filter out those expired once expiration is implemented
+    // use the hasExpired function below
+    var initial = 0;
+    var left = 0;
+    data.forEach((item) => {
+      initial += Number(item.order_initial);
+      left += Number(item.order_left);
+    })
+    return [initial, left];
+  }
+  calculateInventory2(data) {
+    var initial = 0;
+    var left = 0;
+    data.forEach((item) => {
+      initial += Number(item.ingredient_initial);
+      left += Number(item.ingredient_left);
+    })
+    return [initial, left];
+  }
+  hasExpired(date) {
+    var mm = Number(date.slice(0, 2));
+    var dd = Number(date.slice(3, 5));
+    var yyyy = Number(date.slice(6));
+    var today = new Date(Date.now()).toLocaleString();
+    var month = Number(today.slice(0, 1));
+    var day = Number(today.slice(2, 4));
+    var year = Number(today.slice(-4));
+
+    if (year > yyyy) {
+      return true;
+    }
+    if (year === yyyy && month > mm) {
+      return true;
+    }
+    if (year === yyyy && month === mm && date > dd) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
   updateChart() {
     const chart = c3.generate({
       bindto: '#chart',
       x: 'x',
       data: {
-        columns: columns,
+        columns: [
+          ['Inventory_Current', this.state.left], ['Inventory_Initial', this.state.initial],
+        ],
         type: 'bar',
         colors: {
-          Ingredient_Left: '#f05b47',
-          Ingredient_Initial: '#349eff',
+          Inventory_Current: '#f05b47',
+          Inventory_Initial: '#349eff',
         },
       },
       axis: {
         x: {
           type: 'category',
-          categories: ['Bread', 'Lettuce', 'Ham', 'Onions', 'Potatoes', 'Tomatoes'],
+          categories: ['Overall Inventory'],
           tick: {
-            rotate: 75,
             multiline: false,
           },
           height: 130,
@@ -55,4 +128,4 @@ class InventoryBar extends React.Component {
   }
 }
 
-export default InventoryBar;
+export default InventoryUsageBar;

@@ -110,6 +110,22 @@ app.get('/fetch/ingredients', (req, res) => {
   });
 });
 
+app.get('/fetch/currentInventory', (req, res) => {
+  db.Order.findAll({
+    attributes: ['order_name', 'order_initial', 'order_left', 'order_expire'],
+  }).then((data) => {
+    res.send(data);
+  });
+});
+
+app.get('/fetch/inventory', (req, res) => {
+  db.Ingredient.findAll({
+    attributes: ['ingredient_name', 'ingredient_left', 'ingredient_initial'],
+  }).then((data) => {
+    res.send(data);
+  });
+});
+
 app.get('/fetch/employee', (req, res) => {
   db.Employee.findAll({
     where: {
