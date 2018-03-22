@@ -3,12 +3,7 @@ import axios from 'axios';
 
 const c3 = require('c3/c3.js');
 
-const columns = [
-  ['Inventory_Current', 30, 20, 70, 6, 105, 23],
-  ['Inventory_Initial', 50, 20, 100, 40, 150, 25],
-];
-
-class InventoryUsageBar extends React.Component {
+class InventoryUsagePie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,17 +39,17 @@ class InventoryUsageBar extends React.Component {
         this.setState({
           initial: result1[0] + result2[0],
           left: result1[1] + result2[1],
-        }, () => { console.log(this.state); });
+        });
     }));
   }
   calculateInventory1(data) {
-    // need to filter out those expired once expiration is implemented
-    // use the hasExpired function below
     var initial = 0;
     var left = 0;
     data.forEach((item) => {
-      initial += Number(item.order_initial);
-      left += Number(item.order_left);
+      if (!this.hasExpired(item.order_expire)) {   
+        initial += Number(item.order_initial);
+        left += Number(item.order_left);
+      }
     })
     return [initial, left];
   }
@@ -68,9 +63,9 @@ class InventoryUsageBar extends React.Component {
     return [initial, left];
   }
   hasExpired(date) {
-    const mm = Number(date.slice(0, 2));
-    const dd = Number(date.slice(3, 5));
-    const yyyy = Number(date.slice(6));
+    const mm = Number(date.slice(5, 7));
+    const dd = Number(date.slice(-2));
+    const yyyy = Number(date.slice(0, 4));
     const today = new Date(Date.now()).toLocaleString();
     const month = Number(today.slice(0, 1));
     const day = Number(today.slice(2, 4));
@@ -96,12 +91,12 @@ class InventoryUsageBar extends React.Component {
       x: 'x',
       data: {
         columns: [
-          ['Inventory_Current', this.state.left], ['Inventory_Initial', this.state.initial],
+          ['Inventory_Left', this.state.left], ['Inventory_Used', this.state.initial - this.state.left],
         ],
-        type: 'bar',
+        type: 'pie',
         colors: {
-          Inventory_Current: '#f05b47',
-          Inventory_Initial: '#349eff',
+          Inventory_Left: '#f05b47',
+          Inventory_Used: '#349eff',
         },
       },
       axis: {
@@ -128,4 +123,4 @@ class InventoryUsageBar extends React.Component {
   }
 }
 
-export default InventoryUsageBar;
+export default InventoryUsagePie;
