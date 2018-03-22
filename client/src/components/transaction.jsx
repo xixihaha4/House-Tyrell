@@ -33,7 +33,13 @@ export default class Transaction extends React.Component {
   }
 
 
+
+
   render() {
+    let showDiscount = null;
+    if (this.props.discount > 0) {
+      showDiscount = <div style={{ 'grid-row': '4', 'grid-column': '3', color: 'rgb(149, 152, 150)' }}>{(this.props.discount)}% Discount</div>;
+    }
     return (
 
       <div className='transactionGrid'>
@@ -60,7 +66,8 @@ export default class Transaction extends React.Component {
         <div className='transactionGridFooter'>
           <div style={{ 'grid-row': '1', 'grid-column': '3' }}>{this.props.tax.toFixed(2)} Tax</div>
           <div style={{ 'grid-row': '2', 'grid-column': '3' }}>{this.props.total.toFixed(2)} subTotal</div>
-          <div style={{ 'grid-row': '3', 'grid-column': '3' }}>{(this.props.total + this.props.tax).toFixed(2)} Total</div>
+          <div style={{ 'grid-row': '3', 'grid-column': '3' }}>{(this.props.total + this.props.tax - ((this.props.total + this.props.tax) * (this.props.discount / 100))).toFixed(2)} Total</div>
+          {showDiscount}
         </div>
       </div>
     )

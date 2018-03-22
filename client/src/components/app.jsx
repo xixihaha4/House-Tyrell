@@ -13,6 +13,8 @@ export default class App extends React.Component {
       transactionItems: [],
       tax: 0,
       total: 0,
+      discount: 0,
+      discountOptions: [],
     };
     this.itemClick = this.itemClick.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);
@@ -20,11 +22,16 @@ export default class App extends React.Component {
     this.transactionRemove = this.transactionRemove.bind(this);
     this.filterByCategory = this.filterByCategory.bind(this);
     this.removeIng = this.removeIng.bind(this);
+    this.openDiscountModal = this.openDiscountModal.bind(this);
+    this.closeDiscountModal = this.closeDiscountModal.bind(this);
+    this.discountModalOptions = this.discountModalOptions.bind(this);
+    this.updateDiscount = this.updateDiscount.bind(this);
   }
 
   componentDidMount() {
     this.getMenuItems();
     this.getCategories();
+    this.discountModalOptions();
   }
 
   getMenuItems() {
@@ -74,7 +81,6 @@ export default class App extends React.Component {
     });
   }
 
-
   removeIng(ingredient, i, crossed) {
       console.log('this is ingredient and index of ingredient', ingredient, i, crossed);
   }
@@ -95,6 +101,32 @@ export default class App extends React.Component {
     }))
   }
 
+// Below are all the functions for the discount modal and also to update discount.
+
+  openDiscountModal() {
+    document.getElementById('discountModal').style.display = 'block';
+  }
+
+  closeDiscountModal() {
+    document.getElementById('discountModal').style.display = 'none';
+  }
+
+  discountModalOptions() {
+    const myOptions = [];
+    for (let i = 0; i <= 100; i += 1) {
+      myOptions.push({ value: i, label: i });
+    }
+    this.setState({
+      discountOptions: myOptions,
+    });
+  }
+
+  updateDiscount(discount) {
+    this.setState({
+      discount,
+    });
+  }
+
   render() {
     return (
       <div>
@@ -106,10 +138,15 @@ export default class App extends React.Component {
           transactionItems={this.state.transactionItems}
           total={this.state.total}
           tax={this.state.tax}
+          discount={this.state.discount}
+          openDiscountModal={this.openDiscountModal}
+          closeDiscountModal={this.closeDiscountModal}
           transactionRemove={this.transactionRemove}
           filterByCategory={this.filterByCategory}
           removeIng={this.removeIng}
           transactionComplete={this.transactionComplete}
+          discountOptions={this.state.discountOptions}
+          updateDiscount={this.updateDiscount}
         />
 
       </div>

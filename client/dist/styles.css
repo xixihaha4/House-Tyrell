@@ -74,8 +74,11 @@ body {
 .transactionGridFooter {
   grid-row: 3;
   display: grid;
-  grid-template-rows: 5vh 5vh 5vh;
+  grid-template-rows: 2.5vh 2.5vh 2.5vh 2.5vh;
   grid-template-columns: 5vh 15vh 15vh;
+  position: absolute;
+  top: 75%;
+  right: 2%;
 }
 
 
@@ -452,4 +455,60 @@ body {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+/* DISCOUNT MODAL STYLING */
+
+.discountModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+
+.discountClose {
+  color: white;
+  position: absolute;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 0 2%;
+  margin: 0;
+  bottom: 70%;
+  right: 0;
+}
+
+.discountClose:hover,
+.discountClose:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
 }
