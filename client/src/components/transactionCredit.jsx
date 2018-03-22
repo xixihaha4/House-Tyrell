@@ -21,6 +21,7 @@ class TransactionCredit extends React.Component {
     axios.post('/completed/transaction', {
       transactionItems: this.props.location.state.transactionItems,
       total: this.props.location.state.total,
+      discount: this.props.location.state.discount,
     }).then(() => {
       this.props.history.push('/salesScreen');
     })
