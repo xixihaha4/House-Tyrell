@@ -66,7 +66,7 @@ app.post('/completed/transaction', (req, res) => {
     employee_id: employee,
     sale_amount: parseFloat(req.body.total),
     sale_cost: 50,
-    sale_discount: 0,
+    sale_discount: req.body.discount,
     sale_cash: type
   }).then(() => {
     res.send();

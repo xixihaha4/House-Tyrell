@@ -94,7 +94,7 @@ class TransactionCash extends React.Component {
           </div>
         <button
           type="button"
-          onClick={() => this.props.history.push('/transaction/cash/confirm', { total: this.props.location.state.total, tendered: this.state.tendered, transactionItems: this.props.location.state.transactionItems })}>Confirm
+          onClick={() => this.props.history.push('/transaction/cash/confirm', { total: this.props.location.state.total, tendered: this.state.tendered, transactionItems: this.props.location.state.transactionItems, discount: this.props.location.state.discount })}>Confirm
         </button>
       </div>
     );
