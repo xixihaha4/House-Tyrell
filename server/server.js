@@ -351,9 +351,6 @@ app.post('/cronTest', (req, res) => {
               }
             }
           })
-=======
-          res.send([orders, ingredients])
->>>>>>> employeeCharts2
         });
     });
 })
