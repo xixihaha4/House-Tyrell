@@ -55,7 +55,7 @@ const Ingredient = db.define('Ingredients', {
 const Order = db.define('Orders', {
   order_date: Sequelize.STRING,
   order_name: Sequelize.STRING,
-  order_id: Sequelize.INTEGER,
+  order_number: Sequelize.STRING,
   order_initial: Sequelize.DECIMAL(10,2),
   order_left: Sequelize.DECIMAL(10,2),
   unit_cost: Sequelize.DECIMAL(10,2),
@@ -69,6 +69,9 @@ const Timesheet = db.define('Timesheets', {
   check_in: Sequelize.STRING,
   check_out: Sequelize.STRING,
 });
+
+/////////  /// ////..// //
+//
 
 db.sync({ force: true }).then(() => {
   Employee.create({
@@ -102,7 +105,7 @@ db.sync({ force: true }).then(() => {
     ingredient_name: 'Pickles', order_number: 'A888', ingredient_left: 5.5, ingredient_initial: 10.5, unit_cost: 0.5, ingredient_expire: '2018/03/25', ingredient_total: 300.32, order_date: '2018/03/27',
   });
   Ingredient.create({
-    ingredient_name: 'Ketchup', order_number: 'A113', ingredient_left: 5.5, ingredient_initial: 10.5, unit_cost: 1, ingredient_expire: '2018/03/25', ingredient_total: 200.50, order_date: '2017/12/27',
+    ingredient_name: 'Ketchup', order_number: 'A113', ingredient_left: 5.5, ingredient_initial: 10.5, unit_cost: 1, ingredient_expire: '2018/03/20', ingredient_total: 200.50, order_date: '2017/12/27',
   });
   Ingredient.create({
     ingredient_name: 'Coca-Cola Cans', order_number: 'A12', ingredient_left: 80, ingredient_initial: 100, unit_cost: 0.10, ingredient_expire: '2018/03/25', ingredient_total: 313.23, order_date: '2017/11/27',
@@ -161,9 +164,9 @@ db.sync({ force: true }).then(() => {
   Order.create({
     order_date: '2017/08/04', order_name: 'Tomatoes', order_number: 'A4310', order_initial: 35, order_left: 15, unit_cost: 9, order_expire: '2018/02/25', order_total: 913.23, order_used: true,
   });
-  Order.create({
-    order_date: '2017/06/04', order_name: 'Ketchup', order_number: 'A4411', order_initial: 200, order_left: 45, unit_cost: 1.5, order_expire: '2018/03/25', order_total: 313.23,
-  });
+  // Order.create({
+  //   order_date: '2017/06/04', order_name: 'Ketchup', order_number: 'A4411', order_initial: 200, order_left: 45, unit_cost: 1.5, order_expire: '2018/03/25', order_total: 313.23,
+  // });
   Order.create({
     order_date: '2017/07/04', order_name: 'Ground Beef', order_number: 'A45611', order_initial: 55, order_left: 2, unit_cost: 18, order_expire: '2018/02/25', order_total: 213.23, order_used: true,
   });
