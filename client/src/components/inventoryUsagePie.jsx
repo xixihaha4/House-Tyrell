@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import InventoryUsageTable from './inventoryUsageTable.jsx';
 
 const c3 = require('c3/c3.js');
 
@@ -98,6 +99,9 @@ class InventoryUsagePie extends React.Component {
           Inventory_Left: '#f05b47',
           Inventory_Used: '#349eff',
         },
+        size: {
+          height: 120,
+        },
       },
       axis: {
         x: {
@@ -106,7 +110,6 @@ class InventoryUsagePie extends React.Component {
           tick: {
             multiline: false,
           },
-          height: 130,
         },
         y: {
           label: {
@@ -119,7 +122,14 @@ class InventoryUsagePie extends React.Component {
   }
 
   render() {
-    return <div id="chart"></div>;
+    return (
+      <div>
+        <div className="graphGrid">
+        <div id="chart"></div>
+        </div>
+        <div className="table"><InventoryUsageTable /></div>
+      </div>
+    );
   }
 }
 

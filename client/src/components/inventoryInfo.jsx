@@ -21,13 +21,12 @@ class InventoryInfo extends React.Component {
         <div className="navbar">
           <Navbar />
         </div>
-        <div className="managerScreenGrid">
+        <div className="managerScreenGrid-graph">
           <div className="manager-navigation"><Navigation /></div>
           <div className="graphGrid">
             {type === 'usage' ? (<div className="graph"><InventoryUsagePie /></div>) : (
               type === 'cost' ? (<div className="graph"><InventoryCostLine /></div>) : (<div className="graph"><InventoryWastePie /></div>)
             )}
-
             <div style={{ color: 'black' }}>
               <Select
                 options={[{ value: 'usage', label: 'Usage' }, { value: 'cost', label: 'Cost' }, { value: 'waste', label: 'Waste' }]}
@@ -36,7 +35,7 @@ class InventoryInfo extends React.Component {
               />
             </div>
           </div>
-          </div>
+        </div>
       </div>
     );
   }

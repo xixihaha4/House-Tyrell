@@ -70,9 +70,6 @@ const Timesheet = db.define('Timesheets', {
   check_out: Sequelize.STRING,
 });
 
-/////////  /// ////..// //
-//
-
 // db.sync({ force: true }).then(() => {
 //   Employee.create({
 //     employee_id: '5', employee_name: 'Manos', employee_img: 'https://avatars3.githubusercontent.com/u/32654968?s=460&v=4', manager_privilege: true,
@@ -105,7 +102,7 @@ const Timesheet = db.define('Timesheets', {
 //     ingredient_name: 'Pickles', order_number: 'A888', ingredient_left: 5.5, ingredient_initial: 10.5, unit_cost: 0.5, ingredient_expire: '2018/03/25', ingredient_total: 300.32, order_date: '2018/03/27',
 //   });
 //   Ingredient.create({
-//     ingredient_name: 'Ketchup', order_number: 'A113', ingredient_left: 5.5, ingredient_initial: 10.5, unit_cost: 1, ingredient_expire: '2018/03/20', ingredient_total: 200.50, order_date: '2017/12/27',
+//     ingredient_name: 'Ketchup', order_number: 'A113', ingredient_left: 5.5, ingredient_initial: 10.5, unit_cost: 1, ingredient_expire: '2018/03/25', ingredient_total: 200.50, order_date: '2017/12/27',
 //   });
 //   Ingredient.create({
 //     ingredient_name: 'Coca-Cola Cans', order_number: 'A12', ingredient_left: 80, ingredient_initial: 100, unit_cost: 0.10, ingredient_expire: '2018/03/25', ingredient_total: 313.23, order_date: '2017/11/27',
