@@ -1,5 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import moment from 'moment';
+import axios from 'axios';
 
 class SaleControl extends React.Component {
   constructor(props) {
@@ -12,22 +14,36 @@ class SaleControl extends React.Component {
 
   testingCron() {
   axios.post('/cronTest')
-  .then((res) => {
-    let currentTime = JSON.stringify(moment().format());
-    currentTime = currentTime.substring(1, 11)
-    let currentTimeParse = Date.parse(currentTime)
-    let ingredients = res.data[1]
-    let orders = res.data[0]
-    let expired = [];
-
-    for (let i = 0; i < ingredients.length; i += 1) {
-      if (currentTimeParse > Date.parse(ingredients[i].ingredient_expire)) {
-        expired.push(ingredients[i])
-      }
-    }
-
-    console.log(currentTime, '\n', 'ingredients\n', ingredients, '\norders ',orders, '\nexpired ', expired);
-  })
+  // .then((res) => {
+  //   let currentTime = JSON.stringify(moment().format());
+  //   currentTime = currentTime.substring(1, 11)
+  //   let currentTimeParse = Date.parse(currentTime)
+  //   let ingredients = res.data[1]
+  //   let orders = res.data[0]
+  //   let expired = [];
+  //
+  //   for (let i = 0; i < ingredients.length; i += 1) {
+  //     if (currentTimeParse > Date.parse(ingredients[i].ingredient_expire)) {
+  //       expired.push(ingredients[i])
+  //     }
+  //   }
+  //
+  //   for (let j = 0; j < expired.length; j += 1) {
+  //     let foundIndex = orders.indexOf(orders.find((order, index) => {
+  //       return order.order_name === expired[j].ingredient_name
+  //     }))
+  //     if (foundIndex === -1){
+  //       // not in orders
+  //       // find menu items at this point that uses  this expired[j] ingredient
+  //       console.log('not found', expired[j])
+  //     } else {
+  //       // expired item found at orders index foundIndex
+  //       console.log(orders[foundIndex])
+  //     }
+  //   }
+  //
+  //   console.log(currentTime, '\n', 'ingredients\n', ingredients, '\norders ',orders, '\nexpired ', expired);
+  // })
 }
 
   render() {
@@ -41,7 +57,7 @@ class SaleControl extends React.Component {
           Credit
         </button>
         <button type="button" onClick={() => openDiscountModal()}>Discount</button>
-        <button type="button" onClikc={this.testingCron}>Options</button>
+        <button type="button" onClick={this.testingCron}>Options</button>
       </div>
     );
   }
