@@ -196,14 +196,14 @@ body {
 
 .graphGrid {
   grid-row: 1 / 1;
-  grid-column: 3 / 3;
+  grid-column: 2 / 4;
   background-color: white;
 }
 
-.statsGrid {
-  grid-column: 2 / 4;
-  grid-row: 3 / 3;
-  background-color: rgb(80, 80, 80);
+.employeeGraphGrid {
+  grid-row: 1 / 1;
+  grid-column: 3 / 4;
+  background-color: white;
 }
 
 .profileGrid {
@@ -243,10 +243,26 @@ body {
   color: black;
   grid-column: 2 / 3;
   grid-row: 2 / 2;
+  padding-left: 5%;
 }
 
-.employeeSelect form {
+.employeeSelect button {
+  padding: 2%;
+  border-radius: 5%;
+}
+
+.employeeSelect input {
+  width: 40%;
+  height: 30%;
+}
+
+.employeeSelect .employeeIdLabel {
   padding-left: 5%;
+  font-size: 1.5em;
+}
+
+.employeeSelect .newEmployeeNameLabel {
+  font-size: 1.5em;
 }
 
 .transactionCash {

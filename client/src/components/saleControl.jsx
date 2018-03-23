@@ -41,7 +41,7 @@ class SaleControl extends React.Component {
           Credit
         </button>
         <button type="button" onClick={() => openDiscountModal()}>Discount</button>
-        <button type="button" onClikc={this.testingCron}>Options</button>
+        <button type="button" onClick={this.testingCron}>Options</button>
       </div>
     );
   }

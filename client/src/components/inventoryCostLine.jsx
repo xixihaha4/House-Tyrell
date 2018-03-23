@@ -14,7 +14,7 @@ class InventoryCostLine extends React.Component {
     this.getInventoryData = this.getInventoryData.bind(this);
     this.getInventory1 = this.getInventory1.bind(this);
     this.getInventory2 = this.getInventory2.bind(this);
-    this.calculateCostByRecentMonth = this.calculateCostByRecentMonth.bind(this); 
+    this.calculateCostByRecentMonth = this.calculateCostByRecentMonth.bind(this);
   }
   componentWillMount() {
     this.getInventoryData();
@@ -36,7 +36,7 @@ class InventoryCostLine extends React.Component {
       var dateArray = cost.map(item => item[0]);
       var costArray = cost.map(item => item[1]);
       costArray.push('Total_Inventory_Cost');
-      
+
       this.setState({
         date: dateArray.reverse(),
         cost: costArray.reverse(),
