@@ -95,7 +95,7 @@ class EmployeeInfo extends React.Component {
         </div>
         <div className="managerScreenGrid">
           <div className="manager-navigation"><Navigation /></div>
-          <div className="graphGrid">
+          <div className="employeeGraphGrid">
             <div className="barChart"><EmployeeBar /></div>
           </div>
           <div className="profileGrid">
@@ -115,25 +115,25 @@ class EmployeeInfo extends React.Component {
             />
             <form>
               <h1>Add New Employee:</h1>
-              <label>Enter Employee Name: </label>
-              <input type="text" onChange={e => this.setState({ newEmployeeName: e.target.value })}/>
-              <br />
-              <button onClick={e => this.generateEmployeeId(e)}>Generate Employee ID</button>
-              <label>{this.state.newEmployeeId}</label>
-              <br />
               <Select
                 options={[{ value: true, label: 'Yes' }, { value: false, label: 'No' }]}
                 autosize={false}
                 placeholder="Manager Level"
                 onChange={value => this.setState({ managerLevel: value.value })}
               />
+              <br />
+              <label className="newEmployeeNameLabel">Enter Employee Name: </label>
+              <input type="text" onChange={e => this.setState({ newEmployeeName: e.target.value })}/>
+              <br /><br />
+              <button onClick={e => this.generateEmployeeId(e)}>Generate Employee ID</button>
+              <label className="employeeIdLabel">{this.state.newEmployeeId}</label>
+              <br /><br />
               <button onClick={(e) => this.submitEmployee(e)}>Submit</button>
             </form>
           </div>
           <div className="profileGridExtras">
             <h1>MORE STUFF GOES HERE</h1>
           </div>
-          <div className="statsGrid">Employee Info Stats</div>
         </div>
       </div>
     )

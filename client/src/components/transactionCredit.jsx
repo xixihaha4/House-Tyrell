@@ -43,7 +43,7 @@ class TransactionCredit extends React.Component {
                 <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.total}</h1>
                 <SignatureCanvas
                   penColor="rgb(52, 158, 255)"
-                  canvasProps={{ width: '100%', height: 100, className: 'sigCanvas' }}
+                  canvasProps={{ width: 500, height: 100, className: 'sigCanvas' }}
                   ref={(ref) => { this.sigCanvas = ref; }}
                 />
                 <button type="button" onClick={this.clear}>Clear Signature</button>
