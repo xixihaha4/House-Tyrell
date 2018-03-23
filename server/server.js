@@ -82,13 +82,17 @@ app.post('/clockout', (req, res) => {
 });
 
 app.post('/newEmployee', (req, res) => {
-  console.log(req.body);
   db.Employee.create({
     employee_id: req.body.newEmployeeId,
     employee_name: req.body.newEmployeeName,
     manager_privilege: req.body.managerLevel,
-  });
-  res.end();
+  })
+    .then(() => {
+      res.status(201).send();
+    })
+    .catch((error) => {
+      throw error;
+    });
 });
 
 
@@ -201,7 +205,9 @@ app.get('/fetch/employeeInfo', auth, (req, res) => {
 });
 
 app.get('/fetch/allEmployees', (req, res) => {
-  db.Employee.findAll()
+  db.Employee.findAll({
+    order: [['employee_name', 'ASC']],
+  })
     .then((data) => {
       res.send(data);
     })
