@@ -243,7 +243,7 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 5%;
-  padding: 2%;
+  padding: 3%;
 }
 
 .profileGridDetails {
@@ -253,19 +253,22 @@ body {
   padding-left: 5%;
 }
 
-.profileGridExtras {
+.profileGridTimesheet {
   grid-column: 3 / 3;
   grid-row: 2 / 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(20, 5%);
   color: black;
   padding-left: 5%;
-  font-size: 2em;
+  font-size: 1em;
 }
 
 .employeeSelect {
   color: black;
   grid-column: 2 / 3;
   grid-row: 2 / 2;
-  padding-left: 5%;
+  padding-left: 3%;
 }
 
 .employeeSelect button {
@@ -274,8 +277,8 @@ body {
 }
 
 .employeeSelect input {
-  width: 40%;
-  height: 30%;
+  width: 100%;
+  height: 2vh;
 }
 
 .employeeSelect .employeeIdLabel {

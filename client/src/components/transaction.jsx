@@ -20,7 +20,6 @@ export default class Transaction extends React.Component {
   }
 
   openModal() {
-    console.log('hello')
     this.setState({ modalIsOpen: true });
   }
 

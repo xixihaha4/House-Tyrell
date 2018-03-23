@@ -49,8 +49,6 @@ app.post('/test', (req, res) => {
 
 app.post('/completed/transaction', (req, res) => {
   const itemList = [];
-  console.log(req.body.transactionItems)
-
   for (let i = 0; i < req.body.transactionItems.length; i += 1) {
     itemList.push(req.body.transactionItems[i].id)
   }
@@ -77,8 +75,21 @@ app.post('/completed/transaction', (req, res) => {
 
 
 app.post('/clockout', (req, res) => {
-  req.session.destroy();
-  res.status(200).send();
+  db.Timesheet.update({
+    check_out: moment().format('MM/DD/YYYY, hh:mm:ss a'),
+  }, {
+    where: {
+      employee_id: req.session.employee,
+      check_out: null,
+    },
+  })
+    .then(() => {
+      req.session.destroy();
+      res.status(200).send();
+    })
+    .catch((error) => {
+      throw error;
+    });
 });
 
 app.post('/newEmployee', (req, res) => {
@@ -185,6 +196,12 @@ app.get('/fetch/employee', (req, res) => {
         });
       }
     })
+    .then(() => {
+      db.Timesheet.create({
+        employee_id: req.query.PIN,
+        check_in: moment().format('MM/DD/YYYY, hh:mm:ss a'),
+      });
+    })
     .catch((error) => {
       res.send(error);
     });
@@ -198,6 +215,20 @@ app.get('/fetch/employeeInfo', auth, (req, res) => {
   })
     .then((data) => {
       res.send(data[0]);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+app.get('/fetch/timeSheet', auth, (req, res) => {
+  db.Timesheet.findAll({
+    where: {
+      employee_id: req.query.employeeId,
+    },
+  })
+    .then((data) => {
+      res.send(data);
     })
     .catch((error) => {
       res.send(error);
@@ -238,10 +269,6 @@ app.get('/*', (req, res) => {
 //     if (err) res.status(500).send(err);
 //   });
 // });
-
-
-
-
 
 app.post('/cronTest', (req, res) => {
   let currentTime = JSON.stringify(moment().format());
