@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './managerNav.jsx';
 import InventoryUsageBar from './inventoryBar.jsx';
+import Navbar from './navbar.jsx';
 
 class InventoryInfo extends React.Component {
   constructor(props) {
@@ -17,9 +18,12 @@ class InventoryInfo extends React.Component {
 
   render() {
     return (
-      <div className="managerScreenGrid">
-        <div className="manager-navigation"><Navigation /></div>
-        <div className="managerViewGrid">
+      <div>
+        <div className="navbar">
+          <Navbar />
+        </div>
+        <div className="managerScreenGrid">
+          <div className="manager-navigation"><Navigation /></div>
           <div className="graphGrid">
             <div className="barChart"><InventoryUsageBar /></div>
             <div>
@@ -33,7 +37,6 @@ class InventoryInfo extends React.Component {
           <div className="statsGrid">Inventory Stats</div>
         </div>
       </div>
-
     );
   }
 }

@@ -4,7 +4,7 @@ import SignatureCanvas from 'react-signature-canvas';
 import axios from 'axios';
 import Alert from 'react-s-alert';
 import Pinpad from './pinpad.jsx';
-
+import Navbar from './navbar.jsx';
 
 class TransactionCash extends React.Component {
   constructor(props) {
@@ -74,28 +74,35 @@ class TransactionCash extends React.Component {
 
   render() {
     return (
-      <div className="transactionCash animated fadeIn">
-        <div>
-          <h1>Total Sale</h1>
-          <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.total}</h1>
-          <h1>Tendered: </h1>
-          <h1><i className="fas fa-dollar-sign" /> {this.state.tendered}</h1>
+      <div>
+        <div className="navbar">
+          <Navbar />
         </div>
-          <div className="transactionCashConfirmed animated fadeIn">
-            {this.state.pinpadOn ?
-              <Pinpad
-                pinpadOptions={this.state.pinpadOptions}
-                handlePin={this.handlePin}
-                animation={this.state.animation}
-              />
-              :
-              <div className="pinNumber-wrapper"  onClick={this.togglePinpad}>Tendered:<i className="far fa-keyboard"></i> <span className="pinNumber">{this.state.identification}</span></div>
-            }
+        <div className="transactionCash animated fadeIn">
+          <div>
+            <div>
+              <h1>Total Sale</h1>
+              <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.total}</h1>
+              <h1>Tendered: </h1>
+              <h1><i className="fas fa-dollar-sign" /> {this.state.tendered}</h1>
+            </div>
+              <div className="transactionCashConfirmed animated fadeIn">
+                {this.state.pinpadOn ?
+                  <Pinpad
+                    pinpadOptions={this.state.pinpadOptions}
+                    handlePin={this.handlePin}
+                    animation={this.state.animation}
+                  />
+                  :
+                  <div className="pinNumber-wrapper"  onClick={this.togglePinpad}>Tendered:<i className="far fa-keyboard"></i> <span className="pinNumber">{this.state.identification}</span></div>
+                }
+              </div>
+            <button
+              type="button"
+              onClick={() => this.props.history.push('/transaction/cash/confirm', { total: this.props.location.state.total, tendered: this.state.tendered, transactionItems: this.props.location.state.transactionItems, discount: this.props.location.state.discount })}>Confirm
+            </button>
           </div>
-        <button
-          type="button"
-          onClick={() => this.props.history.push('/transaction/cash/confirm', { total: this.props.location.state.total, tendered: this.state.tendered, transactionItems: this.props.location.state.transactionItems, discount: this.props.location.state.discount })}>Confirm
-        </button>
+        </div>
       </div>
     );
   }

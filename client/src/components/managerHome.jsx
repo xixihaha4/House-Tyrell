@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './managerNav.jsx';
 import InventoryBar from './inventoryBar.jsx';
+import Navbar from './navbar.jsx';
 
 const columns = [
   ['Ingredient_Left', 30, 20, 70, 6, 105, 23],
@@ -8,9 +9,12 @@ const columns = [
 ];
 
 const ManagerHome = () => (
-  <div className="managerScreenGrid">
-    <div className="manager-navigation"><Navigation /></div>
-    <div className="managerViewGrid">
+  <div>
+    <div>
+      <Navbar />
+    </div>
+    <div className="managerScreenGrid">
+      <div className="manager-navigation"><Navigation /></div>
       <div className="graphGrid">
         <div className="barChart">
           <InventoryBar columns={columns} chartType="bar" />

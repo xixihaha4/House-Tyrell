@@ -66,19 +66,19 @@ const Timesheet = db.define('Timesheets', {
 
 // db.sync({ force: true }).then(() => {
 //   Employee.create({
-//     employee_id: '5', employee_name: 'Manos', manager_privilege: true,
+//     employee_id: '5', employee_name: 'Manos', employee_img: 'https://avatars3.githubusercontent.com/u/32654968?s=460&v=4', manager_privilege: true,
 //   });
 //   Employee.create({
 //     employee_id: '96', employee_name: 'Eric', manager_privilege: true,
 //   });
 //   Employee.create({
-//     employee_id: '99', employee_name: 'Jerry', manager_privilege: true,
+//     employee_id: '99', employee_name: 'Jerry', employee_img: 'https://avatars2.githubusercontent.com/u/29716220?s=460&v=4', manager_privilege: true,
 //   });
 //   Employee.create({
-//     employee_id: '88', employee_name: 'Xixi', manager_privilege: true,
+//     employee_id: '88', employee_name: 'Xixi', employee_img: 'https://avatars2.githubusercontent.com/u/31266066?s=460&v=4', manager_privilege: true,
 //   });
 //   Employee.create({
-//     employee_id: '400', employee_name: 'Adam', manager_privilege: false,
+//     employee_id: '400', employee_name: 'Adam', employee_img: 'https://media.licdn.com/dms/image/C5603AQESXK5y_CFecQ/profile-displayphoto-shrink_800_800/0?e=1526958000&v=alpha&t=iYNrBoRdR-6nKxPN8ZA76GfYAXWmi3aEmp9pWBAMTns', manager_privilege: false,
 //   });
 //   Ingredient.create({
 //     ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '03/25/2018',

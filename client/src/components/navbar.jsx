@@ -8,10 +8,16 @@ class Navbar extends React.Component {
     super(props);
     this.state = {
       isManager: false,
+      employeeName: '',
     }
     this.openNav = this.openNav.bind(this);
     this.closeNav = this.closeNav.bind(this);
     this.clockout = this.clockout.bind(this);
+    this.onEmployeeLogin = this.onEmployeeLogin.bind(this);
+  }
+
+  componentDidMount() {
+    this.onEmployeeLogin();
   }
 
   openNav() {
@@ -36,6 +42,18 @@ class Navbar extends React.Component {
       })
   }
 
+  onEmployeeLogin() {
+    axios.get('/fetch/employeeInfo', ({}))
+      .then((results) => {
+        this.setState({
+          employeeName: results.data.employee_name,
+        });
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+
   render() {
     return (
       <div className="navbar">
@@ -45,8 +63,9 @@ class Navbar extends React.Component {
           <a href="#">Alert Manager</a>
           <a onClick={() => this.clockout()}>Clock Out</a>
         </nav>
+        <span className="navBack" onClick={() => this.props.history.goBack()}><i className="fas fa-chevron-circle-left" /></span>
         <span className="navbar-time"><Moment interval={1000} format={"MM/DD/YYYY hh:mm:ss a"} /></span>
-        <span className="navbar-employee">Hi, Jane Doe</span>
+        <span className="navbar-employee">{this.state.employeeName}</span>
       </div>
     );
   }
