@@ -20,7 +20,6 @@ export default class Transaction extends React.Component {
   }
 
   openModal() {
-    console.log('hello')
     this.setState({ modalIsOpen: true });
   }
 
@@ -64,7 +63,7 @@ export default class Transaction extends React.Component {
              <TransactionItem item={item} removeIng={this.props.removeIng} />
           </div>)}
           {this.props.transactionItems.map((item, i) =>
-            <div style={{ 'gridRow': `${i + 1}`, 'grid-Column': '3' }}>{item.item_price}</div>)}
+            <div style={{ 'gridRow': `${i + 1}`, 'gridColumn': '3' }}>{item.item_price}</div>)}
         </div>
         <div className="saleControlGrid">
           <SaleControl

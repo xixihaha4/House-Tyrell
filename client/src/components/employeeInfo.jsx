@@ -16,11 +16,13 @@ class EmployeeInfo extends React.Component {
       newEmployeeId: '',
       newEmployeeName: '',
       managerLevel: false,
+      timeSheet: [],
     };
     this.getEmployeeList = this.getEmployeeList.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.generateEmployeeId = this.generateEmployeeId.bind(this);
     this.submitEmployee = this.submitEmployee.bind(this);
+    this.generateTimesheet = this.generateTimesheet.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +50,7 @@ class EmployeeInfo extends React.Component {
       employeeName: value.value.employee_name,
       employeeImage: value.value.employee_img,
       employeeId: value.value.employee_id,
-    });
+    }, () => this.generateTimesheet());
   }
 
   generateEmployeeId(e) {
@@ -57,6 +59,22 @@ class EmployeeInfo extends React.Component {
     this.setState({
       newEmployeeId: num,
     });
+  }
+
+  generateTimesheet() {
+    axios.get('/fetch/timeSheet', {
+      params: {
+        employeeId: this.state.employeeId,
+      },
+    })
+      .then((results) => {
+        this.setState({
+          timeSheet: results.data,
+        });
+      })
+      .catch((error) => {
+        throw error;
+      })
   }
 
   submitEmployee() {
@@ -79,7 +97,6 @@ class EmployeeInfo extends React.Component {
   render() {
     let employeeImage, employeeDetails;
     if (this.state.employeeImage !== '') {
-      console.log(this.state.employeeImage);
       employeeImage = <img src={this.state.employeeImage} />;
       employeeDetails =
       (<div className="profileGridDetails">
@@ -112,9 +129,9 @@ class EmployeeInfo extends React.Component {
               searchable="true"
               onChange={value => this.handleChange(value)}
               placeholder="Select an Employee"
-            />
+            /> <br />
             <form>
-              <h1>Add New Employee:</h1>
+              <label className="newEmployeeNameLabel">Add New Employee:</label>
               <Select
                 options={[{ value: true, label: 'Yes' }, { value: false, label: 'No' }]}
                 autosize={false}
@@ -131,8 +148,36 @@ class EmployeeInfo extends React.Component {
               <button onClick={(e) => this.submitEmployee(e)}>Submit</button>
             </form>
           </div>
-          <div className="profileGridExtras">
-            <h1>MORE STUFF GOES HERE</h1>
+          <div className="profileGridTimesheet">
+            <div style={{ 'gridRow': '1', 'gridColumn': '1' }}>Clock In</div>
+            <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Clock Out</div>
+            <div style={{ 'gridRow': '1', 'gridColumn': '3' }}>Total Time</div>
+            {
+              this.state.timeSheet.map((time, i) => (
+                <div style={{ gridRow: `${i + 1}`, gridColumn: '1' }}>
+                  <h5 className="employeeCheckIn">{time.check_in}</h5>
+                </div>
+              ))
+            }
+            {
+              this.state.timeSheet.map((time, i) => (
+                <div style={{ gridRow: `${i + 1}`, gridColumn: '2' }}>
+                  <h5 className="employeeCheckOut">{time.check_out}</h5>
+                </div>
+              ))
+            }
+            {
+              this.state.timeSheet.map((time, i) => (
+                <div style={{ gridRow: `${i + 1}`, gridColumn: '3' }}>
+                  <h5 className="employeeTotalWorked">
+                    {
+                      Math.floor((Math.floor(Date.parse(time.check_out) - Date.parse(time.check_in)) / 1000) / 60)
+                    }
+                    min
+                  </h5>
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>
