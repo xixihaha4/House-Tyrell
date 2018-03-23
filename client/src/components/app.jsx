@@ -53,7 +53,6 @@ export default class App extends React.Component {
   }
 
   filterByCategory(category) {
-    console.log(category )
     axios.get('/filter/category', { params: { category: category.id } })
       .then((results) => {
         this.setState({
@@ -126,7 +125,7 @@ export default class App extends React.Component {
       discount,
     });
   }
-
+  
   render() {
     return (
       <div>

@@ -17,8 +17,8 @@ export default class Pinpad extends React.Component {
   render() {
     return (
       <div id="pinpad" className="wrapper noselect" className={this.props.animation}>
-        {this.state.pinpadOptions.map(option =>
-          <div className="pinpad" onClick={() => this.props.handlePin(option)}>
+        {this.state.pinpadOptions.map((option, i) =>
+          <div key={i} className="pinpad" onClick={() => this.props.handlePin(option)}>
             {option}
           </div>
         )}

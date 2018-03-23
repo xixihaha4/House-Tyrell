@@ -79,6 +79,16 @@ app.post('/clockout', (req, res) => {
   res.status(200).send();
 });
 
+app.post('/newEmployee', (req, res) => {
+  console.log(req.body);
+  db.Employee.create({
+    employee_id: req.body.newEmployeeId,
+    employee_name: req.body.newEmployeeName,
+    manager_privilege: req.body.managerLevel,
+  });
+  res.end();
+});
+
 
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
@@ -168,6 +178,30 @@ app.get('/fetch/employee', (req, res) => {
           res.send(data);
         });
       }
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+app.get('/fetch/employeeInfo', auth, (req, res) => {
+  db.Employee.findAll({
+    where: {
+      employee_id: req.session.employee,
+    },
+  })
+    .then((data) => {
+      res.send(data[0]);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+app.get('/fetch/allEmployees', (req, res) => {
+  db.Employee.findAll()
+    .then((data) => {
+      res.send(data);
     })
     .catch((error) => {
       res.send(error);

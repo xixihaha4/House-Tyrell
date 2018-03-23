@@ -1,11 +1,13 @@
 import React from 'react';
 import Navigation from './managerNav.jsx';
 import SalesLine from './salesLine.jsx';
+import Navbar from './navbar.jsx';
 
 const SaleInfo = () => (
-  <div className="managerScreenGrid">
-    <div className="manager-navigation"><Navigation /></div>
-    <div className="managerViewGrid">
+  <div>
+    <Navbar />
+    <div className="managerScreenGrid">
+      <div className="manager-navigation"><Navigation /></div>
       <div className="graphGrid">
         <div className="graph">
           <SalesLine />
