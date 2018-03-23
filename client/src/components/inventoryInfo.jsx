@@ -3,7 +3,7 @@ import Navigation from './managerNav.jsx';
 import InventoryUsagePie from './inventoryUsagePie.jsx';
 import InventoryCostLine from './inventoryCostLine.jsx';
 import InventoryWastePie from './inventoryWastePie.jsx';
-// import InventoryUsageBar from './inventoryBar.jsx';
+import Select from 'react-select';
 import Navbar from './navbar.jsx';
 
 class InventoryInfo extends React.Component {
@@ -12,11 +12,6 @@ class InventoryInfo extends React.Component {
     this.state = {
       viewType: 'usage',
     };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e) {
-    this.setState({ viewType: e.target.value });
   }
 
   render() {
@@ -33,12 +28,12 @@ class InventoryInfo extends React.Component {
               type === 'cost' ? (<div className="graph"><InventoryCostLine /></div>) : (<div className="graph"><InventoryWastePie /></div>)
             )}
 
-            <div>
-              <select value={this.state.viewType} onChange={this.handleChange} className="dropDown">
-                <option value="usage">Usage</option>
-                <option value="cost">Cost</option>
-                <option value="waste">Waste</option>
-              </select>
+            <div style={{ color: 'black' }}>
+              <Select
+                options={[{ value: 'usage', label: 'Usage' }, { value: 'cost', label: 'Cost' }, { value: 'waste', label: 'Waste' }]}
+                placeholder="Select a graph"
+                onChange={value => this.setState({ viewType: value })}
+              />
             </div>
           </div>
           <div className="statsGrid">Inventory Stats</div>

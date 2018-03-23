@@ -79,6 +79,7 @@ class EmployeeInfo extends React.Component {
   render() {
     let employeeImage, employeeDetails;
     if (this.state.employeeImage !== '') {
+      console.log(this.state.employeeImage);
       employeeImage = <img src={this.state.employeeImage} />;
       employeeDetails =
       (<div className="profileGridDetails">
@@ -121,7 +122,7 @@ class EmployeeInfo extends React.Component {
               <label>{this.state.newEmployeeId}</label>
               <br />
               <Select
-                options={[{value: true, label: 'Yes'}, {value: false, label: 'No'}]}
+                options={[{ value: true, label: 'Yes' }, { value: false, label: 'No' }]}
                 autosize={false}
                 placeholder="Manager Level"
                 onChange={value => this.setState({ managerLevel: value.value })}
