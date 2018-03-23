@@ -53,6 +53,14 @@ export default class App extends React.Component {
   }
 
   filterByCategory(category) {
+    if (!category) {
+      axios.get('/fetch/items')
+      .then((results) => {
+        this.setState({
+          menuItems: results.data
+        })
+      })
+    } else {
     axios.get('/filter/category', { params: { category: category.id } })
       .then((results) => {
         this.setState({
@@ -62,6 +70,7 @@ export default class App extends React.Component {
       .catch((error) => {
         throw error;
       });
+    }
   }
 
   itemClick(item) {
