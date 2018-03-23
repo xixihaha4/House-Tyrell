@@ -47,6 +47,7 @@ export default class Transaction extends React.Component {
         <div className='transactionGridHeader'>
           <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Name</div>
           <div style={{ 'gridRow': '1', 'gridColumn': '3' }}>Price</div>
+          <button type="button" onClick={this.props.transactionClear} style={{'backgroundColor': 'red', 'gridRow': '1', 'gridColumn': '4'}}>CLEAR</button>
         </div>
 
         <div className='transactionGridItems'>
@@ -64,7 +65,7 @@ export default class Transaction extends React.Component {
              <TransactionItem item={item} removeIng={this.props.removeIng} />
           </div>)}
           {this.props.transactionItems.map((item, i) =>
-            <div style={{ 'gridRow': `${i + 1}`, 'grid-Column': '3' }}>{item.item_price}</div>)}
+            <div style={{ 'gridRow': `${i + 1}`, 'gridColumn': '3' }}>{item.item_price}</div>)}
         </div>
         <div className="saleControlGrid">
           <SaleControl
@@ -74,6 +75,7 @@ export default class Transaction extends React.Component {
             openDiscountModal={this.props.openDiscountModal}
             transactionComplete={this.props.transactionComplete}
             transactionItems={this.props.transactionItems}
+            openOptionModal={this.props.openOptionModal}
           />
         </div>
         <div className='transactionGridFooter'>

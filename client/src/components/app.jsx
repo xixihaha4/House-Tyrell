@@ -26,6 +26,9 @@ export default class App extends React.Component {
     this.closeDiscountModal = this.closeDiscountModal.bind(this);
     this.discountModalOptions = this.discountModalOptions.bind(this);
     this.updateDiscount = this.updateDiscount.bind(this);
+    this.openOptionModal = this.openOptionModal.bind(this);
+    this.closeOptionModal = this.closeOptionModal.bind(this);
+    this.transactionClear = this.transactionClear.bind(this);
   }
 
   componentDidMount() {
@@ -109,6 +112,10 @@ export default class App extends React.Component {
     }))
   }
 
+  transactionClear() {
+    this.setState({ transactionItems: [] })
+  }
+
 // Below are all the functions for the discount modal and also to update discount.
 
   openDiscountModal() {
@@ -117,6 +124,14 @@ export default class App extends React.Component {
 
   closeDiscountModal() {
     document.getElementById('discountModal').style.display = 'none';
+  }
+
+  openOptionModal() {
+    document.getElementById('optionModal').style.display = 'block';
+  }
+
+  closeOptionModal() {
+    document.getElementById('optionModal').style.display = 'none';
   }
 
   discountModalOptions() {
@@ -154,6 +169,9 @@ export default class App extends React.Component {
           transactionComplete={this.transactionComplete}
           discountOptions={this.state.discountOptions}
           updateDiscount={this.updateDiscount}
+          openOptionModal={this.openOptionModal}
+          closeOptionModal={this.closeOptionModal}
+          transactionClear={this.transactionClear}
         />
 
       </div>
