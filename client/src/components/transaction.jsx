@@ -47,7 +47,8 @@ export default class Transaction extends React.Component {
         <div className='transactionGridHeader'>
           <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Name</div>
           <div style={{ 'gridRow': '1', 'gridColumn': '3' }}>Price</div>
-          <button type="button" onClick={this.props.transactionClear} style={{'backgroundColor': 'red', 'gridRow': '1', 'gridColumn': '4'}}>CLEAR</button>
+          {/* <button className='transactionClearButton' type="button">CLEAR</button> */}
+          <div onClick={this.props.transactionClear} className='transactionClearButton'><i className="far fa-trash-alt"></i></div>
         </div>
 
         <div className='transactionGridItems'>

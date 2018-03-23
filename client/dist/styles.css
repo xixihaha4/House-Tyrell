@@ -65,6 +65,15 @@ body {
   background-color: rgb(237, 237, 237);
 }
 
+.transactionClearButton {
+  grid-row: 1;
+  grid-column: 4;
+  color: red;
+  border-radius: 5%;
+  padding-top: 3%
+
+}
+
 .transactionGridHeader {
   grid-row: 1;
   display: grid;
@@ -486,7 +495,7 @@ body {
    box-shadow: 0 9px #999;
  }
 
- .enter-button {
+.enter-button {
    padding: 20px 100%;
    background-color: var(--main-highlight);
  }
