@@ -10,7 +10,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
   (
     <div>
       <div className="navbar">
-        <Navbar />
+        <Navbar transactionItems={transactionItems}/>
       </div>
       <div className="saleScreenGrid animated fadeIn">
         <div id="discountModal" className="discountModal animated fadeIn">

@@ -125,7 +125,6 @@ export default class App extends React.Component {
       discount,
     });
   }
-  
   render() {
     return (
       <div>

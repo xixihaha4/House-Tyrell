@@ -32,12 +32,11 @@ class InventoryInfo extends React.Component {
               <Select
                 options={[{ value: 'usage', label: 'Usage' }, { value: 'cost', label: 'Cost' }, { value: 'waste', label: 'Waste' }]}
                 placeholder="Select a graph"
-                onChange={value => this.setState({ viewType: value })}
+                onChange={value => this.setState({ viewType: value.value })}
               />
             </div>
           </div>
-          <div className="statsGrid">Inventory Stats</div>
-        </div>
+          </div>
       </div>
     );
   }

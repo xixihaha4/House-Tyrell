@@ -14,7 +14,6 @@ const SaleInfo = () => (
         </div>
         <button>By Employee</button>
       </div>
-      <div className="statsGrid">Sale Info Stats</div>
     </div>
   </div>
 );
