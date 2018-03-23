@@ -6,6 +6,8 @@ const path = require('path');
 const db = require('../database/models.js');
 const Sequelize = require('sequelize');
 const session = require('express-session');
+const CronJob = require('cron').CronJob;
+
 
 const Op = Sequelize.Op;
 
@@ -230,5 +232,46 @@ app.get('/*', (req, res) => {
 //     if (err) res.status(500).send(err);
 //   });
 // });
+
+
+
+
+
+app.post('/cronTest', (req, res) => {
+  let ingredients = [];
+  let orders = [];
+  db.Ingredient.findAll({})
+    .then((ing) => {
+      ingredients = ing;
+    }).then(() => {
+      db.Order.findAll({
+        where: { order_used: false },
+        order: [['order_expire', 'DESC']]
+      })
+        .then((order) => {
+          orders = order;
+          console.log(orders, 'CRONCRONCRONCRONCRONCRON NEXT IS INGREDIENTS\n', ingredients)
+          res.send([orders, ingredients])
+        });
+    });
+})
+
+
+// ************************CRONJOB DONT TOUCH**********************/
+const myCronJob = new CronJob('40 06 18 * * 0-6', () => {
+  let ingredients = [];
+  let orders = [];
+  db.Ingredient.findAll({})
+    .then((ing) => {
+      ingredients = ing;
+    }).then(() => {
+      db.Order.findAll({})
+        .then((order) => {
+          orders = order;
+        });
+    });
+}, null, true, 'America/Los_Angeles');
+// myCronJob.start();
+// ************************NO TOUCH*******************************/
 
 app.listen(port);

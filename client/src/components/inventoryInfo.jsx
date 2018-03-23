@@ -3,7 +3,7 @@ import Navigation from './managerNav.jsx';
 import InventoryUsagePie from './inventoryUsagePie.jsx';
 import InventoryCostLine from './inventoryCostLine.jsx';
 import InventoryWastePie from './inventoryWastePie.jsx';
-import InventoryUsageBar from './inventoryBar.jsx';
+// import InventoryUsageBar from './inventoryBar.jsx';
 import Navbar from './navbar.jsx';
 
 class InventoryInfo extends React.Component {
