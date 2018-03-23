@@ -7,7 +7,28 @@ class SaleControl extends React.Component {
     this.state = {
       dummy: 'dummy',
     }
+    this.testingCron = this.testingCron.bind(this);
   };
+
+  testingCron() {
+  axios.post('/cronTest')
+  .then((res) => {
+    let currentTime = JSON.stringify(moment().format());
+    currentTime = currentTime.substring(1, 11)
+    let currentTimeParse = Date.parse(currentTime)
+    let ingredients = res.data[1]
+    let orders = res.data[0]
+    let expired = [];
+
+    for (let i = 0; i < ingredients.length; i += 1) {
+      if (currentTimeParse > Date.parse(ingredients[i].ingredient_expire)) {
+        expired.push(ingredients[i])
+      }
+    }
+
+    console.log(currentTime, '\n', 'ingredients\n', ingredients, '\norders ',orders, '\nexpired ', expired);
+  })
+}
 
   render() {
     const { total, tax, transactionItems, discount, openDiscountModal } = this.props;
@@ -20,7 +41,7 @@ class SaleControl extends React.Component {
           Credit
         </button>
         <button type="button" onClick={() => openDiscountModal()}>Discount</button>
-        <button type="button">Options</button>
+        <button type="button" onClikc={this.testingCron}>Options</button>
       </div>
     );
   }
