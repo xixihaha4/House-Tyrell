@@ -175,6 +175,13 @@ body {
   color: white;
 }
 
+.managerScreenGrid-graph {
+  display: grid;
+  grid-template-columns: 30vh 1fr 1fr;
+  grid-template-rows: 40vh 49vh 5vh;
+  color: white;
+}
+
 .manager-navigation {
   grid-column: 1;
   grid-row: 1 / 4;
@@ -195,9 +202,15 @@ body {
 }
 
 .graphGrid {
-  grid-row: 1 / 1;
-  grid-column: 2 / 4;
+  grid-row: 1/ 1;
+  grid-column:  2/ 4;
   background-color: white;
+  /* overflow: hidden; */
+}
+
+#chart {
+  max-height: 250px !important;
+  padding-top: 3em;
 }
 
 .employeeGraphGrid {
@@ -498,21 +511,6 @@ body {
    box-shadow: 0 5px #666;
    transform: translateY(4px);
  }
-
-.graph{
-  padding: 20px;
-}
-
-#chart {
-  background: #fff;
-  width: 90%;
-  margin: 2em auto;
-}
-
-.dropDown {
-  font-size: 15px;
-
-}
 
 /* NAV BAR */
 
