@@ -79,9 +79,31 @@ app.post('/clockout', (req, res) => {
   res.status(200).send();
 });
 
+app.post('/orderup', (req, res) => {
+  db.Sale.update({
+    ready: true
+  }, {
+    where: {
+      id: req.body.id
+    }
+  }).then(() => {
+    res.send();
+  })
+})
 
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
+
+app.get('/fetch/sales', (req, res) => {
+  db.Sale.findAll({
+    where: {
+      ready: false
+    }
+  })
+    .then((data) => {
+      res.send(data);
+    })
+})
 
 app.get('/fetch/items', (req, res) => {
   db.Item.findAll()

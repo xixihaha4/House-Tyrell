@@ -37,6 +37,7 @@ const Sale = db.define('Sales', {
   sale_cost: Sequelize.DECIMAL,
   sale_discount: Sequelize.INTEGER,
   sale_cash: Sequelize.BOOLEAN,
+  ready: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
 });
 
 const Ingredient = db.define('Ingredients', {
@@ -64,119 +65,119 @@ const Timesheet = db.define('Timesheets', {
   check_out: Sequelize.STRING,
 });
 
-// db.sync({ force: true }).then(() => {
-//   Employee.create({
-//     employee_id: '5', employee_name: 'Manos', manager_privilege: true,
-//   });
-//   Employee.create({
-//     employee_id: '96', employee_name: 'Eric', manager_privilege: true,
-//   });
-//   Employee.create({
-//     employee_id: '99', employee_name: 'Jerry', manager_privilege: true,
-//   });
-//   Employee.create({
-//     employee_id: '88', employee_name: 'Xixi', manager_privilege: true,
-//   });
-//   Employee.create({
-//     employee_id: '400', employee_name: 'Adam', manager_privilege: false,
-//   });
-//   Ingredient.create({
-//     ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '2018/03/29',
-//   });
-//   Ingredient.create({
-//     ingredient_name: 'Lettuce', order_number: 6, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.10, ingredient_expire: '2018/04/25',
-//   });
-//   Ingredient.create({
-//     ingredient_name: 'Tomatoes', order_number: 10, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.25, ingredient_expire: '2018/04/25',
-//   });
-//   Ingredient.create({
-//     ingredient_name: 'Onions', order_number: 9, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.15, ingredient_expire: '2018/03/29',
-//   });
-//   Ingredient.create({
-//     ingredient_name: 'Pickles', order_number: 8, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.5, ingredient_expire: '2018/04/25',
-//   });
-//   Ingredient.create({
-//     ingredient_name: 'Ketchup', order_number: 11, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 1, ingredient_expire: '2018/03/29',
-//   });
-//   Ingredient.create({
-//     ingredient_name: 'Coca-Cola Cans', order_number: 12, ingredient_left: 80, ingredient_initial: 100, ingredient_cost: 0.10, ingredient_expire: '2018/03/29',
-//   });
-//   Category.create({
-//     category_name: 'Drinks',
-//   });
-//   Category.create({
-//     category_name: 'Burgers',
-//   });
-//   Category.create({
-//     category_name: 'Salad',
-//   });
-//   Category.create({
-//     category_name: 'Soup',
-//   });
-//   Category.create({
-//     category_name: 'Steak',
-//   });
-//   Category.create({
-//     category_name: 'Breakfast',
-//   });
-//   Item.create({
-//     item_name: 'Hamburger', item_price: 5, item_image: 'https://www.rallys.com/wp-content/uploads/2017/03/BigBuford_Feature_1000x1000-600x600.jpg', item_ingredients: '[1, 2, 3, 4, 5, 6]', item_category: 2,
-//   });
-//   Item.create({
-//     item_name: 'Coca-Cola', item_price: 1, item_image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY2B_5VgeOlPdpGZLz3H4SBmazfFS1gsoxtcBddF0awQux3EiY', item_ingredients: '[7]', item_category: 1,
-//   });
-//   Item.create({
-//     item_name: 'Basic Salad', item_price: 6, item_image: 'https://recipes.heart.org/-/media/aha/recipe/recipe-images/mediterranean-salad.jpg', item_ingredients: '[2, 3, 4]', item_category: 3,
-//   });
-//   Item.create({
-//     item_name: 'Chicken Noodle Soup', item_price: 4, item_ingredients: '[6]', item_category: 4,
-//   });
-//   Item.create({
-//     item_name: 'Egg and Cheese Sandwich', item_price: 3, item_ingredients: '[6]', item_category: 6,
-//   });
-//   Order.create({
-//     order_date: '2018/02/27', order_name: 'Ground Beef', order_id: 5, order_initial: 21, order_left: 6, order_price: 18, order_expire: '2018/03/25',
-//   });
-//   Order.create({
-//     order_date: '2018/02/27', order_name: 'Lettuce', order_id: 5, order_initial: 50, order_left: 29, order_price: 1, order_expire: '2019/03/25',
-//   });
-//   Order.create({
-//     order_date: '2018/02/27', order_name: 'Pickles', order_id: 5, order_initial: 14, order_left: 2, order_price: 3.6, order_expire: '2018/05/25',
-//   });
-//   Order.create({
-//     order_date: '2018/02/28', order_name: 'Onions', order_id: 6, order_initial: 100, order_left: 70, order_price: 2.2, order_expire: '2018/10/25',
-//   });
-//   Order.create({
-//     order_date: '2018/02/28', order_name: 'Coca-Cola Cans', order_id: 6, order_initial: 90, order_left: 15, order_price: 1.8, order_expire: '2018/11/25',
-//   });
-//   Order.create({
-//     order_date: '2018/02/28', order_name: 'Ground Beef', order_id: 9, order_initial: 8, order_left: 4, order_price: 20, order_expire: '2018/08/25',
-//   });
-//   Order.create({
-//     order_date: '2018/02/28', order_name: 'Tomatoes', order_id: 10, order_initial: 35, order_left: 15, order_price: 9, order_expire: '2019/03/25',
-//   });
-//   Order.create({
-//     order_date: '2018/03/04', order_name: 'Ketchup', order_id: 11, order_initial: 200, order_left: 45, order_price: 1.5, order_expire: '2019/03/25',
-//   });
-//   Order.create({
-//     order_date: '2018/03/04', order_name: 'Ground Beef', order_id: 11, order_initial: 55, order_left: 2, order_price: 18, order_expire: '2018/10/25',
-//   });
-//   Order.create({
-//     order_date: '2018/01/04', order_name: 'Coca-Cola Cans', order_id: 6, order_initial: 90, order_left: 10, order_price: 1.8, order_expire: '2018/06/25',
-//   });
-//   Order.create({
-//     order_date: '2018/01/04', order_name: 'Ground Beef', order_id: 9, order_initial: 8, order_left: 12, order_price: 20, order_expire: '2018/06/25',
-//   });
-//   Order.create({
-//     order_date: '2017/12/12', order_name: 'Tomatoes', order_id: 10, order_initial: 35, order_left: 9, order_price: 9, order_expire: '2018/04/25',
-//   });
-//   Order.create({
-//     order_date: '2017/11/18', order_name: 'Ketchup', order_id: 11, order_initial: 200, order_left: 45, order_price: 1.5, order_expire: '2018/02/25',
-//   });
-//   Order.create({
-//     order_date: '2017/10/02', order_name: 'Ground Beef', order_id: 11, order_initial: 55, order_left: 13, order_price: 18, order_expire: '2018/01/25',
-//   });
-// });
+db.sync({ force: true }).then(() => {
+  Employee.create({
+    employee_id: '5', employee_name: 'Manos', manager_privilege: true,
+  });
+  Employee.create({
+    employee_id: '96', employee_name: 'Eric', manager_privilege: true,
+  });
+  Employee.create({
+    employee_id: '99', employee_name: 'Jerry', manager_privilege: true,
+  });
+  Employee.create({
+    employee_id: '88', employee_name: 'Xixi', manager_privilege: true,
+  });
+  Employee.create({
+    employee_id: '400', employee_name: 'Adam', manager_privilege: false,
+  });
+  Ingredient.create({
+    ingredient_name: 'Ground Beef', order_number: 5, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 5, ingredient_expire: '2018/03/29',
+  });
+  Ingredient.create({
+    ingredient_name: 'Lettuce', order_number: 6, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.10, ingredient_expire: '2018/04/25',
+  });
+  Ingredient.create({
+    ingredient_name: 'Tomatoes', order_number: 10, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.25, ingredient_expire: '2018/04/25',
+  });
+  Ingredient.create({
+    ingredient_name: 'Onions', order_number: 9, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.15, ingredient_expire: '2018/03/29',
+  });
+  Ingredient.create({
+    ingredient_name: 'Pickles', order_number: 8, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 0.5, ingredient_expire: '2018/04/25',
+  });
+  Ingredient.create({
+    ingredient_name: 'Ketchup', order_number: 11, ingredient_left: 5.5, ingredient_initial: 10.5, ingredient_cost: 1, ingredient_expire: '2018/03/29',
+  });
+  Ingredient.create({
+    ingredient_name: 'Coca-Cola Cans', order_number: 12, ingredient_left: 80, ingredient_initial: 100, ingredient_cost: 0.10, ingredient_expire: '2018/03/29',
+  });
+  Category.create({
+    category_name: 'Drinks',
+  });
+  Category.create({
+    category_name: 'Burgers',
+  });
+  Category.create({
+    category_name: 'Salad',
+  });
+  Category.create({
+    category_name: 'Soup',
+  });
+  Category.create({
+    category_name: 'Steak',
+  });
+  Category.create({
+    category_name: 'Breakfast',
+  });
+  Item.create({
+    item_name: 'Hamburger', item_price: 5, item_image: 'https://www.rallys.com/wp-content/uploads/2017/03/BigBuford_Feature_1000x1000-600x600.jpg', item_ingredients: '[1, 2, 3, 4, 5, 6]', item_category: 2,
+  });
+  Item.create({
+    item_name: 'Coca-Cola', item_price: 1, item_image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY2B_5VgeOlPdpGZLz3H4SBmazfFS1gsoxtcBddF0awQux3EiY', item_ingredients: '[7]', item_category: 1,
+  });
+  Item.create({
+    item_name: 'Basic Salad', item_price: 6, item_image: 'https://recipes.heart.org/-/media/aha/recipe/recipe-images/mediterranean-salad.jpg', item_ingredients: '[2, 3, 4]', item_category: 3,
+  });
+  Item.create({
+    item_name: 'Chicken Noodle Soup', item_price: 4, item_ingredients: '[6]', item_category: 4,
+  });
+  Item.create({
+    item_name: 'Egg and Cheese Sandwich', item_price: 3, item_ingredients: '[6]', item_category: 6,
+  });
+  Order.create({
+    order_date: '2018/02/27', order_name: 'Ground Beef', order_id: 5, order_initial: 21, order_left: 6, order_price: 18, order_expire: '2018/03/25',
+  });
+  Order.create({
+    order_date: '2018/02/27', order_name: 'Lettuce', order_id: 5, order_initial: 50, order_left: 29, order_price: 1, order_expire: '2019/03/25',
+  });
+  Order.create({
+    order_date: '2018/02/27', order_name: 'Pickles', order_id: 5, order_initial: 14, order_left: 2, order_price: 3.6, order_expire: '2018/05/25',
+  });
+  Order.create({
+    order_date: '2018/02/28', order_name: 'Onions', order_id: 6, order_initial: 100, order_left: 70, order_price: 2.2, order_expire: '2018/10/25',
+  });
+  Order.create({
+    order_date: '2018/02/28', order_name: 'Coca-Cola Cans', order_id: 6, order_initial: 90, order_left: 15, order_price: 1.8, order_expire: '2018/11/25',
+  });
+  Order.create({
+    order_date: '2018/02/28', order_name: 'Ground Beef', order_id: 9, order_initial: 8, order_left: 4, order_price: 20, order_expire: '2018/08/25',
+  });
+  Order.create({
+    order_date: '2018/02/28', order_name: 'Tomatoes', order_id: 10, order_initial: 35, order_left: 15, order_price: 9, order_expire: '2019/03/25',
+  });
+  Order.create({
+    order_date: '2018/03/04', order_name: 'Ketchup', order_id: 11, order_initial: 200, order_left: 45, order_price: 1.5, order_expire: '2019/03/25',
+  });
+  Order.create({
+    order_date: '2018/03/04', order_name: 'Ground Beef', order_id: 11, order_initial: 55, order_left: 2, order_price: 18, order_expire: '2018/10/25',
+  });
+  Order.create({
+    order_date: '2018/01/04', order_name: 'Coca-Cola Cans', order_id: 6, order_initial: 90, order_left: 10, order_price: 1.8, order_expire: '2018/06/25',
+  });
+  Order.create({
+    order_date: '2018/01/04', order_name: 'Ground Beef', order_id: 9, order_initial: 8, order_left: 12, order_price: 20, order_expire: '2018/06/25',
+  });
+  Order.create({
+    order_date: '2017/12/12', order_name: 'Tomatoes', order_id: 10, order_initial: 35, order_left: 9, order_price: 9, order_expire: '2018/04/25',
+  });
+  Order.create({
+    order_date: '2017/11/18', order_name: 'Ketchup', order_id: 11, order_initial: 200, order_left: 45, order_price: 1.5, order_expire: '2018/02/25',
+  });
+  Order.create({
+    order_date: '2017/10/02', order_name: 'Ground Beef', order_id: 11, order_initial: 55, order_left: 13, order_price: 18, order_expire: '2018/01/25',
+  });
+});
 
 exports.Employee = Employee;
 exports.Item = Item;
