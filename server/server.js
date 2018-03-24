@@ -106,9 +106,39 @@ app.post('/newEmployee', (req, res) => {
     });
 });
 
+app.post('/orderUp', (req, res) => {
+  db.Sale.update({
+    sale_ready: true,
+  }, {
+    where: {
+      id: req.body.id,
+    },
+  })
+    .then(() => {
+      res.status(201).send();
+    })
+    .catch((error) => {
+      throw error;
+    });
+});
+
 
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
+
+app.get('/fetch/currentOrders', (req, res) => {
+  db.Sale.findAll({
+    where: {
+      sale_ready: false,
+    },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      throw error;
+    });
+});
 
 app.get('/fetch/items', (req, res) => {
   db.Item.findAll()
