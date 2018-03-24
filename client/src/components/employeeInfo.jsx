@@ -4,6 +4,33 @@ import EmployeeBar from './employeeBar.jsx';
 import Navbar from './navbar.jsx';
 import Select from 'react-select';
 import axios from 'axios';
+import ReactTable from 'react-table';
+
+const columns =
+[
+  {
+    Header: "Date and Time",
+    columns: [
+      {
+        Header: "Clock In",
+        accessor: "clockIn",
+      },
+      {
+        Header: "Clock Out",
+        accessor: "clockOut",
+      }
+    ],
+  },
+  {
+    Header: "Total Worked",
+    columns: [
+      {
+        Header: "Minutes",
+        accessor: "minutes",
+      }
+    ]
+  }
+];
 
 class EmployeeInfo extends React.Component {
   constructor(props) {
@@ -105,6 +132,21 @@ class EmployeeInfo extends React.Component {
         <h4>Hello</h4>
       </div>);
     }
+
+    let tableData = [];
+    if (this.state.timeSheet) {
+      this.state.timeSheet.forEach((time) => {
+        tableData.push({
+          clockIn: time.check_in,
+          clockOut: time.check_out,
+          minutes: time.check_out !== null
+            ?
+            Math.floor((Math.floor(Date.parse(time.check_out) - Date.parse(time.check_in)) / 1000) / 60)
+            :
+            '',
+        });
+      });
+    }
     return (
       <div>
         <div className="navbar">
@@ -148,36 +190,14 @@ class EmployeeInfo extends React.Component {
               <button onClick={(e) => this.submitEmployee(e)}>Submit</button>
             </form>
           </div>
-          <div className="profileGridTimesheet">
-            <div style={{ 'gridRow': '1', 'gridColumn': '1' }}>Clock In</div>
-            <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Clock Out</div>
-            <div style={{ 'gridRow': '1', 'gridColumn': '3' }}>Total Time</div>
-            {
-              this.state.timeSheet.map((time, i) => (
-                <div style={{ gridRow: `${i + 1}`, gridColumn: '1' }}>
-                  <h5 className="employeeCheckIn">{time.check_in}</h5>
-                </div>
-              ))
-            }
-            {
-              this.state.timeSheet.map((time, i) => (
-                <div style={{ gridRow: `${i + 1}`, gridColumn: '2' }}>
-                  <h5 className="employeeCheckOut">{time.check_out}</h5>
-                </div>
-              ))
-            }
-            {
-              this.state.timeSheet.map((time, i) => (
-                <div style={{ gridRow: `${i + 1}`, gridColumn: '3' }}>
-                  <h5 className="employeeTotalWorked">
-                    {
-                      Math.floor((Math.floor(Date.parse(time.check_out) - Date.parse(time.check_in)) / 1000) / 60)
-                    }
-                    min
-                  </h5>
-                </div>
-              ))
-            }
+          <div>
+            <ReactTable
+              columns={columns}
+              data={tableData}
+              defaultPageSize={7}
+              className="-striped -highlight"
+              style={{ color: 'black' }}
+            />
           </div>
         </div>
       </div>

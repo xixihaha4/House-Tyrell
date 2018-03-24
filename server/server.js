@@ -106,31 +106,38 @@ app.post('/newEmployee', (req, res) => {
     });
 });
 
-app.post('/orderup', (req, res) => {
+app.post('/orderUp', (req, res) => {
   db.Sale.update({
-    ready: true
+    sale_ready: true,
   }, {
     where: {
-      id: req.body.id
-    }
-  }).then(() => {
-    res.send();
+      id: req.body.id,
+    },
   })
-})
+    .then(() => {
+      res.status(201).send();
+    })
+    .catch((error) => {
+      throw error;
+    });
+});
 
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
 
-app.get('/fetch/sales', (req, res) => {
+app.get('/fetch/currentOrders', (req, res) => {
   db.Sale.findAll({
     where: {
-      ready: false
-    }
+      sale_ready: false,
+    },
   })
     .then((data) => {
       res.send(data);
     })
-})
+    .catch((error) => {
+      throw error;
+    });
+});
 
 app.get('/fetch/items', (req, res) => {
   db.Item.findAll()

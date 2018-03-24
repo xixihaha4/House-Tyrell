@@ -39,7 +39,7 @@ const Sale = db.define('Sales', {
   sale_cost: Sequelize.DECIMAL(10,2),
   sale_discount: Sequelize.INTEGER,
   sale_cash: Sequelize.BOOLEAN,
-  ready: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
+  sale_ready: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
 });
 
 const Ingredient = db.define('Ingredients', {

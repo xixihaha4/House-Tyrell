@@ -13,7 +13,7 @@ import TransactionCredit from './components/transactionCredit.jsx';
 import TransactionCash from './components/transactionCash.jsx';
 import TransactionCashConfirm from './components/transactionCashConfirm.jsx';
 import SaleControl from './components/saleControl.jsx';
-import KitchenLog from './components/kitchenlog.jsx'
+import KitchenLog from './components/kitchenLog.jsx';
 
 const history = createHistory();
 

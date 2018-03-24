@@ -303,7 +303,7 @@ body {
   color: black;
   grid-column: 2 / 3;
   grid-row: 2 / 2;
-  padding-left: 3%;
+  padding-left: 2%;
 }
 
 .employeeSelect button {
@@ -312,7 +312,7 @@ body {
 }
 
 .employeeSelect input {
-  width: 100%;
+  width: 60vh;
   height: 2vh;
 }
 
