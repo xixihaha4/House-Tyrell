@@ -11,7 +11,7 @@ export default class SaleItems extends React.Component {
   render() {
     return(
       <div className="saleItemGridManager">
-        <div onClick={this.props.openItemModal}>
+        <div onClick={() => this.props.openModal('itemModal')}>
           <h3>Add an Item</h3>
         </div>
         {

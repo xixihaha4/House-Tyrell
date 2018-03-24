@@ -1,8 +1,8 @@
 import React from 'react';
 
-const SaleCategory = ({ menuCategories, filterByCategory, openCategoryModal }) => (
+const SaleCategory = ({ menuCategories, filterByCategory, openModal }) => (
   <div >
-        <button type="button" className={`category_0`} onClick={() => openCategoryModal()}>Create</button>
+        <button type="button" className={`category_0`} onClick={() => openModal('categoryModal')}>Create</button>
         <button type="button" className={`category_0`} onClick={() => filterByCategory()}>All</button>
     {
       menuCategories.map((category, i) =>
