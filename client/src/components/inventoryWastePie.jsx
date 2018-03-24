@@ -1,18 +1,13 @@
 import React from 'react';
-import axios from 'axios';
 
 const c3 = require('c3/c3.js');
 
 class InventoryWastePie extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      initial: '',
-      left: '',
-    };
+    
     this.updateChart = this.updateChart.bind(this);
     this.getWaste = this.getWaste.bind(this);
-    this.calculateWaste = this.calculateWaste.bind(this);
   }
     componentWillMount() {
       this.getWaste();
@@ -22,26 +17,7 @@ class InventoryWastePie extends React.Component {
       this.updateChart();
     }
     getWaste() {
-      axios.get('/fetch/waste')
-        .then(data => {
-            console.log('waste data', data.data);
-            var result = this.calculateWaste(data.data);
-            this.setState({
-                initial: result[0],
-                left: result[1]
-            })
-        })
-    }
-    calculateWaste(data) {
-      var initial = 0;
-      var left = 0;
-      data.forEach((item) => {
-        if (item.order_used) {   
-          initial += Number(item.order_initial);
-          left += Number(item.order_left);
-        }
-      })
-      return [initial, left];
+      this.props.getWaste();
     }
   
     updateChart() {
@@ -50,7 +26,7 @@ class InventoryWastePie extends React.Component {
         x: 'x',
         data: {
           columns: [
-            ['Order_Wasted', this.state.left], ['Order_Used', this.state.initial - this.state.left],
+            ['Order_Wasted', this.props.wleft], ['Order_Used', this.props.winitial - this.props.wleft],
           ],
           type: 'pie',
           colors: {
