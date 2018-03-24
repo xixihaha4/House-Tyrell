@@ -129,7 +129,8 @@ class InventoryInfo extends React.Component {
         date: dateArray.reverse(),
         cost: costArray.reverse(),
       }, () => {
-        console.log([this.state.date, this.state.cost]);
+        console.log('cost data 1', data1.data);
+        console.log('cost data 2', data2.data);
       });
   }));
   }
@@ -225,7 +226,8 @@ class InventoryInfo extends React.Component {
               <InventoryUsageTable 
               usageData1={ this.state.usageData1 } usageData2={ this.state.usageData2 }/>) : (
                 type === 'cost' ? (
-                  <InventoryCostTable />
+                  <InventoryCostTable 
+                  costData1={ this.state.costData1 } costData2={ this.state.costData2 }/>
                 ) : (
                   <InventoryWasteTable />
                 )

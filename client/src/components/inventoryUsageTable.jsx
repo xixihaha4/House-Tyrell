@@ -8,7 +8,7 @@ class InventoryUsageTable extends React.Component {
     super(props);
     this.state = {
       tableData: [],
-    }
+    };
     this.generateTableData = this.generateTableData.bind(this);
   }
 
@@ -47,7 +47,7 @@ class InventoryUsageTable extends React.Component {
     })
     this.setState({
       tableData: data_1.concat(data_2),
-    })
+    });
   }
 
   render() {

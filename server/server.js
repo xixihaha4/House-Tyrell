@@ -205,7 +205,7 @@ app.get('/fetch/inventory', (req, res) => {
 
 app.get('/fetch/ordercost', (req, res) => {
   db.Order.findAll({
-    attributes: ['order_date', 'order_total'],
+    attributes: ['order_name', 'order_number', 'order_date', 'order_initial', 'unit_cost', 'order_total'],
     order: [['order_date', 'DESC']],
   }).then((data) => {
     res.send(data);
@@ -214,7 +214,7 @@ app.get('/fetch/ordercost', (req, res) => {
 
 app.get('/fetch/inventorycost', (req, res) => {
   db.Ingredient.findAll({
-    attributes: ['order_date', 'ingredient_total'],
+    attributes: ['ingredient_name', 'order_number', 'order_date', 'ingredient_initial', 'unit_cost', 'ingredient_total'],
     order: [['order_date', 'DESC']],
   }).then((data) => {
     res.send(data);
@@ -379,7 +379,7 @@ app.post('/cronTest', (req, res) => {
                     order_date: orders[foundIndex].order_date,
                     ingredient_total: orders[foundIndex].order_total,
                   },
-                  { where: { ingredient_name: orders[foundIndex].order_name } },
+                  { where: { ingredient_name: orders[foundIndex].order_name } }
                 ).then(() => {
                   db.Order.update(
                     {
@@ -465,7 +465,7 @@ const myCronJob = new CronJob('0 6 * * * *', () => {
                     order_date: orders[foundIndex].order_date,
                     ingredient_total: orders[foundIndex].order_total,
                   },
-                  { where: { ingredient_name: orders[foundIndex].order_name } },
+                  { where: { ingredient_name: orders[foundIndex].order_name } }
                 ).then(() => {
                   db.Order.update(
                     {
