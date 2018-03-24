@@ -122,7 +122,6 @@ app.post('/orderUp', (req, res) => {
     });
 });
 
-
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
 
