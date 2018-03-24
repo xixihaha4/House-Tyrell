@@ -31,6 +31,8 @@ export default class Login extends React.Component {
         this.props.history.push('/managerHome');
       } else if (this.state.identification === '2') {
         this.props.history.push('/salesScreen');
+      } else if (this.state.identification === '548') {
+        this.props.history.push('/kitchenScreen');
       } else {
         axios.get(`/fetch/employee?PIN=${this.state.identification}`)
           .then((results) => {
