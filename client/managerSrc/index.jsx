@@ -13,7 +13,6 @@ import TransactionCredit from './components/transactionCredit.jsx';
 import TransactionCash from './components/transactionCash.jsx';
 import TransactionCashConfirm from './components/transactionCashConfirm.jsx';
 import SaleControl from './components/saleControl.jsx';
-import KitchenLog from './components/kitchenLog.jsx';
 import ManagerCustomize from './components/managerCustomize.jsx';
 
 const history = createHistory();
@@ -32,7 +31,6 @@ ReactDOM.render(
         <Route path="/transaction/cash" component={TransactionCash} />
         <Route path="/transaction/cash/confirm" component={TransactionCashConfirm} />
         <Route path="/transaction/credit" component={TransactionCredit} />
-        <Route path="/kitchenScreen" component={KitchenLog} />
       </div>
     </Router>
   </div>,
