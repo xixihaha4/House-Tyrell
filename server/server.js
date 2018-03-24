@@ -379,7 +379,7 @@ app.post('/cronTest', (req, res) => {
                     order_date: orders[foundIndex].order_date,
                     ingredient_total: orders[foundIndex].order_total,
                   },
-                  { where: { ingredient_name: orders[foundIndex].order_name } },
+                  { where: { ingredient_name: orders[foundIndex].order_name } }
                 ).then(() => {
                   db.Order.update(
                     {
@@ -465,7 +465,7 @@ const myCronJob = new CronJob('0 6 * * * *', () => {
                     order_date: orders[foundIndex].order_date,
                     ingredient_total: orders[foundIndex].order_total,
                   },
-                  { where: { ingredient_name: orders[foundIndex].order_name } },
+                  { where: { ingredient_name: orders[foundIndex].order_name } }
                 ).then(() => {
                   db.Order.update(
                     {
