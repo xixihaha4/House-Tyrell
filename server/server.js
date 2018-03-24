@@ -47,6 +47,22 @@ app.post('/test', (req, res) => {
     });
 });
 
+app.post('/create/item', (req, res) => {
+  console.log(req.body)
+  db.Item.create({
+    item_name: req.body.item_name,
+    item_price: req.body.item_price,
+    item_image: req.body.item_image,
+    item_ingredients: req.body.item_ingredients,
+    item_category: req.body.item_category
+  }).then(() => {
+    res.send();
+  })
+  // db.Item.create({
+  //
+  // })
+})
+
 app.post('/completed/transaction', (req, res) => {
   const itemList = [];
   for (let i = 0; i < req.body.transactionItems.length; i += 1) {
