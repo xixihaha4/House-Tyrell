@@ -79,7 +79,7 @@ app.post('/completed/transaction', (req, res) => {
   } else { type = false; }
   let employee = JSON.parse(req.session.employee)
   //let time = JSON.stringify(new Date).substring(1, 20);
-  let time = JSON.stringify(moment().format());
+  let time = moment().format('MMMM Do, YYYY hh:mm:ss');
 
   db.Sale.create({
     sale_date: time,
@@ -285,6 +285,33 @@ app.get('/fetch/allEmployees', (req, res) => {
   db.Employee.findAll({
     order: [['employee_name', 'ASC']],
   })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+app.get('/fetch/allEmployees/clockedIn', (req, res) => {
+  db.Timesheet.findAll({
+    where: {
+      check_in: {
+        [Op.ne]: null,
+      },
+      check_out: null,
+    },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+app.get('/fetch/allSales/today', (req, res) => {
+  db.Sale.findAll()
     .then((data) => {
       res.send(data);
     })
