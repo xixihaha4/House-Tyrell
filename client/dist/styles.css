@@ -763,7 +763,7 @@ body {
   display: none; /* Hidden by default */
   position: absolute; /* Stay in place */
   z-index: 1; /* Sit on top */
-  top: 35%;
+  top: 45%;
   left: 54%;
   width: 50%;
   transform: translate(-50%, -50%);
@@ -785,9 +785,20 @@ body {
 .modal-body-manager {
   display: grid;
   padding: 20px;
-  grid-template-rows: repeat(5, 5vh);
+  grid-template-rows: 5vh 5vh 5vh 20vh 15vh;
   grid-row-gap: 20px;
   border-radius: 5%;
+}
+
+.modal-ingredient-grid {
+  display: grid;
+  color: black;
+  grid-template-rows: repeat(4, 5vh);
+  grid-template-columns: repeat(7, 8.1vh);
+}
+
+.modal-ingredient-item {
+  
 }
 
 .modal-body-manager button {
@@ -884,5 +895,196 @@ body {
 }
 /*******CATEGORY MODAL********/
 
+/*****Confirmation Modal ******/
+.confirmationModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-confirmation{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-confirmation {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-confirmation h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.confirmOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmConfirm {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.cancelConfirm {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-confirmation button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-confirmation {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-confirmation {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/*****Confirmation Modal *****/
+
+/*******discardModal*********/
+.discardModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-discard{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-discard {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-discard h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.confirmOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmDiscard {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #fc4747;
+}
+
+.cancelDiscard {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-discard button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-discard {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-discard {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/********discardModal********/
+
+/*****MANAGER TRANSACTION BUTTONS SAVEALL AND DISCARDALL ***/
+.saveChanges {
+  text-align: center;
+  padding-top: 8%;
+  grid-row: 8/9;
+  grid-column: 2/4;
+  border-radius: 5%;
+  background-color: #1778dc;
+}
+
+.discardChanges {
+  text-align: center;
+  padding-top: 8%;
+  grid-row: 10/11;
+  grid-column: 2/4;
+  border-radius: 5%;
+  background-color: #fc4747;
+}
+
+
+/****MANAGER TRANSACTION BUTTONS SAVEALL AND DISCARDALL ***/
 
 /***        MANAGER CUSTOMIZATION       **/

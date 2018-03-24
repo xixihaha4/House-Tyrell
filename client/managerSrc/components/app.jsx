@@ -15,6 +15,10 @@ export default class App extends React.Component {
       total: 0,
       discount: 0,
       discountOptions: [],
+      newItems: [],
+      newCategories: [],
+      ingredients: [],
+      categories: [],
     };
     this.itemClick = this.itemClick.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);
@@ -22,21 +26,53 @@ export default class App extends React.Component {
     this.transactionRemove = this.transactionRemove.bind(this);
     this.filterByCategory = this.filterByCategory.bind(this);
     this.removeIng = this.removeIng.bind(this);
-    this.openDiscountModal = this.openDiscountModal.bind(this);
-    this.closeDiscountModal = this.closeDiscountModal.bind(this);
-    this.discountModalOptions = this.discountModalOptions.bind(this);
     this.updateDiscount = this.updateDiscount.bind(this);
-    this.openItemModal = this.openItemModal.bind(this);
-    this.closeItemModal = this.closeItemModal.bind(this);
     this.transactionClear = this.transactionClear.bind(this);
-    this.openCategoryModal = this.openCategoryModal.bind(this);
-    this.closeCategoryModal = this.closeCategoryModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.handleNewItem = this.handleNewItem.bind(this);
+    this.handleNewCategory = this.handleNewCategory.bind(this);
+    this.saveChanges = this.saveChanges.bind(this);
+    this.discardChanges = this.discardChanges.bind(this);
+    this.getCategories = this.getCategories.bind(this);
+    this.getStates = this.getStates.bind(this);
   }
 
-  componentDidMount() {
-    this.getMenuItems();
-    this.getCategories();
-    this.discountModalOptions();
+  componentWillMount() {
+    this.getStates();
+  }
+
+
+
+  getStates() {
+    axios.get('/fetch/ingredients')
+      .then((ing) => {
+        this.setState({
+          ingredients: ing.data
+        }, () => {
+          axios.get('/fetch/categories')
+            .then((cat) => {
+              this.setState({
+                categories: cat.data,
+                menuCategories: cat.data,
+              }, () => {
+                axios.get('/fetch/items')
+                  .then((items) => {
+                    this.setState({
+                      menuItems: items.data
+                    })
+                  })
+              })
+            })
+        })
+      })
+  }
+
+  getCategories() {
+    axios.get('/fetch/categories')
+      .then((cat) => {
+        this.setState({ categories: cat.data })
+      })
   }
 
   getMenuItems() {
@@ -44,7 +80,6 @@ export default class App extends React.Component {
       .then((results) => {
         this.setState({
           menuItems: results.data,
-          menuCategories: this.state.menuCategories.reverse(),
         });
       });
   }
@@ -53,7 +88,6 @@ export default class App extends React.Component {
     axios.get('/fetch/categories')
       .then((results) => {
         this.setState({
-          menuItems: this.state.menuItems.reverse(),
           menuCategories: results.data,
         });
       });
@@ -120,33 +154,41 @@ export default class App extends React.Component {
     this.setState({ transactionItems: [] })
   }
 
-  
+
 
 // Below are all the functions for the discount modal and also to update discount.
-
-  openDiscountModal() {
-    document.getElementById('itemModal').style.display = 'block';
+  openModal(modal) {
+    document.getElementById(modal).style.display='block';
+  }
+  closeModal(modal) {
+    document.getElementById(modal).style.display='none';
   }
 
-  closeDiscountModal() {
-    document.getElementById('itemModal').style.display = 'none';
+  handleNewItem(item) {
+    let temp = this.state.newItems.slice()
+    temp.push(item)
+    this.setState({ newItems: temp })
   }
 
-  openCategoryModal() {
-    document.getElementById('categoryModal').style.display = 'block';
+  handleNewCategory(category) {
+    let temp = this.state.newCategories.slice()
+    temp.push(category)
+    this.setState({ newCategories: temp })
   }
 
-  closeCategoryModal() {
-    document.getElementById('categoryModal').style.display = 'none';
+  saveChanges() {
+    console.log('saving changes', this.state.newItems, this.state.newCategory)
+    //loop through new items, create new item entry for each
+    //loop through new categories, create new category entry for each
   }
 
-  openItemModal() {
-    document.getElementById('itemModal').style.display = 'block';
+  discardChanges() {
+    this.setState({
+      newItems: [],
+      newCategory: [],
+    })
   }
 
-  closeItemModal() {
-    document.getElementById('itemModal').style.display = 'none';
-  }
 
   discountModalOptions() {
     const myOptions = [];
@@ -168,30 +210,30 @@ export default class App extends React.Component {
       <div>
 
         <SaleScreen
-          menuItems={this.state.menuItems.reverse()}
+          menuItems={this.state.newItems.concat(this.state.menuItems)}
           itemClick={this.itemClick}
-          menuCategories={this.state.menuCategories.reverse()}
+          menuCategories={this.state.newCategories.concat(this.state.menuCategories)}
           transactionItems={this.state.transactionItems}
           total={this.state.total}
           tax={this.state.tax}
           discount={this.state.discount}
-          openDiscountModal={this.openDiscountModal}
-          closeDiscountModal={this.closeDiscountModal}
           transactionRemove={this.transactionRemove}
           filterByCategory={this.filterByCategory}
           removeIng={this.removeIng}
           transactionComplete={this.transactionComplete}
           discountOptions={this.state.discountOptions}
           updateDiscount={this.updateDiscount}
-          openOptionModal={this.openOptionModal}
-          closeOptionModal={this.closeOptionModal}
-          closeItemModal={this.closeItemModal}
-          openItemModal={this.openItemModal}
           transactionClear={this.transactionClear}
-          openCategoryModal={this.openCategoryModal}
-          closeCategoryModal={this.closeCategoryModal}
           getMenuItems={this.getMenuItems}
           getCategories={this.getCategories}
+          openModal={this.openModal}
+          closeModal={this.closeModal}
+          handleNewItem={this.handleNewItem}
+          handleNewCategory={this.handleNewCategory}
+          saveChanges={this.saveChanges}
+          discardChanges={this.discardChanges}
+          categories={this.state.categories}
+          ingredients={this.state.ingredients}
         />
 
       </div>

@@ -170,19 +170,15 @@ app.get('/fetch/items', (req, res) => {
 app.get('/fetch/categories', (req, res) => {
   db.Category.findAll()
     .then((data) => {
+      console.log(data)
       res.send(data);
     });
 });
 
 app.get('/fetch/ingredients', (req, res) => {
-  const ingredients = JSON.parse(req.query.item_ingredients);
-  db.Ingredient.findAll({
-    where: {
-      id: {
-        [Op.or]: ingredients,
-      },
-    },
-  }).then((data) => {
+  db.Ingredient.findAll()
+  .then((data) => {
+    console.log(data)
     res.send(data);
   });
 });
