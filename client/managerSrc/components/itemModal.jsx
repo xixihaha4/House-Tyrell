@@ -21,7 +21,16 @@ export default class itemModal extends React.Component {
       item_ingredients: '[1,2,3,4]',
       item_category: 3
     }).then(() => {
-      this.props.closeItemModal();
+      this.setState({
+        item_name: '',
+        item_price: '',
+        item_image: '',
+        item_ingredients: '',
+        item_category: '',
+      }, () => {
+        this.props.getMenuItems();
+        this.props.closeItemModal();
+      })
     })
 
   }
@@ -32,8 +41,8 @@ export default class itemModal extends React.Component {
       <div id="itemModal" className="itemModal animated fadeIn">
         <div className="modal-content-manager">
           <div className="modal-header-manager">
-            <div>Add an Item</div>
-            <div className="discountClose" onClick={() => this.props.closeItemModal()}>HELLO</div>
+            <div className="modal-title">Create New Item</div>
+            <div className="modal-close" onClick={() => this.props.closeItemModal()}><i className="fas fa-times-circle"></i></div>
           </div>
           <div className="modal-body-manager">
             <input

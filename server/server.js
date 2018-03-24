@@ -48,7 +48,6 @@ app.post('/test', (req, res) => {
 });
 
 app.post('/create/item', (req, res) => {
-  console.log(req.body)
   db.Item.create({
     item_name: req.body.item_name,
     item_price: req.body.item_price,
@@ -58,10 +57,16 @@ app.post('/create/item', (req, res) => {
   }).then(() => {
     res.send();
   })
-  // db.Item.create({
-  //
-  // })
 })
+
+app.post('/create/category', (req, res) => {
+  db.Category.create({ category_name: req.body.category_name })
+    .then(() => {
+      res.send()
+    })
+})
+
+
 
 app.post('/completed/transaction', (req, res) => {
   const itemList = [];

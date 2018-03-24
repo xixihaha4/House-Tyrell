@@ -29,11 +29,13 @@ export default class App extends React.Component {
     this.openItemModal = this.openItemModal.bind(this);
     this.closeItemModal = this.closeItemModal.bind(this);
     this.transactionClear = this.transactionClear.bind(this);
+    this.openCategoryModal = this.openCategoryModal.bind(this);
+    this.closeCategoryModal = this.closeCategoryModal.bind(this);
   }
 
   componentDidMount() {
-    // this.getMenuItems();
-    // this.getCategories();
+    this.getMenuItems();
+    this.getCategories();
     this.discountModalOptions();
   }
 
@@ -42,6 +44,7 @@ export default class App extends React.Component {
       .then((results) => {
         this.setState({
           menuItems: results.data,
+          menuCategories: this.state.menuCategories.reverse(),
         });
       });
   }
@@ -50,6 +53,7 @@ export default class App extends React.Component {
     axios.get('/fetch/categories')
       .then((results) => {
         this.setState({
+          menuItems: this.state.menuItems.reverse(),
           menuCategories: results.data,
         });
       });
@@ -126,6 +130,14 @@ export default class App extends React.Component {
     document.getElementById('itemModal').style.display = 'none';
   }
 
+  openCategoryModal() {
+    document.getElementById('categoryModal').style.display = 'block';
+  }
+
+  closeCategoryModal() {
+    document.getElementById('categoryModal').style.display = 'none';
+  }
+
   openItemModal() {
     document.getElementById('itemModal').style.display = 'block';
   }
@@ -154,9 +166,9 @@ export default class App extends React.Component {
       <div>
 
         <SaleScreen
-          menuItems={this.state.menuItems}
+          menuItems={this.state.menuItems.reverse()}
           itemClick={this.itemClick}
-          menuCategories={this.state.menuCategories}
+          menuCategories={this.state.menuCategories.reverse()}
           transactionItems={this.state.transactionItems}
           total={this.state.total}
           tax={this.state.tax}
@@ -174,6 +186,10 @@ export default class App extends React.Component {
           closeItemModal={this.closeItemModal}
           openItemModal={this.openItemModal}
           transactionClear={this.transactionClear}
+          openCategoryModal={this.openCategoryModal}
+          closeCategoryModal={this.closeCategoryModal}
+          getMenuItems={this.getMenuItems}
+          getCategories={this.getCategories}
         />
 
       </div>

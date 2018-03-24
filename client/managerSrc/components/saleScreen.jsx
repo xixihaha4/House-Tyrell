@@ -4,25 +4,32 @@ import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
 import SaleControl from './saleControl.jsx';
 import Navbar from './navbar.jsx';
-import ItemModal from './ItemModal.jsx';
+import ItemModal from './itemModal.jsx';
 import Select from 'react-select';
+import CategoryModal from './categoryModal.jsx'
 
-const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openDiscountModal, closeDiscountModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, closeItemModal, openItemModal, transactionClear }) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openDiscountModal, closeDiscountModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, closeItemModal, openItemModal, transactionClear, openCategoryModal, closeCategoryModal, getMenuItems, getCategories }) =>
   (
     <div>
       <div className="saleScreenGridManager animated fadeIn">
         <ItemModal
           openItemModal={openItemModal}
           closeItemModal={closeItemModal}
+          getMenuItems={getMenuItems}
         />
-        <div className="saleItemGridManager">
-          <SaleItems
+        <CategoryModal
+          openCategoryModal={openCategoryModal}
+          closeCategoryModal={closeCategoryModal}
+          getCategories={getCategories}
+        />
+
+
+        <SaleItems
             menuItems={menuItems}
             itemClick={itemClick}
             openItemModal={openItemModal}
             closeItemModal={closeItemModal}
-          />
-        </div>
+        />
         <div className="saleTransactionGrid">
           <Transaction
             removeIng={removeIng}
@@ -42,6 +49,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
         <div className="saleCategoryGrid">
           <SaleCategory
             menuCategories={menuCategories}
+            openCategoryModal={openCategoryModal}
             filterByCategory={filterByCategory} />
         </div>
       </div>
