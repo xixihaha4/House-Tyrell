@@ -11,14 +11,18 @@ export default class CategoryModal extends React.Component {
   }
 
   createCategory() {
-    axios.post('/create/category', { category_name: this.state.category_name })
-      .then(() => {
-        this.setState({ category_name: '' },
-        () => {
-          this.props.getCategories();
-          this.props.closeCategoryModal();
-        })
-      })
+    // axios.post('/create/category', { category_name: this.state.category_name })
+    //   .then(() => {
+    //     this.setState({ category_name: '' },
+    //     () => {
+    //       this.props.getCategories();
+    //       this.props.closeModal('categoryModal');
+    //     })
+    //   })
+    let newCategory = {};
+    newCategory['category_name'] = this.state.category_name;
+    this.props.handleNewCategory(newCategory);
+    this.props.closeModal('categoryModal');
   }
 
   render() {
@@ -27,7 +31,7 @@ export default class CategoryModal extends React.Component {
         <div className="modal-content-category">
           <div className="modal-header-category">
             <div className="modal-title">Create Category</div>
-            <div className="modal-close" onClick={() => this.props.closeCategoryModal()}><i className="fas fa-times-circle"></i></div>
+            <div className="modal-close" onClick={() => this.props.closeModal('categoryModal')}><i className="fas fa-times-circle"></i></div>
 
           </div>
           <div className="modal-body-category">

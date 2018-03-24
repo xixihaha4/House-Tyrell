@@ -51,21 +51,8 @@ export default class Transaction extends React.Component {
         </div>
 
         <div className='transactionGridItems'>
-          {this.props.transactionItems.map((item, i) =>
-          (
-            <div
-              onClick={() => {this.props.transactionRemove(i)}}
-              style={{ gridRow: `${i + 1}`, gridColumn: '1', verticalAlign: 'top' }}
-            >
-              <i className="fas fa-times-circle" style={{ color: 'rgb(224, 94, 94)' }} />
-            </div>
-          ))}
-          {this.props.transactionItems.map((item, i) =>
-           <div style={{ 'gridRow': `${i + 1}`, 'gridColumn': '2' }}>
-             <TransactionItem item={item} removeIng={this.props.removeIng} />
-          </div>)}
-          {this.props.transactionItems.map((item, i) =>
-            <div style={{ 'gridRow': `${i + 1}`, 'gridColumn': '3' }}>{item.item_price}</div>)}
+          <div onClick={() => this.props.openModal('confirmationModal')} className='saveChanges'>Save Changes</div>
+          <div onClick={() => this.props.openModal('discardModal')} className='discardChanges'>Discard Changes</div>
         </div>
         <div className="saleControlGrid">
           <SaleControl
