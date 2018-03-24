@@ -184,6 +184,13 @@ body {
   color: white;
 }
 
+.managerScreenGrid-home {
+  display: grid;
+  grid-template-columns: 30vh 1fr  1fr 1fr;
+  grid-template-rows: 25vh 25vh 39vh 5vh;
+  color: white;
+}
+
 .managerScreenGrid-graph {
   display: grid;
   grid-template-columns: 30vh 1fr 1fr 1fr;
@@ -193,7 +200,7 @@ body {
 
 .manager-navigation {
   grid-column: 1;
-  grid-row: 1 / 4;
+  grid-row: 1 / 5;
   display: grid;
   grid-template-rows: 5vh 5vh 5vh 5vh;
   background-color: #333;
@@ -208,6 +215,54 @@ body {
 
 .managerViewGrid {
   grid-template-rows: 1fr 1fr;
+}
+
+.managerScreenGrid-home h1{
+  font-size: 4em;
+  margin: 0;
+}
+.managerScreenGrid-home h2{
+  font-size: 2em;
+  margin: 0;
+}
+
+#card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+#card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.managerCard-1 {
+  background-color: rgb(54, 122, 214);
+  grid-column: 2 / 3;
+  width: 90%;
+  height: 90%;
+  margin: 3% 0 0 5%;
+  border-radius: 5%;
+  text-align: center;
+}
+
+.managerCard-2 {
+  background-color: rgb(242, 131, 59);
+  grid-column: 3 / 4;
+  width: 90%;
+  height: 90%;
+  margin: 3% 0 0 5%;
+  border-radius: 5%;
+  text-align: center;
+}
+
+.managerCard-3 {
+  background-color: rgb(154, 34, 179);
+  grid-column: 4 / 5;
+  width: 90%;
+  height: 90%;
+  margin: 3% 0 0 5%;
+  border-radius: 5%;
+  text-align: center;
 }
 
 .kitchenGridContainer {
