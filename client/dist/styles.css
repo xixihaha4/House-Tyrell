@@ -705,6 +705,13 @@ body {
   border-radius: 4%;
 }
 
+/* .saleItemGridManager div {
+  position: relative;
+  display: grid;
+  grid-template-rows: 2%, 98%;
+} */
+
+
 .saleItemGridManager h3 {
   border-radius: 15%;
   color: black;
@@ -772,8 +779,9 @@ body {
 }
 
 .removeItem {
-  position: relative;
-  background-color: red;
+  /* position: absolute; */
+  position: absolute;
+  color: black;
 }
 /** ITEM MODAL**/
 

@@ -120,6 +120,8 @@ export default class App extends React.Component {
     this.setState({ transactionItems: [] })
   }
 
+  
+
 // Below are all the functions for the discount modal and also to update discount.
 
   openDiscountModal() {

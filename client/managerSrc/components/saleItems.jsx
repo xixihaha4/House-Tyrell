@@ -18,15 +18,15 @@ export default class SaleItems extends React.Component {
           this.props.menuItems.map((item, i) => {
             if (item.item_image === undefined || item.item_image === null) {
               return (
-                <div key={i} className={`item_${i}`} onClick={() => itemClick(item)}>
+                <div key={i} className={`item_${i}`}>
+                  <div onClick={() => console.log(item)} className="removeItem"><i className="fas fa-times"></i></div>
                   <h3>{item.item_name}</h3>
-                  {/* <button className="removeItem"><i className="fas fa-times-circle"></i></button> */}
                 </div>);
             }
               return (
                 <div key={i} className={`item_${i}`}>
-                  <img alt={item.item_name} src={item.item_image} style={{ width: '95%', height: '95%' }} onClick={() => itemClick(item)}/>
-                  {/* <button className="removeItem"><i className="fas fa-times-circle"></i></button> */}
+                  <div onClick={() => console.log(item)} className="removeItem"><i className="fas fa-times"></i></div>
+                  <img alt={item.item_name} src={item.item_image} style={{ width: '95%', height: '95%' }} />
                 </div>);
           })
         }
