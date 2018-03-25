@@ -219,7 +219,7 @@ app.get('/fetch/inventorycost', (req, res) => {
 
 app.get('/fetch/waste', (req, res) => {
   db.Order.findAll({
-    attributes: ['order_name', 'order_initial', 'order_left', 'order_used'],
+    attributes: ['order_name', 'order_date', 'order_number', 'order_initial', 'order_left', 'order_used'],
   }).then((data) => {
     res.send(data);
   });

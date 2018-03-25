@@ -27,7 +27,7 @@ class InventoryUsageTable extends React.Component {
       obj.order = order.order_name;
       obj.orderdate = order.order_date;
       obj.number = order.order_number;
-      obj.usage = (100*(order.order_initial - order.order_left)/order.order_initial).toFixed();
+      obj.usage = (100*(order.order_initial - order.order_left)/order.order_initial).toFixed() + '%';
       obj.left = order.order_left;
       obj.initial = order.order_initial;
       obj.expiredate = order.order_expire;
@@ -39,7 +39,7 @@ class InventoryUsageTable extends React.Component {
       obj.order = order.ingredient_name;
       obj.orderdate = order.order_date;
       obj.number = order.order_number;
-      obj.usage = (100*(order.ingredient_initial - order.ingredient_left)/order.ingredient_initial).toFixed();
+      obj.usage = (100*(order.ingredient_initial - order.ingredient_left)/order.ingredient_initial).toFixed() + '%';
       obj.left = order.ingredient_left;
       obj.initial = order.ingredient_initial;
       obj.expiredate = order.ingredient_expire;
@@ -66,11 +66,11 @@ class InventoryUsageTable extends React.Component {
       Header: '% Usage',
       accessor: 'usage',
     }, {
-      Header: 'Quantity Left',
+      Header: 'Quantity Left (kg)',
       accessor: 'left',
     }, 
     {
-      Header: 'Quantity Initial',
+      Header: 'Quantity Initial (kg)',
       accessor: 'initial',
     }, 
     {

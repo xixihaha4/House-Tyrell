@@ -3,59 +3,66 @@ import axios from 'axios';
 import ReactTable from 'react-table';
 // import "react-table/react-table.css";
 
-// const ReactTable = window.ReactTable.default;
-// const data = [
-//   {
-//     name: 'Eric',
-//     age: 22,
-//     friend: {
-//       friendName: 'Jiening',
-//       friendAge: 24,
-//     },
-//   }, {
-//     name: 'Manos',
-//     age: 26,
-//     friend: {
-//       friendName: 'Xixi',
-//       friendAge: 43,
-//     },
-//   }];
-
 class InventoryWasteTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      tableData: [],
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.generateTableData(nextProps.wasteData);
+  }
+
+  generateTableData(data) {
+    var wastedata = data.filter(order => {
+      return order.order_used === true
+    }).map(order => {
+      var obj = {};
+      obj.order = order.order_name;
+      obj.orderdate = order.order_date;
+      obj.number = order.order_number;
+      obj.waste = (100*(order.order_left)/order.order_initial).toFixed() + '%';
+      obj.left = order.order_left;
+      obj.initial = order.order_initial;
+      return obj;
+    })
+    this.setState({
+      tableData: wastedata,
+    })
+  }
+
   render() {
-      var columns = [{
-        Header: 'Waste',
-        accessor: 'name', // String-based value accessors!
-      }, {
-        Header: 'Waste',
-        accessor: 'age',
-         // Custom cell components!
-      }, {
-        Header: 'Waste',
-        columns: [
-          {
-            Header: 'Friend Name',
-            accessor: 'friendName',
-          },
-          {
-            Header: 'Friend Age',
-            accessor: 'friendAge',
-          }
-        ]} 
-      ]
+    var columns = [{
+      Header: 'Order Date',
+      accessor: 'orderdate',
+    },
+    {
+      Header: 'Order Number',
+      accessor: 'number',
+    },{
+      Header: 'Order Item',
+      accessor: 'order',
+    }, 
+    {
+      Header: '% Wasted',
+      accessor: 'waste',
+    }, {
+      Header: 'Quantity Left (kg)',
+      accessor: 'left',
+    }, 
+    {
+      Header: 'Quantity Initial (kg)',
+      accessor: 'initial',
+    },        
+    ]
     return (
       <div>
         <ReactTable
-        // data={data}
+        data={this.state.tableData}
         columns={columns}
-        defaultPageSize={5}
+        defaultPageSize={10}
         style={{color: 'black'}}
         />
       </div>
