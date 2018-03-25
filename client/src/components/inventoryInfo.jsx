@@ -229,7 +229,7 @@ class InventoryInfo extends React.Component {
                   <InventoryCostTable 
                   costData1={ this.state.costData1 } costData2={ this.state.costData2 }/>
                 ) : (
-                  <InventoryWasteTable />
+                  <InventoryWasteTable wasteData={ this.state.wasteData }/>
                 )
               )
             }
