@@ -104,7 +104,7 @@ app.post('/completed/transaction', (req, res) => {
   } else { type = false; }
   let employee = JSON.parse(req.session.employee)
   //let time = JSON.stringify(new Date).substring(1, 20);
-  let time = moment().format('MMMM Do, YYYY hh:mm:ss');
+  let time = moment().format();
 
   db.Sale.create({
     sale_date: time,
@@ -241,10 +241,9 @@ app.get('/fetch/categories', (req, res) => {
 
 app.get('/fetch/ingredients', (req, res) => {
   db.Ingredient.findAll()
-    .then((data) => {
-      console.log(data);
-      res.send(data);
-    });
+  .then((data) => {
+    res.send(data);
+  });
 });
 
 app.get('/fetch/currentInventory', (req, res) => {
@@ -372,14 +371,7 @@ app.get('/fetch/allEmployees', (req, res) => {
 });
 
 app.get('/fetch/allEmployees/clockedIn', (req, res) => {
-  db.Timesheet.findAll({
-    where: {
-      check_in: {
-        [Op.ne]: null,
-      },
-      check_out: null,
-    },
-  })
+  db.db.query(`SELECT a.employee_id, b.employee_name, a.check_in FROM Timesheets a INNER JOIN Employees b ON a.employee_id = b.employee_id WHERE a.check_out IS NULL AND a.check_in IS NOT NULL ORDER BY a.check_in DESC`)
     .then((data) => {
       res.send(data);
     })

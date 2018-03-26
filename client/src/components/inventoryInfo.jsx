@@ -77,7 +77,7 @@ class InventoryInfo extends React.Component {
     var initial = 0;
     var left = 0;
     data.forEach((item) => {
-      if (!item.order_used) {   
+      if (!item.order_used) {
         initial += Number(item.order_initial);
         left += Number(item.order_left);
       }
@@ -194,7 +194,7 @@ class InventoryInfo extends React.Component {
     var winitial = 0;
     var wleft = 0;
     data.forEach((item) => {
-      if (item.order_used) {   
+      if (item.order_used) {
         winitial += Number(item.order_initial);
         wleft += Number(item.order_left);
       }
@@ -246,12 +246,12 @@ class InventoryInfo extends React.Component {
           <div className="manager-navigation"><Navigation /></div>
           <div className="graphGrid">
             {type === 'usage' ? (
-            <div className="graph"><InventoryUsagePie 
+            <div className="graph"><InventoryUsagePie
             initial={ this.state.initial } left={ this.state.left } getInventoryData={ this.getInventoryData }/></div>) : (
               type === 'cost' ? (
-              <div className="graph"><InventoryCostLine 
+              <div className="graph"><InventoryCostLine
               date={ this.state.date } cost={ this.state.cost } getInventoryCostData={ this.getInventoryCostData }/></div>) : (
-              <div className="graph"><InventoryWastePie 
+              <div className="graph"><InventoryWastePie
               winitial={ this.state.winitial } wleft={ this.state.wleft } getWaste = { this.getWaste }/></div>)
             )}
           </div>
@@ -274,17 +274,17 @@ class InventoryInfo extends React.Component {
           </div>
           <div className="graphTable">
             {type === 'usage' ? (
-              <InventoryUsageTable 
+              <InventoryUsageTable
               usageData1={ this.state.usageData1 } usageData2={ this.state.usageData2 }/>) : (
                 type === 'cost' ? (
-                  <InventoryCostTable 
+                  <InventoryCostTable
                   costData1={ this.state.costData1 } costData2={ this.state.costData2 }/>
                 ) : (
                   <InventoryWasteTable wasteData={ this.state.wasteData }/>
                 )
               )
             }
-            
+
           </div>
         </div>
       </div>
