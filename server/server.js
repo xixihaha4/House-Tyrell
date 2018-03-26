@@ -116,6 +116,8 @@ app.post('/completed/transaction', (req, res) => {
     sale_cash: type
   }).then(() => {
     res.send();
+  }).then(() => {
+    console.log(req.body.transactionItems)
   })
 });
 
