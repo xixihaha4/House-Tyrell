@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Select from 'react-select';
+
 export default class itemModal extends React.Component {
   constructor(props) {
     super(props);
@@ -11,9 +13,12 @@ export default class itemModal extends React.Component {
       item_category: '',
       categories: [],
       ingredients: [],
+      categorySelect: [],
     }
     this.createItem = this.createItem.bind(this);
     this.handleIngredient = this.handleIngredient.bind(this);
+    this.cancelItem = this.cancelItem.bind(this);
+    this.updateCat = this.updateCat.bind(this);
   }
 
   handleIngredient(item, index) {
@@ -34,6 +39,7 @@ export default class itemModal extends React.Component {
 
   }
 
+
   createItem() {
     let temp = this.state.item_ingredients.slice()
     let newItem = {}
@@ -43,20 +49,51 @@ export default class itemModal extends React.Component {
     newItem['item_ingredients'] = JSON.stringify(temp);
     newItem['item_category'] = this.state.item_category;
     this.props.handleNewItem(newItem);
-    this.props.closeModal('itemModal');
 
+    let ing = this.props.ingredients.slice();
+    console.log(ing)
+
+    for (let i = 0; i < ing.length; i += 1) {
+      let clicked = document.getElementById(`modal-item_${i}`);
+      clicked.style.color = 'black';
+    }
+
+    this.setState({
+      item_name: '',
+      item_price: '',
+      item_image: '',
+      item_ingredients: [],
+      item_category: '',
+    }, () => {
+      this.props.closeModal('itemModal');
+    });
+  }
+
+  cancelItem() {
+    this.setState({
+      item_name: '',
+      item_price: '',
+      item_image: '',
+      item_ingredients: [],
+      item_category: '',
+    }, () => {
+      this.props.closeModal('itemModal');
+    });
+  }
+
+  updateCat(val) {
+    this.setState({ item_category: val })
   }
 
 
   render() {
-    console.log('hello')
     console.log(this.props)
     return (
       <div id="itemModal" className="itemModal animated fadeIn">
         <div className="modal-content-manager">
           <div className="modal-header-manager">
             <div className="modal-title">Create New Item</div>
-            <div className="modal-close" onClick={() => this.props.closeModal('itemModal')}><i className="fas fa-times-circle"></i></div>
+            <div className="modal-close" onClick={this.cancelItem}><i className="fas fa-times-circle"></i></div>
           </div>
           <div className="modal-body-manager">
             <input
@@ -82,12 +119,15 @@ export default class itemModal extends React.Component {
                 return <div onClick={() => this.handleIngredient(ingredient, i)} id={`modal-item_${i}`}>{ingredient.ingredient_name}</div>
               })}
             </div>
-            <input
-              type="Text"
-              value={this.state.item_category}
-              onChange={(e) => this.setState({ item_category: e.target.value }, () => console.log(this.state.item_category))}
-              placeholder="Please enter the item category"
-            />
+            <div className="modal-category-select">
+              <Select
+                className="discountDropdown"
+                options={this.props.catOptions}
+                matchProp="any"
+                searchable="false"
+                onChange={value => this.updateCat(value.value)}
+              />
+            </div>
             <button type="button" onClick={this.createItem}>
               <h3>Create Item</h3>
             </button>

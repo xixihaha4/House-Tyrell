@@ -1,12 +1,12 @@
 import React from 'react';
 
-const SaleCategory = ({ menuCategories, filterByCategory, openModal }) => (
-  <div >
-        <button type="button" className={`category_0`} onClick={() => openModal('categoryModal')}>Create</button>
-        <button type="button" className={`category_0`} onClick={() => filterByCategory()}>All</button>
+const SaleCategory = ({ menuCategories, filterByCategory, removeCategoryConfirm, openModal }) => (
+  <div>
+        <button type="button" className="createButton" onClick={() => openModal('categoryModal')}>Create</button>
+        <button type="button" className="allButton" onClick={() => filterByCategory()}>All</button>
     {
       menuCategories.map((category, i) =>
-        <button key={i} type="button" className={`category_${i + 1}`} onClick={() => filterByCategory(category)}>{category.category_name}</button>)
+        <button key={i} type="button">{category.category_name}<div onClick={() => removeCategoryConfirm(category)}><i className="fas fa-times-circle"></i></div></button>)
     }
   </div>
 );

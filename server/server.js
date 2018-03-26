@@ -47,6 +47,27 @@ app.post('/test', (req, res) => {
     });
 });
 
+app.post('/delete/item', (req, res) => {
+  console.log(req.body)
+  db.Item.find({
+    where: { item_name: req.body.item_name
+    }
+  }).then((found) => {
+    found.destroy();
+  })
+})
+
+app.post('/delete/category', (req, res) => {
+  console.log(req.body)
+  db.Category.find({
+    where: {
+      category_name: req.body.category_name
+    }
+  }).then((found) => {
+    found.destroy();
+  })
+})
+
 app.post('/create/item', (req, res) => {
   db.Item.create({
     item_name: req.body.item_name,
@@ -64,6 +85,10 @@ app.post('/create/category', (req, res) => {
     .then(() => {
       res.send()
     })
+})
+
+app.post('/create/all', (req, res) => {
+
 })
 
 
