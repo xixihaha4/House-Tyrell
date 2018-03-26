@@ -143,6 +143,43 @@ app.post('/orderUp', (req, res) => {
     });
 });
 
+app.post('/addIngredient', (req, res) => {
+  db.Ingredient.find({
+    where: { ingredient_name: req.body.ingredientName },
+  })
+    .then((result) => {
+      if (result === null) {
+        db.Ingredient.create({
+          ingredient_name: req.body.ingredientName,
+          order_number: req.body.orderNumber,
+          ingredient_left: req.body.orderQuantity,
+          ingredient_initial: req.body.orderQuantity,
+          unit_cost: req.body.unitCost,
+          ingredient_expire: req.body.expireDate,
+          order_date: req.body.orderDate,
+          ingredient_total: req.body.totalCost,
+        });
+      } else {
+        db.Order.create({
+          order_date: req.body.orderDate,
+          order_name: req.body.ingredientName,
+          order_number: req.body.orderNumber,
+          order_initial: req.body.orderQuantity,
+          order_left: req.body.orderQuantity,
+          unit_cost: req.body.unitCost,
+          order_expire: req.body.expireDate,
+          order_total: req.body.totalCost,
+        });
+      }
+    })
+    .then(() => {
+      res.status(201).send();
+    })
+    .catch((error) => {
+      throw error;
+    });
+});
+
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
 
@@ -170,17 +207,17 @@ app.get('/fetch/items', (req, res) => {
 app.get('/fetch/categories', (req, res) => {
   db.Category.findAll()
     .then((data) => {
-      console.log(data)
+      console.log(data);
       res.send(data);
     });
 });
 
 app.get('/fetch/ingredients', (req, res) => {
   db.Ingredient.findAll()
-  .then((data) => {
-    console.log(data)
-    res.send(data);
-  });
+    .then((data) => {
+      console.log(data);
+      res.send(data);
+    });
 });
 
 app.get('/fetch/currentInventory', (req, res) => {
@@ -223,6 +260,20 @@ app.get('/fetch/waste', (req, res) => {
   }).then((data) => {
     res.send(data);
   });
+});
+
+app.get('/fetch/allsales', (req, res) => {
+  db.Sale.findAll()
+    .then((data) => {
+      res.send(data);
+    });
+});
+
+app.get('/fetch/allitems', (req, res) => {
+  db.Item.findAll()
+    .then((data) => {
+      res.send(data);
+    });
 });
 
 app.get('/fetch/employee', (req, res) => {
