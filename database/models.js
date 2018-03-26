@@ -177,3 +177,4 @@ exports.Sale = Sale;
 exports.Ingredient = Ingredient;
 exports.Order = Order;
 exports.Timesheet = Timesheet;
+exports.db = db;
