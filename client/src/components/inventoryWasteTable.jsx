@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import ReactTable from 'react-table';
 // import "react-table/react-table.css";
 
@@ -8,7 +7,7 @@ class InventoryWasteTable extends React.Component {
     super(props);
     this.state = {
       tableData: [],
-    }
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,7 +29,7 @@ class InventoryWasteTable extends React.Component {
     })
     this.setState({
       tableData: wastedata,
-    })
+    });
   }
 
   render() {
@@ -66,7 +65,7 @@ class InventoryWasteTable extends React.Component {
         style={{color: 'black'}}
         />
       </div>
-    )
+    );
   }
 }
 

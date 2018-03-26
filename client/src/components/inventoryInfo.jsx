@@ -26,7 +26,13 @@ class InventoryInfo extends React.Component {
       cost: [],
       winitial: '',
       wleft: '',
-
+      ingredientName: '',
+      orderNumber: '',
+      orderDate: '',
+      expireDate: '',
+      orderQuantity: '',
+      unitCost: '',
+      totalCost: '',
     };
     this.getInventory1 = this.getInventory1.bind(this);
     this.getInventory2 = this.getInventory2.bind(this);
@@ -40,6 +46,8 @@ class InventoryInfo extends React.Component {
     this.calculateCostByRecentMonth = this.calculateCostByRecentMonth.bind(this);
     this.getWaste = this.getWaste.bind(this);
     this.calculateWaste = this.calculateWaste.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   /* Inventory Usage Functions */
@@ -194,6 +202,39 @@ class InventoryInfo extends React.Component {
     return [winitial, wleft];
   }
 
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+  handleClick(event) {
+    event.preventDefault();
+    axios.post('/addIngredient', {
+      ingredientName: this.state.ingredientName,
+      orderNumber: this.state.orderNumber,
+      orderDate: this.state.orderDate,
+      expireDate: this.state.expireDate,
+      orderQuantity: this.state.orderQuantity,
+      unitCost: this.state.unitCost,
+      totalCost: this.state.totalCost,
+    })
+      .then(this.setState({
+        ingredientName: '',
+        orderNumber: '',
+        orderDate: '',
+        expireDate: '',
+        orderQuantity: '',
+        unitCost: '',
+        totalCost: '',
+      }), () => {
+        this.getInventoryData();
+      });
+  }
+
   render() {
     const type = this.state.viewType;
     return (
@@ -220,6 +261,16 @@ class InventoryInfo extends React.Component {
               placeholder="Select a graph"
               onChange={value => this.setState({ viewType: value.value })}
             />
+          </div>
+          <div className="addInventoryForm">
+            <input className="inventoryInput" name="ingredientName" type="text" value={this.state.ingredientName} placeholder="Ingredient Name" onChange={this.handleInputChange} />
+            <input className="inventoryInput" name="orderNumber" type="text" value={this.state.orderNumber} placeholder="Order Number" onChange={this.handleInputChange} />
+            <input className="inventoryInput" name="orderDate" type="text" value={this.state.orderDate} placeholder="Order Date (YYYY/MM/DD)" onChange={this.handleInputChange} />
+            <input className="inventoryInput" name="expireDate" type="text" value={this.state.expireDate} placeholder="Expiration Date (YYYY/MM/DD)" onChange={this.handleInputChange} />
+            <input className="inventoryInput" name="orderQuantity" type="number" value={this.state.orderQuantity} placeholder="Order Quantity (kg)" onChange={this.handleInputChange} />
+            <input className="inventoryInput" name="unitCost" type="number" value={this.state.unitCost} placeholder="Unit Cost ($)" onChange={this.handleInputChange} />
+            <input className="inventoryInput" name="totalCost" type="number" value={this.state.totalCost} placeholder="Total Cost ($)" onChange={this.handleInputChange} />
+            <button className="inventoryInput" onClick={this.handleClick}>Add Ingredient</button>
           </div>
           <div className="graphTable">
             {type === 'usage' ? (

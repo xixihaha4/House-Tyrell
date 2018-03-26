@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import ReactTable from 'react-table';
 // import "react-table/react-table.css";
 
@@ -18,6 +17,10 @@ class InventoryUsageTable extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.generateTableData(nextProps.usageData1, nextProps.usageData2);
   }
+
+  // componentWillUpdate() {
+  //   this.generateTableData(this.props.usageData1, this.props.usageData2);
+  // }
 
   generateTableData(data1, data2) {
     var data_1 = data1.filter(order => {
