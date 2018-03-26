@@ -9,8 +9,10 @@ import Select from 'react-select';
 import CategoryModal from './categoryModal.jsx';
 import ConfirmationModal from './confirmationModal.jsx';
 import DiscardModal from './discardModal.jsx';
+import RemoveItemModal from './removeItemModal.jsx';
+import RemoveCategoryConfirm from './removeCategoryConfirm.jsx'
 
-const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear, getMenuItems, getCategories, openModal, closeModal, handleNewItem, handleNewCategory, saveChanges, discardChanges, categories, ingredients }) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear, getMenuItems, getCategories, openModal, closeModal, handleNewItem, handleNewCategory, saveChanges, discardChanges, categories, ingredients, catOptions, removeItem, handleRemoveConfirm, removeCategoryConfirm, confirmCategoryConfirm }) =>
   (
     <div>
       <div className="saleScreenGridManager animated fadeIn">
@@ -21,6 +23,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
           handleNewItem={handleNewItem}
           ingredients={ingredients}
           categories={categories}
+          catOptions={catOptions}
         />
         <CategoryModal
           getCategories={getCategories}
@@ -35,6 +38,18 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
           saveChanges={saveChanges}
         />
 
+        <RemoveItemModal
+          openModal={openModal}
+          closeModal={closeModal}
+          handleRemoveConfirm={handleRemoveConfirm}
+        />
+
+        <RemoveCategoryConfirm
+          openModal={openModal}
+          closeModal={closeModal}
+          confirmCategoryConfirm={confirmCategoryConfirm}
+        />
+
         <DiscardModal
           openModal={openModal}
           closeModal={closeModal}
@@ -46,6 +61,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             itemClick={itemClick}
             openModal={openModal}
             closeModal={closeModal}
+            removeItem={removeItem}
         />
         <div className="saleTransactionGrid">
           <Transaction
@@ -64,6 +80,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
         <div className="saleCategoryGrid">
           <SaleCategory
             menuCategories={menuCategories}
+            removeCategoryConfirm={removeCategoryConfirm}
             openModal={openModal}
             filterByCategory={filterByCategory} />
         </div>

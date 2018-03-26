@@ -8,6 +8,7 @@ export default class CategoryModal extends React.Component {
       category_name: ''
     }
     this.createCategory = this.createCategory.bind(this);
+    this.cancelCategory = this.cancelCategory.bind(this);
   }
 
   createCategory() {
@@ -22,7 +23,15 @@ export default class CategoryModal extends React.Component {
     let newCategory = {};
     newCategory['category_name'] = this.state.category_name;
     this.props.handleNewCategory(newCategory);
-    this.props.closeModal('categoryModal');
+    this.setState({ category_name: '' }, () => {
+      this.props.closeModal('categoryModal')
+    })
+  }
+
+  cancelCategory() {
+    this.setState({ category_name: ''}, () => {
+      this.props.closeModal('categoryModal')
+    })
   }
 
   render() {
@@ -31,7 +40,7 @@ export default class CategoryModal extends React.Component {
         <div className="modal-content-category">
           <div className="modal-header-category">
             <div className="modal-title">Create Category</div>
-            <div className="modal-close" onClick={() => this.props.closeModal('categoryModal')}><i className="fas fa-times-circle"></i></div>
+            <div className="modal-close" onClick={this.cancelCategory}><i className="fas fa-times-circle"></i></div>
 
           </div>
           <div className="modal-body-category">
