@@ -9,27 +9,27 @@ import ReactTable from 'react-table';
 const columns =
 [
   {
-    Header: "Date and Time",
+    Header: 'Total Worked',
     columns: [
       {
-        Header: "Clock In",
-        accessor: "clockIn",
+        Header: 'Minutes',
+        accessor: 'minutes',
+      }
+    ]
+  },
+  {
+    Header: 'Date and Time',
+    columns: [
+      {
+        Header: 'Clock In',
+        accessor: 'clockIn',
       },
       {
-        Header: "Clock Out",
-        accessor: "clockOut",
+        Header: 'Clock Out',
+        accessor: 'clockOut',
       }
     ],
   },
-  {
-    Header: "Total Worked",
-    columns: [
-      {
-        Header: "Minutes",
-        accessor: "minutes",
-      }
-    ]
-  }
 ];
 
 class EmployeeInfo extends React.Component {

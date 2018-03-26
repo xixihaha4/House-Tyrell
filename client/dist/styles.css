@@ -240,9 +240,9 @@ body {
   grid-column: 2 / 3;
   width: 90%;
   height: 90%;
+  text-align: center;
   margin: 3% 0 0 5%;
   border-radius: 5%;
-  text-align: center;
 }
 
 .managerCard-2 {
@@ -250,9 +250,9 @@ body {
   grid-column: 3 / 4;
   width: 90%;
   height: 90%;
+  text-align: center;
   margin: 3% 0 0 5%;
   border-radius: 5%;
-  text-align: center;
 }
 
 .managerCard-3 {
@@ -260,9 +260,23 @@ body {
   grid-column: 4 / 5;
   width: 90%;
   height: 90%;
+  text-align: center;
   margin: 3% 0 0 5%;
   border-radius: 5%;
+}
+
+.managerCard-4 {
+  background-color: rgb(187, 72, 61);
+  grid-column: 2 / 4;
+  grid-row: 2;
+  margin: 1% 0 0 3%;
+  width: 95%;
+  height: 95%;
   text-align: center;
+  border-radius: 2.5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .kitchenGridContainer {
@@ -864,7 +878,7 @@ body {
 }
 
 .modal-ingredient-item {
-  
+
 }
 
 .modal-body-manager button {
