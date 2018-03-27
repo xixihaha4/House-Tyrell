@@ -127,6 +127,7 @@ app.post('/completed/transaction', (req, res) => {
   } else { type = false; }
   let employee = JSON.parse(req.session.employee)
   let time = moment().format();
+  let ingredientsList = [];
 
   db.Sale.create({
     sale_date: time,
@@ -139,10 +140,34 @@ app.post('/completed/transaction', (req, res) => {
   }).then(() => {
     res.send();
   }).then(() => {
-    console.log(req.body.transactionItems)
+    db.Ingredient.findAll()
+    .then((ing) => {
+      console.log('this is running', req.body.transactionItems)
+
+      ingredientsList = JSON.parse(JSON.stringify(ing));
+      req.body.transactionItems.forEach((item) => {
+        console.log('this is item.item_ingredients', item.item_ingredients)
+        console.log(typeof JSON.stringify(item.item_ingredients), JSON.stringify(item.item_ingredients))
+        let ingList = JSON.parse(item.item_ingredients);
+        console.log('this is ingList', ingList)
+        ingList.forEach((ing) => {
+          console.log('this is ing', ing, ingredientsList)
+          ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
+        })
+      })
+      console.log('this is ingredientslist', ingredientsList)
+      ingredientsList.forEach((ing) => {
+        db.Ingredient.update({
+          ingredient_left: ing.ingredient_left
+        },{
+            where: {
+            id: ing.id,
+          },
+        })
+      })
+    })
   })
 });
-
 
 app.post('/clockout', (req, res) => {
   db.Timesheet.update({
