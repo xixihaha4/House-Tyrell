@@ -15,7 +15,7 @@ class InventoryWasteTable extends React.Component {
   }
 
   generateTableData(data) {
-    var wastedata = data.filter(order => {
+    var wastedata = data.filter((order) => {
       return order.order_used === true
     }).map(order => {
       var obj = {};

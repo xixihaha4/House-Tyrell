@@ -23,7 +23,7 @@ class InventoryUsageTable extends React.Component {
   // }
 
   generateTableData(data1, data2) {
-    var data_1 = data1.filter(order => {
+    var data_1 = data1.filter((order) => {
       return order.order_used === false;
     }).map(order => {
       var obj = {};
@@ -37,7 +37,7 @@ class InventoryUsageTable extends React.Component {
       return obj;
     })
 
-    var data_2 = data2.map(order => {
+    var data_2 = data2.map((order) => {
       var obj = {};
       obj.order = order.ingredient_name;
       obj.orderdate = order.order_date;
