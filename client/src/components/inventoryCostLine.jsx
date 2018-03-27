@@ -7,18 +7,13 @@ class InventoryCostLine extends React.Component {
     super(props);
 
     this.updateChart = this.updateChart.bind(this);
-    this.getInventoryCostData = this.getInventoryCostData.bind(this);
   }
   componentWillMount() {
-    this.getInventoryCostData();
+    this.props.getInventoryCostData();
     this.updateChart();
   }
   componentDidUpdate() {
     this.updateChart();
-  }
-
-  getInventoryCostData() {
-    this.props.getInventoryCostData();
   }
 
   updateChart() {

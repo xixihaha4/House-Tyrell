@@ -8,17 +8,13 @@ class InventoryUsagePie extends React.Component {
     super(props);
 
     this.updateChart = this.updateChart.bind(this);
-    this.getInventoryData = this.getInventoryData.bind(this);
   }
   componentWillMount() {
-    this.getInventoryData();
+    this.props.getInventoryData();
     this.updateChart();
   }
   componentDidUpdate() {
     this.updateChart();
-  }
-  getInventoryData() {
-    this.props.getInventoryData();
   }
 
   updateChart() {

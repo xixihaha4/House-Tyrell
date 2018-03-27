@@ -33,8 +33,6 @@ class SaleInfo extends React.Component {
   getData() {
     axios.all([this.getSalesData(), this.getItemsData()])
       .then(axios.spread((salesdata, itemsdata) => {
-        console.log('salesdata', salesdata.data);
-        console.log('itemsdata', itemsdata.data);
         this.setState({
           salesData: salesdata.data,
           itemsData: itemsdata.data,
