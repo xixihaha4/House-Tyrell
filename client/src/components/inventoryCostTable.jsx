@@ -59,18 +59,18 @@ class InventoryCostTable extends React.Component {
     {
       Header: 'Quantity (kg)',
       accessor: 'quantity',
-    },  
+    },
     {
       Header: 'Total Cost ($)',
       accessor: 'totalcost',
-    },    
+    },
     ]
     return (
       <div>
         <ReactTable
         data={this.state.tableData}
         columns={columns}
-        defaultPageSize={10}
+        defaultPageSize={8}
         style={{color: 'black'}}
         />
       </div>

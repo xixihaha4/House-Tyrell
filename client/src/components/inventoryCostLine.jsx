@@ -5,7 +5,7 @@ const c3 = require('c3/c3.js');
 class InventoryCostLine extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.updateChart = this.updateChart.bind(this);
     this.getInventoryCostData = this.getInventoryCostData.bind(this);
   }
@@ -16,7 +16,7 @@ class InventoryCostLine extends React.Component {
   componentDidUpdate() {
     this.updateChart();
   }
-  
+
   getInventoryCostData() {
     this.props.getInventoryCostData();
   }
@@ -31,6 +31,9 @@ class InventoryCostLine extends React.Component {
         colors: {
           Total_Inventory_Cost: '#349eff',
         },
+      },
+      size: {
+        height: 300,
       },
       axis: {
         x: {
