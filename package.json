@@ -36,6 +36,7 @@
     "mysql": "^2.15.0",
     "mysql2": "^1.5.2",
     "nodemon": "^1.17.2",
+    "path": "^0.12.7",
     "react": "^16.2.0",
     "react-c3js": "^0.1.20",
     "react-d3-basic": "^1.6.11",
@@ -49,9 +50,10 @@
     "react-s-alert": "^1.4.1",
     "react-select": "^2.0.0-alpha.8",
     "react-signature-canvas": "^0.2.4",
+    "react-sound": "^1.1.0",
     "react-table": "^6.8.0",
     "redux": "^3.7.2",
-    "sequelize": "^4.37.0"
+    "sequelize": "^4.37.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
