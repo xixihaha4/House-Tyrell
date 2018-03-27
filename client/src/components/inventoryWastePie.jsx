@@ -5,7 +5,7 @@ const c3 = require('c3/c3.js');
 class InventoryWastePie extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.updateChart = this.updateChart.bind(this);
   }
     componentWillMount() {
@@ -15,7 +15,7 @@ class InventoryWastePie extends React.Component {
     componentDidUpdate() {
       this.updateChart();
     }
-  
+
     updateChart() {
       const chart = c3.generate({
         bindto: '#chart',
@@ -29,6 +29,9 @@ class InventoryWastePie extends React.Component {
             Order_Wasted: '#f05b47',
             Order_Used: '#349eff',
           },
+        },
+        size: {
+          height: 380,
         },
         axis: {
           x: {
@@ -48,10 +51,10 @@ class InventoryWastePie extends React.Component {
         },
       });
     }
-  
+
     render() {
       return <div id="chart"></div>;
     }
   }
-  
+
 export default InventoryWastePie;

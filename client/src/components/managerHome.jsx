@@ -121,7 +121,6 @@ class ManagerHome extends React.Component {
 
   render() {
     const lowIngredients = [];
-
     this.state.allIngredients.forEach((ingredient) => {
       if ((parseFloat(ingredient.ingredient_left).toFixed(2) / parseFloat(ingredient.ingredient_initial).toFixed(2) * 100) <= this.state.lowStockPercent) {
         lowIngredients.push(ingredient);

@@ -22,7 +22,9 @@ export default class ManagerCustomize extends React.Component {
         </div>
         <div className="managerScreenGrid">
           <div className="manager-navigation"><Navigation /></div>
-          <App />
+          <div style={{ gridColumn: '2 / 4' }}>
+            <App />
+          </div>
         </div>
       </div>
     )
