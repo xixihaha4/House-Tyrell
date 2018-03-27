@@ -44,15 +44,12 @@ class SaleInfo extends React.Component {
     return (
       <div>
         <Navbar />
-        <div className="managerScreenGrid">
+        <div className="managerScreenGrid-Sales">
           <div className="manager-navigation"><Navigation /></div>
-          <div className="graphGrid">
-            <div className="graph">
+            <div className="graph" style={{ gridColumn: '2 / 4', gridRow: '1 / 1', paddingTop: '5%' }}>
               <SalesLine />
             </div>
-            <button>By Employee</button>
-          </div>
-          <div className="graphTable">
+          <div className="graphTable" style={{ paddingTop: '2%' }}>
             <SaleTable salesData={this.state.salesData} itemsData={this.state.itemsData} />
           </div>
         </div>

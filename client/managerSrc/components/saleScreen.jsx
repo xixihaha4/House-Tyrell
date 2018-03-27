@@ -15,7 +15,7 @@ import RemoveCategoryConfirm from './removeCategoryConfirm.jsx'
 const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear, getMenuItems, getCategories, openModal, closeModal, handleNewItem, handleNewCategory, saveChanges, discardChanges, categories, ingredients, catOptions, removeItem, handleRemoveConfirm, removeCategoryConfirm, confirmCategoryConfirm }) =>
   (
     <div>
-      <div className="saleScreenGridManager animated fadeIn">
+        <div className="saleScreenGridManager animated fadeIn">
         <ItemModal
           openModal={openModal}
           closeModal={closeModal}
