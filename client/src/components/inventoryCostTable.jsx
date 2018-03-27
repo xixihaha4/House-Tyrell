@@ -15,8 +15,8 @@ class InventoryCostTable extends React.Component {
     this.generateTableData(nextProps.costData1, nextProps.costData2);
   }
   generateTableData(data1, data2) {
-    var data_1 = data1.map((order) => {
-      var obj = {};
+    const data_1 = data1.map((order) => {
+      const obj = {};
       obj.orderdate = order.order_date;
       obj.number = order.order_number;
       obj.order = order.order_name;
@@ -25,8 +25,8 @@ class InventoryCostTable extends React.Component {
       obj.totalcost = order.order_total;
       return obj;
     });
-    var data_2 = data2.map((order) => {
-      var obj = {};
+    const data_2 = data2.map((order) => {
+      const obj = {};
       obj.orderdate = order.order_date;
       obj.number = order.order_number;
       obj.order = order.ingredient_name;
@@ -34,21 +34,22 @@ class InventoryCostTable extends React.Component {
       obj.quantity = order.ingredient_initial;
       obj.totalcost = order.ingredient_total;
       return obj;
-    })
+    });
     this.setState({
       tableData: data_1.concat(data_2),
     });
   }
 
   render() {
-    var columns = [{
+    const columns = [{
       Header: 'Order Date',
       accessor: 'orderdate',
     },
     {
       Header: 'Order Number',
       accessor: 'number',
-    },{
+    },
+    {
       Header: 'Order Item',
       accessor: 'order',
     },
@@ -64,17 +65,17 @@ class InventoryCostTable extends React.Component {
       Header: 'Total Cost ($)',
       accessor: 'totalcost',
     },
-    ]
+    ];
     return (
       <div>
         <ReactTable
-        data={this.state.tableData}
-        columns={columns}
-        defaultPageSize={10}
-        style={{color: 'black'}}
+          data={this.state.tableData}
+          columns={columns}
+          defaultPageSize={10}
+          style={{ color: 'black' }}
         />
       </div>
-    )
+    );
   }
 }
 
