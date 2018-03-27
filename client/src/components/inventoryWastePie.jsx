@@ -7,17 +7,13 @@ class InventoryWastePie extends React.Component {
     super(props);
     
     this.updateChart = this.updateChart.bind(this);
-    this.getWaste = this.getWaste.bind(this);
   }
     componentWillMount() {
-      this.getWaste();
+      this.props.getWaste();
       this.updateChart();
     }
     componentDidUpdate() {
       this.updateChart();
-    }
-    getWaste() {
-      this.props.getWaste();
     }
   
     updateChart() {
