@@ -33,7 +33,7 @@ class InventoryCostLine extends React.Component {
         },
       },
       size: {
-        height: 300,
+        height: 380,
       },
       axis: {
         x: {

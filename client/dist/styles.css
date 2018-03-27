@@ -203,14 +203,14 @@ body {
 .managerScreenGrid-home {
   display: grid;
   grid-template-columns: 30vh 1fr  1fr 1fr;
-  grid-template-rows: 25vh 25vh 39vh 5vh;
+  grid-template-rows: 20% 1fr 1fr;
   color: white;
 }
 
 .managerScreenGrid-graph {
   display: grid;
-  grid-template-columns: 30vh 1fr 1fr 1fr;
-  grid-template-rows: 45vh 15vh 55vh;
+  grid-template-columns: 30vh 1fr 1fr 1fr 1fr;
+  grid-template-rows: 25% 5% 1fr;
   color: white;
 }
 
@@ -258,7 +258,6 @@ body {
   height: 90%;
   text-align: center;
   margin: 3% 0 0 5%;
-  border-radius: 5%;
 }
 
 .managerCard-2 {
@@ -268,7 +267,6 @@ body {
   height: 90%;
   text-align: center;
   margin: 3% 0 0 5%;
-  border-radius: 5%;
 }
 
 .managerCard-3 {
@@ -278,7 +276,6 @@ body {
   height: 90%;
   text-align: center;
   margin: 3% 0 0 5%;
-  border-radius: 5%;
 }
 
 .managerCard-4 {
@@ -289,7 +286,6 @@ body {
   width: 95%;
   height: 95%;
   text-align: center;
-  border-radius: 2.5%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
@@ -338,29 +334,31 @@ body {
 }
 
 .selectGraphDropDown {
-  display: grid;
-  grid-row: 1/ 1;
-  grid-column:  4/ 5;
-  padding-top: 3em;
+  grid-row: 1 / 1;
+  grid-column:  4 / 5;
+  padding-top: 5%;
 }
 
 .addInventoryForm {
-  grid-row: 2/2;
-  grid-column:  2/ 5;
-  padding-left: 0.5em;
+  grid-row: 2 / 2;
+  grid-column:  2 / 6;
+  padding-left: 1%;
 }
 
 .inventoryInput {
-  border-radius: 4%;
-  padding: 0.3em;
+  padding: 0.3%;
   font-family: 'Catamaran', sans-serif;
   font-size: 1em;
 }
 
+.graphGrid-inventory {
+  grid-row: 1 / 1;
+  grid-column: 2 / 4;
+}
+
 .graphTable {
-  display: grid;
-  grid-row: 3/ 4;
-  grid-column:  2/ 5;
+  grid-row: 3 / 4;
+  grid-column:  2 / 6;
 }
 
 .employeeGraphGrid {
@@ -819,7 +817,7 @@ body {
 
 .saleScreenGridManager {
   display: grid;
-  grid-template-columns: 118.6vh 40vh;
+  grid-template-columns: 70% 30%;
   grid-template-rows: 87vh 8vh;
   background-color: rgb(237, 237, 237);
 }

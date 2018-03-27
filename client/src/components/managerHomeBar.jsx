@@ -28,7 +28,7 @@ class ManagerHomeBar extends React.Component {
       },
       x: 'x',
       size: {
-        height: 600
+        height: 745,
       },
       data: {
         columns: columns,
