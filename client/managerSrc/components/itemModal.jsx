@@ -109,10 +109,10 @@ export default class itemModal extends React.Component {
               placeholder="Enter Item Price"
             />
             <input
-              type="Text"
-              value={this.state.item_image}
-              onChange={(e) => this.setState({ item_image: e.target.value }, () => console.log(this.state.item_image))}
-              placeholder="Enter an Image_URL or Upload a photo"
+              type="file"
+              accept='image/*'
+              onChange={(e) => this.setState({ item_image: e.target.files[0]}, () => console.log(this.state.item_image))}
+              placeholder="Upload a photo"
             />
             <div className="modal-ingredient-grid">
               {this.props.ingredients.map((ingredient, i) => {

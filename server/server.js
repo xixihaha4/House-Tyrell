@@ -7,6 +7,10 @@ const db = require('../database/models.js');
 const Sequelize = require('sequelize');
 const session = require('express-session');
 const CronJob = require('cron').CronJob;
+const multerS3 = require('multer-s3');
+const multer = require('multer');
+const aws = require('aws-sdk');
+const config = require('../config.js');
 
 
 const Op = Sequelize.Op;
@@ -29,6 +33,24 @@ const port = 3000;
 
 app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
+
+//* *************************** AMAZON S3 IMAGE STORAGE ************************
+
+aws.config.update({
+  secretAccessKey: config.S3_SECRET,
+  accessKeyId: config.S3_KEY,
+  region: 'us-east-1',
+});
+const s3 = new aws.S3();
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'tyrell-pos',
+    key: function(req, file, cb) {
+      cb(null, `${new Date()}-${file.originalname}`);
+    }
+  }),
+});
 
 //* **************************** MIDDLEWARE ************************************
 let auth = function(req, res, next) {
@@ -68,16 +90,17 @@ app.post('/delete/category', (req, res) => {
   })
 })
 
-app.post('/create/item', (req, res) => {
+app.post('/create/item', upload.any(), (req, res) => {
   db.Item.create({
     item_name: req.body.item_name,
     item_price: req.body.item_price,
-    item_image: req.body.item_image,
+    item_image: req.files[0].location,
     item_ingredients: req.body.item_ingredients,
     item_category: req.body.item_category
   }).then(() => {
     res.send();
   })
+  res.end();
 })
 
 app.post('/create/category', (req, res) => {
