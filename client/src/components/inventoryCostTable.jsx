@@ -15,7 +15,7 @@ class InventoryCostTable extends React.Component {
     this.generateTableData(nextProps.costData1, nextProps.costData2);
   }
   generateTableData(data1, data2) {
-    var data_1 = data1.map(order => {
+    var data_1 = data1.map((order) => {
       var obj = {};
       obj.orderdate = order.order_date;
       obj.number = order.order_number;
@@ -25,7 +25,7 @@ class InventoryCostTable extends React.Component {
       obj.totalcost = order.order_total;
       return obj;
     });
-    var data_2 = data2.map(order => {
+    var data_2 = data2.map((order) => {
       var obj = {};
       obj.orderdate = order.order_date;
       obj.number = order.order_number;
