@@ -316,7 +316,14 @@ export default class App extends React.Component {
     let removeCategories = this.state.removedCategories.slice();
     console.log(removeCategories, 'this is removeCategories')
     for (let i = 0; i < items.length; i += 1) {
-      axios.post('/create/item', items[i])
+      let formData = new FormData();
+      formData.append('item_name', items[i].item_name);
+      formData.append('item_price', items[i].item_price);
+      formData.append('item_image', items[i].item_image);
+      console.log("THIS IS IMAGE", items[i].item_image)
+      formData.append('item_ingredients', items[i].item_ingredients);
+      formData.append('item_category', items[i].item_category);
+      axios.post('/create/item', formData);
     }
 
     for (let j = 0; j < categories.length; j += 1) {
