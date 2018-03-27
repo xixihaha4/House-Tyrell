@@ -244,7 +244,7 @@ class InventoryInfo extends React.Component {
         </div>
         <div className="managerScreenGrid-graph">
           <div className="manager-navigation"><Navigation /></div>
-          <div className="graphGrid">
+          <div className="graphGrid-inventory">
             {type === 'usage' ? (
             <div className="graph"><InventoryUsagePie
             initial={ this.state.initial } left={ this.state.left } getInventoryData={ this.getInventoryData }/></div>) : (

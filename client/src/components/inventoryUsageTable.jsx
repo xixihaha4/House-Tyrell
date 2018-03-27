@@ -36,7 +36,7 @@ class InventoryUsageTable extends React.Component {
       obj.expiredate = order.order_expire;
       return obj;
     })
-    
+
     var data_2 = data2.map(order => {
       var obj = {};
       obj.order = order.ingredient_name;
@@ -64,29 +64,29 @@ class InventoryUsageTable extends React.Component {
     },{
       Header: 'Order Item',
       accessor: 'order',
-    }, 
+    },
     {
       Header: '% Usage',
       accessor: 'usage',
     }, {
       Header: 'Quantity Left (kg)',
       accessor: 'left',
-    }, 
+    },
     {
       Header: 'Quantity Initial (kg)',
       accessor: 'initial',
-    }, 
+    },
     {
       Header: 'Expiration Date',
       accessor: 'expiredate',
-    },       
+    },
     ]
     return (
       <div>
         <ReactTable
         data={this.state.tableData}
         columns={columns}
-        defaultPageSize={10}
+        defaultPageSize={8}
         style={{color: 'black'}}
         />
       </div>

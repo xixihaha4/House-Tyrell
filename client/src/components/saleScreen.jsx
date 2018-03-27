@@ -45,7 +45,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             <div className="modal-footer">Please Pick</div>
           </div>
         </div>
-        <div><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
+        <div style={{ gridColumn: '1 / 4', gridRow: '1 / 1' }}><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
         <div className="saleTransactionGrid">
           <Transaction
             removeIng={removeIng}

@@ -43,25 +43,25 @@ class InventoryWasteTable extends React.Component {
     },{
       Header: 'Order Item',
       accessor: 'order',
-    }, 
+    },
     {
       Header: '% Wasted',
       accessor: 'waste',
     }, {
       Header: 'Quantity Left (kg)',
       accessor: 'left',
-    }, 
+    },
     {
       Header: 'Quantity Initial (kg)',
       accessor: 'initial',
-    },        
+    },
     ]
     return (
       <div>
         <ReactTable
         data={this.state.tableData}
         columns={columns}
-        defaultPageSize={10}
+        defaultPageSize={8}
         style={{color: 'black'}}
         />
       </div>

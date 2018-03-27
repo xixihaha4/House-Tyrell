@@ -6,7 +6,7 @@ const c3 = require('c3/c3.js');
 class InventoryUsagePie extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.updateChart = this.updateChart.bind(this);
     this.getInventoryData = this.getInventoryData.bind(this);
   }
@@ -25,6 +25,9 @@ class InventoryUsagePie extends React.Component {
     const chart = c3.generate({
       bindto: '#chart',
       x: 'x',
+      size: {
+        height: 250,
+      },
       data: {
         columns: [
           ['Inventory_Left', this.props.left], ['Inventory_Used', this.props.initial - this.props.left],
@@ -33,9 +36,6 @@ class InventoryUsagePie extends React.Component {
         colors: {
           Inventory_Left: '#f05b47',
           Inventory_Used: '#349eff',
-        },
-        size: {
-          height: 120,
         },
       },
       axis: {
