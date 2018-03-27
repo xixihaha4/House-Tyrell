@@ -24,7 +24,12 @@ export default class itemModal extends React.Component {
   handleIngredient(item, index) {
     console.log('hello', item, index)
     let clicked = document.getElementById(`modal-item_${index}`)
-    clicked.style.color = (clicked.style.color === 'green') ? 'black' : 'green';
+    clicked.style.color = (clicked.style.color === 'green') ? 'grey' : 'green';
+    clicked.style.textDecoration = (clicked.style.textDecoration === 'line-through') ? '' : 'line-through'
+    let input = document.getElementById(`modal-item_input${index}`)
+
+    if (clicked.style.color === 'green') input.readOnly = false;
+    if (clicked.style.color === 'grey') input.readOnly = true;
 
     if (clicked.style.color === 'green') {
       let temp = this.state.item_ingredients.slice();
@@ -55,7 +60,8 @@ export default class itemModal extends React.Component {
 
     for (let i = 0; i < ing.length; i += 1) {
       let clicked = document.getElementById(`modal-item_${i}`);
-      clicked.style.color = 'black';
+      clicked.style.color = 'grey';
+      clicked.style.textDecoration = 'line-through';
     }
 
     this.setState({
@@ -116,7 +122,20 @@ export default class itemModal extends React.Component {
             />
             <div className="modal-ingredient-grid">
               {this.props.ingredients.map((ingredient, i) => {
-                return <div onClick={() => this.handleIngredient(ingredient, i)} id={`modal-item_${i}`}>{ingredient.ingredient_name}</div>
+                return (
+                <div>
+                  <div
+                    style={{textDecoration: 'line-through', color: 'grey',}}
+                    onClick={() => this.handleIngredient(ingredient, i)}
+                    id={`modal-item_${i}`}>{ingredient.ingredient_name}
+                  </div>
+                  <div>
+                    <input
+                      id={`modal-item_input${i}`}
+                      readOnly
+                    />
+                  </div>
+                </div>)
               })}
             </div>
             <div className="modal-category-select">
