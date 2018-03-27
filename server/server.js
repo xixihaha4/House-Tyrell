@@ -126,7 +126,6 @@ app.post('/completed/transaction', (req, res) => {
     type = true;
   } else { type = false; }
   let employee = JSON.parse(req.session.employee)
-  //let time = JSON.stringify(new Date).substring(1, 20);
   let time = moment().format();
 
   db.Sale.create({
@@ -178,6 +177,7 @@ app.post('/newEmployee', (req, res) => {
 });
 
 app.post('/orderUp', (req, res) => {
+  console.log('order req', req)
   db.Sale.update({
     sale_ready: true,
   }, {
@@ -185,7 +185,8 @@ app.post('/orderUp', (req, res) => {
       id: req.body.id,
     },
   })
-    .then(() => {
+    .then((response) => {
+      console.log('response from orderup on server: ', response)
       res.status(201).send();
     })
     .catch((error) => {
