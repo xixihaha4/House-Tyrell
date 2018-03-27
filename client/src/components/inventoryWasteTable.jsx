@@ -61,7 +61,7 @@ class InventoryWasteTable extends React.Component {
         <ReactTable
         data={this.state.tableData}
         columns={columns}
-        defaultPageSize={8}
+        defaultPageSize={10}
         style={{color: 'black'}}
         />
       </div>

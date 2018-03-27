@@ -22,7 +22,7 @@ class InventoryUsagePie extends React.Component {
       bindto: '#chart',
       x: 'x',
       size: {
-        height: 250,
+        height: 380,
       },
       data: {
         columns: [
