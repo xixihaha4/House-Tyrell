@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 import Navbar from './navbar.jsx';
+import socket from '../socket.js';
 
 class TransactionCashConfirm extends React.Component {
   constructor(props) {
@@ -12,6 +13,8 @@ class TransactionCashConfirm extends React.Component {
     this.finalize = this.finalize.bind(this);
   }
 
+
+
   finalize() {
     axios.post('/completed/transaction', {
       transactionItems: this.props.location.state.transactionItems,
@@ -20,6 +23,7 @@ class TransactionCashConfirm extends React.Component {
       discount: this.props.location.state.discount,
       type: this.state.type
     }).then(() => {
+      socket.emit('madeSale', {total: this.props.location.state.total})
       this.props.history.push('/salesScreen');
     })
   }

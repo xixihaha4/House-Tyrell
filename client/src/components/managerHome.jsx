@@ -6,6 +6,8 @@ import Select from 'react-select';
 import Navigation from './managerNav.jsx';
 import Navbar from './navbar.jsx';
 import ManagerHomeBar from './managerHomeBar.jsx';
+import socket from '../socket.js';
+
 
 const columns =
 [
@@ -39,13 +41,23 @@ class ManagerHome extends React.Component {
     this.getAllSalesToday = this.getAllSalesToday.bind(this);
     this.getLowInventory = this.getLowInventory.bind(this);
     this.percentageDropdownOptions = this.percentageDropdownOptions.bind(this);
+    this.initSocket = this.initSocket.bind(this);
   }
 
   componentDidMount() {
+    this.initSocket();
     this.getAllClockedIn();
     this.getAllSalesToday();
     this.getLowInventory();
     this.percentageDropdownOptions();
+  }
+
+  initSocket() {
+    socket.on('madeSale', (total) => {
+      console.log('socketsocketsocketsocketsocketsocketsocketsocket')
+      console.log(total, typeof total, this.state.totalSales, typeof this.state.totalSales)
+      this.setState({ totalSales: parseFloat(this.state.totalSales) + parseFloat(total.total) });
+    })
   }
 
   getAllClockedIn() {
