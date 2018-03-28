@@ -39,6 +39,8 @@ export default class Login extends React.Component {
             if (results.data[0].manager_privilege === true) {
               this.props.history.push('/managerHome');
             } else {
+              //socket.emit(employeelogin)
+
               this.props.history.push('/salesScreen');
             }
           })
