@@ -80,7 +80,6 @@ export default class App extends React.Component {
                   temp.push(obj)
                 }
                 this.setState({ catOptions: temp }, () => {
-                  console.log(this.state.catOptions)
                   axios.get('/fetch/items')
                     .then((items) => {
                       this.setState({
@@ -209,7 +208,6 @@ export default class App extends React.Component {
     let removed = this.state.removedItems.slice();
     let temp = this.state.menuItems.slice();
     if (item.id) {
-      console.log('item.id found, this is temp', temp)
       for (let i = 0; i < temp.length; i += 1) {
         if (temp[i].item_name === item.item_name) {
           removed.push(temp[i])
@@ -232,18 +230,9 @@ export default class App extends React.Component {
         this.openModal('removeItemModal')
       })
     }
-    console.log('this is in item', item, this.state.newItems);
-    // let temp = this.state.removeItem.slice()
-    // temp.push(item)
-    // this.setState({ itemsToRemove: temp }, () => {
-    //   this.openModal('removeItemModal')
-    // })
-    //
-
   }
 
   handleRemoveConfirm() {
-    console.log('handle remove confirm being called', this.state.tempNewItems)
     let temp = this.state.tempMenuItems.slice();
     let newItemTemp = this.state.tempNewItems.slice();
     let removed = this.state.removedItems.slice();
@@ -267,7 +256,6 @@ export default class App extends React.Component {
   }
 
   removeCategoryConfirm(category) {
-    console.log(category)
     let temp = [];
     let categories = this.state.menuCategories.slice();
     let newCategories = this.state.newCategories.slice();
@@ -309,18 +297,16 @@ export default class App extends React.Component {
 
 
   saveChanges() {
-    console.log('saving changes', this.state.newItems, this.state.newCategories)
     let items = this.state.newItems.slice();
     let categories = this.state.newCategories.slice();
     let removeItems = this.state.removedItems.slice();
     let removeCategories = this.state.removedCategories.slice();
-    console.log(removeCategories, 'this is removeCategories')
     for (let i = 0; i < items.length; i += 1) {
       let formData = new FormData();
+      items[i].item_ingredients = '' + JSON.stringify(items[i].item_ingredients)
       formData.append('item_name', items[i].item_name);
       formData.append('item_price', items[i].item_price);
       formData.append('item_image', items[i].item_image);
-      console.log("THIS IS IMAGE", items[i].item_image)
       formData.append('item_ingredients', items[i].item_ingredients);
       formData.append('item_category', items[i].item_category);
       axios.post('/create/item', formData);
@@ -330,7 +316,6 @@ export default class App extends React.Component {
       axios.post('/create/category', categories[j])
     }
 
-    console.log('awpeofjpawoejf', this.state.removedItems, this.state.removedCategories)
 
     for (let q = 0; q < removeItems.length; q += 1) {
       axios.post('/delete/item', removeItems[q])

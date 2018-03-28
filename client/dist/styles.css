@@ -904,11 +904,12 @@ body {
 .modal-ingredient-grid {
   display: grid;
   color: black;
-  grid-template-rows: repeat(4, 4.6vh);
+  grid-template-rows: repeat(3, 31.3%);
   grid-row-gap: 4px;
   grid-column-gap: 4px;
-  grid-template-columns: repeat(5, 13.2vh);
+  grid-template-columns: repeat(4, 24.5%);
   overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .modal-ingredient-item {

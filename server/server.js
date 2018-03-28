@@ -70,7 +70,6 @@ app.post('/test', (req, res) => {
 });
 
 app.post('/delete/item', (req, res) => {
-  console.log(req.body)
   db.Item.find({
     where: { item_name: req.body.item_name
     }
@@ -80,7 +79,6 @@ app.post('/delete/item', (req, res) => {
 })
 
 app.post('/delete/category', (req, res) => {
-  console.log(req.body)
   db.Category.find({
     where: {
       category_name: req.body.category_name
@@ -95,7 +93,7 @@ app.post('/create/item', upload.any(), (req, res) => {
     item_name: req.body.item_name,
     item_price: req.body.item_price,
     item_image: req.files[0].location,
-    item_ingredients: req.body.item_ingredients,
+    item_ingredients: JSON.stringify(req.body.item_ingredients),
     item_category: req.body.item_category
   }).then(() => {
     res.send();
@@ -142,20 +140,17 @@ app.post('/completed/transaction', (req, res) => {
   }).then(() => {
     db.Ingredient.findAll()
     .then((ing) => {
-      console.log('this is running', req.body.transactionItems)
-
       ingredientsList = JSON.parse(JSON.stringify(ing));
       req.body.transactionItems.forEach((item) => {
-        console.log('this is item.item_ingredients', item.item_ingredients)
-        console.log(typeof JSON.stringify(item.item_ingredients), JSON.stringify(item.item_ingredients))
         let ingList = JSON.parse(item.item_ingredients);
-        console.log('this is ingList', ingList)
+        if (typeof ingList === 'string') {
+          console.log('parsing again because its a string');
+          ingList = JSON.parse(ingList)
+        }
         ingList.forEach((ing) => {
-          console.log('this is ing', ing, ingredientsList)
-          ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
+          ingredientsList[ing.ingredient_id-1].ingredient_left = (ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount).toFixed(2);
         })
       })
-      console.log('this is ingredientslist', ingredientsList)
       ingredientsList.forEach((ing) => {
         db.Ingredient.update({
           ingredient_left: ing.ingredient_left
@@ -202,7 +197,6 @@ app.post('/newEmployee', (req, res) => {
 });
 
 app.post('/orderUp', (req, res) => {
-  console.log('order req', req)
   db.Sale.update({
     sale_ready: true,
   }, {
@@ -211,7 +205,6 @@ app.post('/orderUp', (req, res) => {
     },
   })
     .then((response) => {
-      console.log('response from orderup on server: ', response)
       res.status(201).send();
     })
     .catch((error) => {
@@ -283,7 +276,6 @@ app.get('/fetch/items', (req, res) => {
 app.get('/fetch/categories', (req, res) => {
   db.Category.findAll()
     .then((data) => {
-      console.log(data);
       res.send(data);
     });
 });
@@ -480,7 +472,6 @@ app.post('/cronTest', (req, res) => {
       })
         .then((order) => {
           orders = order;
-          console.log(orders, 'CRONCRONCRONCRONCRONCRON NEXT IS INGREDIENTS\n', ingredients)
           db.Item.findAll({})
           .then((menu) => {
             items = menu;
