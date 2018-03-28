@@ -13,9 +13,14 @@ const aws = require('aws-sdk');
 const config = require('../config.js');
 
 
+
 const Op = Sequelize.Op;
 
 const app = express();
+const port = 3000;
+const server = app.listen(port);
+const io = require('socket.io').listen(server);
+
 
 const sess = {
   secret: 'tyrell',
@@ -29,7 +34,6 @@ const sess = {
 
 app.use(session(sess));
 
-const port = 3000;
 
 app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -625,5 +629,16 @@ const myCronJob = new CronJob('0 6 * * * *', () => {
 }, null, true, 'America/Los_Angeles');
 myCronJob.start();
 // ************************NO TOUCH*******************************/
+/*******SOCKET****/
+io.on('connection', socket => {
+  console.log('New client connected')
+  socket.on('madeSale', (total) => {
+    io.sockets.emit('madeSale', total)
+  })
+  // disconnect is fired when a client leaves the server
+  socket.on('disconnect', () => {
+    console.log('user disconnected')
+  })
+})
 
-app.listen(port);
+/*******SOCKET****/
