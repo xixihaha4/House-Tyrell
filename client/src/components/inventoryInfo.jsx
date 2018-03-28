@@ -137,14 +137,14 @@ class InventoryInfo extends React.Component {
         date: dateArray.reverse(),
         cost: costArray.reverse(),
       }, () => {
-        console.log('cost data 1', data1.data);
-        console.log('cost data 2', data2.data);
+        console.log('date for line', this.state.date);
+        console.log('cost for line', this.state.cost);
       });
   }));
   }
   calculateCostByRecentMonth(data1, data2) {
     var cost = {};
-    data1.data.forEach(order => {
+    data1.data.forEach((order) => {
       var date = order.order_date.slice(0, 7);
       if (cost[date] === undefined) {
         cost[date] = Number(order.order_total);
@@ -152,7 +152,7 @@ class InventoryInfo extends React.Component {
         cost[date] += Number(order.order_total);
       }
     })
-    data2.data.forEach(order => {
+    data2.data.forEach((order) => {
         var date = order.order_date.slice(0, 7);
         if (cost[date] === undefined) {
           cost[date] = Number(order.ingredient_total);
