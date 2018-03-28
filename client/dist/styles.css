@@ -945,8 +945,9 @@ body {
 
 .removeItem {
   /* position: absolute; */
-  position: absolute;
-  color: black;
+  position: relative;
+  display: inline-block;
+  color: white;
 }
 /** ITEM MODAL**/
 
