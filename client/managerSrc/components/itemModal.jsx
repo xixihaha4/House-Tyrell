@@ -19,49 +19,65 @@ export default class itemModal extends React.Component {
     this.handleIngredient = this.handleIngredient.bind(this);
     this.cancelItem = this.cancelItem.bind(this);
     this.updateCat = this.updateCat.bind(this);
+    this.handleIngredientInput = this.handleIngredientInput.bind(this);
   }
 
   handleIngredient(item, index) {
-    console.log('hello', item, index)
     let clicked = document.getElementById(`modal-item_${index}`)
     clicked.style.color = (clicked.style.color === 'green') ? 'grey' : 'green';
     clicked.style.textDecoration = (clicked.style.textDecoration === 'line-through') ? '' : 'line-through'
     let input = document.getElementById(`modal-item_input${index}`)
-
     if (clicked.style.color === 'green') input.readOnly = false;
-    if (clicked.style.color === 'grey') input.readOnly = true;
+    if (clicked.style.color === 'grey') {
+      input.readOnly = true;
+      input.value = '';
+    }
 
     if (clicked.style.color === 'green') {
       let temp = this.state.item_ingredients.slice();
-      temp.push(item.ingredient_name);
-      this.setState({ item_ingredients: temp }, () => console.log(this.state.item_ingredients))
+      temp.push({ingredient_id: index+1, ingredient_amount: ''});
+      this.setState({ item_ingredients: temp })
     } else {
       let temp = this.state.item_ingredients.slice();
-      let found = temp.indexOf(item.ingredient_name);
+      let found;
+      for (let i = 0; i < temp.length; i += 1) {
+        if (temp[i].ingredient_id === index+1) found = i;
+      }
       temp.splice(found, 1);
-      this.setState({ item_ingredients: temp }, () => console.log(this.state.item_ingredients))
+      this.setState({ item_ingredients: temp })
     }
+  }
 
+  handleIngredientInput(amount, index) {
+    let temp = this.state.item_ingredients.slice()
+    let location = 0;
+    for (let i = 0; i < temp.length; i ++) {
+      if (temp[i].ingredient_id === index+1) location = i;
+    }
+    temp[location].ingredient_amount = parseFloat(amount).toFixed(2);
+    this.setState({item_ingredients: temp})
   }
 
 
   createItem() {
-    let temp = this.state.item_ingredients.slice()
+
+
     let newItem = {}
     newItem['item_name'] = this.state.item_name;
     newItem['item_price'] = this.state.item_price;
     newItem['item_image'] = this.state.item_image;
-    newItem['item_ingredients'] = JSON.stringify(temp);
+    newItem['item_ingredients'] = this.state.item_ingredients;
     newItem['item_category'] = this.state.item_category;
     this.props.handleNewItem(newItem);
 
     let ing = this.props.ingredients.slice();
-    console.log(ing)
 
     for (let i = 0; i < ing.length; i += 1) {
       let clicked = document.getElementById(`modal-item_${i}`);
       clicked.style.color = 'grey';
       clicked.style.textDecoration = 'line-through';
+      let input = document.getElementById(`modal-item_input${i}`);
+      input.value = '';
     }
 
     this.setState({
@@ -93,7 +109,6 @@ export default class itemModal extends React.Component {
 
 
   render() {
-    console.log(this.props)
     return (
       <div id="itemModal" className="itemModal animated fadeIn">
         <div className="modal-content-manager">
@@ -105,19 +120,19 @@ export default class itemModal extends React.Component {
             <input
               type="text"
               value={this.state.item_name}
-              onChange={(e) => this.setState({ item_name: e.target.value }, () => console.log(this.state.item_name))}
+              onChange={(e) => this.setState({ item_name: e.target.value })}
               placeholder="Enter new Item Name"
             />
             <input
               type="Number"
               value={this.state.item_price}
-              onChange={(e) => this.setState({ item_price: e.target.value }, () => console.log(this.state.item_price))}
+              onChange={(e) => this.setState({ item_price: e.target.value })}
               placeholder="Enter Item Price"
             />
             <input
               type="file"
               accept='image/*'
-              onChange={(e) => this.setState({ item_image: e.target.files[0]}, () => console.log(this.state.item_image))}
+              onChange={(e) => this.setState({ item_image: e.target.files[0]})}
               placeholder="Upload a photo"
             />
             <div className="modal-ingredient-grid">
@@ -132,7 +147,10 @@ export default class itemModal extends React.Component {
                   <div>
                     <input
                       id={`modal-item_input${i}`}
+                      type="Number"
+                      onChange={(e) => this.handleIngredientInput(e.target.value, i)}
                       readOnly
+                      placeholder='Enter Amount'
                     />
                   </div>
                 </div>)
