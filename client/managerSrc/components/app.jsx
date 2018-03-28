@@ -29,7 +29,6 @@ export default class App extends React.Component {
       removedCategories: [],
       tempCategories: [],
       tempNewCategories: [],
-
     };
     this.itemClick = this.itemClick.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);

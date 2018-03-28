@@ -19,14 +19,18 @@ export default class SaleItems extends React.Component {
             if (item.item_image === undefined || item.item_image === null) {
               return (
                 <div key={i} className={`item_${i}`}>
-                  <div onClick={() => this.props.removeItem(item)} className="removeItem"><i className="fas fa-times"></i></div>
+                  <div onClick={() => this.props.removeItem(item)} className="removeItem"><i style={{color: '#333'}} className="fas fa-times-circle"></i></div>
                   <h3>{item.item_name}</h3>
                 </div>);
             }
               return (
                 <div key={i} className={`item_${i}`}>
-                  <div onClick={() => this.props.removeItem(item)} className="removeItem"><i className="fas fa-times"></i></div>
-                  <img alt={item.item_name} src={item.item_image} style={{ width: '95%', height: '95%' }} />
+                  <div onClick={() => this.props.removeItem(item)} className="removeItem"><i style={{color: '#333'}} className="fas fa-times-circle"></i></div>
+                  {(((typeof item.item_image) === 'object') || (item.item_image === ''))?
+                  <h3>{item.item_name}</h3>
+                  :
+                  <img alt={item.item_name} src={item.item_image} style={{ width: '95%', height: '78%' }} />
+                  }
                 </div>);
           })
         }
