@@ -29,6 +29,7 @@ export default class App extends React.Component {
     this.openOptionModal = this.openOptionModal.bind(this);
     this.closeOptionModal = this.closeOptionModal.bind(this);
     this.transactionClear = this.transactionClear.bind(this);
+    this.sendEmail = this.sendEmail.bind(this);
   }
 
   componentDidMount() {
@@ -148,6 +149,16 @@ export default class App extends React.Component {
     this.setState({
       discount,
     });
+  }
+
+  sendEmail() {
+    axios.post('/send/email')
+      .then(() => {
+        console.log('works');
+      })
+      .catch((error) => {
+        throw error;
+      });
   }
   render() {
     return (
