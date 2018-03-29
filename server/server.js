@@ -24,12 +24,12 @@ const io = require('socket.io').listen(server);
 
 const sess = {
   secret: 'tyrell',
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   cookie: {
-    expires: false,
+    maxAge: 8 * 60 * 60 * 1000
   },
-  //rolling: true,
+  rolling: true,
 };
 
 app.use(session(sess));
@@ -209,7 +209,7 @@ app.post('/completed/transaction', (req, res) => {
 });
 
 app.post('/clockout', (req, res) => {
-  console.log('this is running')
+  console.log('this is running', req.session.employee)
   db.Timesheet.update({
     check_out: moment().format('MM/DD/YYYY, hh:mm:ss a'),
   }, {
@@ -219,13 +219,8 @@ app.post('/clockout', (req, res) => {
     },
   })
     .then(() => {
-      console.log('this is req.session.employee', req.session.employee)
-      db.Employee.findOne({where:{employee_id: req.session.employee}})
-      .then((emp) => {
-        req.session.destroy();
-        res.status(200).send();
-      })
-
+      req.session.destroy();
+      res.status(200).send();
     })
     .catch((error) => {
       throw error;
@@ -395,6 +390,7 @@ app.get('/fetch/allitems', (req, res) => {
 });
 
 app.get('/fetch/employee', (req, res) => {
+  let employeeName;
   db.Employee.findAll({
     where: {
       employee_id: req.query.PIN,
@@ -402,24 +398,36 @@ app.get('/fetch/employee', (req, res) => {
   })
     .then((data) => {
       if (data.length === 0) {
-        // invalid login
         res.status(404).send();
       } else {
-        req.session.regenerate(() => {
-          req.session.employee = req.query.PIN;
-          res.send(data);
-        });
+        employeeName = data;
+        db.Timesheet.findOne({
+          where: {
+            employee_id: req.query.PIN,
+            check_out: null,
+          }
+        }).then((emp) => {
+          console.log('this is emp in login', emp)
+          if (!emp) {
+            console.log('this is emp inside the if statement', emp)
+            console.log('this is req.query.PIN and session', req.query.PIN)
+            req.session.regenerate(() => {
+              req.session.employee = req.query.PIN;
+              res.send(employeeName)
+              console.log('this is req.session', req.session.employee)
+              db.Timesheet.create({
+                employee_id: req.query.PIN,
+                check_in: moment().format('MM/DD/YYYY, hh:mm:ss a'),
+              });
+            });
+          } else {
+              res.status(404).send();
+
+          }
+        })
       }
     })
-    .then(() => {
-      db.Timesheet.create({
-        employee_id: req.query.PIN,
-        check_in: moment().format('MM/DD/YYYY, hh:mm:ss a'),
-      });
-    })
-    .catch((error) => {
-      res.send(error);
-    });
+
 });
 
 app.get('/fetch/employeeInfo', auth, (req, res) => {
