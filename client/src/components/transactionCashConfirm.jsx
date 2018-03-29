@@ -14,6 +14,7 @@ class TransactionCashConfirm extends React.Component {
     this.finalize = this.finalize.bind(this);
   }
 
+
   finalize(email) {
     if (email === 'email') {
       sendReceipt(this.props.location.state.transactionItems, this.props.location.state.total);
