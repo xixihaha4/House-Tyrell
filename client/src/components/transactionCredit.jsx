@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import SignatureCanvas from 'react-signature-canvas';
 import axios from 'axios';
 import Navbar from './navbar.jsx';
+import sendReceipt from '../../helpers/sendEmail.js';
 
 class TransactionCredit extends React.Component {
   constructor(props) {
@@ -18,14 +19,17 @@ class TransactionCredit extends React.Component {
     this.sigCanvas.clear();
   }
 
-  finalize() {
+  finalize(email) {
+    if (email) {
+      sendReceipt(this.props.location.state.transactionItems, this.props.location.state.total);
+    }
     axios.post('/completed/transaction', {
       transactionItems: this.props.location.state.transactionItems,
       total: this.props.location.state.total,
       discount: this.props.location.state.discount,
     }).then(() => {
       this.props.history.push('/salesScreen');
-    })
+    });
   }
 
   render() {
@@ -52,7 +56,7 @@ class TransactionCredit extends React.Component {
             :
               <div className="transactionCreditConfirmed animated fadeIn">
                 <h1>Thank you for your purchase.</h1>
-                <button type="button" onClick={this.finalize}>Email Receipt</button>
+                <button type="button" onClick={() => this.finalize('email')}>Email Receipt</button>
                 <button type="button" onClick={this.finalize}>Print Receipt</button>
                 <button type="button" onClick={this.finalize}>No Receipt</button>
               </div>

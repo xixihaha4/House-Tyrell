@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router';
 import Navbar from './navbar.jsx';
 import socket from '../socket.js';
+import sendReceipt from '../../helpers/sendEmail.js';
 
 class TransactionCashConfirm extends React.Component {
   constructor(props) {
@@ -13,9 +14,10 @@ class TransactionCashConfirm extends React.Component {
     this.finalize = this.finalize.bind(this);
   }
 
-
-
-  finalize() {
+  finalize(email) {
+    if (email) {
+      sendReceipt(this.props.location.state.transactionItems, this.props.location.state.total);
+    }
     axios.post('/completed/transaction', {
       transactionItems: this.props.location.state.transactionItems,
       total: this.props.location.state.total,
@@ -41,7 +43,7 @@ class TransactionCashConfirm extends React.Component {
             <h1><i className="fas fa-dollar-sign" /> {(this.props.location.state.tendered - this.props.location.state.total).toFixed(2)}</h1>
             <h1>Thank you for your purchase</h1>
             <div>
-              <button type="button" onClick={this.finalize}>Email Receipt</button>
+              <button type="button" onClick={this.finalize('email')}>Email Receipt</button>
               <button type="button" onClick={this.finalize}>Print Receipt</button>
               <button type="button" onClick={this.finalize}>No Receipt</button>
             </div>

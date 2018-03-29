@@ -56,6 +56,47 @@ const upload = multer({
   }),
 });
 
+//* **************************** AMAZON SES EMAIL STUFF ************************
+app.post('/send/receipt', (req, res) => {
+  let menuItems = '';
+  for (let i = 0; i < req.body.items.length; i += 1) {
+    menuItems += `${req.body.items[i].item_name}\n`;
+  }
+
+  let emailParams = {
+    Destination: { /* required */
+      ToAddresses: [
+        'jieningjchen@gmail.com',
+        /* more items */
+      ],
+    },
+    Message: { /* required */
+      Body: { /* required */
+        Html: {
+          Charset: 'UTF-8',
+          Data: `Your purchased items\n${menuItems}\nTotal Price: $ ${req.body.price}`,
+        },
+      },
+      Subject: {
+        Charset: 'UTF-8',
+        Data: 'Your Receipt',
+      },
+    },
+    Source: 'jieningjchen@gmail.com', /* required */
+
+  };
+
+  let sendPromise = new aws.SES({apiVersion: '2010-12-01'}).sendEmail(emailParams).promise();
+  sendPromise.then(
+    function(data) {
+      console.log(data.MessageId);
+      res.send();
+    }).catch(
+      function(err) {
+      console.error(err, err.stack);
+    });
+  res.end();
+});
 //* **************************** MIDDLEWARE ************************************
 let auth = function(req, res, next) {
   if (req.session.employee) {
@@ -147,12 +188,8 @@ app.post('/completed/transaction', (req, res) => {
       ingredientsList = JSON.parse(JSON.stringify(ing));
       req.body.transactionItems.forEach((item) => {
         let ingList = JSON.parse(item.item_ingredients);
-        if (typeof ingList === 'string') {
-          console.log('parsing again because its a string');
-          ingList = JSON.parse(ingList)
-        }
         ingList.forEach((ing) => {
-          ingredientsList[ing.ingredient_id-1].ingredient_left = (ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount).toFixed(2);
+          ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
         })
       })
       ingredientsList.forEach((ing) => {
