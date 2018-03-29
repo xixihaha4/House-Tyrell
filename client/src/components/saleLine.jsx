@@ -129,8 +129,8 @@ class SaleLine extends React.Component {
     return reversed;
   }
   updateChart() {
-    console.log(this.state.dataType, this.state.dateArray);
-    console.log(this.state.dataType, this.state.revenueArray);
+    // console.log(this.state.dataType, this.state.dateArray);
+    // console.log(this.state.dataType, this.state.revenueArray);
     const chart = c3.generate({
       bindto: '#chart',
       x: 'x',

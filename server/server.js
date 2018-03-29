@@ -13,7 +13,6 @@ const aws = require('aws-sdk');
 const config = require('../config.js');
 
 
-
 const Op = Sequelize.Op;
 
 const app = express();
@@ -157,12 +156,10 @@ app.post('/create/all', (req, res) => {
 
 })
 
-
-
 app.post('/completed/transaction', (req, res) => {
   const itemList = [];
   for (let i = 0; i < req.body.transactionItems.length; i += 1) {
-    itemList.push(req.body.transactionItems[i].id)
+    itemList.push(req.body.transactionItems[i].id);
   }
   let type;
   if (req.body.type) {
@@ -181,6 +178,15 @@ app.post('/completed/transaction', (req, res) => {
     sale_discount: req.body.discount,
     sale_cash: type
   }).then(() => {
+    // io.sockets.emit('addSale', {
+    //   sale_date: time,
+    //   item_id: JSON.stringify(itemList),
+    //   employee_id: employee,
+    //   sale_amount: parseFloat(req.body.total),
+    //   sale_cost: 50,
+    //   sale_discount: req.body.discount,
+    //   sale_cash: type,
+    // });
     res.send();
   }).then(() => {
     db.Ingredient.findAll()
@@ -295,6 +301,9 @@ app.post('/addIngredient', (req, res) => {
 
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
+app.get('/getempid', (req, res) => {
+  res.send(req.session.employee);
+});
 
 app.get('/fetch/currentOrders', (req, res) => {
   db.Sale.findAll({
@@ -675,6 +684,9 @@ io.on('connection', (socket) => {
   socket.on('madeSale', (total) => {
     io.sockets.emit('madeSale', total);
   });
+  socket.on('addSale', (data) => {
+    io.sockets.emit('addSale', data);
+  })
   // disconnect is fired when a client leaves the server
   socket.on('disconnect', () => {
     console.log('user disconnected');
