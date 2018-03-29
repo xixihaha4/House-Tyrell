@@ -682,7 +682,6 @@ io.on('connection', (socket) => {
   socket.on('madeSale', (sale) => {
     io.sockets.emit('madeSale', sale);
   });
-<<<<<<< HEAD
 
   socket.on('employeeLogin', (data) => {
     io.sockets.emit('employeeLogin', data)
@@ -692,11 +691,9 @@ io.on('connection', (socket) => {
     io.sockets.emit('employeeLogout', employee)
   })
 
-=======
   socket.on('addSale', (data) => {
     io.sockets.emit('addSale', data);
   })
->>>>>>> socket
   // disconnect is fired when a client leaves the server
   socket.on('disconnect', () => {
     console.log('user disconnected');
