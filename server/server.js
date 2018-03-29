@@ -52,6 +52,47 @@ const upload = multer({
   }),
 });
 
+//* **************************** AMAZON SES EMAIL STUFF ************************
+app.post('/send/receipt', (req, res) => {
+  let menuItems = '';
+  for (let i = 0; i < req.body.items.length; i += 1) {
+    menuItems += `${req.body.items[i].item_name}\n`;
+  }
+
+  let emailParams = {
+    Destination: { /* required */
+      ToAddresses: [
+        'jieningjchen@gmail.com',
+        /* more items */
+      ],
+    },
+    Message: { /* required */
+      Body: { /* required */
+        Html: {
+          Charset: 'UTF-8',
+          Data: `Your purchased items\n${menuItems}\nTotal Price: $ ${req.body.price}`,
+        },
+      },
+      Subject: {
+        Charset: 'UTF-8',
+        Data: 'Your Receipt',
+      },
+    },
+    Source: 'jieningjchen@gmail.com', /* required */
+
+  };
+
+  let sendPromise = new aws.SES({apiVersion: '2010-12-01'}).sendEmail(emailParams).promise();
+  sendPromise.then(
+    function(data) {
+      console.log(data.MessageId);
+      res.send();
+    }).catch(
+      function(err) {
+      console.error(err, err.stack);
+    });
+  res.end();
+});
 //* **************************** MIDDLEWARE ************************************
 let auth = function(req, res, next) {
   if (req.session.employee) {
@@ -70,7 +111,6 @@ app.post('/test', (req, res) => {
 });
 
 app.post('/delete/item', (req, res) => {
-  console.log(req.body)
   db.Item.find({
     where: { item_name: req.body.item_name
     }
@@ -80,7 +120,6 @@ app.post('/delete/item', (req, res) => {
 })
 
 app.post('/delete/category', (req, res) => {
-  console.log(req.body)
   db.Category.find({
     where: {
       category_name: req.body.category_name
@@ -142,20 +181,13 @@ app.post('/completed/transaction', (req, res) => {
   }).then(() => {
     db.Ingredient.findAll()
     .then((ing) => {
-      console.log('this is running', req.body.transactionItems)
-
       ingredientsList = JSON.parse(JSON.stringify(ing));
       req.body.transactionItems.forEach((item) => {
-        console.log('this is item.item_ingredients', item.item_ingredients)
-        console.log(typeof JSON.stringify(item.item_ingredients), JSON.stringify(item.item_ingredients))
         let ingList = JSON.parse(item.item_ingredients);
-        console.log('this is ingList', ingList)
         ingList.forEach((ing) => {
-          console.log('this is ing', ing, ingredientsList)
           ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
         })
       })
-      console.log('this is ingredientslist', ingredientsList)
       ingredientsList.forEach((ing) => {
         db.Ingredient.update({
           ingredient_left: ing.ingredient_left
@@ -202,7 +234,6 @@ app.post('/newEmployee', (req, res) => {
 });
 
 app.post('/orderUp', (req, res) => {
-  console.log('order req', req)
   db.Sale.update({
     sale_ready: true,
   }, {
@@ -211,7 +242,6 @@ app.post('/orderUp', (req, res) => {
     },
   })
     .then((response) => {
-      console.log('response from orderup on server: ', response)
       res.status(201).send();
     })
     .catch((error) => {
@@ -283,7 +313,6 @@ app.get('/fetch/items', (req, res) => {
 app.get('/fetch/categories', (req, res) => {
   db.Category.findAll()
     .then((data) => {
-      console.log(data);
       res.send(data);
     });
 });
