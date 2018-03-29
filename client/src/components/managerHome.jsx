@@ -53,10 +53,8 @@ class ManagerHome extends React.Component {
   }
 
   initSocket() {
-    socket.on('madeSale', (total) => {
-      console.log('socketsocketsocketsocketsocketsocketsocketsocket')
-      console.log(total, typeof total, this.state.totalSales, typeof this.state.totalSales)
-      this.setState({ totalSales: parseFloat(this.state.totalSales) + parseFloat(total.total) });
+    socket.on('madeSale', (sale) => {
+      this.setState({ totalSales: parseFloat(this.state.totalSales) + parseFloat(sale.total) });
     })
   }
 

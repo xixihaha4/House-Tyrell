@@ -22,7 +22,7 @@ export default class OrderKitchenView extends React.Component {
       if(secs >= 60*1.5 && !this.state.urgent) {
         this.setState({
           classes: this.state.classes + ' kitchenOldOrder',
-          urgent: true
+          urgent: true,
         });
       }
     }, 1000);

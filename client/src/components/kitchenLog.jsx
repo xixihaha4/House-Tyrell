@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import moment from 'moment';
 import OrderKitchenView from './orderKitchenView.jsx'
 
 export default class KitchenLog extends React.Component {
@@ -8,7 +8,7 @@ export default class KitchenLog extends React.Component {
     super(props);
     this.state = {
       ordersPlaced: [],
-      menuItems: []
+      menuItems: [],
     };
     this.orderUp = this.orderUp.bind(this);
     this.getOrders = this.getOrders.bind(this);
@@ -16,10 +16,7 @@ export default class KitchenLog extends React.Component {
   }
 
   componentDidMount() {
-    this.getMenuItems()
-    // check server for new orders every 5 seconds
-    // hopefully this can be replaced with sockets
-    setInterval(this.getOrders, 5000);
+    this.getMenuItems();
   }
 
   getMenuItems() {
@@ -28,8 +25,7 @@ export default class KitchenLog extends React.Component {
         this.setState({
           menuItems: results.data,
         });
-        this.getOrders()
-        console.log('menu items: ', this.state.menuItems)
+        this.getOrders();
       });
   }
 
@@ -38,7 +34,7 @@ export default class KitchenLog extends React.Component {
       .then((sales) => {
         this.setState({
           ordersPlaced: sales.data,
-        }, () => console.log('orders placed got', this.state.ordersPlaced));
+        });
       });
   }
 
