@@ -2,6 +2,8 @@ import React from 'react';
 import Moment from 'react-moment';
 import axios from 'axios';
 import { withRouter } from 'react-router';
+import moment from 'moment';
+import socket from '../socket.js'
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -14,11 +16,19 @@ class Navbar extends React.Component {
     this.closeNav = this.closeNav.bind(this);
     this.clockout = this.clockout.bind(this);
     this.onEmployeeLogin = this.onEmployeeLogin.bind(this);
+    this.onUnload = this.onUnload.bind(this);
   }
 
   componentDidMount() {
     this.onEmployeeLogin();
+    window.addEventListener("beforeunload", this.onUnload)
   }
+
+  onUnload(event) {
+    socket.emit('employeeLogout',{employee_name: this.state.employeeName})
+    axios.post('/clockout')
+  }
+
 
   openNav() {
     document.getElementById('mySidenav').style.width = '250px';
@@ -29,6 +39,7 @@ class Navbar extends React.Component {
   }
 
   clockout() {
+    socket.emit('employeeLogout', {employee_name: this.state.employeeName})
     axios.post('/clockout')
       .then(() => {
         this.props.history.push('/');
@@ -41,9 +52,14 @@ class Navbar extends React.Component {
   onEmployeeLogin() {
     axios.get('/fetch/employeeInfo', ({}))
       .then((results) => {
+        console.log('this is employee info', results.data)
         this.setState({
           employeeName: results.data.employee_name,
-        });
+        }, () => socket.emit('employeeLogin', {
+          employee_id: results.data.employee_id,
+          employee_name: results.data.employee_name,
+          check_in: moment().format('MM/DD/YYYY, hh:mm:ss a')
+        }));
       })
       .catch((error) => {
         throw error;
@@ -66,5 +82,6 @@ class Navbar extends React.Component {
     );
   }
 }
+
 
 export default withRouter(Navbar);
