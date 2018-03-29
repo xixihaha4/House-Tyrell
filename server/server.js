@@ -180,8 +180,8 @@ app.post('/completed/transaction', (req, res) => {
     sale_cost: 50,
     sale_discount: req.body.discount,
     sale_cash: type
-  }).then(() => {
-    res.send();
+  }).then((results) => {
+    res.send(results.dataValues);
   }).then(() => {
     db.Ingredient.findAll()
     .then((ing) => {
@@ -672,8 +672,8 @@ myCronJob.start();
 /*******SOCKET****/
 io.on('connection', (socket) => {
   console.log('New client connected');
-  socket.on('madeSale', (total) => {
-    io.sockets.emit('madeSale', total);
+  socket.on('madeSale', (sale) => {
+    io.sockets.emit('madeSale', sale);
   });
   // disconnect is fired when a client leaves the server
   socket.on('disconnect', () => {
