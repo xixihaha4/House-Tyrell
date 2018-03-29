@@ -4,6 +4,7 @@ import SignatureCanvas from 'react-signature-canvas';
 import axios from 'axios';
 import Navbar from './navbar.jsx';
 import sendReceipt from '../../helpers/sendEmail.js';
+import socket from '../socket.js';
 
 class TransactionCredit extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class TransactionCredit extends React.Component {
   }
 
   finalize(email) {
-    if (email) {
+    if (email === 'email') {
       sendReceipt(this.props.location.state.transactionItems, this.props.location.state.total);
     }
     axios.post('/completed/transaction', {
@@ -28,6 +29,7 @@ class TransactionCredit extends React.Component {
       total: this.props.location.state.total,
       discount: this.props.location.state.discount,
     }).then(() => {
+      socket.emit('madeSale', { total: this.props.location.state.total });
       this.props.history.push('/salesScreen');
     });
   }
