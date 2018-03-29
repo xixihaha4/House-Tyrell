@@ -14,7 +14,6 @@ const config = require('../config.js');
 ///const socket = require('../client/src/socket.js')
 
 
-
 const Op = Sequelize.Op;
 
 const app = express();
@@ -157,12 +156,10 @@ app.post('/create/all', (req, res) => {
 
 })
 
-
-
 app.post('/completed/transaction', (req, res) => {
   const itemList = [];
   for (let i = 0; i < req.body.transactionItems.length; i += 1) {
-    itemList.push(req.body.transactionItems[i].id)
+    itemList.push(req.body.transactionItems[i].id);
   }
   let type;
   if (req.body.type) {
@@ -302,6 +299,9 @@ app.post('/addIngredient', (req, res) => {
 
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
+app.get('/getempid', (req, res) => {
+  res.send(req.session.employee);
+});
 
 app.get('/fetch/currentOrders', (req, res) => {
   db.Sale.findAll({
@@ -682,6 +682,7 @@ io.on('connection', (socket) => {
   socket.on('madeSale', (sale) => {
     io.sockets.emit('madeSale', sale);
   });
+<<<<<<< HEAD
 
   socket.on('employeeLogin', (data) => {
     io.sockets.emit('employeeLogin', data)
@@ -691,6 +692,11 @@ io.on('connection', (socket) => {
     io.sockets.emit('employeeLogout', employee)
   })
 
+=======
+  socket.on('addSale', (data) => {
+    io.sockets.emit('addSale', data);
+  })
+>>>>>>> socket
   // disconnect is fired when a client leaves the server
   socket.on('disconnect', () => {
     console.log('user disconnected');

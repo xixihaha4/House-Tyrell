@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTable from 'react-table';
+import socket from '../socket.js';
 
 class SaleTable extends React.Component {
   constructor(props) {
@@ -11,8 +12,12 @@ class SaleTable extends React.Component {
     };
     this.generateTableData = this.generateTableData.bind(this);
     this.getItemNames = this.getItemNames.bind(this);
+    this.initSocket = this.initSocket.bind(this);
   }
 
+  componentDidMount() {
+    this.initSocket();
+  }
 
   componentWillReceiveProps(nextProps) {
     // console.log('nextProps.salesData', nextProps.salesData);
@@ -65,6 +70,28 @@ class SaleTable extends React.Component {
     });
     this.setState({
       tableData: data,
+    }, () => {
+      console.log('this.state.tableData', this.state.tableData);
+    });
+  }
+
+  initSocket() {
+    socket.on('addSale', (data) => {
+      console.log('socket data', data);
+      const obj = {};
+      obj.date = data.sale_date;
+      obj.items = data.item_id;
+      obj.amount = data.sale_amount;
+      obj.cost = data.sale_cost;
+      obj.discount = data.sale_discount + '%';
+      obj.type = data.sale_cash ? 'Cash' : 'Credit';
+      obj.employee = data.employee_id;
+      const tempdata = this.state.tableData.slice();
+      tempdata.push(obj);
+
+      this.setState({
+        tableData: tempdata,
+      });
     });
   }
 
@@ -106,6 +133,10 @@ class SaleTable extends React.Component {
           columns={columns}
           defaultPageSize={10}
           style={{ color: 'black' }}
+          sorted={[{
+            id: 'date',
+            desc: true,
+          }]}
         />
       </div>
     );
