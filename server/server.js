@@ -11,6 +11,7 @@ const multerS3 = require('multer-s3');
 const multer = require('multer');
 const aws = require('aws-sdk');
 const config = require('../config.js');
+///const socket = require('../client/src/socket.js')
 
 
 
@@ -21,15 +22,14 @@ const port = 3000;
 const server = app.listen(port);
 const io = require('socket.io').listen(server);
 
-
 const sess = {
   secret: 'tyrell',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     expires: false,
   },
-  rolling: true,
+  //rolling: true,
 };
 
 app.use(session(sess));
@@ -209,6 +209,7 @@ app.post('/completed/transaction', (req, res) => {
 });
 
 app.post('/clockout', (req, res) => {
+  console.log('this is running')
   db.Timesheet.update({
     check_out: moment().format('MM/DD/YYYY, hh:mm:ss a'),
   }, {
@@ -218,13 +219,19 @@ app.post('/clockout', (req, res) => {
     },
   })
     .then(() => {
-      req.session.destroy();
-      res.status(200).send();
+      console.log('this is req.session.employee', req.session.employee)
+      db.Employee.findOne({where:{employee_id: req.session.employee}})
+      .then((emp) => {
+        req.session.destroy();
+        res.status(200).send();
+      })
+
     })
     .catch((error) => {
       throw error;
     });
 });
+
 
 app.post('/newEmployee', (req, res) => {
   db.Employee.create({
@@ -675,10 +682,21 @@ io.on('connection', (socket) => {
   socket.on('madeSale', (sale) => {
     io.sockets.emit('madeSale', sale);
   });
+
+  socket.on('employeeLogin', (data) => {
+    io.sockets.emit('employeeLogin', data)
+  })
+
+  socket.on('employeeLogout', (employee) => {
+    io.sockets.emit('employeeLogout', employee)
+  })
+
   // disconnect is fired when a client leaves the server
   socket.on('disconnect', () => {
     console.log('user disconnected');
-  });
+  })
 });
+
+
 
 /*******SOCKET****/

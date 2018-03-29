@@ -46,7 +46,7 @@ class ManagerHome extends React.Component {
 
   componentDidMount() {
     this.initSocket();
-    this.getAllClockedIn();
+    // this.getAllClockedIn();
     this.getAllSalesToday();
     this.getLowInventory();
     this.percentageDropdownOptions();
@@ -54,13 +54,39 @@ class ManagerHome extends React.Component {
 
   initSocket() {
     socket.on('madeSale', (sale) => {
-      this.setState({ totalSales: parseFloat(this.state.totalSales) + parseFloat(sale.total) });
+      this.setState({ totalSales: (parseFloat(this.state.totalSales) + parseFloat(sale.total)).toFixed(2) });
+    })
+    socket.on('employeeLogin', (data) => {
+      this.getAllClockedIn();
+      let temp = this.state.allEmployees.slice();
+      temp.push(data)
+      let tableTemp = this.state.tableData.slice();
+      tableTemp.push({
+        name: data.employee_name,
+        clockIn: data.check_in
+      })
+      this.setState({
+        allEmployees: temp,
+        tableData: tableTemp,
+      })
+    })
+    socket.on('employeeLogout', (employee) => {
+      let temp = this.state.allEmployees.slice();
+      let tempTable = this.state.tableData.slice();
+      for (let i = 0; i < temp.length; i += 1) {
+        if (temp[i].employee_name === employee.employee_name) {
+          temp.splice(i, 1)
+          tempTable.splice(i, 1)
+        }
+      }
+      this.setState({ allEmployees: temp, tableData: tempTable })
     })
   }
 
   getAllClockedIn() {
     axios.get('/fetch/allEmployees/clockedIn')
       .then((results) => {
+        console.log('this is results.data', results.data[0])
         this.setState({
           allEmployees: results.data[0],
         });
