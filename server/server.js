@@ -188,6 +188,9 @@ app.post('/completed/transaction', (req, res) => {
       ingredientsList = JSON.parse(JSON.stringify(ing));
       req.body.transactionItems.forEach((item) => {
         let ingList = JSON.parse(item.item_ingredients);
+        if (typeof ingList === 'string') {
+          let ingList = JSON.parse(ingList);
+        }
         ingList.forEach((ing) => {
           ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
         })

@@ -15,7 +15,7 @@ class TransactionCashConfirm extends React.Component {
   }
 
   finalize(email) {
-    if (email) {
+    if (email === 'email') {
       sendReceipt(this.props.location.state.transactionItems, this.props.location.state.total);
     }
     axios.post('/completed/transaction', {
@@ -43,7 +43,7 @@ class TransactionCashConfirm extends React.Component {
             <h1><i className="fas fa-dollar-sign" /> {(this.props.location.state.tendered - this.props.location.state.total).toFixed(2)}</h1>
             <h1>Thank you for your purchase</h1>
             <div>
-              <button type="button" onClick={this.finalize('email')}>Email Receipt</button>
+              <button type="button" onClick={() =>  this.finalize('email')}>Email Receipt</button>
               <button type="button" onClick={this.finalize}>Print Receipt</button>
               <button type="button" onClick={this.finalize}>No Receipt</button>
             </div>
