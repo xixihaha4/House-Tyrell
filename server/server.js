@@ -667,15 +667,15 @@ const myCronJob = new CronJob('0 6 * * * *', () => {
 myCronJob.start();
 // ************************NO TOUCH*******************************/
 /*******SOCKET****/
-io.on('connection', socket => {
-  console.log('New client connected')
+io.on('connection', (socket) => {
+  console.log('New client connected');
   socket.on('madeSale', (total) => {
-    io.sockets.emit('madeSale', total)
-  })
+    io.sockets.emit('madeSale', total);
+  });
   // disconnect is fired when a client leaves the server
   socket.on('disconnect', () => {
-    console.log('user disconnected')
-  })
-})
+    console.log('user disconnected');
+  });
+});
 
 /*******SOCKET****/
