@@ -294,9 +294,6 @@ app.post('/addIngredient', (req, res) => {
 
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
-app.get('/getempid', (req, res) => {
-  res.send(req.session.employee);
-});
 
 app.get('/fetch/currentOrders', (req, res) => {
   db.Sale.findAll({

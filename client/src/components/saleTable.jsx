@@ -70,21 +70,19 @@ class SaleTable extends React.Component {
     });
     this.setState({
       tableData: data,
-    }, () => {
-      console.log('this.state.tableData', this.state.tableData);
     });
   }
 
   initSocket() {
-    socket.on('addSale', (data) => {
+    socket.on('madeSale', (data) => {
       console.log('socket data', data);
       const obj = {};
-      obj.date = data.sale_date;
-      obj.items = data.item_id;
-      obj.amount = data.sale_amount;
-      obj.cost = data.sale_cost;
-      obj.discount = data.sale_discount + '%';
-      obj.type = data.sale_cash ? 'Cash' : 'Credit';
+      obj.date = data.date;
+      obj.items = this.getItemNames(data.transactionItems);
+      obj.amount = data.total;
+      obj.cost = 50;
+      obj.discount = data.discount + '%';
+      obj.type = data.type ? 'Cash' : 'Credit';
       obj.employee = data.employee_id;
       const tempdata = this.state.tableData.slice();
       tempdata.push(obj);

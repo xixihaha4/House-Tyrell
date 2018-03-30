@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import SignatureCanvas from 'react-signature-canvas';
 import axios from 'axios';
-import moment from 'moment';
 import Navbar from './navbar.jsx';
 import sendReceipt from '../../helpers/sendEmail.js';
 import socket from '../socket.js';
@@ -13,24 +12,13 @@ class TransactionCredit extends React.Component {
     super(props);
     this.state = {
       sigConfirm: false,
-      employeeID: '',
     };
     this.sigCanvas = {};
     this.clear = this.clear.bind(this);
     this.finalize = this.finalize.bind(this);
-    this.getEmpID = this.getEmpID.bind(this);
   }
   clear() {
     this.sigCanvas.clear();
-  }
-
-  getEmpID() {
-    axios.get('/getempid')
-      .then((result) => {
-        this.setState({
-          employeeID: result.data,
-        });
-      });
   }
 
   finalize(email) {
@@ -43,40 +31,23 @@ class TransactionCredit extends React.Component {
       total: this.props.location.state.total,
       discount: this.props.location.state.discount,
     }).then((results) => {
+      console.log('jerry results', results);
       socket.emit('madeSale',
-      {
-        id: results.data.id,
-        total: results.data.sale_amount,
-        item_id: results.data.item_id,
-        sale_date: results.data.sale_date,
-        tendered: this.props.location.state.tendered,
-        sale_discount: results.data.sale_discount,
-        type: this.state.type,
+        {
+          id: results.data.id,
+          employee_id: results.data.employee_id,
+          total: results.data.sale_amount,
+          transactionItems: results.data.item_id,
+          date: results.data.sale_date,
+          tendered: this.props.location.state.tendered,
+          discount: results.data.sale_discount,
+          type: results.data.sale_cash,
+        },
+      );
+    })
+      .then(() => {
+        this.props.history.push('/salesScreen');
       });
-    })
-    .then(() => {
-      this.getEmpID();
-    })
-    .then(() => {
-      const itemList = [];
-      const transactionItems = this.props.location.state.transactionItems;
-      for (let i = 0; i < transactionItems.length; i += 1) {
-        itemList.push(transactionItems[i].id);
-      }
-      console.log('ITEM LIST', itemList);
-      console.log('employee id', this.state.employeeID)
-      socket.emit('madeSale', { total: this.props.location.state.total });
-      socket.emit('addSale', {
-        sale_date: moment().format(),
-        item_id: JSON.stringify(itemList),
-        employee_id: this.state.employeeID,
-        sale_amount: parseFloat(this.props.location.state.total),
-        sale_cost: 50,
-        sale_discount: this.props.location.state.discount,
-        sale_cash: false,
-      })
-      this.props.history.push('/salesScreen');
-    });
   }
 
   render() {
