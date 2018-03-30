@@ -2,21 +2,27 @@ import React from 'react';
 import c3 from 'c3/c3.js';
 import axios from 'axios';
 import moment from 'moment';
+import socket from '../socket.js';
 
 class ManagerHomeBar extends React.Component {
   constructor(props) {
     super(props);
-    this.updateChart = this.updateChart.bind(this);
     this.state = {
       items_Y: [],
       sales_X: [],
+      allItems: [],
+      allSales: [],
     }
     this.setUpAllData = this.setUpAllData.bind(this);
+    this.updateChart = this.updateChart.bind(this);
   }
+
   componentDidMount() {
+    this.initSocket();
     this.setUpAllData();
     this.updateChart();
   }
+
   componentDidUpdate() {
     this.updateChart();
   }
@@ -24,11 +30,10 @@ class ManagerHomeBar extends React.Component {
   setUpAllData() {
     axios.all([
       axios.get('/fetch/items'),
-      axios.get('/fetch/allsales')
+      axios.get('/fetch/allsales'),
     ])
       .then(axios.spread((allItems, allSales) => {
-
-        let itemLib = {};
+        const itemLib = {};
         allItems.data.forEach((item) => {
           itemLib[item.id] = {
             name: item.item_name,
@@ -41,24 +46,62 @@ class ManagerHomeBar extends React.Component {
           .filter(sale => moment(sale.sale_date).format('MM DD YYYY') === moment().format('MM DD YYYY'))
           .forEach((sale) => {
             JSON.parse(sale.item_id).forEach((menuItemId) => {
-              itemLib[menuItemId].sold++;
+              itemLib[menuItemId].sold += 1;
             });
           });
 
-        var categories = [];
-        var data = [['Sales']];
-        for(var item in itemLib){
+        const categories = [];
+        const data = [['Sales']];
+        for (const item in itemLib) {
           categories.push(itemLib[item].name);
           data[0].push(itemLib[item].price * itemLib[item].sold);
         }
-
-
         this.setState({
+          allItems,
+          allSales,
           items_Y: categories,
           sales_X: data,
         });
-
       }));
+  }
+
+  initSocket() {
+    socket.on('madeSale', (newSale) => {
+      const { allItems } = this.state;
+      const { allSales } = this.state;
+      allSales.data.push(newSale);
+      console.log(allSales);
+      console.log(allItems);
+      const itemLib = {};
+      allItems.data.forEach((item) => {
+        itemLib[item.id] = {
+          name: item.item_name,
+          price: JSON.parse(item.item_price),
+          sold: 0,
+        };
+      });
+
+      allSales.data
+        .filter(sale => moment(sale.sale_date).format('MM DD YYYY') === moment().format('MM DD YYYY'))
+        .forEach((sale) => {
+          JSON.parse(sale.item_id).forEach((menuItemId) => {
+            itemLib[menuItemId].sold += 1;
+          });
+        });
+
+      const categories = [];
+      const data = [['Sales']];
+      for (const item in itemLib) {
+        categories.push(itemLib[item].name);
+        data[0].push(itemLib[item].price * itemLib[item].sold);
+      }
+      this.setState({
+        allItems,
+        allSales,
+        items_Y: categories,
+        sales_X: data,
+      });
+    })
   }
 
   updateChart() {

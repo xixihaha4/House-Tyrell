@@ -9,15 +9,6 @@ import ReactTable from 'react-table';
 const columns =
 [
   {
-    Header: 'Total Worked',
-    columns: [
-      {
-        Header: 'Minutes',
-        accessor: 'minutes',
-      }
-    ]
-  },
-  {
     Header: 'Date and Time',
     columns: [
       {
@@ -27,7 +18,16 @@ const columns =
       {
         Header: 'Clock Out',
         accessor: 'clockOut',
-      }
+      },
+    ],
+  },
+  {
+    Header: 'Total Worked',
+    columns: [
+      {
+        Header: 'Minutes',
+        accessor: 'minutes',
+      },
     ],
   },
 ];
