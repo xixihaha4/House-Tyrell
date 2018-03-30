@@ -1,0 +1,1377 @@
+body {
+  font-family: 'Catamaran', sans-serif;
+  margin: 5px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.saleItemGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: rgb(237, 237, 237);
+  text-align: center;
+  min-height: 30vh;
+  max-height: 86vh;
+  overflow-y: scroll;
+  padding-top: 1%;
+  padding-left: 1%;
+  margin: 0;
+  grid-column: 1 / 4;
+  grid-row: 1 / 1;
+}
+
+.saleItemGrid * {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: break-word;
+  border-radius: 4%;
+}
+
+.saleItemGrid h3 {
+  border-radius: 15%;
+}
+
+.saleItemGrid > * {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4%;
+  width: 95%;
+  height: 95%;
+}
+
+
+.saleTransactionGrid {
+  grid-column: 4 / 5;
+  grid-row: 1 / 1;
+}
+
+
+.saleTransactionGrid > div {
+  text-align: center;
+  vertical-align: text-top;
+}
+
+.transactionItem {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.transactionGrid {
+  display: grid;
+  grid-template-rows: 5vh 62vh 10vh;
+  padding-top: 1%;
+  border-left: 1px solid black;
+  background-color: rgb(237, 237, 237);
+}
+
+.transactionClearButton {
+  grid-row: 1;
+  grid-column: 4;
+  color: red;
+  border-radius: 5%;
+  padding-top: 3%
+
+}
+
+.transactionGridHeader {
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 5vh;
+  grid-template-columns: 5vh 15vh 12vh;
+}
+
+.transactionGridItems {
+  grid-row: 2;
+  overflow-y: scroll;
+  display:grid;
+  grid-template-rows: repeat(13, auto);
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.transactionGridFooter {
+  display: grid;
+  grid-row: 3;
+  grid-template-rows: 2.5vh 2.5vh 2.5vh 2.5vh;
+  grid-template-columns: 5vh 10vh 8vh;
+  text-align: right;
+  grid-column: 1;
+  background-color: rgb(84, 178, 255);
+  color: white;
+  width: 100%;
+}
+
+.transactionGridFooter > div {
+  padding-right: 3%;
+}
+
+
+.tName {
+  grid-row-start: 1;
+  grid-column-start: 3;
+}
+
+.saleCategoryGrid {
+  overflow-x: scroll;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  grid-row: 2 / 2;
+  grid-column: 1 / 4;
+}
+
+.saleCategoryGrid button {
+  width: 25%;
+  background-color: rgb(84, 178, 255);
+  color: white;
+  font-size: 1.5em;
+  padding: 2% 0;
+}
+
+
+.createButton {
+  padding-bottom: 3.2% !important;
+
+}
+
+.allButton {
+  padding-bottom: 3.2% !important;
+}
+
+
+
+.saleScreenGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 87vh 7vh;
+  background-color: rgb(237, 237, 237);
+}
+
+.saleGrid {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 20% 20% 20% 20%;
+  background-color: #333;
+  bottom: 0;
+  background-color: rgb(237, 237, 237);
+}
+
+.saleGrid button {
+  color: white;
+}
+
+.saleGrid button:nth-child(1) {
+  background-color: #31c23d;
+  font-size: 1.3em;
+  grid-column: 1 / 3;
+  grid-row: 1 / 1;
+  padding-top: 14%;
+  padding-bottom: 14%;
+}
+.saleGrid button:nth-child(2) {
+  background-color: #1778dc;
+  font-size: 1.3em;
+  grid-column: 3 / 5;
+  grid-row: 1 / 1;
+}
+.saleGrid button:nth-child(3) {
+  background-color:#ffc004;
+  font-size: 1.3em;
+  grid-column: 1 / 3;
+  grid-row: 2 / 2;
+  padding-top: 12.5%;
+  padding-bottom: 12.5%;
+}
+.saleGrid button:nth-child(4) {
+  background-color: #716f6f;
+  font-size: 1.3em;
+  grid-column: 3 / 5;
+  grid-row: 2 / 2;
+}
+
+/* *********************** MANAGER SCREEN SECTION ********************** */
+.managerScreenGrid {
+  display: grid;
+  grid-template-columns: 30vh 1fr 1fr;
+  grid-template-rows: 50vh 45vh;
+  color: white;
+}
+
+.managerScreenGrid-home {
+  display: grid;
+  grid-template-columns: 30vh 1fr 1fr 1fr;
+  grid-template-rows: 20% 1fr 1fr;
+  color: white;
+}
+
+.managerScreenGrid-graph {
+  display: grid;
+  grid-template-columns: 30vh 1fr 1fr 1fr 1fr;
+  grid-template-rows: 25% 5% 1fr;
+  color: white;
+}
+
+.managerScreenGrid-Sales {
+  display: grid;
+  grid-template-columns: 30vh 1fr 1fr;
+  grid-template-rows: 50% 1fr;
+  color: white;
+}
+
+.manager-navigation {
+  grid-column: 1;
+  grid-row: 1 / 5;
+  display: grid;
+  grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh;
+  background-color: white;
+  border-right: 1px solid rgb(84, 178, 255);
+}
+
+.manager-navigation .item {
+  color: rgb(84, 178, 255);
+  padding: 1.5em;
+  text-decoration: none;
+  font-size: 1.4em;
+}
+
+.managerViewGrid {
+  grid-template-rows: 1fr 1fr;
+}
+
+.managerScreenGrid-home h1{
+  font-size: 4em;
+  margin: 0;
+}
+.managerScreenGrid-home h2{
+  font-size: 2em;
+  margin: 0;
+}
+
+#card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+#card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.managerCard-1 {
+  background-color: rgb(54, 122, 214);
+  grid-column: 2 / 3;
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  margin: 3% 0 0 5%;
+}
+
+.managerCard-2 {
+  background-color: rgb(242, 131, 59);
+  grid-column: 3 / 4;
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  margin: 3% 0 0 5%;
+}
+
+.managerCard-3 {
+  background-color: rgb(154, 34, 179);
+  grid-column: 4 / 5;
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  margin: 3% 0 0 5%;
+}
+
+.managerCard-4 {
+  background-color: rgb(187, 72, 61);
+  grid-column: 2 / 4;
+  grid-row: 2;
+  margin: 1% 0 0 3%;
+  width: 95%;
+  height: 95%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.kitchenGridContainer {
+  display: grid;
+  grid-column-gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.kitchenOrder {
+  background: lightblue;
+  border-style: solid;
+  border-width: 5px;
+  padding: 15px;
+  font-size: 20pt;
+}
+
+.kitchenOrderNumber {
+  background: rgba(200, 200, 200, 0.5);
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.kitchenOldOrder {
+  /* background: red */
+  -webkit-animation: warningFlash 1s infinite
+}
+
+@keyframes warningFlash {
+  0%, 49%{
+    background: rgb(255, 78, 113)
+  }
+  50%, 100% {
+    background: red
+  }
+}
+
+.graphGrid {
+  grid-row: 1/ 2;
+  grid-column:  2/ 4;
+  background-color: white;
+  /* overflow: hidden; */
+}
+
+.selectGraphDropDown {
+  grid-row: 1 / 1;
+  grid-column:  4 / 5;
+  padding-top: 5%;
+}
+
+.addInventoryForm {
+  grid-row: 2 / 2;
+  grid-column:  2 / 6;
+  padding-left: 1%;
+}
+
+.inventoryInput {
+  padding: 0.3%;
+  font-family: 'Catamaran', sans-serif;
+  font-size: 1em;
+}
+
+.graphGrid-inventory {
+  grid-row: 1 / 1;
+  grid-column: 2 / 4;
+}
+
+.graphTable {
+  grid-row: 3 / 3;
+  grid-column:  2 / 6;
+}
+
+.employeeGraphGrid {
+  display: grid;
+  grid-row: 1 / 1;
+  grid-column: 3 / 4;
+  background-color: white;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.profileGridImage {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+}
+
+.profileGridImage img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+  padding: 3%;
+}
+
+.profileGridDetails {
+  grid-column: 2 / 3;
+  grid-row: 1 / 1;
+  color: rgb(84, 178, 255);
+  padding-left: 5%;
+}
+
+.profileGridTimesheet {
+  grid-column: 3 / 3;
+  grid-row: 2 / 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(20, 5%);
+  color: black;
+  padding-left: 5%;
+  font-size: 1em;
+}
+
+.employeeSelect {
+  color: black;
+  grid-column: 2 / 3;
+  grid-row: 2 / 2;
+  padding-left: 2%;
+}
+
+.employeeSelect button {
+  padding: 2%;
+  border-radius: 5%;
+}
+
+.employeeSelect input {
+  width: 60vh;
+  height: 2vh;
+}
+
+.employeeSelect .employeeIdLabel {
+  padding-left: 5%;
+  font-size: 1.5em;
+}
+
+.employeeSelect .newEmployeeNameLabel {
+  font-size: 1.5em;
+}
+
+.transactionCash {
+  text-align: center;
+  height: 90%;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(237, 237, 237);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCash h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.transactionCash button {
+  position: absolute;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  top: 85%;
+  left: 42%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirm {
+  text-align: center;
+  height: 90%;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(237, 237, 237);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirm h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.transactionCashConfirm button {
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  top: 85%;
+  left: 42%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirmed {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+}
+
+.transactionCashConfirmed button {
+  font-size: 1em;
+  left: 50%;
+  padding: 15%;
+  margin: 1.5%;
+}
+
+.transactionCredit {
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: rgb(237, 237, 237);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCredit button {
+  padding: 2.5%;
+  margin: 5%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCreditConfirmed {
+  padding: 15%;
+}
+
+.transactionCreditConfirmed button {
+  font-size: 1em;
+  margin: 1.5%;
+}
+
+.sigCanvas {
+  border-bottom: 1px solid black;
+}
+
+/* variables to keep color themes constant? */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/:root */
+:root {
+  --main-highlight: red;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: minmax(80px, 40%) minmax(80px, 40%) minmax(80px, 40%);
+  grid-template-rows: minmax(80px, 40%) minmax(80px, 40%) minmax(80px, 40%) minmax(80px, 40%);
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  margin: 0;
+  transform: translate(-50%, -15%);
+  background-color: rgb(52, 158, 255);
+  color: white;
+  border: 1px solid #919191;
+  border-radius: 2%;
+}
+
+.wrapper * {
+  border: 1px solid #605e5e;
+  border-radius: 2%;
+}
+
+.pinpad {
+  font-size: 0.8em;
+}
+
+.pinNumber-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  /*
+  margin: 0;
+  background-color: rgb(52, 158, 255); */
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -80%);
+  opacity: 0.80;
+  display: inline-block;
+  font-size: 7.5em;
+}
+
+.logo * {
+  fill: rgb(26, 150, 240);
+}
+
+.logo-text {
+  font-size: 15%;
+  margin: 0;
+  padding: 0;
+}
+
+.pinNumber {
+  /*
+  margin: 0;
+  background-color: rgb(52, 158, 255); */
+  border-bottom: 1px solid black;
+}
+
+ .wrapper div:nth-child(13) {
+   grid-column: 1 / 4;
+   /* padding: 20px 20px; */
+   background-color: var(--main-highlight);
+   background-color: rgb(112, 198, 60);
+   padding: 10px;
+ }
+
+ .wrapper div:nth-child(10) {
+   background-color: rgb(238, 153, 64);
+ }
+
+ .wrapper div:nth-child(12) {
+   background-color: rgb(240, 91, 71);
+ }
+
+
+ /* disable selection for touch interfaces */
+ .noselect {
+   -webkit-touch-callout: none; /* iOS Safari */
+     -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+         -ms-user-select: none; /* Internet Explorer/Edge */
+             user-select: none; /* Non-prefixed version, currently
+                                   supported by Chrome and Opera */
+ }
+
+ .button {
+   padding: 15px 25px;
+   font-size: 24px;
+   text-align: center;
+   cursor: pointer;
+   outline: none;
+   color: #fff;
+   background-color: #4CAF50;
+   border: none;
+   border-radius: 5px;
+   box-shadow: 0 9px #999;
+ }
+
+.enter-button {
+   padding: 20px 100%;
+   background-color: var(--main-highlight);
+ }
+
+ .button:hover {background-color: #3e8e41}
+
+ .button:active {
+   background-color: #3e8e41;
+   box-shadow: 0 5px #666;
+   transform: translateY(4px);
+ }
+
+/* NAV BAR */
+
+ .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #0c3179;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.navbar {
+  border-bottom: 1px solid #333;
+  background-color: rgb(84, 178, 255);
+  color: white;
+  width: 100%;
+}
+
+.navbar-employee {
+  position: absolute;
+  left: 90%;
+  top: 1%;
+}
+
+.navbar-time {
+  position: absolute;
+  left: 45%;
+  top: 1%;
+}
+
+.navbar-bars {
+  margin: 0 1%;
+}
+
+.navBack {
+  position: absolute;
+  left: 5%;
+  top: 1%;
+  font-size: 1.5em;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/* DISCOUNT MODAL STYLING */
+
+.discountModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* OPTION MODAL STYLING */
+
+.optionModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+
+.discountClose {
+  color: white;
+  position: absolute;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 0 2%;
+  margin: 0;
+  bottom: 70%;
+  right: 0;
+}
+
+.discountClose:hover,
+.discountClose:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+
+
+
+/***        MANAGER CUSTOMIZATION       **/
+.addItem {
+  background-color: red !important;
+
+}
+
+.saleScreenGridManager {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 87vh 8vh;
+  background-color: rgb(237, 237, 237);
+}
+.saleItemGridManager {
+  grid-row: 1;
+  grid-column: 1;
+  display: inline-grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  background-color: rgb(237, 237, 237);
+  text-align: center;
+  min-height: 30vh;
+  max-height: 86vh;
+  overflow-y: scroll;
+  padding-top: 1%;
+  padding-left: 1%;
+  margin: 0;
+}
+
+.saleItemGridManager * {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  overflow-wrap: break-word;
+  border-radius: 4%;
+}
+
+/* .saleItemGridManager div {
+  position: relative;
+  display: grid;
+  grid-template-rows: 2%, 98%;
+} */
+
+
+.saleItemGridManager h3 {
+  border-radius: 15%;
+  color: black;
+}
+
+.saleItemGridManager > * {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4%;
+  width: 95%;
+  height: 95%;
+}
+/** item modal **/
+.itemModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 45%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-manager{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-manager {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: 5vh 5vh 5vh 20vh 15vh;
+  grid-row-gap: 20px;
+  border-radius: 5%;
+}
+
+.modal-ingredient-grid {
+  display: grid;
+  color: black;
+  grid-template-rows: repeat(3, 31.3%);
+  grid-row-gap: 4px;
+  grid-column-gap: 4px;
+  grid-template-columns: repeat(4, 24.5%);
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.modal-ingredient-item {
+
+}
+
+.modal-category-select {
+  color: black;
+}
+
+.modal-body-manager button {
+  color: white;
+  border-radius: 2%;
+  padding-top: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-bottom: 10px;
+
+  background-color: #333;
+}
+
+.modal-footer-manager {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-manager {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+
+.removeItem {
+  /* position: absolute; */
+  position: relative;
+  display: inline-block;
+  color: white;
+}
+/** ITEM MODAL**/
+
+/*******CATEGORY MODAL*********/
+.categoryModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-category{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-category {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  grid-row-gap: 20px;
+  border-radius: 5%;
+}
+
+.modal-title {
+  grid-row: 1;
+  grid-column: 1;
+
+}
+
+.modal-close {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.modal-body-category button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-category {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-category {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/*******CATEGORY MODAL********/
+
+/*****Confirmation Modal ******/
+.confirmationModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-confirmation{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-confirmation {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-confirmation h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.confirmOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmConfirm {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.cancelConfirm {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-confirmation button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-confirmation {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-confirmation {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/*****Confirmation Modal *****/
+
+/*****removeItemModal *******/
+.removeItemModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-removeItem{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-removeItem {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-removeItem h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.removeOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmRemove {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.cancelRemove {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-removeItem button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-removeItem {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-removeItem {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/*****removeItemModal ******/
+
+/******removeCategoryModal *****/
+.removeCatModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-removeCat{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-removeCat {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-removeCat h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.removeOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmRemove {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.cancelRemove {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-removeCat button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-removeCat {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-removeCat {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+
+/******removeCategoryModal *****/
+
+
+/*******discardModal*********/
+.discardModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-discard{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-discard {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-discard h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.confirmOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmDiscard {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #fc4747;
+}
+
+.cancelDiscard {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-discard button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-discard {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-discard {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/********discardModal********/
+
+/*****MANAGER TRANSACTION BUTTONS SAVEALL AND DISCARDALL ***/
+.saveChanges {
+  text-align: center;
+  background-color: #1778dc;
+  color: white;
+}
+
+.discardChanges {
+  text-align: center;
+  background-color: #fc4747;
+  color: white;
+}
+
+
+/****MANAGER TRANSACTION BUTTONS SAVEALL AND DISCARDALL ***/
+
+/***        MANAGER CUSTOMIZATION       **/
