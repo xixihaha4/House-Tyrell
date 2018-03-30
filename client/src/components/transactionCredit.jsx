@@ -12,7 +12,6 @@ class TransactionCredit extends React.Component {
     super(props);
     this.state = {
       sigConfirm: false,
-      employeeID: '',
     };
     this.sigCanvas = {};
     this.clear = this.clear.bind(this);
