@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import SignatureCanvas from 'react-signature-canvas';
 import axios from 'axios';
-import moment from 'moment';
 import Navbar from './navbar.jsx';
 import sendReceipt from '../../helpers/sendEmail.js';
 import socket from '../socket.js';
