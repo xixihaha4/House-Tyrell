@@ -88,6 +88,10 @@ class InventoryUsageTable extends React.Component {
         columns={columns}
         defaultPageSize={10}
         style={{color: 'black'}}
+        sorted={[{
+          id: 'orderdate',
+          desc: true,
+        }]}
         />
       </div>
     )
