@@ -54,8 +54,13 @@ class ManagerHome extends React.Component {
 
   initSocket() {
     socket.on('madeSale', (sale) => {
-      this.setState({ totalSales: (parseFloat(this.state.totalSales) + parseFloat(sale.total)).toFixed(2) });
-    })
+      let allSales = this.state.allSales;
+      allSales.push({ sale });
+      this.setState({
+        totalSales: (parseFloat(this.state.totalSales) + parseFloat(sale.total)).toFixed(2),
+        allSales,
+      });
+    });
     socket.on('employeeLogin', (data) => {
       this.getAllClockedIn();
       let temp = this.state.allEmployees.slice();
@@ -86,7 +91,6 @@ class ManagerHome extends React.Component {
   getAllClockedIn() {
     axios.get('/fetch/allEmployees/clockedIn')
       .then((results) => {
-        console.log('this is results.data', results.data[0])
         this.setState({
           allEmployees: results.data[0],
         });
