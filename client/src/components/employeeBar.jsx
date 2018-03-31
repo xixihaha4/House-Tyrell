@@ -15,6 +15,7 @@ class EmployeeBar extends React.Component {
     this.updateChart();
   }
   componentDidUpdate() {
+  // componentDidReceiveProps() {
     this.updateChart();
   }
   updateChart() {
@@ -22,8 +23,9 @@ class EmployeeBar extends React.Component {
       bindto: '#chart',
       x: 'x',
       data: {
-        columns: columns,
-        type: 'bar',
+        columns: [this.props.amount],
+        // columns: columns, // data
+        // type: 'bar',
         colors: {
           Sales: '#349eff',
         },
@@ -31,7 +33,8 @@ class EmployeeBar extends React.Component {
       axis: {
         x: {
           type: 'category',
-          categories: ['Brad', 'Christine', 'Harriette', 'Peter', 'Phil', 'Tam'],
+          categories: this.props.intervals,
+          // categories: ['Brad', 'Christine', 'Harriette', 'Peter', 'Phil', 'Tam'],
           tick: {
             rotate: 75,
             multiline: false,
@@ -49,7 +52,7 @@ class EmployeeBar extends React.Component {
   }
 
   render() {
-    return <div id="chart"></div>;
+    return <div id="chart">lol</div>;
   }
 }
 
