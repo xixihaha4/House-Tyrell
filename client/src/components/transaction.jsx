@@ -32,9 +32,6 @@ export default class Transaction extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
-
-
-
   render() {
     let showDiscount = null;
     if (this.props.discount > 0) {
@@ -72,7 +69,7 @@ export default class Transaction extends React.Component {
             total={this.props.total}
             tax={this.props.tax}
             discount={this.props.discount}
-            openDiscountModal={this.props.openDiscountModal}
+            openModal={this.props.openModal}
             transactionComplete={this.props.transactionComplete}
             transactionItems={this.props.transactionItems}
             openOptionModal={this.props.openOptionModal}
@@ -88,13 +85,3 @@ export default class Transaction extends React.Component {
     )
   }
 }
-
-// (<ReactModal
-//                 isOpen={this.state.modalIsOpen}
-//                 onAfterOpen={this.afterOpenModal}
-//                 onRequestClose={this.closeModal}
-//                 contentLabel="Example Modal"
-//               >
-//                 <button onClick={this.closeModal}>close</button>
-//                <div>I am a modal</div>
-//              </ReactModal>, )
