@@ -36,6 +36,7 @@ export default class Login extends React.Component {
       } else {
         axios.get(`/fetch/employee?PIN=${this.state.identification}`)
           .then((results) => {
+            console.log('this is results.data', results.data)
             if (results.data[0].manager_privilege === true) {
               this.props.history.push('/managerHome');
             } else {
