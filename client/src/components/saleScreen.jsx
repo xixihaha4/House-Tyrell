@@ -6,7 +6,7 @@ import SaleControl from './saleControl.jsx';
 import Navbar from './navbar.jsx';
 import Select from 'react-select';
 
-const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openDiscountModal, closeDiscountModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, openOptionModal, closeOptionModal, transactionClear }) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openModal, closeModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, openOptionModal, closeOptionModal, transactionClear }) =>
   (
     <div>
       <div className="navbar">
@@ -15,7 +15,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
       <div className="saleScreenGrid animated fadeIn">
         <div id="discountModal" className="discountModal animated fadeIn">
           <div className="modal-content">
-            <div className="modal-header">Discount <div className="discountClose" onClick={() => closeDiscountModal()}>&times;</div></div>
+            <div className="modal-header">Discount <div className="discountClose" onClick={() => closeModal('discountModal')}>&times;</div></div>
             <div className="modal-body">
               Percentage
               <Select
@@ -54,7 +54,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             total={total}
             tax={tax}
             discount={discount}
-            openDiscountModal={openDiscountModal}
+            openModal={openModal}
             transactionComplete={transactionComplete}
             transactionItems={transactionItems}
             openOptionModal={openOptionModal}

@@ -543,6 +543,11 @@ body {
   margin: 1.5%;
 }
 
+.transactionCreditConfirmed input {
+  border: none;
+  width: 100%;
+}
+
 .sigCanvas {
   border-bottom: 1px solid black;
 }
