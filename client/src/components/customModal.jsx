@@ -12,7 +12,7 @@ export default class CustomModal extends React.Component {
 
   componentWillMount() {
     if (this.state.ingredients.length === 0) {
-      axios.get('/fetch/ingredients', { params: this.props.item })
+      axios.get('/fetch/items/ingredients', { params: this.props.item })
       .then((res) => {
         console.log('this is res.data\n', res.data)
         this.setState({ ingredients: res.data })
