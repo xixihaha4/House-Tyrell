@@ -9,15 +9,21 @@ class TransactionCashConfirm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: 'cash'
+      type: 'cash',
+      emailReceipt: false,
+      emailAddress: '',
     };
     this.finalize = this.finalize.bind(this);
   }
 
 
   finalize(email) {
-    if (email === 'email') {
-      sendReceipt(this.props.location.state.transactionItems, this.props.location.state.total);
+    if (email) {
+      sendReceipt(this.props.location.state.transactionItems, this.props.location.state.total, email);
+      this.setState({
+        emailReceipt: false,
+        emailAddress: '',
+      });
     }
     axios.post('/completed/transaction', {
       transactionItems: this.props.location.state.transactionItems,
@@ -44,20 +50,31 @@ class TransactionCashConfirm extends React.Component {
     return (
       <div className="transactionCashConfirm animated fadeIn">
         <div>
-          <div>
-            <h1>Total Sale</h1>
-            <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.total}</h1>
-            <h1>Tendered: </h1>
-            <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.tendered}</h1>
-            <h1>Change: </h1>
-            <h1><i className="fas fa-dollar-sign" /> {(this.props.location.state.tendered - this.props.location.state.total).toFixed(2)}</h1>
-            <h1>Thank you for your purchase</h1>
-            <div>
-              <button type="button" onClick={() =>  this.finalize('email')}>Email Receipt</button>
-              <button type="button" onClick={this.finalize}>Print Receipt</button>
-              <button type="button" onClick={this.finalize}>No Receipt</button>
+          {
+            this.state.emailReceipt === false
+            ?
+              <div>
+                <h1>Total Sale</h1>
+                <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.total}</h1>
+                <h1>Tendered: </h1>
+                <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.tendered}</h1>
+                <h1>Change: </h1>
+                <h1><i className="fas fa-dollar-sign" /> {(this.props.location.state.tendered - this.props.location.state.total).toFixed(2)}</h1>
+                <h1>Thank you for your purchase</h1>
+                <div>
+                  <button type="button" onClick={() =>  this.setState({ emailReceipt: true })}>Email Receipt</button>
+                  <button type="button" onClick={this.finalize}>Print Receipt</button>
+                  <button type="button" onClick={this.finalize}>No Receipt</button>
+                </div>
+              </div>
+            :
+            <div className="transactionCreditConfirmed animated fadeIn">
+              <h1>Please enter your e-mail.</h1>
+              <input type="text" placeholder="Enter your e-mail address" onChange={e => this.setState({ emailAddress: e.target.value })}/>
+              <button type="button" onClick={() => this.finalize(this.state.emailAddress)}>Send Receipt</button>
             </div>
-          </div>
+          }
+
         </div>
       </div>
     );

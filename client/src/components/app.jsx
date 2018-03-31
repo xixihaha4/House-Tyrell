@@ -22,8 +22,8 @@ export default class App extends React.Component {
     this.transactionRemove = this.transactionRemove.bind(this);
     this.filterByCategory = this.filterByCategory.bind(this);
     this.removeIng = this.removeIng.bind(this);
-    this.openDiscountModal = this.openDiscountModal.bind(this);
-    this.closeDiscountModal = this.closeDiscountModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.discountModalOptions = this.discountModalOptions.bind(this);
     this.updateDiscount = this.updateDiscount.bind(this);
     this.openOptionModal = this.openOptionModal.bind(this);
@@ -119,12 +119,12 @@ export default class App extends React.Component {
 
 // Below are all the functions for the discount modal and also to update discount.
 
-  openDiscountModal() {
-    document.getElementById('discountModal').style.display = 'block';
+  openModal(modal) {
+    document.getElementById(modal).style.display = 'block';
   }
 
-  closeDiscountModal() {
-    document.getElementById('discountModal').style.display = 'none';
+  closeModal(modal) {
+    document.getElementById(modal).style.display = 'none';
   }
 
   openOptionModal() {
@@ -172,8 +172,8 @@ export default class App extends React.Component {
           total={this.state.total}
           tax={this.state.tax}
           discount={this.state.discount}
-          openDiscountModal={this.openDiscountModal}
-          closeDiscountModal={this.closeDiscountModal}
+          openModal={this.openModal}
+          closeModal={this.closeModal}
           transactionRemove={this.transactionRemove}
           filterByCategory={this.filterByCategory}
           removeIng={this.removeIng}

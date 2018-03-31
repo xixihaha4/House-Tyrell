@@ -1,12 +1,17 @@
 const Sequelize = require('sequelize');
 const {
-  DB_NAME, DB_PORT, DB_UN, DB_PW, DB_URL
+  DB_NAME, DB_PORT, DB_UN, DB_PW, DB_URL, READ_DB_URL,
 } = require('../config.js');
 
-const db = new Sequelize(DB_NAME, DB_UN, DB_PW, {
-  host: DB_URL,
-  port: DB_PORT,
+const db = new Sequelize(DB_NAME, null, null, {
   dialect: 'mysql',
+  port: DB_PORT,
+  replication: {
+    read: [
+      { host: READ_DB_URL, username: DB_UN, password: DB_PW },
+    ],
+    write: { host: DB_URL, username: DB_UN, password: DB_PW },
+  },
 });
 
 const Employee = db.define('Employees', {
@@ -70,7 +75,7 @@ const Timesheet = db.define('Timesheets', {
   check_in: Sequelize.STRING,
   check_out: Sequelize.STRING,
 });
-// 
+//
 // db.sync({ force: true }).then(() => {
 //   Employee.create({
 //     employee_id: '5', employee_name: 'Manos', employee_img: 'https://avatars3.githubusercontent.com/u/32654968?s=460&v=4', manager_privilege: true,

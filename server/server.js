@@ -65,7 +65,7 @@ app.post('/send/receipt', (req, res) => {
   let emailParams = {
     Destination: { /* required */
       ToAddresses: [
-        'jieningjchen@gmail.com',
+        req.body.email,
         /* more items */
       ],
     },
