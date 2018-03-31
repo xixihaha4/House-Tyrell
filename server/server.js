@@ -340,7 +340,8 @@ app.get('/fetch/items/ingredients', (req, res) => {
   ingredientList.forEach(ingredient => {
     ingIdList.push(ingredient.ingredient_id)
   })
-  db.Ingredient.findAll({
+  db.Ingredient.findAll(
+    {
     where: {
       id: {
         [Op.in]: ingIdList
@@ -410,6 +411,7 @@ app.get('/fetch/allitems', (req, res) => {
 
 app.get('/fetch/employee', (req, res) => {
   let employee;
+  console.log('hello')
   db.Employee.findAll({
     where: {
       employee_id: req.query.PIN,
@@ -433,10 +435,12 @@ app.get('/fetch/employee', (req, res) => {
           if (!emp) {
             console.log('this is emp inside the if statement', emp)
             console.log('this is req.query.PIN and session', req.query.PIN)
+
+            console.log('sent response');
             req.session.regenerate(() => {
               req.session.employee = req.query.PIN;
-              res.send(employee.employee_name)
               console.log('this is req.session', req.session.employee)
+              res.send([employee])
               db.Timesheet.create({
                 employee_id: req.query.PIN,
                 check_in: moment().format('MM/DD/YYYY, hh:mm:ss a'),
