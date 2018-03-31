@@ -36,7 +36,7 @@ export default class itemModal extends React.Component {
     if (clicked.style.color === 'green') {
       let temp = this.state.item_ingredients.slice();
       temp.push({ingredient_id: index+1, ingredient_amount: ''});
-      this.setState({ item_ingredients: temp })
+      this.setState({ item_ingredients: temp }, () => console.log('this is item_ingredients', this.state.item_ingredients))
     } else {
       let temp = this.state.item_ingredients.slice();
       let found;
@@ -44,7 +44,7 @@ export default class itemModal extends React.Component {
         if (temp[i].ingredient_id === index+1) found = i;
       }
       temp.splice(found, 1);
-      this.setState({ item_ingredients: temp })
+      this.setState({ item_ingredients: temp }, () => console.log('this is item_ingredients', this.state.item_ingredients))
     }
   }
 
@@ -55,7 +55,9 @@ export default class itemModal extends React.Component {
       if (temp[i].ingredient_id === index+1) location = i;
     }
     temp[location].ingredient_amount = parseFloat(amount).toFixed(2);
-    this.setState({item_ingredients: temp})
+    this.setState({item_ingredients: temp}, () => {
+      console.log('this is itemIngredients', this.state.item_ingredients)
+    })
   }
 
 
@@ -68,6 +70,7 @@ export default class itemModal extends React.Component {
     newItem['item_image'] = this.state.item_image;
     newItem['item_ingredients'] = this.state.item_ingredients;
     newItem['item_category'] = this.state.item_category;
+    console.log('this is newItem', newItem);
     this.props.handleNewItem(newItem);
 
     let ing = this.props.ingredients.slice();
@@ -104,7 +107,7 @@ export default class itemModal extends React.Component {
   }
 
   updateCat(val) {
-    this.setState({ item_category: val })
+    this.setState({ item_category: val }, () => {console.log('this is the new category', this.state.item_category)})
   }
 
 

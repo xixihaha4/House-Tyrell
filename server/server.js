@@ -330,6 +330,28 @@ app.get('/fetch/ingredients', (req, res) => {
   });
 });
 
+app.get('/fetch/items/ingredients', (req, res) => {
+  console.log(req.query)
+  let ingredientList = JSON.parse(req.query.item_ingredients);
+  while (typeof ingredientList === 'string') {
+    ingredientList = JSON.parse(ingredientList)
+  }
+  let ingIdList = [];
+  ingredientList.forEach(ingredient => {
+    ingIdList.push(ingredient.ingredient_id)
+  })
+  db.Ingredient.findAll({
+    where: {
+      id: {
+        [Op.in]: ingIdList
+      }
+    }
+  })
+  .then((data) => {
+    res.send(data);
+  });
+});
+
 app.get('/fetch/currentInventory', (req, res) => {
   db.Order.findAll({
     attributes: ['order_name', 'order_number', 'order_date', 'order_initial', 'order_left', 'order_expire', 'order_used'],
@@ -387,7 +409,7 @@ app.get('/fetch/allitems', (req, res) => {
 });
 
 app.get('/fetch/employee', (req, res) => {
-  let employeeName;
+  let employee;
   db.Employee.findAll({
     where: {
       employee_id: req.query.PIN,
@@ -397,7 +419,10 @@ app.get('/fetch/employee', (req, res) => {
       if (data.length === 0) {
         res.status(404).send();
       } else {
-        employeeName = data;
+        console.log('this is data', data)
+        employee = JSON.parse(JSON.stringify(data));
+        employee = employee[0]
+        console.log('this is employee', employee)
         db.Timesheet.findOne({
           where: {
             employee_id: req.query.PIN,
@@ -410,7 +435,7 @@ app.get('/fetch/employee', (req, res) => {
             console.log('this is req.query.PIN and session', req.query.PIN)
             req.session.regenerate(() => {
               req.session.employee = req.query.PIN;
-              res.send(employeeName)
+              res.send(employee.employee_name)
               console.log('this is req.session', req.session.employee)
               db.Timesheet.create({
                 employee_id: req.query.PIN,
@@ -418,7 +443,13 @@ app.get('/fetch/employee', (req, res) => {
               });
             });
           } else {
+            // db.Timesheet.update({
+            //   check_out: moment().format('MM/DD/YYYY, hh:mm:ss a')
+            // },{
+            //   where: {check_out: null}
+            // }).then(() => {
               res.status(404).send();
+            // })
 
           }
         })
@@ -630,6 +661,9 @@ const myCronJob = new CronJob('0 6 * * * *', () => {
               if (foundIndex === -1){
                 for (let q = 0; q < items.length; q += 1) {
                   let ingredients = JSON.parse(items[q].item_ingredients);
+                  while (typeof ingredients === 'string') {
+                    ingredients = JSON.parse(ingredients);
+                  }
                   let usesIngredient = ingredients.find(ing => {
                     return ing === expired[j].id
                   })
