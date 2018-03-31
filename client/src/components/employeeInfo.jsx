@@ -44,16 +44,57 @@ class EmployeeInfo extends React.Component {
       newEmployeeName: '',
       managerLevel: false,
       timeSheet: [],
+      allSales: null,
+      employeeSalesRate: [],
+      employeeSales: [],
     };
     this.getEmployeeList = this.getEmployeeList.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.generateEmployeeId = this.generateEmployeeId.bind(this);
     this.submitEmployee = this.submitEmployee.bind(this);
     this.generateTimesheet = this.generateTimesheet.bind(this);
+    this.getAllSales = this.getAllSales.bind(this);
   }
 
   componentDidMount() {
+    this.getAllSales();
     this.getEmployeeList();
+  }
+
+  getAllSales() {
+    axios.get('/fetch/allsales')
+      .then((sales) => {
+        this.setState({
+          allSales: sales.data.reduce((lib, sale) => {
+            if(!lib.hasOwnProperty(sale.employee_id)) lib[sale.employee_id] = [[],['Sales']]
+            let idx = lib[sale.employee_id]
+              .indexOf(lib[sale.employee_id]
+                .find(tuple => tuple[0] === sale.sale_date))
+
+            // lib[sale.employee_id].push([sale.sale_date, sale.sale_amount])
+            let date = sale.sale_date.split('T').join(' ')
+            date = date.slice(0, date.length-6)
+            lib[sale.employee_id][0].push(date)
+            lib.all[0].push(date)
+            lib[sale.employee_id][1].push(parseInt(sale.sale_amount))
+            lib.all[1].push(parseInt(sale.sale_amount))
+
+            // if(idx === -1) {
+            //   lib[sale.employee_id].push([sale.sale_date, sale.sale_amount])
+            // } else {
+            //   lib[sale.employee_id][idx][1] += sale.sale_amount
+            // }
+            return lib
+          }, {all: [[], ['Sales']]}),
+          // employeeSales: this.state.allSales.all[1],
+          // employeeSalesRate: this.state.allSales.all[0]
+        })
+        this.setState({
+          employeeSalesRate: this.state.allSales.all[0],
+          employeeSales: this.state.allSales.all[1],
+        })
+        console.log('sales obj', this.state.allSales);
+      })
   }
 
   getEmployeeList() {
@@ -73,11 +114,27 @@ class EmployeeInfo extends React.Component {
   }
 
   handleChange(value) {
+    console.log('value on change:',value);
     this.setState({
       employeeName: value.value.employee_name,
       employeeImage: value.value.employee_img,
       employeeId: value.value.employee_id,
-    }, () => this.generateTimesheet());
+    }, () => {
+      console.log('thisstate after first setstate', this.state)
+      this.generateTimesheet()
+      console.log("next emp id set:", this.state.employeeId);
+      if(this.state.allSales.hasOwnProperty(this.state.employeeId)){
+        this.setState({
+          employeeSalesRate: this.state.allSales[this.state.employeeId][0],
+          employeeSales: this.state.allSales[this.state.employeeId][1]
+        })
+      } else {
+        this.setState({
+          employeeSalesRate: '',
+          employeeSales: '',
+        })
+      }
+    });
   }
 
   generateEmployeeId(e) {
@@ -155,7 +212,16 @@ class EmployeeInfo extends React.Component {
         <div className="managerScreenGrid">
           <div className="manager-navigation"><Navigation /></div>
           <div className="employeeGraphGrid">
-            <div className="barChart"><EmployeeBar /></div>
+            <div className="barChart">
+              {this.state.employeeSales.length > 1 ?
+                <EmployeeBar
+                  amount={this.state.employeeSales}
+                  intervals={this.state.employeeSalesRate}
+                />
+                :
+                <h1 className="noDataNotice">no data</h1>
+              }
+            </div>
           </div>
           <div className="profileGrid">
             <div className="profileGridImage">
