@@ -53,8 +53,10 @@ class ManagerHomeBar extends React.Component {
         const categories = [];
         const data = [['Sales']];
         for (const item in itemLib) {
-          categories.push(itemLib[item].name);
-          data[0].push(itemLib[item].price * itemLib[item].sold);
+          if (itemLib[item].sold > 0) {
+            categories.push(itemLib[item].name);
+            data[0].push(itemLib[item].price * itemLib[item].sold);
+          }
         }
         this.setState({
           allItems,
@@ -67,11 +69,10 @@ class ManagerHomeBar extends React.Component {
 
   initSocket() {
     socket.on('madeSale', (newSale) => {
+      console.log('NEW SALE HAS BEEN MADE', newSale);
       const { allItems } = this.state;
       const { allSales } = this.state;
       allSales.data.push(newSale);
-      console.log(allSales);
-      console.log(allItems);
       const itemLib = {};
       allItems.data.forEach((item) => {
         itemLib[item.id] = {
@@ -80,7 +81,7 @@ class ManagerHomeBar extends React.Component {
           sold: 0,
         };
       });
-
+      console.log('THIS IS ALL SALES AFTER SOCKETS', allSales);
       allSales.data
         .filter(sale => moment(sale.sale_date).format('MM DD YYYY') === moment().format('MM DD YYYY'))
         .forEach((sale) => {
@@ -92,8 +93,10 @@ class ManagerHomeBar extends React.Component {
       const categories = [];
       const data = [['Sales']];
       for (const item in itemLib) {
-        categories.push(itemLib[item].name);
-        data[0].push(itemLib[item].price * itemLib[item].sold);
+        if (itemLib[item].sold > 0) {
+          categories.push(itemLib[item].name);
+          data[0].push(itemLib[item].price * itemLib[item].sold);
+        }
       }
       this.setState({
         allItems,
@@ -101,7 +104,7 @@ class ManagerHomeBar extends React.Component {
         items_Y: categories,
         sales_X: data,
       });
-    })
+    });
   }
 
   updateChart() {

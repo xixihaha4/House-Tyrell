@@ -43,10 +43,10 @@ class TransactionCredit extends React.Component {
           id: results.data.id,
           employee_id: results.data.employee_id,
           total: results.data.sale_amount,
-          transactionItems: results.data.item_id,
-          date: results.data.sale_date,
+          item_id: results.data.item_id,
+          sale_date: results.data.sale_date,
           tendered: this.props.location.state.tendered,
-          discount: results.data.sale_discount,
+          sale_discount: results.data.sale_discount,
           type: results.data.sale_cash,
         },
       );
