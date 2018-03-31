@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import ReactTable from 'react-table';
 import socket from '../socket.js';
 
@@ -59,7 +60,7 @@ class SaleTable extends React.Component {
   generateTableData(salesData, itemsData) {
     const data = salesData.map((sale) => {
       const obj = {};
-      obj.date = sale.sale_date;
+      obj.date = moment(sale.sale_date).format('MM/DD/YYYY hh:mm:ss a');
       obj.items = this.getItemNames(sale.item_id);
       obj.amount = sale.sale_amount;
       obj.cost = sale.sale_cost;
@@ -77,7 +78,7 @@ class SaleTable extends React.Component {
     socket.on('madeSale', (data) => {
       console.log('socket data', data);
       const obj = {};
-      obj.date = data.date;
+      obj.date = moment(data.date).format('MM/DD/YYYY hh:mm:ss a');
       obj.items = this.getItemNames(data.transactionItems);
       obj.amount = data.total;
       obj.cost = 50;
