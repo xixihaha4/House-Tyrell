@@ -5,7 +5,7 @@ import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
 import SaleControl from './saleControl.jsx';
 import Navbar from './navbar.jsx';
-// import VoidModal from './voidModal.jsx';
+import VoidModal from './voidModal.jsx';
 
 const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openModal, closeModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear }) =>
   (
@@ -31,10 +31,10 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
           </div>
         </div>
         <div id="voidModal" className="voidModal animated fadeIn">
-          {/* <VoidModal
+          <VoidModal
             openModal={openModal}
             closeModal={closeModal}
-          /> */}
+          />
         </div>
         <div style={{ gridColumn: '1 / 4', gridRow: '1 / 1' }}><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
         <div className="saleTransactionGrid">
