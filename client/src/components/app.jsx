@@ -26,8 +26,8 @@ export default class App extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.discountModalOptions = this.discountModalOptions.bind(this);
     this.updateDiscount = this.updateDiscount.bind(this);
-    this.openOptionModal = this.openOptionModal.bind(this);
-    this.closeOptionModal = this.closeOptionModal.bind(this);
+    // this.openOptionModal = this.openOptionModal.bind(this);
+    // this.closeOptionModal = this.closeOptionModal.bind(this);
     this.transactionClear = this.transactionClear.bind(this);
     this.sendEmail = this.sendEmail.bind(this);
   }
@@ -127,14 +127,6 @@ export default class App extends React.Component {
     document.getElementById(modal).style.display = 'none';
   }
 
-  openOptionModal() {
-    document.getElementById('optionModal').style.display = 'block';
-  }
-
-  closeOptionModal() {
-    document.getElementById('optionModal').style.display = 'none';
-  }
-
   discountModalOptions() {
     const myOptions = [];
     for (let i = 0; i <= 100; i += 1) {
@@ -180,8 +172,8 @@ export default class App extends React.Component {
           transactionComplete={this.transactionComplete}
           discountOptions={this.state.discountOptions}
           updateDiscount={this.updateDiscount}
-          openOptionModal={this.openOptionModal}
-          closeOptionModal={this.closeOptionModal}
+          // openOptionModal={this.openOptionModal}
+          // closeOptionModal={this.closeOptionModal}
           transactionClear={this.transactionClear}
         />
 

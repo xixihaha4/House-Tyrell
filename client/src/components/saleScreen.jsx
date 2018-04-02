@@ -1,16 +1,17 @@
 import React from 'react';
+import Select from 'react-select';
 import SaleItems from './saleItems.jsx';
 import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
 import SaleControl from './saleControl.jsx';
 import Navbar from './navbar.jsx';
-import Select from 'react-select';
+import VoidModal from './voidModal.jsx';
 
-const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openModal, closeModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, openOptionModal, closeOptionModal, transactionClear }) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openModal, closeModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear }) =>
   (
     <div>
       <div className="navbar">
-        <Navbar transactionItems={transactionItems}/>
+        <Navbar transactionItems={transactionItems} />
       </div>
       <div className="saleScreenGrid animated fadeIn">
         <div id="discountModal" className="discountModal animated fadeIn">
@@ -29,21 +30,8 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             <div className="modal-footer">Please Pick</div>
           </div>
         </div>
-        <div id="optionModal" className="discountModal animated fadeIn">
-          <div className="modal-content">
-            <div className="modal-header">Options <div className="discountClose" onClick={() => closeOptionModal()}>&times;</div></div>
-            <div className="modal-body">
-              Percentage
-              <Select
-                className="discountDropdown"
-                options={discountOptions}
-                matchProp="any"
-                searchable="false"
-                // onChange={value => updateDiscount(value.value)}
-              />
-            </div>
-            <div className="modal-footer">Please Pick</div>
-          </div>
+        <div id="voidModal" className="voidModal animated fadeIn">
+          <VoidModal openModal={openModal} closeModal={closeModal} menuItems={menuItems} />
         </div>
         <div style={{ gridColumn: '1 / 4', gridRow: '1 / 1' }}><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
         <div className="saleTransactionGrid">
@@ -57,8 +45,8 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             openModal={openModal}
             transactionComplete={transactionComplete}
             transactionItems={transactionItems}
-            openOptionModal={openOptionModal}
-            closeOptionModal={closeOptionModal}
+            // openOptionModal={openOptionModal}
+            // closeOptionModal={closeOptionModal}
             transactionClear={transactionClear}
           />
         </div>

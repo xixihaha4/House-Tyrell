@@ -762,20 +762,24 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* OPTION MODAL STYLING */
+/* VOID MODAL STYLING */
 
-.optionModal {
+.voidModal {
   display: none; /* Hidden by default */
   position: absolute; /* Stay in place */
   z-index: 1; /* Sit on top */
   top: 50%;
   left: 50%;
-  width: 50%;
+  /* width: 50%; */
   transform: translate(-50%, -50%);
   background-color: rgb(185, 185, 185);
   margin:0;
   padding: 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.order-list {
+  overflow: scroll;
 }
 
 /* Modal Content */

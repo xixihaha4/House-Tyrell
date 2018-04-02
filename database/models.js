@@ -76,6 +76,14 @@ const Timesheet = db.define('Timesheets', {
   check_in: Sequelize.STRING,
   check_out: Sequelize.STRING,
 });
+
+const Voiditem = db.define('Voiditems', {
+  void_date: Sequelize.STRING,
+  employee_id: Sequelize.INTEGER,
+  order_number: Sequelize.STRING,
+  void_items: Sequelize.STRING,
+});
+
 //
 // db.sync({ force: true }).then(() => {
 //   Employee.create({
@@ -183,4 +191,5 @@ exports.Sale = Sale;
 exports.Ingredient = Ingredient;
 exports.Order = Order;
 exports.Timesheet = Timesheet;
+exports.Voiditem = Voiditem;
 exports.db = db;

@@ -84,20 +84,20 @@ export default class App extends React.Component {
                       this.setState({
                         menuItems: items.data,
                         masterMenu: items.data,
-                      })
-                    })
-                })
-              })
-            })
-        })
-      })
+                      });
+                    });
+                });
+              });
+            });
+        });
+      });
   }
 
   getCategories() {
     axios.get('/fetch/categories')
       .then((cat) => {
-        this.setState({ categories: cat.data })
-      })
+        this.setState({ categories: cat.data });
+      });
   }
 
   getMenuItems() {
@@ -123,7 +123,7 @@ export default class App extends React.Component {
       axios.get('/fetch/items')
       .then((results) => {
         this.setState({
-          menuItems: results.data
+          menuItems: results.data,
         })
       })
     } else {
@@ -146,7 +146,7 @@ export default class App extends React.Component {
     for (let i = 0; i < temp.length; i += 1) {
       tempTotal = tempTotal + parseFloat(temp[i].item_price)
     }
-    let tempTax = (tempTotal * 0.0875).toFixed(2)
+    let tempTax = (tempTotal * 0.0875).toFixed(2);
 
     this.setState({
       transactionItems: temp,
@@ -162,7 +162,7 @@ export default class App extends React.Component {
   transactionRemove(index) {
     const remove = this.state.transactionItems.slice();
     let tempTotal = this.state.total - remove[index].item_price;
-    let tempTax = (tempTotal * 0.0875).toFixed(2)
+    let tempTax = (tempTotal * 0.0875).toFixed(2);
     remove.splice(index, 1);
     this.setState({
       transactionItems: [],
@@ -172,7 +172,7 @@ export default class App extends React.Component {
       transactionItems: remove,
       total: tempTotal,
       tax: parseFloat(tempTax),
-    }))
+    }));
   }
 
   transactionClear() {
@@ -190,15 +190,15 @@ export default class App extends React.Component {
   }
 
   handleNewItem(item) {
-    let temp = this.state.newItems.slice()
-    temp.push(item)
-    this.setState({ newItems: temp })
+    let temp = this.state.newItems.slice();
+    temp.push(item);
+    this.setState({ newItems: temp });
   }
 
   handleNewCategory(category) {
-    let temp = this.state.newCategories.slice()
-    temp.push(category)
-    this.setState({ newCategories: temp })
+    let temp = this.state.newCategories.slice();
+    temp.push(category);
+    this.setState({ newCategories: temp });
   }
 
   removeItem(item) {
@@ -209,24 +209,24 @@ export default class App extends React.Component {
     if (item.id) {
       for (let i = 0; i < temp.length; i += 1) {
         if (temp[i].item_name === item.item_name) {
-          removed.push(temp[i])
-          temp.splice(i, 1)
+          removed.push(temp[i]);
+          temp.splice(i, 1);
         }
       }
       this.setState({ tempMenuItems: temp, removedItems: removed }, () => {
-        this.openModal('removeItemModal')
+        this.openModal('removeItemModal');
       })
     } else {
       let tempp = this.state.newItems.slice();
       for (let i = 0; i < tempp.length; i += 1) {
         if (tempp[i].item_name === item.item_name) {
-          removed.push(tempp[i])
-          tempp.splice(i, 1)
+          removed.push(tempp[i]);
+          tempp.splice(i, 1);
 
         }
       }
       this.setState({ tempMenuItems: tempp, removedItems: removed }, () => {
-        this.openModal('removeItemModal')
+        this.openModal('removeItemModal');
       })
     }
   }
@@ -241,16 +241,16 @@ export default class App extends React.Component {
        }, () => {
         this.setState({ tempMenuItems: [] }, () => {
           this.closeModal('removeItemModal');
-        })
-      })
+        });
+      });
     } else {
       this.setState({
         newItems: newItemTemp,
       }, () => {
         this.setState({ tempNewItems: [] }, () => {
           this.closeModal('removeItemModal');
-        })
-      })
+        });
+      });
     }
   }
 
@@ -258,21 +258,21 @@ export default class App extends React.Component {
     let temp = [];
     let categories = this.state.menuCategories.slice();
     let newCategories = this.state.newCategories.slice();
-    temp.push(category)
+    temp.push(category);
 
     for (let i = 0 ; i < categories.length; i += 1) {
       if (category.category_name === categories[i].category_name) {
-        categories.splice(i, 1)
+        categories.splice(i, 1);
       }
     }
     for (let i = 0; i < newCategories.length; i += 1) {
       if (category.category_name === newCategories[i].category_name) {
-        newCategories.splice(i, 1)
+        newCategories.splice(i, 1);
       }
     }
 
     this.setState({ categoryRemove: temp, tempCategories: categories, tempNewCategories: newCategories }, () => {
-      this.openModal('removeCatModal')
+      this.openModal('removeCatModal');
     })
   }
 
@@ -281,7 +281,7 @@ export default class App extends React.Component {
     let remove = this.state.categoryRemove.slice();
     let updatedRemove = this.state.removedCategories.slice();
     let temp = this.state.tempNewCategories.slice();
-    updatedRemove.push(remove[0])
+    updatedRemove.push(remove[0]);
 
 
     this.setState({
@@ -312,16 +312,16 @@ export default class App extends React.Component {
     }
 
     for (let j = 0; j < categories.length; j += 1) {
-      axios.post('/create/category', categories[j])
+      axios.post('/create/category', categories[j]);
     }
 
 
     for (let q = 0; q < removeItems.length; q += 1) {
-      axios.post('/delete/item', removeItems[q])
+      axios.post('/delete/item', removeItems[q]);
     }
 
     for (let w = 0; w < removeCategories.length; w += 1) {
-      axios.post('/delete/category', removeCategories[w])
+      axios.post('/delete/category', removeCategories[w]);
     }
 
     //loop through new items, create new item entry for each
@@ -337,7 +337,7 @@ export default class App extends React.Component {
       newCategories: [],
       menuItems: tempMenu,
       menuCategories: tempCat,
-    })
+    });
   }
 
 

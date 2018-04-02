@@ -44,6 +44,7 @@
     "react-c3js": "^0.1.20",
     "react-d3-basic": "^1.6.11",
     "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
     "react-modal": "^3.3.2",
     "react-moment": "^0.7.0",
     "react-redux": "^5.0.7",
