@@ -193,6 +193,7 @@ app.post('/create/all', (req, res) => {
 })
 
 app.post('/completed/transaction', (req, res) => {
+  console.log('this is req.body', req.body);
   const itemList = [];
   console.log('req.body.transactionItems', req.body.transactionItems);
   console.log('req.body.orderNumber', req.body.orderNumber);
