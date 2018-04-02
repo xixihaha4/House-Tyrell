@@ -16,26 +16,33 @@ export default class VoidModal extends React.Component {
       itemList: [],
       selectedList: [],
       currentOrderIndex: 0,
-      lastOrderNumber: '',
+      lastOrderNumber: null,
     };
     this.getRecentSales = this.getRecentSales.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);
     this.getTransactionData = this.getTransactionData.bind(this);
+    this.getMoreTransactionData = this.getMoreTransactionData.bind(this);
     this.displayOrder = this.displayOrder.bind(this);
     this.getItemNames = this.getItemNames.bind(this);
     this.handleVoid = this.handleVoid.bind(this);
     this.getItemsID = this.getItemsID.bind(this);
     this.updateSelectedList = this.updateSelectedList.bind(this);
+    this.transformSelectedList = this.transformSelectedList.bind(this);
+    this.calculateTotal = this.calculateTotal.bind(this);
     this.handleLeft = this.handleLeft.bind(this);
     this.handleRight = this.handleRight.bind(this);
   }
 
-  componentWillMount() {
-    this.getTransactionData();
-  }
+  // componentWillMount() {
+  //   this.getTransactionData();
+  // }
 
   componentWillUpdate() {
     this.state.selectedList;
+  }
+
+  componentDidMount() {
+    this.getTransactionData();
   }
 
   getRecentSales() {
@@ -54,17 +61,36 @@ export default class VoidModal extends React.Component {
         this.setState({
           transactions: salesData.data,
           menuData: menuData.data,
+          lastOrderNumber: salesData.data[salesData.data.length - 1].id,
         }, () => {
           this.displayOrder();
         });
       }));
   }
 
+  getMoreTransactionData() {
+    axios.get('/fetch/recentSales', { params: { saleID: this.state.lastOrderNumber } })
+      .then((moreData) => {
+        const currentData = this.state.transactions;
+        const newData = currentData.concat(moreData.data);
+        // console.log('current order Index', this.state.currentOrderIndex);
+        // console.log('current DATA', newData);
+        this.setState({
+          transactions: newData,
+          currentOrderIndex: this.state.currentOrderIndex + 1,
+          lastOrderNumber: moreData.data[moreData.data.length - 1].id,
+        }, () => {
+          // console.log('THIS IS WHAT TRANSACTIONS LOOK LIKE', this.state.transactions)
+          this.displayOrder();
+        });
+      });
+  }
+
   getItemNames(items) {
     const itemsArray = JSON.parse(items);
     const menuData = this.state.menuData;
     const obj = {};
-    var result = '';
+    const result = '';
     const itemNamesArray = itemsArray.map((item) => {
       for (var i = 0; i < menuData.length; i++) {
         if (item === menuData[i].id) {
@@ -77,11 +103,11 @@ export default class VoidModal extends React.Component {
   }
 
   getItemsID(itemlist) {
-    const menuitems = this.state.menuData;
+    const menuItems = this.state.menuData;
     const result = itemlist.map(item => {
-      for (var i = 0; i < menuitems.length; i++) {
-        if(menuitems[i].item_name === item) {
-          return menuitems[i].id;
+      for (var i = 0; i < menuItems.length; i++) {
+        if(menuItems[i].item_name === item) {
+          return menuItems[i].id;
         }
       }
     })
@@ -102,10 +128,36 @@ export default class VoidModal extends React.Component {
     });
   }
 
+  transformSelectedList(listNames) {
+    const menuItems = this.state.menuData;
+    const resultList = listNames.map((item) => {
+      for (var i = 0; i < menuItems.length; i++) {
+        if (item === menuItems[i].item_name) {
+          item = menuItems[i];
+        }
+      }
+      return item;
+    });
+    return resultList;
+  }
+
+  calculateTotal(list) {
+    return list.reduce((sum, item) => sum + Number(item.item_price), 0)
+  }
+
   handleVoid(list) {
-    console.log('selected list', this.state.selectedList);
-    console.log('whole list', this.state.itemList);
-    axios.post('/voidItems', { selected: this.getItemsID(list), orderNumber: this.state.orderID })
+    // console.log('selected list', this.transformSelectedList(list));
+    // console.log('whole list', list);
+    const selectedTransactionList = this.transformSelectedList(list);
+    // console.log('total', this.calculateTotal(selectedTransactionList));
+    axios.post('/completed/transaction', { 
+      transactionItems: selectedTransactionList,
+      orderNumber: this.state.orderID,
+      total: JSON.stringify(this.calculateTotal(selectedTransactionList)),
+    })
+      .then(() => {
+        this.props.closeModal('voidModal');
+      })
       .catch(err => console.log(err));
   }
 
@@ -113,6 +165,8 @@ export default class VoidModal extends React.Component {
     if (this.state.currentOrderIndex > 0) {
       this.setState({
         currentOrderIndex: this.state.currentOrderIndex - 1,
+        selectedList: [],
+        isSelected: false,
       }, () => {
         this.displayOrder();
       });
@@ -120,11 +174,15 @@ export default class VoidModal extends React.Component {
   }
 
   handleRight() {
+    // console.log('currentOrderIndex', this.state.currentOrderIndex);
+    // console.log('transaction length', this.state.transactions.length - 1);
     if (this.state.currentOrderIndex === this.state.transactions.length - 1) {
-      console.log('need to get more transactions data');
+      this.getMoreTransactionData();
     } else {
       this.setState({
         currentOrderIndex: this.state.currentOrderIndex + 1,
+        selectedList: [],
+        isSelected: false,
       }, () => {
         this.displayOrder();
       });
@@ -144,13 +202,18 @@ export default class VoidModal extends React.Component {
           Order ID. {this.state.orderID}
           Employee ID. {this.state.employeeID}
           <div className="order-list">
-          {this.state.itemList.map((item, i) => 
-            <VoidList item={item} key={i} saleID={this.state.orderID} selectedList={this.state.selectedList} updateSelectedList={this.updateSelectedList} />
-          )}
+            {this.state.itemList.map((item, i) => (
+              <VoidList
+                item={item}
+                key={i}
+                saleID={this.state.orderID}
+                selectedList={this.state.selectedList}
+                updateSelectedList={this.updateSelectedList}
+              />))}
           </div>
-          <div className="void-list">
+          {/* <div className="void-list">
             {this.state.selectedList}
-          </div>
+          </div> */}
           <button onClick={() => this.handleVoid(this.state.selectedList)}>Void</button>
           <button onClick={() => this.handleVoid(this.state.itemList)}>Void Entire Order</button>
           <button onClick={() => closeModal('voidModal')}>Cancel</button>

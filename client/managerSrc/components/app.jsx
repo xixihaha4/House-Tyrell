@@ -56,8 +56,6 @@ export default class App extends React.Component {
     this.getStates();
   }
 
-
-
   getStates() {
     axios.get('/fetch/ingredients')
       .then((ing) => {
