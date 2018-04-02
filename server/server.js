@@ -292,6 +292,22 @@ app.post('/addIngredient', (req, res) => {
     });
 });
 
+app.post('/voidItems', (req, res) => {
+  console.log('req.body on voidItems', req.body);
+  db.Voiditem.create({
+    void_date: moment().format('MM/DD/YYYY, hh:mm:ss a'),
+    employee_id: req.session.employee,
+    order_number: req.body.orderNumber,
+    void_items: JSON.stringify(req.body.selected),
+  })
+    .then((response) => {
+      res.status(201).send();
+    })
+    .catch((error) => {
+      throw error;
+    });
+});
+
 //* **************************** GET REQUESTS *********************************
 // not working? attempt to redirect users who are not logged in
 
@@ -400,6 +416,16 @@ app.get('/fetch/allsales', (req, res) => {
     .then((data) => {
       res.send(data);
     });
+});
+
+app.get('/fetch/recentSales', (req, res) => {
+  db.Sale.findAll({
+    // where sale id is smaller than the current one
+    limit: 20,
+    order: [['id', 'DESC']],
+  }).then((data) => {
+    res.send(data);
+  });
 });
 
 app.get('/fetch/allitems', (req, res) => {

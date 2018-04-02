@@ -62,7 +62,7 @@ export default class Transaction extends React.Component {
             openDiscountModal={this.props.openDiscountModal}
             transactionComplete={this.props.transactionComplete}
             transactionItems={this.props.transactionItems}
-            openOptionModal={this.props.openOptionModal}
+            openVoidModal={this.props.openVoidModal}
           />
         </div>
         <div className='transactionGridFooter'>
