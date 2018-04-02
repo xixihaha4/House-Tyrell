@@ -40,8 +40,6 @@ class InventoryCostLine extends React.Component {
       this.setState({
         date: dateArray.reverse(),
         cost: costArray.reverse(),
-      }, () => {
-        console.log([this.state.date, this.state.cost]);
       });
   }));
   }

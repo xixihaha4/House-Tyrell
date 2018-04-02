@@ -38,10 +38,11 @@ class EmployeeInfo extends React.Component {
     this.state = {
       employeeSelectOptions: [],
       employeeName: '',
-      employeeImage: '',
+      employeeImage: 'http://www.sherwoodchamber.net/media/com_jbusinessdirectory/pictures/companies/0/profileicon-1487694034.png',
       employeeId: '',
       newEmployeeId: '',
       newEmployeeName: '',
+      newEmployeeImage: '',
       managerLevel: false,
       timeSheet: [],
     };
@@ -50,6 +51,7 @@ class EmployeeInfo extends React.Component {
     this.generateEmployeeId = this.generateEmployeeId.bind(this);
     this.submitEmployee = this.submitEmployee.bind(this);
     this.generateTimesheet = this.generateTimesheet.bind(this);
+    this.handleNameInput = this.handleNameInput.bind(this);
   }
 
   componentDidMount() {
@@ -80,6 +82,12 @@ class EmployeeInfo extends React.Component {
     }, () => this.generateTimesheet());
   }
 
+  handleNameInput(e) {
+    this.setState({
+      newEmployeeName: e.target.value,
+    });
+  }
+
   generateEmployeeId(e) {
     e.preventDefault();
     const num = Math.floor(Math.random() * 900000) + 100000;
@@ -105,15 +113,17 @@ class EmployeeInfo extends React.Component {
   }
 
   submitEmployee() {
-    axios.post('/newEmployee', {
-      newEmployeeId: this.state.newEmployeeId,
-      newEmployeeName: this.state.newEmployeeName,
-      managerLevel: this.state.managerLevel,
-    })
+    const formData = new FormData();
+    formData.append('newEmployeeId', this.state.newEmployeeId);
+    formData.append('newEmployeeName', this.state.newEmployeeName);
+    formData.append('managerLevel', this.state.managerLevel);
+    formData.append('newEmployeeImage', this.state.newEmployeeImage[0]);
+    axios.post('/newEmployee', formData)
       .then(() => {
         this.setState({
           newEmployeeId: '',
           newEmployeeName: '',
+          newEmployeeImage: '',
         });
       })
       .catch((error) => {
@@ -124,7 +134,7 @@ class EmployeeInfo extends React.Component {
   render() {
     let employeeImage, employeeDetails;
     if (this.state.employeeImage !== '') {
-      employeeImage = <img src={this.state.employeeImage} />;
+      employeeImage = <img src={this.state.employeeImage } />;
       employeeDetails =
       (<div className="profileGridDetails">
         <h2>Name: {this.state.employeeName}</h2>
@@ -182,11 +192,19 @@ class EmployeeInfo extends React.Component {
               />
               <br />
               <label className="newEmployeeNameLabel">Enter Employee Name: </label>
-              <input type="text" onChange={e => this.setState({ newEmployeeName: e.target.value })}/>
+              <input type="text" onBlur={(e) => this.handleNameInput(e)} />
               <br /><br />
               <button onClick={e => this.generateEmployeeId(e)}>Generate Employee ID</button>
               <label className="employeeIdLabel">{this.state.newEmployeeId}</label>
               <br /><br />
+              <div>
+                <input
+                  type="file"
+                  onChange={e => this.setState({ newEmployeeImage: e.target.files })}
+                  placeholder="Upload a photo"
+                  accept='image/*'
+                />
+              </div>
               <button onClick={(e) => this.submitEmployee(e)}>Submit</button>
             </form>
           </div>

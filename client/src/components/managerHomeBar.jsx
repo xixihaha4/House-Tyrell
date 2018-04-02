@@ -69,7 +69,6 @@ class ManagerHomeBar extends React.Component {
 
   initSocket() {
     socket.on('madeSale', (newSale) => {
-      console.log('NEW SALE HAS BEEN MADE', newSale);
       const { allItems } = this.state;
       const { allSales } = this.state;
       allSales.data.push(newSale);
@@ -81,7 +80,6 @@ class ManagerHomeBar extends React.Component {
           sold: 0,
         };
       });
-      console.log('THIS IS ALL SALES AFTER SOCKETS', allSales);
       allSales.data
         .filter(sale => moment(sale.sale_date).format('MM DD YYYY') === moment().format('MM DD YYYY'))
         .forEach((sale) => {

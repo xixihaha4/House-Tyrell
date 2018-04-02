@@ -11,7 +11,6 @@ export default class confirmationModal extends React.Component {
   }
 
   saveChanges() {
-    console.log('saving changes');
     this.props.saveChanges();
     this.props.closeModal('confirmationModal');
   }
