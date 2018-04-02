@@ -21,8 +21,6 @@ class SaleTable extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log('nextProps.salesData', nextProps.salesData);
-    // console.log('nextProps.itemsData', nextProps.itemsData);
     this.setState({
       itemsData: nextProps.itemsData,
       salesData: nextProps.salesData,

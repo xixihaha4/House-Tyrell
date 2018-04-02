@@ -15,6 +15,7 @@ class EmployeeInfo extends React.Component {
       employeeId: '',
       newEmployeeId: '',
       newEmployeeName: '',
+      newEmployeeImage: '',
       managerLevel: false,
       timeSheet: [],
     };

@@ -52,7 +52,7 @@ export default class KitchenLog extends React.Component {
   initSocket() {
    socket.on('madeSale', (sale) => {
      let ordersPlaced = this.state.ordersPlaced;
-     ordersPlaced.push({ id: sale.id, sale_date: sale.date, item_id: sale.transactionItems });
+     ordersPlaced.push({ id: sale.id, sale_date: sale.sale_date, item_id: sale.item_id });
      this.setState({
        ordersPlaced,
      });

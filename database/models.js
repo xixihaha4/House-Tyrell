@@ -30,7 +30,7 @@ const Item = db.define('Items', {
   item_ingredients: Sequelize.STRING(10000),
   item_category: Sequelize.INTEGER,
   item_availability: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
-
+  item_popularity: { type: Sequelize.INTEGER, allowNull: false, defaultValue: 0 },
 });
 
 const Category = db.define('Categories', {

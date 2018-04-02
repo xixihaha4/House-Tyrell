@@ -4,7 +4,7 @@ import moment from 'moment'
 
 export default class OrderKitchenView extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       classes: 'kitchenOrder',
       age: '0:00',

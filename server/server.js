@@ -130,7 +130,7 @@ app.post('/delete/category', (req, res) => {
   }).then((found) => {
     found.destroy();
   })
-})
+  })
 
 app.post('/create/item', upload.any(), (req, res) => {
   db.Item.create({
@@ -169,6 +169,19 @@ app.post('/completed/transaction', (req, res) => {
   let time = moment().format();
   let ingredientsList = [];
 
+  for (let i = 0; i < itemList.length; i += 1) {
+    db.Item.update(
+      {
+        item_popularity: Sequelize.literal('item_popularity + 1'),
+      },
+      {
+        where: {
+          id: itemList[i],
+        },
+      },
+    );
+  }
+
   db.Sale.create({
     sale_date: time,
     item_id: JSON.stringify(itemList),
@@ -176,7 +189,7 @@ app.post('/completed/transaction', (req, res) => {
     sale_amount: parseFloat(req.body.total),
     sale_cost: 50,
     sale_discount: req.body.discount,
-    sale_cash: type
+    sale_cash: type,
   }).then((results) => {
     res.send(results.dataValues);
   }).then(() => {
@@ -225,11 +238,12 @@ app.post('/clockout', (req, res) => {
 });
 
 
-app.post('/newEmployee', (req, res) => {
+app.post('/newEmployee', upload.any(), (req, res) => {
   db.Employee.create({
     employee_id: req.body.newEmployeeId,
     employee_name: req.body.newEmployeeName,
     manager_privilege: req.body.managerLevel,
+    employee_img: req.files[0].location,
   })
     .then(() => {
       res.status(201).send();
@@ -330,6 +344,15 @@ app.get('/fetch/items', (req, res) => {
     .then((data) => {
       res.send(data);
     });
+});
+
+app.get('/fetch/items/popular', (req, res) => {
+  db.Item.findAll({
+    order: [['item_popularity', 'DESC']],
+  })
+    .then((data) => {
+      res.send(data);
+    })
 });
 
 app.get('/fetch/categories', (req, res) => {

@@ -35,7 +35,6 @@ class TransactionCash extends React.Component {
   }
 
   verifyTotal() {
-    console.log('verifyTotal being called')
     this.setState({
       tendered: (this.state.tendered === '')? '' : parseFloat(this.state.tendered).toFixed(2),
       completed: !this.state.completed,
@@ -49,7 +48,6 @@ class TransactionCash extends React.Component {
   }
 
   togglePinpad() {
-    console.log('hello togglepinpad being called')
     this.setState({ pinpadOn: !this.state.pinpadOn })
   }
 

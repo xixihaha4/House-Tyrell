@@ -61,9 +61,17 @@ export default class App extends React.Component {
       axios.get('/fetch/items')
       .then((results) => {
         this.setState({
-          menuItems: results.data
-        })
-      })
+          menuItems: results.data,
+        });
+      });
+    } else if (category === 'popular') {
+      axios.get('/fetch/items/popular')
+        .then((results) => {
+          console.log('These are reuslts', results.data);
+          this.setState({
+            menuItems: results.data,
+          });
+        });
     } else {
     axios.get('/filter/category', { params: { category: category.id } })
       .then((results) => {
