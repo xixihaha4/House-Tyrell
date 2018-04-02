@@ -49,7 +49,7 @@ class SaleControl extends React.Component {
   render() {
     const { total, tax, transactionItems, discount, openModal, sendEmail } = this.props;
     return (
-      <div className="saleGrid">
+      <div className="innerSaleGrid">
         <button type="button" onClick={() => this.props.history.push('/transaction/cash', { total: ((total + tax) - ((total + tax) * (discount / 100))).toFixed(2), transactionItems, discount })}>
           Cash
         </button>

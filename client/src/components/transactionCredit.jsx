@@ -33,25 +33,50 @@ class TransactionCredit extends React.Component {
         signConfirm: false,
       });
     }
-    axios.post('/completed/transaction', {
-      transactionItems: this.props.location.state.transactionItems,
-      total: this.props.location.state.total,
-      discount: this.props.location.state.discount,
-    }).then((results) => {
-      socket.emit('madeSale',
-        {
-          id: results.data.id,
-          employee_id: results.data.employee_id,
-          total: results.data.sale_amount,
-          item_id: results.data.item_id,
-          sale_date: results.data.sale_date,
-          tendered: this.props.location.state.tendered,
-          sale_discount: results.data.sale_discount,
-          type: results.data.sale_cash,
-        },
-      );
-      this.props.history.push('/salesScreen');
-    });
+
+    axios.get('/fetch/ingredients')
+      .then((results) => {
+        let saleCost = 0;
+        let ingredientCost = {};
+        for (let i = 0; i < results.data.length; i += 1) {
+          let ingredient = results.data[i];
+          if (ingredientCost[ingredient.id] === undefined) {
+            ingredientCost[ingredient.id] = {
+              unit_cost: parseFloat(ingredient.unit_cost),
+            };
+          }
+        }
+
+        let transactionItems = this.props.location.state.transactionItems;
+        for (let i = 0; i < transactionItems.length; i += 1) {
+          const items = JSON.parse(transactionItems[i].item_ingredients);
+          for (let j = 0; j < items.length; j += 1) {
+            saleCost += (ingredientCost[items[j].ingredient_id].unit_cost * items[j].ingredient_amount);
+          }
+        }
+
+        return saleCost
+      })
+      .then((saleCost) => {
+        axios.post('/completed/transaction', {
+          transactionItems: this.props.location.state.transactionItems,
+          total: this.props.location.state.total,
+          discount: this.props.location.state.discount,
+          saleCost,
+        }).then((results) => {
+          socket.emit('madeSale',
+            {
+              id: results.data.id,
+              employee_id: results.data.employee_id,
+              total: results.data.sale_amount,
+              item_id: results.data.item_id,
+              sale_date: results.data.sale_date,
+              sale_discount: results.data.sale_discount,
+            },
+          );
+          this.props.history.push('/salesScreen');
+        });
+      });
   }
 
   emailReceiptClick() {

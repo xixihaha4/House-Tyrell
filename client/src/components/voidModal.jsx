@@ -48,7 +48,7 @@ export default class VoidModal extends React.Component {
   getRecentSales() {
     return axios.get('/fetch/recentSales');
   }
-  
+
   getMenuItems() {
     return axios.get('/fetch/allitems');
   }
@@ -150,7 +150,7 @@ export default class VoidModal extends React.Component {
     // console.log('whole list', list);
     const selectedTransactionList = this.transformSelectedList(list);
     // console.log('total', this.calculateTotal(selectedTransactionList));
-    axios.post('/completed/transaction', { 
+    axios.post('/completed/transaction', {
       transactionItems: selectedTransactionList,
       orderNumber: this.state.orderID,
       total: JSON.stringify(this.calculateTotal(selectedTransactionList)),
@@ -193,7 +193,7 @@ export default class VoidModal extends React.Component {
     const { openModal, closeModal } = this.props;
     return (
       <div className="modal-content">
-        <div className="modal-header">Void 
+        <div className="modal-header">Void
           <FaAngleLeft onClick={() => this.handleLeft()} />
           <FaAngleRight onClick={() => this.handleRight()} />
           <div className="discountClose" onClick={() => closeModal('voidModal')}>&times;</div>
