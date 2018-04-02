@@ -15,6 +15,7 @@ import TransactionCashConfirm from './components/transactionCashConfirm.jsx';
 import SaleControl from './components/saleControl.jsx';
 import KitchenLog from './components/kitchenLog.jsx';
 import ManagerCustomize from './components/managerCustomize.jsx';
+import DeleteEmployee from './components/deleteEmployee.jsx';
 
 const history = createHistory();
 
@@ -33,6 +34,7 @@ ReactDOM.render(
         <Route path="/transaction/cash/confirm" component={TransactionCashConfirm} />
         <Route path="/transaction/credit" component={TransactionCredit} />
         <Route path="/kitchenScreen" component={KitchenLog} />
+        <Route path="/deleteEmployee" component={DeleteEmployee} />
       </div>
     </Router>
   </div>,

@@ -132,6 +132,40 @@ app.post('/delete/category', (req, res) => {
   })
   })
 
+app.post('/delete/employee', (req, res) => {
+  db.Employee.find({
+    where: {
+      employee_id: req.body.employee_id
+    }
+  }).then((found) => {
+    found.destroy();
+  }).then(() => {
+    db.Timesheet.findAll({
+      where: {
+        employee_id: req.body.employee_id
+      }
+    }).then((list) => {
+      console.log('this is list', list)
+      if (list.length > 0) {
+        list.destroy();
+      }
+    }).then(() => {
+      db.Sale.findAll({
+        where: {
+          employee_id: req.body.employee_id
+        }
+      }).then((sales) => {
+        console.log('this is sales', sales)
+        if (sales.length > 0) {
+          sales.destroy();
+        }
+      }).then(() => {
+        res.send();
+      })
+    })
+  })
+})
+
 app.post('/create/item', upload.any(), (req, res) => {
   db.Item.create({
     item_name: req.body.item_name,
@@ -239,11 +273,12 @@ app.post('/clockout', (req, res) => {
 
 
 app.post('/newEmployee', upload.any(), (req, res) => {
+  console.log('this is req.files', req.files)
   db.Employee.create({
     employee_id: req.body.newEmployeeId,
     employee_name: req.body.newEmployeeName,
     manager_privilege: req.body.managerLevel,
-    employee_img: req.files[0].location,
+    employee_img: (req.files.length > 0) ? req.files[0].location : 'http://www.sherwoodchamber.net/media/com_jbusinessdirectory/pictures/companies/0/profileicon-1487694034.png',
   })
     .then(() => {
       res.status(201).send();

@@ -25,6 +25,9 @@ const ManagerNav = () => (
     <Link to="/kitchenScreen" className="item">
       Kitchen
     </Link>
+    <Link to="/deleteEmployee" className="item">
+      Delete Employee
+    </Link>
   </div>
 );
 

@@ -4,7 +4,9 @@ import EmployeeBar from './employeeBar.jsx';
 import Navbar from './navbar.jsx';
 import Select from 'react-select';
 import axios from 'axios';
+import { withRouter } from 'react-router';
 import ReactTable from 'react-table';
+import ConfirmationModal from './confirmationModal.jsx';
 
 const columns =
 [
@@ -56,6 +58,9 @@ class EmployeeInfo extends React.Component {
     this.generateTimesheet = this.generateTimesheet.bind(this);
     this.getAllSales = this.getAllSales.bind(this);
     this.handleNameInput = this.handleNameInput.bind(this);
+    this.closeDelete = this.closeDelete.bind(this);
+    this.openConfirmation = this.openConfirmation.bind(this);
+    this.deletedEmployee = this.deletedEmployee.bind(this);
   }
 
   componentDidMount() {
@@ -188,6 +193,20 @@ class EmployeeInfo extends React.Component {
       });
   }
 
+  openConfirmation(e,val) {
+    e.preventDefault();
+    document.getElementById(val).style.display = 'block';
+  }
+
+  closeDelete(modal) {
+    document.getElementById(modal).style.display = 'none';
+  }
+
+  deletedEmployee() {
+    this.getEmployeeList();
+    this.getAllSales();
+  }
+
   render() {
     let employeeImage, employeeDetails;
     if (this.state.employeeImage !== '') {
@@ -220,6 +239,12 @@ class EmployeeInfo extends React.Component {
           <Navbar />
         </div>
         <div className="managerScreenGrid">
+          <ConfirmationModal
+            closeDelete={this.closeDelete}
+            employeeId={this.state.employeeId}
+            employeeName={this.state.employeeName}
+            deletedEmployee={this.deletedEmployee}
+          />
           <div className="manager-navigation"><Navigation /></div>
           <div className="employeeGraphGrid">
             <div className="barChart">
@@ -272,6 +297,7 @@ class EmployeeInfo extends React.Component {
                 />
               </div>
               <button onClick={(e) => this.submitEmployee(e)}>Submit</button>
+              <button onClick={(e) => this.openConfirmation(e,'deleteEmployeeModal')}>Delete Employee</button>
             </form>
           </div>
           <div>
@@ -289,4 +315,4 @@ class EmployeeInfo extends React.Component {
   }
 }
 
-export default EmployeeInfo;
+export default withRouter(EmployeeInfo);
