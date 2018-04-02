@@ -9,7 +9,12 @@ export default class NotificationModal extends React.Component {
     }
   }
 
+  sendNotice(i) {
+    console.log(i, this.props.alerts[i])
+  }
+
   render() {
+    console.log('this is props in notificationModal', this.props)
     return (
       <div id="notificationModal" className="notificationModal animated fadeIn">
         <div className="modal-content-notification">
@@ -18,21 +23,37 @@ export default class NotificationModal extends React.Component {
             <div className="modal-close" onClick={() => this.props.closeNotification('notificationModal')}><i className="fas fa-times-circle"></i></div>
           </div>
           <div className="modal-body-notification">
-            <h3>Please confirm that you want to remove this employee and all of the employee's data.</h3>
-            <div className="modal-body-employeeName">
-              <h3>
-                Employee Name: {this.props.employeeName}
-              </h3>
+            <h3>These are the current alerts.</h3>
+            <div className="modal-body-alerts">
+              <div className="alert-employee">
+                Employee ID
+              </div>
+              <div className="alert-employeeId">
+                Employee Name
+              </div>
+              <div className="alert-time">
+                Time
+              </div>
             </div>
-            <div className="modal-body-employeeId">
-              <h3>
-                Employee ID: {this.props.employeeId}
-              </h3>
-            </div>
-            <div className="confirmOrCancelNotification">
-              <div onClick={this.saveChanges} className="confirmConfirmNotification">Notification Employee</div>
-              <div onClick={() => this.props.closeNotification('notificationModal')} className="cancelConfirmNotification">Cancel</div>
-            </div>
+            {this.props.alerts.map((alert, i) => {
+              return (<div className="modal-body-alerts" id={`alert_${i}`} style={{gridRow: `${i+3}`}}>
+                <div className="alert-employee">
+                  {alert.employee_id}
+                </div>
+                <div className="alert-employeeId">
+                  {alert.employee_name}
+                </div>
+                <div className="alert-time">
+                  {alert.time}
+                </div>
+                <div
+                  onClick={() => this.props.alertEmployee(i)}
+                  className="alert-button">
+                  <i className="fas fa-times-circle"></i>
+                </div>
+              </div>)
+            })}
+
           </div>
           <div className="modal-footer-notification">Delete Employee Information</div>
 

@@ -1514,7 +1514,7 @@ body {
   z-index: 1; /* Sit on top */
   top: 35%;
   left: 54%;
-  width: 50%;
+  width: 65%;
   transform: translate(-50%, -50%);
   border-radius: 5%;
   background-color: rgb(185, 185, 185);
@@ -1535,7 +1535,32 @@ body {
   display: grid;
   padding: 20px;
   grid-template-rows: repeat(8, 5vh);
+  grid-row-gap: 2px;
+  overflow-y: scroll;
   border-radius: 5%;
+}
+
+.modal-body-alerts {
+  position: relative;
+  display: grid;
+  grid-template-columns:  25% 25% 40% 10%;
+}
+.alert-employee {
+  grid-column: 1;
+  color: black;
+}
+.alert-employeeId {
+  grid-column: 2;
+  color: black;
+}
+.alert-time {
+  grid-column: 3;
+  color: black;
+}
+
+.alert-button {
+  grid-column: 4;
+  color: red;
 }
 
 .modal-body-notification h3 {
