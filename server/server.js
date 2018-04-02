@@ -211,20 +211,26 @@ app.post('/completed/transaction', (req, res) => {
   if (req.body.orderNumber) {
     saleType = req.body.orderNumber;
   }
+  let multiplier = 1;
+  if (saleType !==) {
+    multiplier = -1;
+  }
 
-  for (let i = 0; i < itemList.length; i += 1) {
-    db.Item.update(
-      {
-        item_popularity: Sequelize.literal('item_popularity + 1'),
-      },
-      {
-        where: {
-          id: itemList[i],
+  if (saleType === 0) {
+    for (let i = 0; i < itemList.length; i += 1) {
+      db.Item.update(
+        {
+          item_popularity: Sequelize.literal('item_popularity + 1'),
         },
-      },
-    ).catch((error) => {
-      res.send(error);
-    });
+        {
+          where: {
+            id: itemList[i],
+          },
+        },
+      ).catch((error) => {
+        res.send(error);
+      });
+    }
   }
 
   let discount = 0;
@@ -236,7 +242,7 @@ app.post('/completed/transaction', (req, res) => {
     sale_date: time,
     item_id: JSON.stringify(itemList),
     employee_id: employee,
-    sale_amount: parseFloat(req.body.total),
+    sale_amount: parseFloat(req.body.total) * multiplier,
     sale_cost: 50,
     sale_discount: discount,
     sale_cash: type,
@@ -253,7 +259,11 @@ app.post('/completed/transaction', (req, res) => {
           let ingList = JSON.parse(ingList);
         }
         ingList.forEach((ing) => {
-          ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
+          if (multiplier === -1) {
+            ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left + ing.ingredient_amount
+          } else {
+            ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
+          }
         })
       })
       ingredientsList.forEach((ing) => {
