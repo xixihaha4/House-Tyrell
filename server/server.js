@@ -188,10 +188,6 @@ app.post('/create/category', (req, res) => {
     });
 })
 
-app.post('/create/all', (req, res) => {
-
-})
-
 app.post('/completed/transaction', (req, res) => {
   console.log('this is req.body', req.body);
   const itemList = [];
@@ -243,8 +239,8 @@ app.post('/completed/transaction', (req, res) => {
     item_id: JSON.stringify(itemList),
     employee_id: employee,
     sale_amount: parseFloat(req.body.total) * multiplier,
-    sale_cost: 50,
-    sale_discount: discount,
+    sale_cost: req.body.saleCost,
+    sale_discount: req.body.discount,
     sale_cash: type,
     sale_type: saleType,
   }).then((results) => {

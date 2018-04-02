@@ -7,7 +7,7 @@ const SaleCategory = ({ menuCategories, filterByCategory, removeCategoryConfirm,
         <button type="button" className="allButton" onClick={() => console.log('hello')}>Popularity</button>
     {
       menuCategories.map((category, i) =>
-        <button key={i} type="button">{category.category_name}<div onClick={() => removeCategoryConfirm(category)}><i className="fas fa-times-circle"></i></div></button>)
+        <button key={i} type="button" className="allButton">{category.category_name} <span onClick={() => removeCategoryConfirm(category)}><i className="fas fa-times-circle" /></span></button>)
     }
   </div>
 );

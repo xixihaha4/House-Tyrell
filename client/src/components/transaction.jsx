@@ -40,11 +40,11 @@ export default class Transaction extends React.Component {
     return (
 
       <div className='transactionGrid'>
+
         <div className='transactionGridHeader'>
-          <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Name</div>
-          <div style={{ 'gridRow': '1', 'gridColumn': '3' }}>Price</div>
-          {/* <button className='transactionClearButton' type="button">CLEAR</button> */}
-          <div onClick={this.props.transactionClear} className='transactionClearButton'><i className="far fa-trash-alt"></i></div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '1' }}>Name</div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Price</div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '3' }} onClick={this.props.transactionClear} className='transactionClearButton'><i className="far fa-trash-alt"></i></div>
         </div>
 
         <div className='transactionGridItems'>
@@ -64,7 +64,8 @@ export default class Transaction extends React.Component {
           {this.props.transactionItems.map((item, i) =>
             <div style={{ 'gridRow': `${i + 1}`, 'gridColumn': '3' }}>{item.item_price}</div>)}
         </div>
-        <div className="saleControlGrid">
+
+        <div className="saleControlGrid" style={{ gridRow: '6', height: '100%' }}>
           <SaleControl
             total={this.props.total}
             tax={this.props.tax}
@@ -72,15 +73,16 @@ export default class Transaction extends React.Component {
             openModal={this.props.openModal}
             transactionComplete={this.props.transactionComplete}
             transactionItems={this.props.transactionItems}
-            // openOptionModal={this.props.openOptionModal}
           />
         </div>
+
         <div className='transactionGridFooter'>
           <div style={{ gridRow: '1', gridColumn: '4' }}>{this.props.tax.toFixed(2)} Tax </div>
           <div style={{ gridRow: '2', gridColumn: '4' }}>{this.props.total.toFixed(2)} subTotal </div>
           <div style={{ gridRow: '3', gridColumn: '4' }}>{(this.props.total + this.props.tax - ((this.props.total + this.props.tax) * (this.props.discount / 100))).toFixed(2)} Total </div>
           {showDiscount}
         </div>
+
       </div>
     )
   }

@@ -298,7 +298,6 @@ export default class App extends React.Component {
     let categories = this.state.newCategories.slice();
     let removeItems = this.state.removedItems.slice();
     let removeCategories = this.state.removedCategories.slice();
-    console.log('this is items', items)
     for (let i = 0; i < items.length; i += 1) {
       let formData = new FormData();
       items[i].item_ingredients = '' + JSON.stringify(items[i].item_ingredients)

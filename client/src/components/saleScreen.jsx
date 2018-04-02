@@ -5,7 +5,7 @@ import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
 import SaleControl from './saleControl.jsx';
 import Navbar from './navbar.jsx';
-import VoidModal from './voidModal.jsx';
+// import VoidModal from './voidModal.jsx';
 
 const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openModal, closeModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear }) =>
   (
@@ -48,8 +48,6 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             openModal={openModal}
             transactionComplete={transactionComplete}
             transactionItems={transactionItems}
-            // openOptionModal={openOptionModal}
-            // closeOptionModal={closeOptionModal}
             transactionClear={transactionClear}
           />
         </div>

@@ -57,14 +57,13 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
         />
 
         <SaleItems
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr', gridTemplateRows: '1fr 1fr 1fr 1fr 1fr' }}
             menuItems={menuItems}
             itemClick={itemClick}
             openModal={openModal}
             closeModal={closeModal}
             removeItem={removeItem}
         />
-        <div className="saleTransactionGrid" style={{ gridColumn: '2 / 3', gridRow: '1 / 1' }}>
+        <div className="saleTransactionGrid" style={{ gridColumn: '4 / 4', gridRow: '1 / 3' }}>
           <Transaction
             removeIng={removeIng}
             transactionRemove={transactionRemove}
@@ -78,7 +77,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             transactionClear={transactionClear}
           />
         </div>
-        <div className="saleCategoryGrid" style={{ gridRow: '2 / 2', gridColumn: '1 / 1' }}>
+        <div className="saleCategoryGrid" style={{ gridRow: '2 / 2', gridColumn: '1 / 4' }}>
           <SaleCategory
             menuCategories={menuCategories}
             removeCategoryConfirm={removeCategoryConfirm}
