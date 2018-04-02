@@ -149,7 +149,9 @@ app.post('/create/category', (req, res) => {
   db.Category.create({ category_name: req.body.category_name })
     .then(() => {
       res.send()
-    })
+    }).catch((error) => {
+      res.send(error);
+    });
 })
 
 app.post('/create/all', (req, res) => {
@@ -158,6 +160,8 @@ app.post('/create/all', (req, res) => {
 
 app.post('/completed/transaction', (req, res) => {
   const itemList = [];
+  console.log('req.body.transactionItems', req.body.transactionItems);
+  console.log('req.body.orderNumber', req.body.orderNumber);
   for (let i = 0; i < req.body.transactionItems.length; i += 1) {
     itemList.push(req.body.transactionItems[i].id);
   }
@@ -168,6 +172,10 @@ app.post('/completed/transaction', (req, res) => {
   let employee = JSON.parse(req.session.employee)
   let time = moment().format();
   let ingredientsList = [];
+  let saleType = 0;
+  if (req.body.orderNumber) {
+    saleType = req.body.orderNumber;
+  }
 
   for (let i = 0; i < itemList.length; i += 1) {
     db.Item.update(
@@ -179,7 +187,14 @@ app.post('/completed/transaction', (req, res) => {
           id: itemList[i],
         },
       },
-    );
+    ).catch((error) => {
+      res.send(error);
+    });
+  }
+
+  let discount = 0;
+  if (req.body.discount) {
+    discount = req.body.discount;
   }
 
   db.Sale.create({
@@ -188,8 +203,9 @@ app.post('/completed/transaction', (req, res) => {
     employee_id: employee,
     sale_amount: parseFloat(req.body.total),
     sale_cost: 50,
-    sale_discount: req.body.discount,
+    sale_discount: discount,
     sale_cash: type,
+    sale_type: saleType,
   }).then((results) => {
     res.send(results.dataValues);
   }).then(() => {
@@ -215,7 +231,9 @@ app.post('/completed/transaction', (req, res) => {
         })
       })
     })
-  })
+  }).catch((error) => {
+    res.send(error);
+  });
 });
 
 app.post('/clockout', (req, res) => {
@@ -343,6 +361,8 @@ app.get('/fetch/items', (req, res) => {
   db.Item.findAll()
     .then((data) => {
       res.send(data);
+    }).catch((error) => {
+      res.send(error);
     });
 });
 
@@ -352,21 +372,28 @@ app.get('/fetch/items/popular', (req, res) => {
   })
     .then((data) => {
       res.send(data);
-    })
+    }).catch((error) => {
+      res.send(error);
+    });
 });
 
 app.get('/fetch/categories', (req, res) => {
   db.Category.findAll()
     .then((data) => {
       res.send(data);
+    }).catch((error) => {
+      res.send(error);
     });
 });
 
 app.get('/fetch/ingredients', (req, res) => {
   db.Ingredient.findAll()
-  .then((data) => {
-    res.send(data);
-  });
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
 });
 
 app.get('/fetch/items/ingredients', (req, res) => {
@@ -389,6 +416,8 @@ app.get('/fetch/items/ingredients', (req, res) => {
   })
   .then((data) => {
     res.send(data);
+  }).catch((error) => {
+    res.send(error);
   });
 });
 
@@ -397,6 +426,8 @@ app.get('/fetch/currentInventory', (req, res) => {
     attributes: ['order_name', 'order_number', 'order_date', 'order_initial', 'order_left', 'order_expire', 'order_used'],
   }).then((data) => {
     res.send(data);
+  }).catch((error) => {
+    res.send(error);
   });
 });
 
@@ -405,6 +436,8 @@ app.get('/fetch/inventory', (req, res) => {
     attributes: ['ingredient_name', 'order_number', 'order_date', 'ingredient_left', 'ingredient_initial', 'ingredient_expire'],
   }).then((data) => {
     res.send(data);
+  }).catch((error) => {
+    res.send(error);
   });
 });
 
@@ -414,6 +447,8 @@ app.get('/fetch/ordercost', (req, res) => {
     order: [['order_date', 'DESC']],
   }).then((data) => {
     res.send(data);
+  }).catch((error) => {
+    res.send(error);
   });
 });
 
@@ -423,6 +458,8 @@ app.get('/fetch/inventorycost', (req, res) => {
     order: [['order_date', 'DESC']],
   }).then((data) => {
     res.send(data);
+  }).catch((error) => {
+    res.send(error);
   });
 });
 
@@ -431,6 +468,8 @@ app.get('/fetch/waste', (req, res) => {
     attributes: ['order_name', 'order_date', 'order_number', 'order_initial', 'order_left', 'order_used'],
   }).then((data) => {
     res.send(data);
+  }).catch((error) => {
+    res.send(error);
   });
 });
 
@@ -438,17 +477,41 @@ app.get('/fetch/allsales', (req, res) => {
   db.Sale.findAll()
     .then((data) => {
       res.send(data);
+    })
+    .catch((error) => {
+      res.send(error);
     });
 });
 
 app.get('/fetch/recentSales', (req, res) => {
+  const lastSaleID = req.query.saleID;
+  if (!lastSaleID) {
+    db.Sale.findAll({
+      limit: 3,
+      order: [['id', 'DESC']],
+    })
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((error) => {
+        res.send(error);
+      });
+  }
   db.Sale.findAll({
-    // where sale id is smaller than the current one
-    limit: 20,
+    limit: 3,
     order: [['id', 'DESC']],
-  }).then((data) => {
-    res.send(data);
-  });
+    where: {
+      id: {
+        [Op.lt]: lastSaleID,
+      },
+    },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
 });
 
 app.get('/fetch/allitems', (req, res) => {

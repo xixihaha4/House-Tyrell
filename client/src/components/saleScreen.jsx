@@ -31,7 +31,10 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
           </div>
         </div>
         <div id="voidModal" className="voidModal animated fadeIn">
-          <VoidModal openModal={openModal} closeModal={closeModal} menuItems={menuItems} />
+          <VoidModal
+            openModal={openModal}
+            closeModal={closeModal}
+          />
         </div>
         <div style={{ gridColumn: '1 / 4', gridRow: '1 / 1' }}><SaleItems menuItems={menuItems} itemClick={itemClick} /></div>
         <div className="saleTransactionGrid">
