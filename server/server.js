@@ -212,7 +212,7 @@ app.post('/completed/transaction', (req, res) => {
     saleType = req.body.orderNumber;
   }
   let multiplier = 1;
-  if (saleType !==) {
+  if (saleType !== 0) {
     multiplier = -1;
   }
 
@@ -894,6 +894,14 @@ io.on('connection', (socket) => {
 
   socket.on('addSale', (data) => {
     io.sockets.emit('addSale', data);
+  })
+
+  socket.on('alertManager', (alert)=> {
+    io.sockets.emit('alertManager', alert);
+  })
+
+  socket.on('alertEmployee', (manager) => {
+    io.sockets.emit('alertEmployee', manager);
   })
   // disconnect is fired when a client leaves the server
   socket.on('disconnect', () => {
