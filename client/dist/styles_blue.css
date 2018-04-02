@@ -224,7 +224,7 @@ body {
   grid-column: 1;
   grid-row: 1 / 5;
   display: grid;
-  grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh;
+  grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh 5vh;
   background-color: white;
   border-right: 1px solid rgb(84, 178, 255);
 }
