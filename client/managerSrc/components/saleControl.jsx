@@ -47,7 +47,7 @@ class SaleControl extends React.Component {
 }
 
   render() {
-    const { total, tax, transactionItems, discount, openDiscountModal, openOptionModal } = this.props;
+    const { total, tax, transactionItems, discount, openDiscountModal, openVoidModal } = this.props;
     return (
       <div className="saleGrid">
         <button style={{ padding: '16.5% 0' }} type="button" onClick={() => this.props.history.push('/transaction/cash', { total: ((total + tax) - ((total + tax) * (discount / 100))).toFixed(2), transactionItems, discount })}>
@@ -57,7 +57,7 @@ class SaleControl extends React.Component {
           Credit
         </button>
         <button type="button" onClick={() => openDiscountModal()}>Discount</button>
-        <button type="button" onClick={() => openOptionModal()}>Options</button>
+        <button type="button" onClick={() => openVoidModal()}>Void</button>
       </div>
     );
   }
