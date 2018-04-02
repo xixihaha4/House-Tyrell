@@ -743,8 +743,14 @@ body {
 }
 
 .navBack {
-  position: absolute;
-  left: 5%;
+  position: relative;
+  left: 1%;
+  top: 1%;
+  font-size: 1.5em;
+}
+.navAlert {
+  position: relative;
+  left: 4%;
   top: 1%;
   font-size: 1.5em;
 }
@@ -1497,5 +1503,106 @@ body {
 
 
 /**** DELETE EMPLOYEE *****/
+
+
+/**** Notification Modal *****/
+
+
+.notificationModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-notification{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-notification {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(8, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-notification h3 {
+  grid-row: 1;
+  color: black;
+}
+
+
+
+.modal-body-notification button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-notification {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-notification {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+.confirmOrCancelNotification {
+  grid-row: 7;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmConfirmNotification {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.modal-body-employeeName {
+  grid-row: 4;
+  text-align: center;
+}
+
+.modal-body-employeeId {
+  text-align: center;
+  grid-row: 5;
+}
+
+.cancelConfirmNotification {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+
+/**** Notification Modal *****/
 
 /***        MANAGER CUSTOMIZATION       **/
