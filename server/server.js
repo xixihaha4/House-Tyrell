@@ -193,11 +193,16 @@ app.post('/completed/transaction', (req, res) => {
   for (let i = 0; i < req.body.transactionItems.length; i += 1) {
     itemList.push(req.body.transactionItems[i].id);
   }
+  /* below is capturing payment type (cash or credit) from making new sales vs void */
   let type;
   if (req.body.type) {
     type = true;
+  }
+  if (req.body.cash) {
+    type = req.body.cash;
   } else { type = false; }
-  let employee = JSON.parse(req.session.employee)
+
+  let employee = JSON.parse(req.session.employee);
   let time = moment().format();
   let ingredientsList = [];
   let saleType = 0;
@@ -224,11 +229,6 @@ app.post('/completed/transaction', (req, res) => {
         res.send(error);
       });
     }
-  }
-
-  let discount = 0;
-  if (req.body.discount) {
-    discount = req.body.discount;
   }
 
   return Promise.all(req.body.transactionItems.map((item) => {
