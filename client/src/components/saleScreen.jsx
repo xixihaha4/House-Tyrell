@@ -7,7 +7,7 @@ import SaleControl from './saleControl.jsx';
 import Navbar from './navbar.jsx';
 import VoidModal from './voidModal.jsx';
 
-const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openModal, closeModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear }) =>
+const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openModal, closeModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear, addIng }) =>
   (
     <div>
       <div className="navbar">
@@ -46,9 +46,11 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             tax={tax}
             discount={discount}
             openModal={openModal}
+            addIng={addIng}
             transactionComplete={transactionComplete}
             transactionItems={transactionItems}
             transactionClear={transactionClear}
+            menuItems={menuItems}
           />
         </div>
         <div className="saleCategoryGrid">

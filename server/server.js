@@ -263,20 +263,30 @@ app.post('/completed/transaction', (req, res) => {
         db.Ingredient.findAll()
         .then((ing) => {
           ingredientsList = JSON.parse(JSON.stringify(ing));
+          console.log('this is ingredientList and req.body.transactionItems', req.body.transactionItems,'\nawfawefawfawfawf\nwawfawef', ingredientsList)
           req.body.transactionItems.forEach((item) => {
             let ingList = JSON.parse(item.item_ingredients);
-            if (typeof ingList === 'string') {
+            while (typeof ingList === 'string') {
               let ingList = JSON.parse(ingList);
             }
+            console.log('\nthis is ingList\n', ingList)
             ingList.forEach((ing) => {
-              if (multiplier === -1) {
-                ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left + ing.ingredient_amount
-              } else {
-                ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
+              for (let i = 0; i < ingredientsList.length; i += 1) {
+                if (ingredientsList[i].id === ing.ingredient_id) {
+                  let temp = JSON.parse(ingredientsList[i].ingredient_left).toFixed(2);
+                  if (multiplier === -1) {
+                    temp = temp + ing.ingredient_amount;
+                    ingredientsList[i].ingredient_left = JSON.stringify(temp);
+                  } else {
+                    temp = temp - ing.ingredient_amount;
+                    ingredientsList[i].ingredient_left = JSON.stringify(temp);
+                  }
+                }
               }
             })
           })
           ingredientsList.forEach((ing) => {
+            console.log('this is ing before update', ing)
             db.Ingredient.update({
               ingredient_left: ing.ingredient_left
             },{
@@ -453,29 +463,50 @@ app.get('/fetch/ingredients', (req, res) => {
     });
 });
 
+// app.get('/fetch/items/all/ingredients', (req, res) => {
+//   console.log('this is req.query', req.query)
+//   db.Item.find({
+//     where: {
+//       id: req.query.id
+//     }
+//   }).then((result) => {
+//     res.send(result)
+//   })
+// })
+
 app.get('/fetch/items/ingredients', (req, res) => {
-  console.log(req.query)
-  let ingredientList = JSON.parse(req.query.item_ingredients);
-  while (typeof ingredientList === 'string') {
-    ingredientList = JSON.parse(ingredientList)
-  }
+  let finalIngList = [];
   let ingIdList = [];
-  ingredientList.forEach(ingredient => {
-    ingIdList.push(ingredient.ingredient_id)
-  })
-  db.Ingredient.findAll(
-    {
+  db.Item.find({
     where: {
-      id: {
-        [Op.in]: ingIdList
-      }
+      id: req.query.id
     }
   })
   .then((data) => {
-    res.send(data);
-  }).catch((error) => {
-    res.send(error);
-  });
+    let temp = JSON.parse(JSON.stringify(data))
+    let ingredientList = JSON.parse(temp.item_ingredients)
+    while (typeof ingredientList === 'string') {
+      ingredientList = JSON.parse(ingredientList)
+    }
+    ingredientList.forEach(ingredient => {
+      finalIngList.push(ingredient);
+      ingIdList.push(ingredient.ingredient_id)
+    })
+  }).then(() => {
+    db.Ingredient.findAll({
+      where: {
+        id: {
+          [Op.in]: ingIdList
+        }
+      }
+    }).then((results) => {
+      results = JSON.parse(JSON.stringify(results));
+      for (let i = 0; i < finalIngList.length; i ++) {
+        finalIngList[i]['ingredient_name'] = results[i].ingredient_name
+      }
+      res.send(finalIngList);
+    })
+  })
 });
 
 app.get('/fetch/currentInventory', (req, res) => {
