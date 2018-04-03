@@ -11,7 +11,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
   text-align: center;
   min-height: 30vh;
   max-height: 86vh;
@@ -64,7 +64,7 @@ body {
   grid-template-rows: 5vh 62vh 10vh;
   padding-top: 1%;
   border-left: 1px solid black;
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
 }
 
 .transactionClearButton {
@@ -146,7 +146,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 87vh 7vh;
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
 }
 
 .saleGrid {
@@ -155,7 +155,7 @@ body {
   grid-template-rows: 20% 20% 20% 20%;
   background-color: #333;
   bottom: 0;
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
 }
 
 .saleGrid button {
@@ -447,7 +447,7 @@ body {
   padding: 0;
   margin: 0;
   transform: translate(-50%, -50%);
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -480,7 +480,7 @@ body {
   padding: 0;
   margin: 0;
   transform: translate(-50%, -50%);
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -522,7 +522,7 @@ body {
   position: fixed;
   margin: 0;
   transform: translate(-50%, -50%);
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -826,7 +826,7 @@ body {
   display: grid;
   grid-template-columns: 70% 30%;
   grid-template-rows: 87vh 8vh;
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
 }
 .saleItemGridManager {
   grid-row: 1;
@@ -834,7 +834,7 @@ body {
   display: inline-grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: 20% 20% 20% 20% 20%;
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
   text-align: center;
   min-height: 30vh;
   max-height: 86vh;
