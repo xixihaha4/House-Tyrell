@@ -227,9 +227,9 @@ body {
   color: white;
 }
 
-.managerScreenGrid-Sales {
+.managerScreenGrid-sales {
   display: grid;
-  grid-template-columns: 30vh 1fr 1fr;
+  grid-template-columns: 30vh 1fr 1fr 1fr 1fr;
   grid-template-rows: 50% 1fr;
   color: white;
 }
@@ -355,8 +355,8 @@ body {
 
 .selectGraphDropDown {
   grid-row: 1 / 1;
-  grid-column:  4 / 5;
-  padding-top: 5%;
+  grid-column:  5 / 5;
+  padding: 5%;
 }
 
 .addInventoryForm {
@@ -373,7 +373,7 @@ body {
 
 .graphGrid-inventory {
   grid-row: 1 / 1;
-  grid-column: 2 / 4;
+  grid-column: 2 / 5;
 }
 
 .graphTable {
