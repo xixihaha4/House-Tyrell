@@ -36,6 +36,7 @@ class ManagerHome extends React.Component {
       tableData: [],
       dropdownOptions: [],
       lowStockPercent: 20,
+      totalCash: 0,
     };
     this.getAllClockedIn = this.getAllClockedIn.bind(this);
     this.getAllSalesToday = this.getAllSalesToday.bind(this);
@@ -58,6 +59,7 @@ class ManagerHome extends React.Component {
       allSales.push({ sale });
       this.setState({
         totalSales: (parseFloat(this.state.totalSales) + parseFloat(sale.total)).toFixed(2),
+        totalCash: sale.type ? (parseFloat(this.state.totalCash) + parseFloat(sale.total)).toFixed(2) : this.state.totalCash,
         allSales,
       });
     });
@@ -80,11 +82,11 @@ class ManagerHome extends React.Component {
       let tempTable = this.state.tableData.slice();
       for (let i = 0; i < temp.length; i += 1) {
         if (temp[i].employee_name === employee.employee_name) {
-          temp.splice(i, 1)
-          tempTable.splice(i, 1)
+          temp.splice(i, 1);
+          tempTable.splice(i, 1);
         }
       }
-      this.setState({ allEmployees: temp, tableData: tempTable })
+      this.setState({ allEmployees: temp, tableData: tempTable });
     })
   }
 
@@ -127,9 +129,17 @@ class ManagerHome extends React.Component {
         todaySales.forEach((sale) => {
           totalAmount += parseFloat(sale.sale_amount);
         })
+        let totalCash = 0;
+        todaySales.forEach((sale) => {
+          console.log("CASH SALE", sale);
+          if (sale.sale_cash === true) {
+            totalCash += parseFloat(sale.sale_amount);
+          }
+        })
         this.setState({
           allSales: todaySales,
-          totalSales: totalAmount.toFixed(2)
+          totalSales: totalAmount.toFixed(2),
+          totalCash: totalCash.toFixed(2),
         });
       })
       .catch((error) => {
@@ -185,6 +195,10 @@ class ManagerHome extends React.Component {
             <h1><i className="fas fa-dollar-sign" /> {this.state.totalSales}</h1>
             <h2>Total Sales</h2>
           </div>
+          <div id="card" className="managerCard-5">
+            <h1><i className="fas fa-dollar-sign" /> {this.state.totalCash}</h1>
+            <h2>Total Cash</h2>
+          </div>
           <div id="card" className="managerCard-4">
             {
               lowIngredients.length > 0
@@ -204,7 +218,7 @@ class ManagerHome extends React.Component {
               />
             </div>
           </div>
-          <div style={{ gridColumn: '2 / 4', gridRow: '3 / 4', paddingTop: '2%', paddingLeft: '3%' }}>
+          <div className="managerClockTable">
             <ReactTable
               columns={columns}
               data={this.state.tableData}
@@ -213,7 +227,7 @@ class ManagerHome extends React.Component {
               style={{ color: 'black' }}
             />
           </div>
-          <div style={{ gridColumn: '4 / 5', gridRow: '2 / 4' }}>
+          <div style={{ gridColumn: '3 / 9', gridRow: '2 / 3' }}>
             <ManagerHomeBar />
           </div>
         </div>

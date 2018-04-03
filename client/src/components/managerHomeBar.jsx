@@ -43,7 +43,7 @@ class ManagerHomeBar extends React.Component {
         });
 
         allSales.data
-          .filter(sale => moment(sale.sale_date).format('MM DD YYYY') === moment().format('MM DD YYYY'))
+          .filter(sale => (moment(sale.sale_date).format('MM DD YYYY') === moment().format('MM DD YYYY')) && (sale.sale_type === 0))
           .forEach((sale) => {
             JSON.parse(sale.item_id).forEach((menuItemId) => {
               itemLib[menuItemId].sold += 1;
@@ -81,7 +81,7 @@ class ManagerHomeBar extends React.Component {
         };
       });
       allSales.data
-        .filter(sale => moment(sale.sale_date).format('MM DD YYYY') === moment().format('MM DD YYYY'))
+        .filter(sale => (moment(sale.sale_date).format('MM DD YYYY') === moment().format('MM DD YYYY')) && (sale.sale_type === 0))
         .forEach((sale) => {
           JSON.parse(sale.item_id).forEach((menuItemId) => {
             itemLib[menuItemId].sold += 1;
@@ -113,7 +113,7 @@ class ManagerHomeBar extends React.Component {
       },
       x: 'x',
       size: {
-        height: 745,
+        height: 400,
       },
       data: {
         columns: this.state.sales_X,
@@ -138,7 +138,6 @@ class ManagerHomeBar extends React.Component {
             position: 'outer-middle',
           },
         },
-        rotated: true,
       },
     });
   }
