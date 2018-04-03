@@ -189,10 +189,7 @@ app.post('/create/category', (req, res) => {
 })
 
 app.post('/completed/transaction', (req, res) => {
-  console.log('this is req.body', req.body);
   const itemList = [];
-  console.log('req.body.transactionItems', req.body.transactionItems);
-  console.log('req.body.orderNumber', req.body.orderNumber);
   for (let i = 0; i < req.body.transactionItems.length; i += 1) {
     itemList.push(req.body.transactionItems[i].id);
   }
@@ -234,47 +231,65 @@ app.post('/completed/transaction', (req, res) => {
     discount = req.body.discount;
   }
 
-  db.Sale.create({
-    sale_date: time,
-    item_id: JSON.stringify(itemList),
-    employee_id: employee,
-    sale_amount: parseFloat(req.body.total) * multiplier,
-    sale_cost: req.body.saleCost,
-    sale_discount: req.body.discount,
-    sale_cash: type,
-    sale_type: saleType,
-  }).then((results) => {
-    res.send(results.dataValues);
-  }).then(() => {
-    db.Ingredient.findAll()
-    .then((ing) => {
-      ingredientsList = JSON.parse(JSON.stringify(ing));
-      req.body.transactionItems.forEach((item) => {
-        let ingList = JSON.parse(item.item_ingredients);
-        if (typeof ingList === 'string') {
-          let ingList = JSON.parse(ingList);
-        }
-        ingList.forEach((ing) => {
-          if (multiplier === -1) {
-            ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left + ing.ingredient_amount
-          } else {
-            ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
-          }
-        })
+  return Promise.all(req.body.transactionItems.map((item) => {
+    const parseItem = JSON.parse(item.item_ingredients);
+    return Promise.all(parseItem.map((ingredient) => {
+      return db.Ingredient.findAll({
+        where: {
+          id: ingredient.ingredient_id,
+        },
       })
-      ingredientsList.forEach((ing) => {
-        db.Ingredient.update({
-          ingredient_left: ing.ingredient_left
-        },{
-            where: {
-            id: ing.id,
-          },
+        .then((result) => {
+          return result[0].unit_cost * ingredient.ingredient_amount;
+        });
+    }))
+      .then((results) => {
+        return results.reduce((accum, val) => accum + val);
+      });
+  }))
+    .then((results) => {
+      db.Sale.create({
+        sale_date: time,
+        item_id: JSON.stringify(itemList),
+        employee_id: employee,
+        sale_amount: parseFloat(req.body.total) * multiplier,
+        sale_cost: results.reduce((accum, val) => accum + val),
+        sale_discount: req.body.discount,
+        sale_cash: type,
+        sale_type: saleType,
+      }).then((results) => {
+        res.send(results.dataValues);
+      }).then(() => {
+        db.Ingredient.findAll()
+        .then((ing) => {
+          ingredientsList = JSON.parse(JSON.stringify(ing));
+          req.body.transactionItems.forEach((item) => {
+            let ingList = JSON.parse(item.item_ingredients);
+            if (typeof ingList === 'string') {
+              let ingList = JSON.parse(ingList);
+            }
+            ingList.forEach((ing) => {
+              if (multiplier === -1) {
+                ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left + ing.ingredient_amount
+              } else {
+                ingredientsList[ing.ingredient_id-1].ingredient_left = ingredientsList[ing.ingredient_id-1].ingredient_left - ing.ingredient_amount
+              }
+            })
+          })
+          ingredientsList.forEach((ing) => {
+            db.Ingredient.update({
+              ingredient_left: ing.ingredient_left
+            },{
+                where: {
+                id: ing.id,
+              },
+            })
+          })
         })
-      })
-    })
-  }).catch((error) => {
-    res.send(error);
-  });
+      }).catch((error) => {
+        res.send(error);
+      });
+    });
 });
 
 app.post('/clockout', (req, res) => {
