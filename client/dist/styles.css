@@ -1598,14 +1598,33 @@ body {
   grid-column: 2;
   color: black;
 }
+
 .alert-time {
   grid-column: 3;
   color: black;
 }
 
+.manager-name {
+  text-align: center;
+  grid-row: 4;
+  color: black;
+}
+
+.manager-time {
+  text-align: center;
+  grid-row: 6;
+  color: black;
+}
+
+
+.alert-notice {
+  grid-column: 4;
+  color: black;
+}
+
 .alert-button {
   grid-column: 4;
-  color: red;
+  color: green;
 }
 
 .modal-body-notification h3 {
