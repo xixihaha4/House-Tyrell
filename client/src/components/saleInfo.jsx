@@ -59,9 +59,9 @@ class SaleInfo extends React.Component {
     return (
       <div>
         <Navbar />
-        <div className="managerScreenGrid-Sales">
+        <div className="managerScreenGrid-sales">
           <div className="manager-navigation"><Navigation /></div>
-          <div className="graph" style={{ gridColumn: '2 / 4', gridRow: '1 / 1', paddingTop: '5%' }}>
+          <div className="graph-sales" style={{ gridColumn: '2 / 5', gridRow: '1 / 1', paddingTop: '5%' }}>
             <SaleLine
               salesData={this.state.salesData}
               ingredientsData={this.state.ingredientsData}
@@ -69,7 +69,7 @@ class SaleInfo extends React.Component {
               dataType={this.state.dataType}
             />
           </div>
-          <div style={{ color: 'black' }}>
+          <div className="selectGraphDropDown-sales" style={{ color: 'black', padding: '5%' }}>
             <Select
               options={[{ value: 'daily', label: 'Daily' }, { value: 'monthly', label: 'Monthly' }, { value: 'yearly', label: 'Yearly' }]}
               placeholder="Select a graph"
