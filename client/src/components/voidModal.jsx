@@ -13,6 +13,7 @@ export default class VoidModal extends React.Component {
       menuData: [],
       orderID: '',
       employeeID: '',
+      discount: 0,
       itemList: [],
       selectedList: [],
       currentOrderIndex: 0,
@@ -118,7 +119,8 @@ export default class VoidModal extends React.Component {
     this.setState({
       orderID: this.state.transactions[this.state.currentOrderIndex].id,
       employeeID: this.state.transactions[this.state.currentOrderIndex].employee_id,
-      itemList: this.getItemNames(this.state.transactions[this.state.currentOrderIndex].item_id)
+      itemList: this.getItemNames(this.state.transactions[this.state.currentOrderIndex].item_id),
+      discount: this.state.transactions[this.state.currentOrderIndex].sale_discount,
     });
   }
 
@@ -153,7 +155,8 @@ export default class VoidModal extends React.Component {
     axios.post('/completed/transaction', { 
       transactionItems: selectedTransactionList,
       orderNumber: this.state.orderID,
-      total: JSON.stringify(this.calculateTotal(selectedTransactionList)),
+      discount: this.state.discount,
+      total: ((this.calculateTotal(selectedTransactionList) * 1.0875).toFixed(2)).toString(),
     })
       .then(() => {
         this.props.closeModal('voidModal');
@@ -192,16 +195,21 @@ export default class VoidModal extends React.Component {
   render() {
     const { openModal, closeModal } = this.props;
     return (
-      <div className="modal-content">
-        <div className="modal-header">Void 
+      <div className="void-modal-content">
+        <div className="void-modal-header">
+          <div className="void-modal-title">Void </div>
+          <div className="void-modal-nav-left">
           <FaAngleLeft onClick={() => this.handleLeft()} />
+          </div>
+          <div className="void-modal-nav-right">
           <FaAngleRight onClick={() => this.handleRight()} />
-          <div className="discountClose" onClick={() => closeModal('voidModal')}>&times;</div>
+          </div>
+          <div className="voidClose" onClick={() => closeModal('voidModal')}>&times;</div>
         </div>
-        <div className="modal-body">
+        <div className="void-modal-body">
           Order ID. {this.state.orderID}
           Employee ID. {this.state.employeeID}
-          <div className="order-list">
+          <div className="void-order-list">
             {this.state.itemList.map((item, i) => (
               <VoidList
                 item={item}
@@ -218,7 +226,7 @@ export default class VoidModal extends React.Component {
           <button onClick={() => this.handleVoid(this.state.itemList)}>Void Entire Order</button>
           <button onClick={() => closeModal('voidModal')}>Cancel</button>
         </div>
-        <div className="modal-footer"></div>
+        <div className="void-modal-footer"></div>
       </div>
     );
   }
