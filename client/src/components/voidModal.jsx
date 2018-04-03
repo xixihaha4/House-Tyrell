@@ -4,6 +4,7 @@ import Select from 'react-select';
 import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import VoidList from './voidList.jsx';
+import socket from '../socket.js';
 
 export default class VoidModal extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export default class VoidModal extends React.Component {
     this.calculateTotal = this.calculateTotal.bind(this);
     this.handleLeft = this.handleLeft.bind(this);
     this.handleRight = this.handleRight.bind(this);
+    this.initSocket = this.initSocket.bind(this);
   }
 
   // componentWillMount() {
@@ -45,6 +47,7 @@ export default class VoidModal extends React.Component {
 
   componentDidMount() {
     this.getTransactionData();
+    this.initSocket();
   }
 
   getRecentSales() {
@@ -191,6 +194,25 @@ export default class VoidModal extends React.Component {
         this.displayOrder();
       });
     }
+  }
+
+  initSocket() {
+    socket.on('madeSale', (data) => {
+      // console.log('SOCKET DATA', data);
+      var cash = false;
+      if (data.type === 'cash') {
+        cash = true;
+      }
+      // console.log('CASH????', cash);
+      // console.log('NAMES', this.getItemNames(data.item_id));
+      this.setState({
+        orderID: data.id,
+        employeeID: data.employee_id,
+        itemList: this.getItemNames(data.item_id),
+        paymentType: cash,
+        discount: data.sale_discount,
+      });
+    });
   }
 
   render() {

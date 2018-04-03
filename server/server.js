@@ -531,7 +531,11 @@ app.get('/fetch/waste', (req, res) => {
 });
 
 app.get('/fetch/allsales', (req, res) => {
-  db.Sale.findAll()
+  db.Sale.findAll({
+    where: {
+      sale_type: 0,
+    },
+  })
     .then((data) => {
       res.send(data);
     })
