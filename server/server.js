@@ -229,11 +229,6 @@ app.post('/completed/transaction', (req, res) => {
     }
   }
 
-  let discount = 0;
-  if (req.body.discount) {
-    discount = req.body.discount;
-  }
-
   db.Sale.create({
     sale_date: time,
     item_id: JSON.stringify(itemList),
@@ -531,6 +526,9 @@ app.get('/fetch/recentSales', (req, res) => {
     db.Sale.findAll({
       limit: 3,
       order: [['id', 'DESC']],
+      where: {
+        sale_type: 0,
+      },
     })
       .then((data) => {
         res.send(data);
@@ -543,6 +541,7 @@ app.get('/fetch/recentSales', (req, res) => {
     limit: 3,
     order: [['id', 'DESC']],
     where: {
+      sale_type: 0,
       id: {
         [Op.lt]: lastSaleID,
       },
@@ -886,10 +885,6 @@ io.on('connection', (socket) => {
 
   socket.on('employeeLogout', (employee) => {
     io.sockets.emit('employeeLogout', employee)
-  })
-
-  socket.on('addSale', (data) => {
-    io.sockets.emit('addSale', data);
   })
 
   socket.on('alertManager', (alert)=> {

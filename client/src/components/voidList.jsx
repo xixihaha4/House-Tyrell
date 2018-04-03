@@ -26,7 +26,7 @@ export default class VoidList extends React.Component {
       <div 
         onClick={() => this.selectItem(this.props.item)}
         style={this.state.selected ? {'color': 'red'} : {'color': 'grey'}}>
-            {this.props.item}
+          {this.props.item}
       </div>
     )
   }
