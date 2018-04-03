@@ -68,13 +68,15 @@ class SaleTable extends React.Component {
       return obj;
     });
     this.setState({
-      tableData: data,
+      tableData: data.reverse(),
+    }, () => {
+      console.log(this.state.tableData);
     });
   }
 
   initSocket() {
     socket.on('madeSale', (data) => {
-      console.log('socket data', data);
+      // console.log('socket data', data);
       const obj = {};
       obj.date = moment(data.date).format('MM/DD/YYYY hh:mm:ss a');
       obj.items = this.getItemNames(data.transactionItems);
@@ -130,10 +132,10 @@ class SaleTable extends React.Component {
           columns={columns}
           defaultPageSize={10}
           style={{ color: 'black' }}
-          sorted={[{
-            id: 'date',
-            desc: true,
-          }]}
+          // sorted={[{
+          //   id: 'date',
+          //   desc: true,
+          // }]}
         />
       </div>
     );
