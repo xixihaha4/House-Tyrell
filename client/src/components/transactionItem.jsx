@@ -20,7 +20,13 @@ export default class TransactionItem extends React.Component {
       <div>
         {this.state.modalIsOpen ?
           <div>{this.props.item.item_name}
-            <CustomModal removeIng={this.props.removeIng} item={this.props.item} />
+            <CustomModal
+              removeIng={this.props.removeIng}
+              item={this.props.item}
+              addIng={this.props.addIng}
+              index={this.props.index}
+              menuItems={this.props.menuItems}
+            />
           </div>
           : <div onClick={this.showModal}>{this.props.item.item_name}</div>}
       </div>
