@@ -26,10 +26,9 @@ export default class App extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.discountModalOptions = this.discountModalOptions.bind(this);
     this.updateDiscount = this.updateDiscount.bind(this);
-    // this.openOptionModal = this.openOptionModal.bind(this);
-    // this.closeOptionModal = this.closeOptionModal.bind(this);
     this.transactionClear = this.transactionClear.bind(this);
     this.sendEmail = this.sendEmail.bind(this);
+    this.addIng = this.addIng.bind(this);
   }
 
   componentDidMount() {
@@ -101,8 +100,31 @@ export default class App extends React.Component {
     });
   }
 
-  removeIng(ingredient, i, crossed) {
-      console.log('this is ingredient and index of ingredient', ingredient, i, crossed);
+  removeIng(ingredient, i, crossed, index) {
+      let temp = this.state.transactionItems.slice();
+      let ingredientList = JSON.parse(temp[index].item_ingredients);
+      for (let i = 0; i < ingredientList.length; i ++) {
+        if (ingredientList[i].ingredient_id === ingredient.ingredient_id) {
+          ingredientList.splice(i, 1)
+        }
+      }
+      temp[index].item_ingredients = JSON.stringify(ingredientList);
+      this.setState({ transactionItems: temp })
+  }
+
+  addIng(ingredient, i, crossed, index) {
+    console.log('this is ingredient, i , crossed, index', ingredient, i, crossed, index);
+    let temp = this.state.transactionItems.slice();
+    let ingredientList = JSON.parse(temp[index].item_ingredients);
+
+    console.log('this is temp and ingredientList', temp, ingredientList)
+    ingredientList.push({
+      ingredient_id: ingredient.ingredient_id,
+      ingredient_amount: ingredient.ingredient_amount,
+    });
+    console.log('this is ingredientList now', ingredientList)
+    temp[index].item_ingredients = JSON.stringify(ingredientList);
+    this.setState({ transactionItems: temp }, () => console.log('this is transactionItems now', this.state.transactionItems));
   }
 
   transactionRemove(index) {
@@ -122,7 +144,12 @@ export default class App extends React.Component {
   }
 
   transactionClear() {
-    this.setState({ transactionItems: [] })
+    this.setState({
+      transactionItems: [],
+      total: 0,
+      tax: 0,
+      discount: 0,
+    })
   }
 
 // Below are all the functions for the discount modal and also to update discount.
@@ -180,9 +207,8 @@ export default class App extends React.Component {
           transactionComplete={this.transactionComplete}
           discountOptions={this.state.discountOptions}
           updateDiscount={this.updateDiscount}
-          // openOptionModal={this.openOptionModal}
-          // closeOptionModal={this.closeOptionModal}
           transactionClear={this.transactionClear}
+          addIng={this.addIng}
         />
 
       </div>
