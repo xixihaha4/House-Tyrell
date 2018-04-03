@@ -584,12 +584,7 @@ app.get('/fetch/employee', (req, res) => {
             check_out: null,
           }
         }).then((emp) => {
-          console.log('this is emp in login', emp)
-          if (!emp) {
-            console.log('this is emp inside the if statement', emp)
-            console.log('this is req.query.PIN and session', req.query.PIN)
-
-            console.log('sent response');
+          // if (!emp) {
             req.session.regenerate(() => {
               req.session.employee = req.query.PIN;
               console.log('this is req.session', req.session.employee)
@@ -599,16 +594,16 @@ app.get('/fetch/employee', (req, res) => {
                 check_in: moment().format('MM/DD/YYYY, hh:mm:ss a'),
               });
             });
-          } else {
+          // } else {
             // db.Timesheet.update({
             //   check_out: moment().format('MM/DD/YYYY, hh:mm:ss a')
             // },{
             //   where: {check_out: null}
             // }).then(() => {
-              res.status(404).send();
+              // res.status(404).send();
             // })
 
-          }
+          // }
         })
       }
     })
