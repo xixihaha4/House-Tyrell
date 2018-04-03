@@ -270,7 +270,7 @@ class InventoryInfo extends React.Component {
             <input className="inventoryInput" name="orderQuantity" type="number" value={this.state.orderQuantity} placeholder="Order Quantity (kg)" onChange={this.handleInputChange} />
             <input className="inventoryInput" name="unitCost" type="number" value={this.state.unitCost} placeholder="Unit Cost ($)" onChange={this.handleInputChange} />
             <input className="inventoryInput" name="totalCost" type="number" value={this.state.totalCost} placeholder="Total Cost ($)" onChange={this.handleInputChange} />
-            <button className="inventoryInput" onClick={this.handleClick}>Add Ingredient</button>
+            <span className="inventoryInput" onClick={this.handleClick}><i class="fas fa-plus-circle" /></span>
           </div>
           <div className="graphTable">
             {type === 'usage' ? (
