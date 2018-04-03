@@ -12,6 +12,7 @@ export default class VoidModal extends React.Component {
       transactions: [],
       menuData: [],
       orderID: '',
+      paymentType: '',
       employeeID: '',
       discount: 0,
       itemList: [],
@@ -120,6 +121,7 @@ export default class VoidModal extends React.Component {
       orderID: this.state.transactions[this.state.currentOrderIndex].id,
       employeeID: this.state.transactions[this.state.currentOrderIndex].employee_id,
       itemList: this.getItemNames(this.state.transactions[this.state.currentOrderIndex].item_id),
+      paymentType: this.state.transactions[this.state.currentOrderIndex].sale_cash,
       discount: this.state.transactions[this.state.currentOrderIndex].sale_discount,
     });
   }
@@ -156,6 +158,7 @@ export default class VoidModal extends React.Component {
       transactionItems: selectedTransactionList,
       orderNumber: this.state.orderID,
       discount: this.state.discount,
+      cash: this.state.paymentType,
       total: ((this.calculateTotal(selectedTransactionList) * 1.0875).toFixed(2)).toString(),
     })
       .then(() => {
@@ -169,7 +172,6 @@ export default class VoidModal extends React.Component {
       this.setState({
         currentOrderIndex: this.state.currentOrderIndex - 1,
         selectedList: [],
-        isSelected: false,
       }, () => {
         this.displayOrder();
       });
@@ -185,7 +187,6 @@ export default class VoidModal extends React.Component {
       this.setState({
         currentOrderIndex: this.state.currentOrderIndex + 1,
         selectedList: [],
-        isSelected: false,
       }, () => {
         this.displayOrder();
       });
@@ -207,9 +208,11 @@ export default class VoidModal extends React.Component {
           <div className="voidClose" onClick={() => closeModal('voidModal')}>&times;</div>
         </div>
         <div className="void-modal-body">
-          Order ID. {this.state.orderID}
-          Employee ID. {this.state.employeeID}
-          <div className="void-order-list">
+          <div className="void-modal-list-head">
+            <div className="void-modal-list-head1">Order ID. {this.state.orderID}</div>
+            <div className="void-modal-list-head2">Employee ID. {this.state.employeeID}</div>
+          </div>
+          <div className="void-modal-order-list">
             {this.state.itemList.map((item, i) => (
               <VoidList
                 item={item}
@@ -219,14 +222,15 @@ export default class VoidModal extends React.Component {
                 updateSelectedList={this.updateSelectedList}
               />))}
           </div>
-          {/* <div className="void-list">
-            {this.state.selectedList}
-          </div> */}
-          <button onClick={() => this.handleVoid(this.state.selectedList)}>Void</button>
+          {/* <button onClick={() => this.handleVoid(this.state.selectedList)}>Void</button>
           <button onClick={() => this.handleVoid(this.state.itemList)}>Void Entire Order</button>
-          <button onClick={() => closeModal('voidModal')}>Cancel</button>
+          <button onClick={() => closeModal('voidModal')}>Cancel</button> */}
         </div>
-        <div className="void-modal-footer"></div>
+        <div className="void-modal-footer">
+          <button className="void-modal-button1" onClick={() => this.handleVoid(this.state.selectedList)}>Void</button>
+          <button className="void-modal-button2" onClick={() => this.handleVoid(this.state.itemList)}>Void Entire Order</button>
+          <button className="void-modal-button3" onClick={() => closeModal('voidModal')}>Cancel</button>
+        </div>
       </div>
     );
   }

@@ -790,10 +790,6 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.void-order-list {
-  overflow: scroll;
-}
-
 .void-modal-header {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
@@ -804,7 +800,7 @@ body {
 
 .void-modal-title {
   grid-column: 1;
-  font-size: 24px;
+  font-size: 26px;
 }
 
 .void-modal-nav-left {
@@ -817,7 +813,6 @@ body {
   text-align: center;
   font-size: 28px;
 }
-
 .voidClose {
   grid-column: 4;
   text-align: right;
@@ -829,6 +824,74 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.void-modal-body {
+  display: grid;
+  grid-template-rows: repeat(5, minmax(10vh, 1fr));
+  background-color: white;
+  padding: 2px 16px;
+}
+
+.void-modal-list-head {
+  grid-row: 1/1;
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.void-modal-list-head1 {
+  grid-column: 1;
+  text-align: left;
+  padding-top: 3%;
+}
+
+.void-modal-list-head2 {
+  grid-column: 2;
+  text-align: right;
+  padding-top: 3%;
+}
+
+.void-modal-order-list {
+  grid-row: 2/5;
+  font-size: 24px;
+  max-height: 38vh;
+  overflow-y: scroll;
+}
+
+.void-modal-footer {
+  display: grid;
+  grid-template-columns: 33% 34% 33%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+  grid-column-gap: 1%;
+  grid-row-gap: 1%;
+}
+
+.void-modal-button1 {
+  grid-column: 1;
+  padding: 2%;
+  margin: 2%;
+  border-radius: 2%;
+  font-size: 20px;
+}
+
+.void-modal-button2 {
+  grid-column: 2;
+  padding: 2%;
+  margin: 2%;
+  border-radius: 2%;
+  font-size: 20px;
+}
+
+.void-modal-button3 {
+  grid-column: 3;
+  padding: 2%;
+  margin: 2%;
+  margin-right: 7%;
+  border-radius: 2%;
+  font-size: 20px;
 }
 
 /* DISCOUNT MODAL STYLING */
