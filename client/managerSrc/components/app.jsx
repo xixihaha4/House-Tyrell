@@ -1,7 +1,7 @@
 import React from 'react';
 import SaleScreen from './saleScreen.jsx';
 import axios from 'axios';
-import Login from './login.jsx';
+// import Login from './login.jsx';
 import Alert from 'react-s-alert';
 
 export default class App extends React.Component {
@@ -335,6 +335,8 @@ export default class App extends React.Component {
       newCategories: [],
       menuItems: tempMenu,
       menuCategories: tempCat,
+      removedItems: [],
+      removedCategories: []
     });
   }
 
