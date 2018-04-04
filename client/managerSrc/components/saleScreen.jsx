@@ -3,7 +3,7 @@ import SaleItems from './saleItems.jsx';
 import SaleCategory from './saleCategory.jsx';
 import Transaction from './transaction.jsx';
 import SaleControl from './saleControl.jsx';
-import Navbar from './navbar.jsx';
+// import Navbar from './navbar.jsx';
 import ItemModal from './itemModal.jsx';
 import Select from 'react-select';
 import CategoryModal from './categoryModal.jsx';
