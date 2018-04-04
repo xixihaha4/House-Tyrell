@@ -18,6 +18,9 @@ class EmployeeBar extends React.Component {
   // componentDidReceiveProps() {
     this.updateChart();
   }
+  componentDidReceiveProps() {
+    this.updateChart();
+  }
   updateChart() {
     const chart = c3.generate({
       bindto: '#chart',
