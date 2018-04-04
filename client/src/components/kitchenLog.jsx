@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import OrderKitchenView from './orderKitchenView.jsx';
 import socket from '../socket.js';
+import Navbar from './navbar.jsx';
 
 export default class KitchenLog extends React.Component {
   constructor(props) {
@@ -61,24 +62,27 @@ export default class KitchenLog extends React.Component {
 
   render() {
     return (
-      <div className="kitchenGridContainer noselect">
-        {this.state.ordersPlaced.map(order =>
-          (<div>
-            <OrderKitchenView
-              orderUp={this.orderUp}
-              number={order.id}
-              time={
-                order.sale_date
-              }
-              foods={
-                JSON.parse(order.item_id)
-                  .map(idOrdered =>
-                    this.state.menuItems
-                      .find(item => item.id === idOrdered).item_name
-                  )
-              }
-            />
-          </div>))}
+      <div>
+        <div style={{ marginBottom: '1%' }}><Navbar /></div>
+        <div className="kitchenGridContainer noselect">
+          {this.state.ordersPlaced.map(order =>
+            (<div>
+              <OrderKitchenView
+                orderUp={this.orderUp}
+                number={order.id}
+                time={
+                  order.sale_date
+                }
+                foods={
+                  JSON.parse(order.item_id)
+                    .map(idOrdered =>
+                      this.state.menuItems
+                        .find(item => item.id === idOrdered).item_name
+                    )
+                }
+              />
+            </div>))}
+        </div>
       </div>
     )
   }

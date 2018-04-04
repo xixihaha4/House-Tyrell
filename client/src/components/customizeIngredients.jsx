@@ -6,7 +6,6 @@ export default class CustomizeIngredients extends React.Component {
     this.state = {
       crossed: false,
     }
-
     this.crossOutItem = this.crossOutItem.bind(this);
     this.remove = this.remove.bind(this);
     this.add = this.add.bind(this);
