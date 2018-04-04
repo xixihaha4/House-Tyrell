@@ -224,7 +224,7 @@ app.post('/completed/transaction', (req, res) => {
           where: {
             id: itemList[i],
           },
-        },
+        }
       ).catch((error) => {
         res.send(error);
       });

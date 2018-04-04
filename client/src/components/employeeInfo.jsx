@@ -2,11 +2,13 @@ import React from 'react';
 import Navigation from './managerNav.jsx';
 import EmployeeBar from './employeeBar.jsx';
 import Navbar from './navbar.jsx';
+import moment from 'moment'
 import Select from 'react-select';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 import ReactTable from 'react-table';
 import ConfirmationModal from './confirmationModal.jsx';
+import socket from '../socket.js'
 
 const columns =
 [
@@ -41,7 +43,7 @@ class EmployeeInfo extends React.Component {
       employeeSelectOptions: [],
       employeeName: '',
       employeeImage: 'http://www.sherwoodchamber.net/media/com_jbusinessdirectory/pictures/companies/0/profileicon-1487694034.png',
-      employeeId: '',
+      employeeId: 'all',
       newEmployeeId: '',
       newEmployeeName: '',
       newEmployeeImage: '',
@@ -50,6 +52,8 @@ class EmployeeInfo extends React.Component {
       allSales: null,
       employeeSalesRate: [],
       employeeSales: [],
+      employeeSalesOption: 'monthly',
+      trigger: 1,
     };
     this.getEmployeeList = this.getEmployeeList.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -61,11 +65,41 @@ class EmployeeInfo extends React.Component {
     this.closeDelete = this.closeDelete.bind(this);
     this.openConfirmation = this.openConfirmation.bind(this);
     this.deletedEmployee = this.deletedEmployee.bind(this);
+    this.sortDate = this.sortDate.bind(this);
+    this.organizeSalesData = this.organizeSalesData.bind(this);
+    this.getDateArray = this.getDateArray.bind(this);
+    this.getRevenueArray = this.getRevenueArray.bind(this);
+    this.updateChart = this.updateChart.bind(this);
   }
 
   componentDidMount() {
+    this.initSocket();
     this.getAllSales();
     this.getEmployeeList();
+  }
+
+  initSocket() {
+    socket.on('madeSale', (sale) => {
+      console.log('sale received:', sale)
+      let allSales = this.state.allSales
+      let date = sale.sale_date.split('T').join(' ')
+      let tuple = [
+        date.slice(0, date.length-6), sale.total
+      ]
+      console.log('all sales in socket func', allSales)
+      allSales.all[0].push(tuple[0])
+      allSales.all[1].push(tuple[1])
+      allSales[sale.employee_id][0].push(tuple[0])
+      allSales[sale.employee_id][1].push(tuple[1])
+
+      this.setState({allSales})
+
+      // let ordersPlaced = this.state.ordersPlaced;
+      // ordersPlaced.push({ id: sale.id, sale_date: sale.sale_date, item_id: sale.item_id });
+      // this.setState({
+      //   ordersPlaced,
+      // });
+    });
   }
 
   getAllSales() {
@@ -96,12 +130,114 @@ class EmployeeInfo extends React.Component {
           // employeeSales: this.state.allSales.all[1],
           // employeeSalesRate: this.state.allSales.all[0]
         })
-        this.setState({
-          employeeSalesRate: this.state.allSales.all[0],
-          employeeSales: this.state.allSales.all[1],
-        })
+        // this.setState({
+        //   employeeSalesRate: this.state.allSales.all[0],
+        //   employeeSales: this.state.allSales.all[1],
+        // })
+        this.organizeSalesData();
         console.log('sales obj', this.state.allSales);
       })
+  }
+
+  organizeSalesData() {
+    // const data = this.state.salesData;
+    console.log('organize sales data, data', this.state.allSales, 'employeeId:', this.state.employeeId)
+    const data = this.state.allSales[this.state.employeeId]
+    const objDay = {};
+    const objMonth = {};
+    const objYear = {};
+    data[0].forEach((saleByDate, idx) => {
+      const day = saleByDate.slice(0, 10);
+      const month = saleByDate.slice(0, 7);
+      const year = saleByDate.slice(0, 4);
+      // const day = sale.sale_date.slice(0, 10);
+      // const month = sale.sale_date.slice(0, 7);
+      // const year = sale.sale_date.slice(0, 4);
+      if (objDay[day] === undefined) {
+        objDay[day] = Number(data[1][idx + 1]);
+      }
+      if (objMonth[month] === undefined) {
+        objMonth[month] = Number(data[1][idx + 1]);
+      }
+      if (objYear[year] === undefined) {
+        objYear[year] = Number(data[1][idx + 1]);
+      }
+      objDay[day] += Number(data[1][idx + 1]);
+      objMonth[month] += Number(data[1][idx + 1]);
+      objYear[year] += Number(data[1][idx + 1]);
+    });
+    const salesDay = Object.keys(objDay).map((date) => {
+      return [date, objDay[date]];
+    });
+    const salesMonth = Object.keys(objMonth).map((date) => {
+      return [date, objMonth[date]];
+    });
+    const salesYear = Object.keys(objYear).map((date) => {
+      return [date, objYear[date]];
+    });
+    const orderedsalesDay = this.sortDate(salesDay).slice(0, 15);
+    const orderedsalesMonth = this.sortDate(salesMonth).slice(0, 12);
+    const orderedsalesYear = this.sortDate(salesYear).slice(0, 15);
+
+    console.log('obj day and ordered', objDay, orderedsalesDay)
+
+    if (this.state.employeeSalesOption === 'daily') {
+      this.setState({
+        employeeSalesRate: this.getDateArray(orderedsalesDay),
+        employeeSales: this.getRevenueArray(orderedsalesDay),
+      }, () => {
+        this.updateChart();
+      })
+    }
+    if (this.state.employeeSalesOption === 'monthly') {
+      this.setState({
+        employeeSalesRate: this.getDateArray(orderedsalesMonth),
+        employeeSales: this.getRevenueArray(orderedsalesMonth),
+      }, () => {
+        this.updateChart();
+      })
+    }
+    if (this.state.employeeSalesOption === 'yearly') {
+      this.setState({
+        employeeSalesRate: this.getDateArray(orderedsalesYear),
+        employeeSales: this.getRevenueArray(orderedsalesYear),
+      }, () => {
+        this.updateChart();
+      })
+    }
+  }
+
+  updateChart() {
+    this.setState({ trigger: this.state.trigger * -1})
+  }
+
+  getDateArray(array) {
+    const date = array.map((entry) => {
+      return entry[0]
+    })
+    const reversed = date.reverse();
+    return reversed;
+  }
+  getRevenueArray(array) {
+    const revenue = array.map((entry) => {
+      return entry[1]
+    })
+    const reversed = revenue.reverse();
+    reversed.unshift('Revenue');
+    return reversed;
+  }
+
+
+  sortDate(array) {
+    return array.sort((a, b) => {
+      if ((a[0]) < (b[0])) {
+        return 1;
+      }
+      if ((a[0]) > (b[0])) {
+        return -1;
+      }
+      return 0;
+    })
   }
 
   getEmployeeList() {
@@ -112,7 +248,7 @@ class EmployeeInfo extends React.Component {
           myOptions.push({ value: results.data[i], label: results.data[i].employee_name });
         }
         this.setState({
-          employeeSelectOptions: myOptions,
+          employeeSelectOptions: ['all'].concat(myOptions),
         });
       })
       .catch((error) => {
@@ -252,10 +388,25 @@ class EmployeeInfo extends React.Component {
                 <EmployeeBar
                   amount={this.state.employeeSales}
                   intervals={this.state.employeeSalesRate}
+                  update={this.state.trigger}
                 />
                 :
                 <h1 className="noDataNotice">no data</h1>
               }
+            </div>
+            <div style={{ color: 'black' }}>
+              <Select
+                options={[
+                  { value: 'daily', label: 'Daily' },
+                  { value: 'monthly', label: 'Monthly' },
+                  { value: 'yearly', label: 'Yearly' }
+                ]}
+                placeholder="Select a graph"
+                onChange={value =>
+                  this.setState({ employeeSalesOption: value.value },
+                    () => this.organizeSalesData())
+                }
+              />
             </div>
           </div>
           <div className="profileGrid">
