@@ -36,7 +36,7 @@ app.on('ready', () => {
 
   mainWindow.setTitle('OctoPOS');
   // mainWindow.loadURL("file://" + __dirname + "/client/dist/index.html");
-  mainWindow.loadURL('http://10.16.2.132:3000');
+  mainWindow.loadURL('http://192.168.1.3:3000');
   mainWindow.webContents.executeJavaScript(`
     var path = require('path');
     module.paths.push(path.resolve('node_modules'));

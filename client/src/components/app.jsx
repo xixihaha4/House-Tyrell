@@ -108,15 +108,14 @@ export default class App extends React.Component {
 
   removeIng(ingredient, i, crossed, index) {
       let temp = this.state.transactionItems.slice();
-      let tempp = temp.slice();
-      let ingredientList = JSON.parse(tempp[index].item_ingredients);
-      for (let i = 0; i < ingredientList.length; i ++) {
+      let ingredientList = JSON.parse(temp[index].item_ingredients);
+      for (let i = 0; i < ingredientList.length; i += 1) {
         if (ingredientList[i].ingredient_id === ingredient.ingredient_id) {
           ingredientList.splice(i, 1)
         }
       }
-      tempp[index].item_ingredients = JSON.stringify(ingredientList);
-      this.setState({ transactionItems: tempp })
+      temp[index].item_ingredients = JSON.stringify(ingredientList);
+      this.setState({ transactionItems: temp })
   }
 
   addIng(ingredient, i, crossed, index) {
