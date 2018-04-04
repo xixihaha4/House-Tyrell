@@ -85,8 +85,11 @@ export default class App extends React.Component {
   }
 
   itemClick(item) {
+    const tempItem = item;
+    console.log(tempItem);
     const temp = this.state.transactionItems.slice();
-    temp.push(item);
+    console.log(temp, 'THIS IS STATE TITEMS', this.state.transactionItems)
+    temp.push(tempItem);
     let tempTotal = 0;
     for (let i = 0; i < temp.length; i += 1) {
       tempTotal = tempTotal + parseFloat(temp[i].item_price)
@@ -103,7 +106,7 @@ export default class App extends React.Component {
   removeIng(ingredient, i, crossed, index) {
       let temp = this.state.transactionItems.slice();
       let ingredientList = JSON.parse(temp[index].item_ingredients);
-      for (let i = 0; i < ingredientList.length; i ++) {
+      for (let i = 0; i < ingredientList.length; i += 1) {
         if (ingredientList[i].ingredient_id === ingredient.ingredient_id) {
           ingredientList.splice(i, 1)
         }

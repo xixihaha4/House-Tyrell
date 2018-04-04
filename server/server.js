@@ -11,13 +11,11 @@ const multerS3 = require('multer-s3');
 const multer = require('multer');
 const aws = require('aws-sdk');
 const config = require('../config.js');
-///const socket = require('../client/src/socket.js')
-
 
 const Op = Sequelize.Op;
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const server = app.listen(port);
 const io = require('socket.io').listen(server);
 
@@ -194,13 +192,10 @@ app.post('/completed/transaction', (req, res) => {
     itemList.push(req.body.transactionItems[i].id);
   }
   /* below is capturing payment type (cash or credit) from making new sales vs void */
-  let type;
-  if (req.body.type) {
+  let type = false;
+  if (req.body.type || (req.body.cash === true)) {
     type = true;
   }
-  if (req.body.cash) {
-    type = req.body.cash;
-  } else { type = false; }
 
   let employee = JSON.parse(req.session.employee);
   let time = moment().format();

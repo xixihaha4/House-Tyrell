@@ -41,6 +41,7 @@ class TransactionCashConfirm extends React.Component {
           sale_date: results.data.sale_date,
           tendered: this.props.location.state.tendered,
           sale_discount: results.data.sale_discount,
+          sale_type: results.data.sale_type,
           type: this.state.type,
         }
       );

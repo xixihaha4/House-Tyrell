@@ -5,22 +5,21 @@ export default class CustomizeIngredients extends React.Component {
     super(props);
     this.state = {
       crossed: false,
-      masterIngredients: []
+      masterIngredients: [],
     }
-
     this.crossOutItem = this.crossOutItem.bind(this);
   }
 
-  componentDidMount() {
-    let masterIngredients;
-    let temp = this.props.menuItems.slice()
-    for (let i = 0; i < temp.length; i += 1) {
-      if (temp[i].id === this.props.item.id) {
-        masterIngredients = JSON.parse(temp[i].item_ingredients)
-      }
-    }
-    this.setState({ masterIngredients: masterIngredients }, () => console.log('this is masterIngredients now', this.state.masterIngredients))
-  }
+  // componentDidMount() {
+  //   let masterIngredients;
+  //   let temp = this.props.menuItems.slice()
+  //   for (let i = 0; i < temp.length; i += 1) {
+  //     if (temp[i].id === this.props.item.id) {
+  //       masterIngredients = JSON.parse(temp[i].item_ingredients)
+  //     }
+  //   }
+  //   this.setState({ masterIngredients: masterIngredients }, () => console.log('this is masterIngredients now', this.state.masterIngredients))
+  // }
 
   crossOutItem() {
     if (!this.state.crossed) {
