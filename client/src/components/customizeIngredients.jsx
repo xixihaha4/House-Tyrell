@@ -5,40 +5,45 @@ export default class CustomizeIngredients extends React.Component {
     super(props);
     this.state = {
       crossed: false,
-      masterIngredients: []
     }
 
     this.crossOutItem = this.crossOutItem.bind(this);
+    this.remove = this.remove.bind(this);
+    this.add = this.add.bind(this);
   }
 
   componentDidMount() {
-    let masterIngredients;
-    let temp = this.props.menuItems.slice()
-    for (let i = 0; i < temp.length; i += 1) {
-      if (temp[i].id === this.props.item.id) {
-        masterIngredients = JSON.parse(temp[i].item_ingredients)
-      }
-    }
-    this.setState({ masterIngredients: masterIngredients }, () => console.log('this is masterIngredients now', this.state.masterIngredients))
+
+  }
+
+  remove() {
+    this.setState({ crossed: !this.state.crossed}, () => {
+      this.props.removeIng(this.props.ingredient, this.props.i, this.state.crossed, this.props.index)
+    })
+  }
+
+  add() {
+    this.setState({ crossed: !this.state.crossed}, () => {
+      this.props.addIng(this.props.ingredient, this.props.i, this.state.crossed, this.props.index)
+    })
   }
 
   crossOutItem() {
-    if (!this.state.crossed) {
-      this.setState({ crossed: !this.state.crossed },
-        () => this.props.removeIng(this.props.ingredient, this.props.i, this.state.crossed, this.props.index),
-      );
-    } else {
-      this.setState({ crossed: !this.state.crossed },
-        () => this.props.addIng(this.props.ingredient, this.props.i, this.state.crossed, this.props.index),
-      );
-    }
+    this.setState({ crossed: !this.state.crossed} , () => {
+      if (this.state.crossed) {
+        this.remove()
+      } else {
+        this.add()
+      }
+    })
 
   }
 
   render() {
+    console.log('this is props in customize ingredients', this.props)
     return (
       <div
-        onClick={this.crossOutItem}
+        onClick={this.state.crossed ? this.add : this.remove}
         style={this.state.crossed ? {'text-decoration' : 'line-through', 'color': 'grey'} : {'color': 'grey'}}>
         {this.props.ingredient.ingredient_name}
       </div>

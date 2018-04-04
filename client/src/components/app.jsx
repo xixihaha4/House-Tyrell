@@ -66,7 +66,6 @@ export default class App extends React.Component {
     } else if (category === 'popular') {
       axios.get('/fetch/items/popular')
         .then((results) => {
-          console.log('These are reuslts', results.data);
           this.setState({
             menuItems: results.data,
           });
@@ -85,8 +84,15 @@ export default class App extends React.Component {
   }
 
   itemClick(item) {
-    const temp = this.state.transactionItems.slice();
-    temp.push(item);
+    this.getMenuItems();
+    let temp = this.state.transactionItems.slice();
+    let menuTemp = this.state.menuItems.slice();
+    for (let i = 0; i < menuTemp.length; i +=1) {
+      if (menuTemp[i].id === item.id) {
+        temp.push(menuTemp[i])
+      }
+    }
+
     let tempTotal = 0;
     for (let i = 0; i < temp.length; i += 1) {
       tempTotal = tempTotal + parseFloat(temp[i].item_price)
@@ -102,29 +108,26 @@ export default class App extends React.Component {
 
   removeIng(ingredient, i, crossed, index) {
       let temp = this.state.transactionItems.slice();
-      let ingredientList = JSON.parse(temp[index].item_ingredients);
+      let tempp = temp.slice();
+      let ingredientList = JSON.parse(tempp[index].item_ingredients);
       for (let i = 0; i < ingredientList.length; i ++) {
         if (ingredientList[i].ingredient_id === ingredient.ingredient_id) {
           ingredientList.splice(i, 1)
         }
       }
-      temp[index].item_ingredients = JSON.stringify(ingredientList);
-      this.setState({ transactionItems: temp })
+      tempp[index].item_ingredients = JSON.stringify(ingredientList);
+      this.setState({ transactionItems: tempp })
   }
 
   addIng(ingredient, i, crossed, index) {
-    console.log('this is ingredient, i , crossed, index', ingredient, i, crossed, index);
     let temp = this.state.transactionItems.slice();
     let ingredientList = JSON.parse(temp[index].item_ingredients);
-
-    console.log('this is temp and ingredientList', temp, ingredientList)
     ingredientList.push({
       ingredient_id: ingredient.ingredient_id,
       ingredient_amount: ingredient.ingredient_amount,
     });
-    console.log('this is ingredientList now', ingredientList)
     temp[index].item_ingredients = JSON.stringify(ingredientList);
-    this.setState({ transactionItems: temp }, () => console.log('this is transactionItems now', this.state.transactionItems));
+    this.setState({ transactionItems: temp });
   }
 
   transactionRemove(index) {

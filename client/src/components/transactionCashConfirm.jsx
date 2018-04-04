@@ -37,11 +37,12 @@ class TransactionCashConfirm extends React.Component {
           id: results.data.id,
           total: results.data.sale_amount,
           employee_id: results.data.employee_id,
-          item_id: results.data.item_id,
+          item_id: results.data.item_id, //[1,1,1]
           sale_date: results.data.sale_date,
           tendered: this.props.location.state.tendered,
           sale_discount: results.data.sale_discount,
           type: this.state.type,
+          transactionList: this.props.location.state.transactionItems,
         }
       );
       this.props.history.push('/salesScreen');
