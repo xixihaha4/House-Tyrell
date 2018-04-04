@@ -114,8 +114,8 @@ export default class App extends React.Component {
           ingredientList.splice(i, 1)
         }
       }
-      tempp[index].item_ingredients = JSON.stringify(ingredientList);
-      this.setState({ transactionItems: tempp })
+      temp[index].item_ingredients = JSON.stringify(ingredientList);
+      this.setState({ transactionItems: temp })
   }
 
   addIng(ingredient, i, crossed, index) {
