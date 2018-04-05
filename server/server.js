@@ -386,15 +386,14 @@ app.post('/addIngredient', (req, res) => {
     });
 });
 
-app.post('/voidItems', (req, res) => {
-  console.log('req.body on voidItems', req.body);
-  db.Voiditem.create({
-    void_date: moment().format('MM/DD/YYYY, hh:mm:ss a'),
-    employee_id: req.session.employee,
-    order_number: req.body.orderNumber,
-    void_items: JSON.stringify(req.body.selected),
+app.post('/removeIngredient', (req, res) => {
+  console.log('req.body on remove ingredients', req.body.ingredient);
+  db.Ingredient.destroy({
+    where: {
+      ingredient_name: req.body.ingredient,
+    },
   })
-    .then((response) => {
+    .then(() => {
       res.status(201).send();
     })
     .catch((error) => {
@@ -574,7 +573,7 @@ app.get('/fetch/recentSales', (req, res) => {
   const lastSaleID = req.query.saleID;
   if (!lastSaleID) {
     db.Sale.findAll({
-      limit: 3,
+      limit: 10,
       order: [['id', 'DESC']],
       where: {
         sale_type: 0,
@@ -588,7 +587,7 @@ app.get('/fetch/recentSales', (req, res) => {
       });
   }
   db.Sale.findAll({
-    limit: 3,
+    limit: 10,
     order: [['id', 'DESC']],
     where: {
       sale_type: 0,
