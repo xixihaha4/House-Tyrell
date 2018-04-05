@@ -515,7 +515,7 @@ app.get('/fetch/currentInventory', (req, res) => {
 
 app.get('/fetch/inventory', (req, res) => {
   db.Ingredient.findAll({
-    attributes: ['ingredient_name', 'order_number', 'order_date', 'ingredient_left', 'ingredient_initial', 'ingredient_expire'],
+    attributes: ['id', 'ingredient_name', 'order_number', 'order_date', 'ingredient_left', 'ingredient_initial', 'ingredient_expire'],
   }).then((data) => {
     res.send(data);
   }).catch((error) => {
