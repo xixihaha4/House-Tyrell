@@ -29,3 +29,8 @@ This initializes [Webpack](https://webpack.js.org/) and [Node](https://nodejs.or
 If you don't yet use [npm](http://npmjs.com/) or a modern module bundler, or simply want to test or use POS, [click to download](www.eric-sin.com) the desktop application version of POS, made possible via [electron](https://electronjs.org/).
 
 ### Contributing
+
+
+
+
+### Architecture
