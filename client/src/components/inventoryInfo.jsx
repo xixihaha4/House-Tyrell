@@ -33,6 +33,9 @@ class InventoryInfo extends React.Component {
       orderQuantity: '',
       unitCost: '',
       totalCost: '',
+      showAddInventory: true,
+      ingredientDropDown: [],
+      ingredientToRemove: '',
     };
     this.getInventory1 = this.getInventory1.bind(this);
     this.getInventory2 = this.getInventory2.bind(this);
@@ -46,8 +49,13 @@ class InventoryInfo extends React.Component {
     this.calculateCostByRecentMonth = this.calculateCostByRecentMonth.bind(this);
     this.getWaste = this.getWaste.bind(this);
     this.calculateWaste = this.calculateWaste.bind(this);
+    this.transformDate = this.transformDate.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.showAddInventory = this.showAddInventory.bind(this);
+    this.showRemoveInventory = this.showRemoveInventory.bind(this);
+    this.prepareIngredientsDropDown = this.prepareIngredientsDropDown.bind(this);
+    this.handleRemoveIngredient = this.handleRemoveIngredient.bind(this);
   }
 
   /* Inventory Usage Functions */
@@ -67,9 +75,10 @@ class InventoryInfo extends React.Component {
           usageData2: data2.data,
           initial: result1[0] + result2[0],
           left: result1[1] + result2[1],
+          ingredientDropDown: this.prepareIngredientsDropDown(data2.data),
         }, () => {
           console.log('data1', data1.data);
-          console.log('data2', data2.data);
+          console.log('ingredients data', this.state.ingredientDropDown);
         });
     }));
   }
@@ -202,6 +211,17 @@ class InventoryInfo extends React.Component {
     return [winitial, wleft];
   }
 
+  /* Add Inventory */ 
+  showAddInventory() {
+    this.setState({
+      showAddInventory: true,
+    });
+  }
+
+  transformDate(date) {
+    return date.slice(0, 4) + '/' + date.slice(5, 7) + '/' + date.slice(-2);
+  }
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -216,8 +236,8 @@ class InventoryInfo extends React.Component {
     axios.post('/addIngredient', {
       ingredientName: this.state.ingredientName,
       orderNumber: this.state.orderNumber,
-      orderDate: this.state.orderDate,
-      expireDate: this.state.expireDate,
+      orderDate: this.transformDate(this.state.orderDate),
+      expireDate: this.transformDate(this.state.expireDate),
       orderQuantity: this.state.orderQuantity,
       unitCost: this.state.unitCost,
       totalCost: this.state.totalCost,
@@ -235,8 +255,38 @@ class InventoryInfo extends React.Component {
       });
   }
 
+  /* Remove Inventory */
+
+  showRemoveInventory() {
+    this.setState({
+      showAddInventory: false,
+    });
+  }
+
+  prepareIngredientsDropDown(data) {
+    const ingredients = data.map((item) => {
+      const obj = {};
+      obj.value = item.ingredient_name.toLowerCase();
+      obj.label = item.ingredient_name;
+      return obj;
+    });
+    return ingredients;
+  }
+
+  handleRemoveIngredient(event) {
+    event.preventDefault();
+    const item = this.state.ingredientToRemove.label;
+    axios.post('/removeIngredient', {
+      ingredient: item,
+    })
+      .then(this.setState({
+        ingredientToRemove: '',
+      }));
+  }
+
   render() {
     const type = this.state.viewType;
+    const showAdd = this.state.showAddInventory;
     return (
       <div>
         <div className="navbar">
@@ -255,25 +305,49 @@ class InventoryInfo extends React.Component {
               winitial={ this.state.winitial } wleft={ this.state.wleft } getWaste = { this.getWaste }/></div>)
             )}
           </div>
-          <div className="selectGraphDropDown" style={{ color: 'black' }}>
+          
+          <div className="sales-graph-options" style={{ color: 'black' }}>
             <Select
               options={[{ value: 'usage', label: 'Usage' }, { value: 'cost', label: 'Cost' }, { value: 'waste', label: 'Waste' }]}
               placeholder="Select a graph"
               onChange={value => this.setState({ viewType: value.value })}
             />
+            <button onClick={this.showAddInventory}>Add An Ingredient</button>
+            <button onClick={this.showRemoveInventory}>Remove An Ingredient</button>
           </div>
+
+          { (showAdd === true) ? (
           <div className="addInventoryForm">
-            <input className="inventoryInput" name="ingredientName" type="text" value={this.state.ingredientName} placeholder="Ingredient Name" onChange={this.handleInputChange} />
-            <input className="inventoryInput" name="orderNumber" type="text" value={this.state.orderNumber} placeholder="Order Number" onChange={this.handleInputChange} />
-            <input className="inventoryInput" name="orderDate" type="text" value={this.state.orderDate} placeholder="Order Date (YYYY/MM/DD)" onChange={this.handleInputChange} />
-            <input className="inventoryInput" name="expireDate" type="text" value={this.state.expireDate} placeholder="Expiration Date (YYYY/MM/DD)" onChange={this.handleInputChange} />
-            <input className="inventoryInput" name="orderQuantity" type="number" value={this.state.orderQuantity} placeholder="Order Quantity (kg)" onChange={this.handleInputChange} />
-            <input className="inventoryInput" name="unitCost" type="number" value={this.state.unitCost} placeholder="Unit Cost ($)" onChange={this.handleInputChange} />
-            <input className="inventoryInput" name="totalCost" type="number" value={this.state.totalCost} placeholder="Total Cost ($)" onChange={this.handleInputChange} />
-            <span className="inventoryInput" onClick={this.handleClick}><i class="fas fa-plus-circle" /></span>
+            <div>Order Number</div>
+            <div>Ingredient Name</div>
+            <div>Order Quantity</div>
+            <div>Unit Cost</div>
+            <div>Total Cost</div>
+            <div>Order Date</div>
+            <div>Expiration Date</div>
+            <input name="orderNumber" type="text" value={this.state.orderNumber} onChange={this.handleInputChange} />
+            <input name="ingredientName" type="text" value={this.state.ingredientName} onChange={this.handleInputChange} />
+            <input name="orderQuantity" type="number" value={this.state.orderQuantity} onChange={this.handleInputChange} />
+            <input name="unitCost" type="number" value={this.state.unitCost} onChange={this.handleInputChange} />
+            <input name="totalCost" type="number" value={this.state.totalCost} onChange={this.handleInputChange} />
+            <input name="orderDate" type="date" value={this.state.orderDate} onChange={this.handleInputChange} />
+            <input name="expireDate" type="date" value={this.state.expireDate} onChange={this.handleInputChange} />
+            <span onClick={this.handleClick}><i class="fas fa-plus-circle" /></span>
           </div>
+          ) : ( 
+            <div className="removeInventoryForm">
+              <Select
+                options={this.state.ingredientDropDown}
+                placeholder="Select an ingredient"
+                value={this.state.ingredientToRemove}
+                onChange={value => this.setState({ ingredientToRemove: value })}
+              />
+              <button onClick={this.handleRemoveIngredient}>Remove</button>
+            </div>) 
+          }
+
           <div className="graphTable">
-            {type === 'usage' ? (
+            {type === 'usage' ? (      
               <InventoryUsageTable
               usageData1={ this.state.usageData1 } usageData2={ this.state.usageData2 }/>) : (
                 type === 'cost' ? (
@@ -282,9 +356,8 @@ class InventoryInfo extends React.Component {
                 ) : (
                   <InventoryWasteTable wasteData={ this.state.wasteData }/>
                 )
-              )
+              ) 
             }
-
           </div>
         </div>
       </div>

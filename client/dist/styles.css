@@ -381,7 +381,7 @@ html {
   /* overflow: hidden; */
 }
 
-.selectGraphDropDown {
+.sales-graph-options {
   grid-row: 1 / 1;
   grid-column:  5 / 5;
   padding: 5%;
@@ -390,27 +390,41 @@ html {
 .addInventoryForm {
   grid-row: 2 / 2;
   grid-column:  2 / 6;
-  padding-left: 1%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(8, minmax(10vh, 1fr));
+  padding-left: 0.5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
-.addInventoryForm > * {
+.addInventoryForm div {
+  color: black;
+  grid-row: 1 / 1;
+  text-align: center;
+}
+
+.addInventoryForm input {
+  grid-row: 2 / 2;
   margin-right: 0.2%;
   margin-bottom: 0.5%;
+  font-size: 1em;
+  font-family: 'Catamaran', sans-serif;
 }
 
 .addInventoryForm span {
+  grid-row: 2 / 2;
   color: #5493ff;
   font-size: 1.2em;
   border: none;
-  padding: 0;
+  padding-left: 2%;
   margin: 0 0 0 0.5%;
 }
 
-
-.inventoryInput {
-  padding: 0.3%;
-  font-family: 'Catamaran', sans-serif;
-  font-size: 1em;
+.removeInventoryForm {
+  color: black;
+  grid-row: 2 / 2;
+  grid-column:  2 / 6;
 }
 
 .graphGrid-inventory {
