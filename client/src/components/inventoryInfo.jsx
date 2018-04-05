@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Redirect } from 'react-router';
 import Navigation from './managerNav.jsx';
 import InventoryUsagePie from './inventoryUsagePie.jsx';
 import InventoryCostLine from './inventoryCostLine.jsx';
@@ -36,6 +37,7 @@ class InventoryInfo extends React.Component {
       showAddInventory: true,
       ingredientDropDown: [],
       ingredientToRemove: '',
+      alertItems: '',
     };
     this.getInventory1 = this.getInventory1.bind(this);
     this.getInventory2 = this.getInventory2.bind(this);
@@ -56,6 +58,10 @@ class InventoryInfo extends React.Component {
     this.showRemoveInventory = this.showRemoveInventory.bind(this);
     this.prepareIngredientsDropDown = this.prepareIngredientsDropDown.bind(this);
     this.handleRemoveIngredient = this.handleRemoveIngredient.bind(this);
+    this.getIngredientID = this.getIngredientID.bind(this);
+    this.containIngredient = this.containIngredient.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   /* Inventory Usage Functions */
@@ -77,7 +83,7 @@ class InventoryInfo extends React.Component {
           left: result1[1] + result2[1],
           ingredientDropDown: this.prepareIngredientsDropDown(data2.data),
         }, () => {
-          console.log('data1', data1.data);
+          console.log('Ingredients Data', data2.data);
           console.log('ingredients data', this.state.ingredientDropDown);
         });
     }));
@@ -190,7 +196,7 @@ class InventoryInfo extends React.Component {
   getWaste() {
     axios.get('/fetch/waste')
       .then(data => {
-          console.log('waste data', data.data);
+          // console.log('waste data', data.data);
           var result = this.calculateWaste(data.data);
           this.setState({
             wasteData: data.data,
@@ -276,12 +282,60 @@ class InventoryInfo extends React.Component {
   handleRemoveIngredient(event) {
     event.preventDefault();
     const item = this.state.ingredientToRemove.label;
-    axios.post('/removeIngredient', {
-      ingredient: item,
+    axios.get('/fetch/items')
+      .then((menuItems) => {
+        console.log(menuItems.data)
+        var menuitems = [];
+        menuItems.data.map((menuItem) => {
+          if (this.containIngredient(menuItem, this.getIngredientID(item))) {
+            menuitems.push(menuItem.item_name);
+          }
+        });
+        this.setState({
+          alertItems: menuitems.join(', '),
+        }, () => {
+          console.log(this.state.alertItems)
+        });
+        const isinMenu = menuItems.data.some((menuItem) => {
+          return this.containIngredient(menuItem, this.getIngredientID(item));
+        });
+        if (isinMenu) {
+          console.log('GOT HERE');
+          this.openModal('alertRemovalModal');
+
+        } else {
+          // axios.post('/removeIngredient', {
+          //   ingredient: item,
+          // })
+          //   .then(this.setState({
+          //     ingredientToRemove: '',
+          //   }));
+        }
+      });
+  }
+
+  getIngredientID(target) {
+    var ingredients = this.state.usageData2;
+    for (var i = 0; i < ingredients.length; i++) {
+      if (ingredients[i].ingredient_name === target) {
+        return ingredients[i].id;
+      }
+    }
+  }
+
+  containIngredient(menuItem, targetIngID) {
+    var ingredients = JSON.parse(menuItem.item_ingredients);
+    return ingredients.some((ing) => {
+      return ing.ingredient_id === targetIngID
     })
-      .then(this.setState({
-        ingredientToRemove: '',
-      }));
+  }
+
+  openModal(modal) {
+    document.getElementById(modal).style.display = 'block';
+  }
+
+  closeModal(modal) {
+    document.getElementById(modal).style.display = 'none';
   }
 
   render() {
@@ -345,6 +399,16 @@ class InventoryInfo extends React.Component {
               <button onClick={this.handleRemoveIngredient}>Remove</button>
             </div>) 
           }
+          <div id="alertRemovalModal" className="alertRemovalModal animated fadeIn">
+            <div className="alert-removal-modal-header">
+            <div className="alert-removal-close" onClick={() => this.closeModal('alertRemovalModal')}>&times;</div>
+            </div>
+            <div className="alert-removal-modal-body">This ingredient cannot be removed. It is currently used in {this.state.alertItems}. You may change your menu items first.</div>
+            <div className="alert-removal-modal-footer">
+              <button onClick={() => <Redirect to="/managercustomize" />}>Change Menu Items</button>
+              <button onClick={() => this.closeModal('alertRemovalModal')}>Cancel</button>
+            </div>
+          </div>
 
           <div className="graphTable">
             {type === 'usage' ? (      
