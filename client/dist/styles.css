@@ -1,6 +1,12 @@
 body {
   font-family: 'Catamaran', sans-serif;
-  margin: 0;
+  -webkit-app-region: drag;
+  margin: 0 !important;
+}
+
+html {
+  margin: 0 !important;
+  background-color: #f9f9f9 !important;
 }
 
 ::-webkit-scrollbar {
@@ -9,32 +15,43 @@ body {
 
 .saleItemGrid {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-template-rows: auto auto auto auto;
-  background-color: rgb(237, 237, 237);
+  grid-template-columns: repeat(6, minmax(15vh, 1fr));
+  grid-template-rows: repeat(6, minmax(15vh, 1fr));
+  grid-column-gap: 1%;
+  grid-row-gap: 10px;
+  background-color: #ededed;
   text-align: center;
+  min-height: 30vh;
+  max-height: 86vh;
+  overflow-y: scroll;
+  padding: 1%;
+  margin: 0;
 }
 
 .saleItemGrid * {
-  background-color: white;
+  background-color: #545454;
   margin: 0;
   padding: 0;
   overflow-wrap: break-word;
-  border-radius: 2%;
+  border-radius: 5%;
+}
+
+.saleItemGrid h3 {
+  margin: 10%;
+  color: white;
 }
 
 .saleItemGrid > * {
-  border: 1px solid rgb(181, 181, 181);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 2%;
-  width: 95%;
-  height: 95%;
+  border-radius: 4%;
+  width: 100%;
+  height: 100%;
 }
 
 
 .saleTransactionGrid {
-  grid-row-start: 1;
-  grid-column-start: 2;
+  grid-column: 4 / 4;
+  grid-row: 1 / 3;
 }
 
 
@@ -49,30 +66,53 @@ body {
 }
 
 .transactionGrid {
+  border-left: 1px solid black;
+  grid-row: 1 / 3;
+  background-color: #ededed;
   display: grid;
-  grid-template-rows: 5vh 65vh 15vh;
+  grid-template-rows: auto 1fr 1fr 1fr auto 1fr;
+  height: 100%;
+}
+
+.transactionClearButton {
+  grid-row: 1;
+  grid-column: 4;
+  color: red;
+  border-radius: 5%;
+  padding-top: 3%
+
 }
 
 .transactionGridHeader {
   grid-row: 1;
   display: grid;
-  grid-template-rows: 5vh;
-  grid-template-columns: 5vh 15vh 15vh;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-bottom: 1% 0;
 }
 
 .transactionGridItems {
-  grid-row: 2;
+  grid-row: 2 / 5;
   overflow-y: scroll;
+  max-height: 55vh;
   display:grid;
   grid-template-rows: repeat(13, auto);
-  grid-template-columns: 5vh 15vh 15vh
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .transactionGridFooter {
-  grid-row: 3;
   display: grid;
-  grid-template-rows: 5vh 5vh 5vh;
-  grid-template-columns: 5vh 15vh 15vh;
+  grid-row: 5;
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 5vh 10vh 8vh;
+  text-align: right;
+  grid-column: 1;
+  background-color: rgb(90, 90, 90);
+  color: white;
+  width: 100%;
+}
+
+.transactionGridFooter > div {
+  padding-right: 3%;
 }
 
 
@@ -81,85 +121,479 @@ body {
   grid-column-start: 3;
 }
 
-
-
 .saleCategoryGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
   overflow-x: scroll;
   white-space: nowrap;
-  width: 100%;
-  height: 100%;
-  display: inline-block;
+  margin: 0;
+  padding: 0;
+  grid-row: 2 / 2;
+  grid-column: 1 / 4;
 }
+
+/* .saleCategoryGrid > div {
+  height: 100%;
+} */
 
 .saleCategoryGrid button {
   width: 25%;
-  height: 10vh;
-  background-color: rgb(52, 158, 255);
+  background-color: rgb(90, 90, 90);
   color: white;
   font-size: 1.5em;
+  padding: 1% 0;
+  height: 100%;
 }
+
+
+.createButton {
+  padding-bottom: 3.2% !important;
+
+}
+
+.allButton {
+  padding-bottom: 3.2% !important;
+}
+
+
 
 .saleScreenGrid {
   display: grid;
-  grid-template-columns: 70% 30%;
-  grid-template-rows: 80% 20%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 85% 15%;
+  background-color: #ededed;
 }
 
-.saleControlGrid {
-  grid-row: 2;
-  grid-column: 2;
-}
-
-.saleGrid {
+.innerSaleGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 8vh 8vh;
+  grid-template-columns: 25% 25% 25% 25% 25%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
   background-color: #333;
-  overflow: hidden;
-  padding: 0;
+  bottom: 0;
+  background-color: #ededed;
 }
 
-.saleGrid button:nth-child(1) {
-  background-color: #45d645;
-  font-size: 3em;
-}
-.saleGrid button:nth-child(2) {
-  background-color: #71c9ff;
-  font-size: 1.5em;
-}
-.saleGrid button:nth-child(3) {
-  background-color: #a5d8c1;
-}
-.saleGrid button:nth-child(4) {
-  background-color: #f5acef;
+.innerSaleGrid {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25% 25%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  background-color: #333;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #ededed;
 }
 
+.innerSaleGrid button {
+  color: white;
+  border: none;
+}
 
+.innerSaleGrid button:nth-child(1) {
+  background-color: #31c23d;
+  font-size: 1.3em;
+  grid-column: 1 / 3;
+  grid-row: 1 / 4;
+}
+.innerSaleGrid button:nth-child(2) {
+  background-color: #1778dc;
+  font-size: 1.3em;
+  grid-column: 3 / 5;
+  grid-row: 1 / 4;
+}
+.innerSaleGrid button:nth-child(3) {
+  background-color:#ffc004;
+  font-size: 1.3em;
+  grid-column: 1 / 3;
+  grid-row: 4 / 6;
+}
+.innerSaleGrid button:nth-child(4) {
+  background-color: #716f6f;
+  font-size: 1.3em;
+  grid-column: 3 / 5;
+  grid-row: 4 / 6;
+}
+
+/* *********************** MANAGER SCREEN SECTION ********************** */
 .managerScreenGrid {
   display: grid;
-  grid-template-columns: 20% 80%;
-  grid-template-rows: 40% 60%;
+  grid-template-columns: 30vh 1fr 1fr;
+  grid-template-rows: 50vh 45vh;
+  color: white;
+}
+
+.managerScreenGrid-home {
+  display: grid;
+  grid-template-columns: 30vh 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 20% 40% 40%;
+  color: white;
+}
+
+.managerScreenGrid-graph {
+  display: grid;
+  grid-template-columns: 30vh 1fr 1fr 1fr 1fr;
+  grid-template-rows: 25% 5% 1fr;
+  color: white;
+}
+
+.managerScreenGrid-sales {
+  display: grid;
+  grid-template-columns: 30vh 1fr 1fr 1fr 1fr;
+  grid-template-rows: 50% 1fr;
+  color: white;
 }
 
 .manager-navigation {
+  grid-column: 1;
+  grid-row: 1 / 5;
   display: grid;
-  grid-template-columns: 1fr;
-  background-color: orange;
+  grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh;
+  background-color: #333;
+  height: 100%;
+}
+
+.manager-navigation .item {
+  color: white;
+  padding: 1.5em;
+  text-decoration: none;
+  font-size: 1.4em;
+}
+
+.managerViewGrid {
+  grid-template-rows: 1fr 1fr;
+}
+
+.managerScreenGrid-home h1{
+  font-size: 4em;
+  margin: 0;
+}
+.managerScreenGrid-home h2{
+  font-size: 2em;
+  margin: 0;
+}
+
+#card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+#card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.managerCard-1 {
+  background-color: rgb(54, 122, 214);
+  grid-column: 2 / 4;
+  grid-row: 1 /1;
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  margin: 3% 0 0 5%;
+}
+
+.managerCard-2 {
+  background-color: rgb(242, 131, 59);
+  grid-column: 4 / 6;
+  grid-row: 1 /1;
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  margin: 3% 0 0 5%;
+}
+
+.managerCard-3 {
+  background-color: rgb(154, 34, 179);
+  grid-column: 6 / 8;
+  grid-row: 1 /1;
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  margin: 3% 0 0 5%;
+}
+
+.managerCard-4 {
+  background-color: rgb(187, 72, 61);
+  grid-column: 6 / 10;
+  grid-row: 3;
+  margin: 2% 0 0 3%;
+  width: 95%;
+  height: 92%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.managerCard-5 {
+  background-color: rgb(71, 177, 66);
+  grid-column: 8 / 10;
+  grid-row: 1 /1;
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  margin: 3% 0 0 5%;
+}
+
+.managerClockTable {
+  grid-column: 2 / 6;
+  grid-row: 3 / 3;
+  padding-top: 2%;
+  padding-left: 3%;
+}
+
+.kitchenGridContainer {
+  display: grid;
+  grid-column-gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.kitchenOrder {
+  background: lightblue;
+  border-style: solid;
+  border-width: 5px;
+  padding: 15px;
+  font-size: 20pt;
+}
+
+.kitchenOrderNumber {
+  background: rgba(200, 200, 200, 0.5);
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.kitchenOldOrder {
+  /* background: red */
+  -webkit-animation: warningFlash 1s infinite
+}
+
+@keyframes warningFlash {
+  0%, 49%{
+    background: rgb(255, 78, 113)
+  }
+  50%, 100% {
+    background: red
+  }
 }
 
 .graphGrid {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  background-color: blue;
+  grid-row: 1/ 2;
+  grid-column:  2/ 4;
+  background-color: white;
+  /* overflow: hidden; */
 }
 
-.statsGrid {
+.sales-graph-options {
+  grid-row: 1 / 1;
+  grid-column:  5 / 5;
+  padding: 5%;
+}
+
+.addInventoryForm {
+  grid-row: 2 / 2;
+  grid-column:  2 / 6;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  background-color: pink;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(8, minmax(10vh, 1fr));
+  padding-left: 0.5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.addInventoryForm div {
+  color: black;
+  grid-row: 1 / 1;
+  text-align: center;
+}
+
+.addInventoryForm input {
+  grid-row: 2 / 2;
+  margin-right: 0.2%;
+  margin-bottom: 0.5%;
+  font-size: 1em;
+  font-family: 'Catamaran', sans-serif;
+}
+
+.addInventoryForm span {
+  grid-row: 2 / 2;
+  color: #5493ff;
+  font-size: 1.2em;
+  border: none;
+  padding-left: 2%;
+  margin: 0 0 0 0.5%;
+}
+
+.removeInventoryForm {
+  color: black;
+  grid-row: 2 / 2;
+  grid-column:  2 / 6;
+}
+
+.graphGrid-inventory {
+  grid-row: 1 / 1;
+  grid-column: 2 / 5;
+}
+
+.graphTable {
+  grid-row: 3 / 3;
+  grid-column:  2 / 6;
+}
+
+.employeeGraphGrid {
+  display: grid;
+  grid-row: 1 / 1;
+  grid-column: 3 / 4;
+  background-color: white;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.profileGridDelete {
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.profileGridImage {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+}
+
+.profileGridImage img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+  padding: 3%;
+}
+
+.profileGridDetails {
+  grid-column: 2 / 3;
+  grid-row: 1 / 1;
+  color: rgb(80, 80, 80);
+  padding-left: 5%;
+}
+
+.profileGridTimesheet {
+  grid-column: 3 / 3;
+  grid-row: 2 / 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(20, 5%);
+  color: black;
+  padding-left: 5%;
+  font-size: 1em;
+}
+
+.employeeSelect {
+  color: black;
+  grid-column: 2 / 3;
+  grid-row: 2 / 2;
+  padding-left: 2%;
+}
+
+.employeeSelect button {
+  padding: 2%;
+  margin: 1%;
+  border-radius: 5%;
+  border: none;
+  background-color: #5493ff;
+  color: white;
+}
+
+.employeeSelect input {
+  width: 60vh;
+  height: 2vh;
+}
+
+.employeeSelect .employeeIdLabel {
+  padding-left: 5%;
+  font-size: 1.5em;
+}
+
+.employeeSelect .newEmployeeNameLabel {
+  font-size: 1em;
+}
+
+.transactionCash {
+  text-align: center;
+  height: 90%;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: #ededed;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCash h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.transactionCash button {
+  position: absolute;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  top: 85%;
+  left: 42%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirm {
+  text-align: center;
+  height: 90%;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  background-color: #ededed;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirm h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.transactionCashConfirm button {
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  top: 85%;
+  left: 42%;
+  background-color: #71c9ff;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.transactionCashConfirmed {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+}
+
+.transactionCashConfirmed button {
+  font-size: 1em;
+  left: 50%;
+  padding: 15%;
+  margin: 1.5%;
 }
 
 .transactionCredit {
@@ -169,7 +603,7 @@ body {
   position: fixed;
   margin: 0;
   transform: translate(-50%, -50%);
-  background-color: rgb(237, 237, 237);
+  background-color: #ededed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -189,6 +623,11 @@ body {
 .transactionCreditConfirmed button {
   font-size: 1em;
   margin: 1.5%;
+}
+
+.transactionCreditConfirmed input {
+  border: none;
+  width: 100%;
 }
 
 .sigCanvas {
@@ -305,7 +744,7 @@ body {
    box-shadow: 0 9px #999;
  }
 
- .enter-button {
+.enter-button {
    padding: 20px 100%;
    background-color: var(--main-highlight);
  }
@@ -317,3 +756,1065 @@ body {
    box-shadow: 0 5px #666;
    transform: translateY(4px);
  }
+
+/* NAV BAR */
+
+ .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.navbar {
+  border-bottom: 1px solid #333;
+  background-color: rgb(80, 80, 80);
+  color: white;
+  width: 100%;
+}
+
+.navbar-employee {
+  position: absolute;
+  left: 90%;
+  top: 1%;
+}
+
+.navbar-time {
+  position: absolute;
+  left: 45%;
+  top: 1%;
+}
+
+.navbar-bars {
+  margin: 0 1%;
+}
+
+.navBack {
+  position: relative;
+  left: 1%;
+  top: 1%;
+  font-size: 1.5em;
+}
+.navAlert {
+  position: relative;
+  left: 4%;
+  top: 1%;
+  font-size: 1.5em;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/* VOID MODAL STYLING */
+
+.voidModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.void-modal-header {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.void-modal-title {
+  grid-column: 1;
+  font-size: 26px;
+}
+
+.void-modal-nav-left {
+  grid-column: 2;
+  text-align: center;
+  font-size: 28px;
+}
+.void-modal-nav-right {
+  grid-column: 3;
+  text-align: center;
+  font-size: 28px;
+}
+.voidClose {
+  grid-column: 4;
+  text-align: right;
+  font-size: 28px;
+}
+
+.voidClose:hover,
+.voidClose:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.void-modal-body {
+  display: grid;
+  grid-template-rows: repeat(5, minmax(10vh, 1fr));
+  background-color: white;
+  padding: 2px 16px;
+}
+
+.void-modal-list-head {
+  grid-row: 1/1;
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.void-modal-list-head1 {
+  grid-column: 1;
+  text-align: left;
+  padding-top: 3%;
+}
+
+.void-modal-list-head2 {
+  grid-column: 2;
+  text-align: right;
+  padding-top: 3%;
+}
+
+.void-modal-order-list {
+  grid-row: 2/5;
+  font-size: 24px;
+  max-height: 38vh;
+  overflow-y: scroll;
+}
+
+.void-modal-footer {
+  display: grid;
+  grid-template-columns: 33% 34% 33%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+  grid-column-gap: 1%;
+  grid-row-gap: 1%;
+}
+
+.void-modal-button1 {
+  grid-column: 1;
+  padding: 2%;
+  margin: 2%;
+  border-radius: 2%;
+  font-size: 20px;
+}
+
+.void-modal-button2 {
+  grid-column: 2;
+  padding: 2%;
+  margin: 2%;
+  border-radius: 2%;
+  font-size: 20px;
+}
+
+.void-modal-button3 {
+  grid-column: 3;
+  padding: 2%;
+  margin: 2%;
+  margin-right: 7%;
+  border-radius: 2%;
+  font-size: 20px;
+}
+
+/* DISCOUNT MODAL STYLING */
+
+.discountModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal-content {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+
+.discountClose {
+  color: white;
+  position: absolute;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 0 2%;
+  margin: 0;
+  bottom: 70%;
+  right: 0;
+}
+
+.discountClose:hover,
+.discountClose:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+
+
+
+/***        MANAGER CUSTOMIZATION       **/
+.addItem {
+  background-color: red !important;
+
+}
+
+.saleScreenGridManager {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 85% 15%;
+  background-color: #ededed;
+}
+.saleItemGridManager {
+  grid-row: 1 / 1;
+  grid-column: 1 / 4;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(20vh, 1fr));
+  grid-template-rows: repeat(5, minmax(20vh, 1fr));
+  background-color: #ededed;
+  text-align: center;
+  min-height: 30vh;
+  max-height: 86vh;
+  overflow-y: scroll;
+  padding-top: 1%;
+  padding-left: 1%;
+  margin: 0;
+}
+
+.saleItemGridManager * {
+  background-color: rgb(99, 99, 99);
+  margin: 0;
+  padding: 0;
+  overflow-wrap: break-word;
+  border-radius: 4%;
+  color: white;
+}
+
+.saleItemGridManager h3 {
+  border-radius: 15%;
+  color: white;
+}
+
+.saleItemGridManager > * {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4%;
+  width: 95%;
+  height: 95%;
+  color: white;
+}
+/** item modal **/
+.itemModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 45%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-manager{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-manager {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: 5vh 5vh 5vh 20vh 15vh;
+  grid-row-gap: 20px;
+  border-radius: 5%;
+}
+
+.modal-ingredient-grid {
+  display: grid;
+  color: black;
+  grid-template-rows: repeat(3, 31.3%);
+  grid-row-gap: 4px;
+  grid-column-gap: 4px;
+  grid-template-columns: repeat(4, 24.5%);
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.modal-ingredient-item {
+
+}
+
+.modal-category-select {
+  color: black;
+}
+
+.modal-body-manager button {
+  color: white;
+  border-radius: 2%;
+  padding-top: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-bottom: 10px;
+
+  background-color: #333;
+}
+
+.modal-footer-manager {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-manager {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+
+.removeItem {
+  /* position: absolute; */
+  position: relative;
+  display: inline-block;
+  color: white;
+}
+/** ITEM MODAL**/
+
+/*******CATEGORY MODAL*********/
+.categoryModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-category{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-category {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  grid-row-gap: 20px;
+  border-radius: 5%;
+}
+
+.modal-title {
+  grid-row: 1;
+  grid-column: 1;
+
+}
+
+.modal-close {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.modal-body-category button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-category {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-category {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/*******CATEGORY MODAL********/
+
+/*****Confirmation Modal ******/
+.confirmationModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-confirmation{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-confirmation {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-confirmation h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.confirmOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmConfirm {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.cancelConfirm {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-confirmation button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-confirmation {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-confirmation {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/*****Confirmation Modal *****/
+
+/*****removeItemModal *******/
+.removeItemModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-removeItem{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-removeItem {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-removeItem h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.removeOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmRemove {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.cancelRemove {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-removeItem button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-removeItem {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-removeItem {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+/*****removeItemModal ******/
+
+/******removeCategoryModal *****/
+.removeCatModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-removeCat{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-removeCat {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-removeCat h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.removeOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmRemove {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.cancelRemove {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-removeCat button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-removeCat {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-removeCat {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+
+/******removeCategoryModal *****/
+
+
+/*******discardModal*********/
+.discardModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-discard{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-discard {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(5, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-discard h3 {
+  grid-row: 1;
+  color: black;
+}
+
+.confirmOrCancel {
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmDiscard {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #fc4747;
+}
+
+.cancelDiscard {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+.modal-body-discard button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-discard {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-discard {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+
+.noDataNotice {
+  color: rgba(200, 200, 200, 0.8)
+}
+/********discardModal********/
+
+/*****MANAGER TRANSACTION BUTTONS SAVEALL AND DISCARDALL ***/
+.saveChanges {
+  text-align: center;
+  background-color: #1778dc;
+  color: white;
+}
+
+.discardChanges {
+  text-align: center;
+  background-color: #fc4747;
+  color: white;
+}
+
+
+/****MANAGER TRANSACTION BUTTONS SAVEALL AND DISCARDALL ***/
+
+/**** DELETE EMPLOYEE *****/
+.delete-employee-select {
+  color: black;
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.deleteEmployeeModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-deleteEmployee{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-deleteEmployee {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(8, 5vh);
+  border-radius: 5%;
+}
+
+.modal-body-deleteEmployee h3 {
+  grid-row: 1;
+  color: black;
+}
+
+
+
+.modal-body-deleteEmployee button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-deleteEmployee {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-deleteEmployee {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+.confirmOrCancelDelete {
+  grid-row: 7;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmConfirmDelete {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.modal-body-employeeName {
+  grid-row: 4;
+  text-align: center;
+}
+
+.modal-body-employeeId {
+  text-align: center;
+  grid-row: 5;
+}
+
+.cancelConfirmDelete {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+
+/**** DELETE EMPLOYEE *****/
+
+
+/**** Notification Modal *****/
+
+
+.notificationModal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top: 35%;
+  left: 54%;
+  width: 65%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%;
+  background-color: rgb(185, 185, 185);
+  margin:0;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-header-notification{
+  position: relative;
+  display: grid;
+  grid-template-columns: 98% 10%;
+  padding: 2px 16px;
+  background-color: rgb(52, 158, 255);
+  color: white;
+}
+
+.modal-body-notification {
+  display: grid;
+  padding: 20px;
+  grid-template-rows: repeat(8, 5vh);
+  grid-row-gap: 2px;
+  overflow-y: scroll;
+  border-radius: 5%;
+}
+
+.modal-body-alerts {
+  position: relative;
+  display: grid;
+  grid-template-columns:  25% 25% 40% 10%;
+}
+.alert-employee {
+  grid-column: 1;
+  color: black;
+}
+.alert-employeeId {
+  grid-column: 2;
+  color: black;
+}
+
+.alert-time {
+  grid-column: 3;
+  color: black;
+}
+
+.manager-name {
+  text-align: center;
+  grid-row: 4;
+  color: black;
+}
+
+.manager-time {
+  text-align: center;
+  grid-row: 6;
+  color: black;
+}
+
+
+.alert-notice {
+  grid-column: 4;
+  color: black;
+}
+
+.alert-button {
+  grid-column: 4;
+  color: green;
+}
+
+.modal-body-notification h3 {
+  grid-row: 1;
+  color: black;
+}
+
+
+
+.modal-body-notification button {
+  color: white;
+  border-radius: 2%;
+
+
+  background-color: #333;
+}
+
+.modal-footer-notification {
+    padding: 2px 16px;
+    background-color: rgb(52, 158, 255);
+    color: white;
+}
+.modal-content-notification {
+  background-color: white;
+  margin: auto;
+  margin: 0;
+  width: 100%;
+}
+.confirmOrCancelNotification {
+  grid-row: 7;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.confirmConfirmNotification {
+  color: white;
+  padding-top: 4%;
+  text-align: center;
+  margin-right: 13px;
+  border-radius: 3%;
+  margin-left: 13px;
+  grid-column: 1;
+  background-color: #369eff;
+}
+
+.modal-body-employeeName {
+  grid-row: 4;
+  text-align: center;
+}
+
+.modal-body-employeeId {
+  text-align: center;
+  grid-row: 5;
+}
+
+.cancelConfirmNotification {
+  padding-top: 4%;
+  text-align: center;
+  color: white;
+  border-radius: 3%;
+  margin-right: 13px;
+  margin-left: 13px;
+  grid-column: 2;
+  background-color: #807575;
+}
+
+
+/**** Notification Modal *****/
+
+/***        MANAGER CUSTOMIZATION       **/

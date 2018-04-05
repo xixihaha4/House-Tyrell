@@ -14,15 +14,15 @@ export default class Login extends React.Component {
       ],
       animation: 'wrapper noselect animated fadeIn',
       failedAttempts: 0,
-      pinpadOn: false
     };
 
     this.verifyLogin = this.verifyLogin.bind(this);
     this.handlePin = this.handlePin.bind(this);
   }
 
-  togglePinpad() {
-    this.setState({pinpadOn: !this.state.pinpadOn})
+  componentDidMount() {
+    const hover = document.getElementById("hover");
+    hover.play();
   }
 
   verifyLogin() {
@@ -31,52 +31,54 @@ export default class Login extends React.Component {
         this.props.history.push('/managerHome');
       } else if (this.state.identification === '2') {
         this.props.history.push('/salesScreen');
+      } else if (this.state.identification === '548') {
+        this.props.history.push('/kitchenScreen');
       } else {
         axios.get(`/fetch/employee?PIN=${this.state.identification}`)
-          .then(results => {
-            results.data[0].manager_privilege ?
-            this.props.history.push('/managerHome') :
-            this.props.history.push('/salesScreen');
+          .then((results) => {
+            console.log('this is results.data', results.data)
+            if (results.data[0].manager_privilege === true) {
+              this.props.history.push('/managerHome');
+            } else {
+              //socket.emit(employeelogin)
+
+              this.props.history.push('/salesScreen');
+            }
           })
-          .catch(error => {
-              if(this.state.failedAttempts < 2) {
-                this.setState({failedAttempts: this.state.failedAttempts + 1})
-                var str = `${this.state.failedAttempts} of 3 failed attempts`
-                Alert.warning(str, {
-                    position: 'top-right',
-                    effect: 'slide',
-                    timeout: 'none',
-                    html: true,
-                });
-              } else {
-                Alert.error('Too many attempts!', {
-                  position: 'top-right',
-                  effect: 'jelly'
-                });
-              }
+          .catch((error) => {
+            if (this.state.failedAttempts < 2) {
+              this.setState({ failedAttempts: this.state.failedAttempts + 1 });
+              const str = `${this.state.failedAttempts} of 3 failed attempts`;
+              Alert.warning(str, {
+                position: 'top-right',
+                effect: 'slide',
+                timeout: 'none',
+                html: true,
+              });
+            } else {
+              Alert.error('Too many attempts!', {
+                position: 'top-right',
+                effect: 'jelly',
+              });
+            }
           });
       }
     }
   }
 
   handlePin(val) {
-    Alert.closeAll()
+    Alert.closeAll();
     if (val === 'enter') {
-      this.verifyLogin()
+      this.verifyLogin();
     } else if (val === 'clear') {
-      this.setState( {identification: ''} )
+      this.setState({ identification: '' });
     } else if (val === 'delete') {
-      var temp = this.state.identification
-      this.setState( {identification: temp.slice(0, temp.length-1)} )
-    } else if (this.state.identification.length < 12){
-      var temp = this.state.identification
-      this.setState( {identification: temp + val} )
+      const temp = this.state.identification;
+      this.setState({ identification: temp.slice(0, temp.length - 1) });
+    } else if (this.state.identification.length < 12) {
+      const temp = this.state.identification;
+      this.setState({ identification: temp + val });
     }
-  }
-
-  componentDidMount() {
-    var hover = document.getElementById("hover");
-    hover.play();
   }
 
   render() {
@@ -92,14 +94,13 @@ export default class Login extends React.Component {
             <div className="logo">
               <span className="logo-text">House</span><i className="fas fa-circle-notch" ></i><span className="logo-text">Tyrell</span>
             </div>
-            <div className="pinNumber-wrapper"  onClick={() => this.togglePinpad()}><i className="far fa-keyboard"></i>Enter your pin <i className="fas fa-hashtag"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
-            {this.state.pinpadOn &&
-              <Pinpad
+            <div className="pinNumber-wrapper"><i className="far fa-keyboard"> </i>Enter your pin <i className="fas fa-hashtag"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
+            <Pinpad
               pinpadOptions={this.state.pinpadOptions}
               handlePin={this.handlePin}
               animation={this.state.animation}
-            />}
-            <Alert stack={{limit: 3}} />
+            />
+            <Alert stack={{ limit: 3 }} />
           </div>
         </h1>
       </div>

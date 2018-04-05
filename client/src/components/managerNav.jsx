@@ -16,6 +16,15 @@ const ManagerNav = () => (
     <Link to="/saleinfo" className="item">
       Sales
     </Link>
+    <Link to="/managercustomize" className="item">
+      Customize
+    </Link>
+    <Link to="/salesScreen" className="item">
+      Make A Sale
+    </Link>
+    <Link to="/kitchenScreen" className="item">
+      Kitchen
+    </Link>
   </div>
 );
 

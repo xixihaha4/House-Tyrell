@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactModal from 'react-modal';
+// import ReactModal from 'react-modal';
 import CustomModal from './customModal.jsx';
 import TransactionItem from './transactionItem.jsx'
+import SaleControl from './saleControl.jsx';
 
 
 
@@ -19,7 +20,6 @@ export default class Transaction extends React.Component {
   }
 
   openModal() {
-    console.log('hello')
     this.setState({ modalIsOpen: true });
   }
 
@@ -32,49 +32,58 @@ export default class Transaction extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
-
   render() {
+    let showDiscount = null;
+    if (this.props.discount > 0) {
+      showDiscount = <div style={{ 'gridRow': '4', 'gridColumn': '4', color: 'rgb(149, 152, 150)' }}>{(this.props.discount)}% Discount</div>;
+    }
     return (
 
       <div className='transactionGrid'>
+
         <div className='transactionGridHeader'>
-          <div style={{ 'grid-row': '1', 'grid-column': '2' }}>Name</div>
-          <div style={{ 'grid-row': '1', 'grid-column': '3' }}>Price</div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '1' }}>Name</div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Price</div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '3' }} onClick={this.props.transactionClear} className='transactionClearButton'><i className="far fa-trash-alt"></i></div>
         </div>
 
         <div className='transactionGridItems'>
           {this.props.transactionItems.map((item, i) =>
-          (<button
-            onClick={() => {this.props.transactionRemove(i)}}
-            style={{ 'grid-row': `${i + 1}`, 'grid-column': '1', 'vertical-align': 'top' }}
-            >X
-          </button>))}
+          (
+            <div
+              onClick={() => {this.props.transactionRemove(i)}}
+              style={{ gridRow: `${i + 1}`, gridColumn: '1', verticalAlign: 'top' }}
+            >
+              <i className="fas fa-times-circle" style={{ color: 'rgb(224, 94, 94)' }} />
+            </div>
+          ))}
           {this.props.transactionItems.map((item, i) =>
-           <div style={{ 'grid-row': `${i + 1}`, 'grid-column': '2' }}>
-             <TransactionItem item={item} removeIng={this.props.removeIng} />
+           <div style={{ 'gridRow': `${i + 1}`, 'gridColumn': '2' }}>
+             <TransactionItem item={item} removeIng={this.props.removeIng} index={i} addIng={this.props.addIng} menuItems={this.props.menuItems}/>
           </div>)}
           {this.props.transactionItems.map((item, i) =>
-            <div style={{ 'grid-row': `${i + 1}`, 'grid-column': '3' }}>{item.item_price}</div>)}
+            <div style={{ 'gridRow': `${i + 1}`, 'gridColumn': '3' }}>{item.item_price}</div>)}
+        </div>
+
+        <div className="saleControlGrid" style={{ gridRow: '6', height: '100%' }}>
+          <SaleControl
+            total={this.props.total}
+            tax={this.props.tax}
+            discount={this.props.discount}
+            openModal={this.props.openModal}
+            transactionComplete={this.props.transactionComplete}
+            transactionItems={this.props.transactionItems}
+          />
         </div>
 
         <div className='transactionGridFooter'>
-          <div style={{ 'grid-row': '1', 'grid-column': '3' }}>{this.props.tax.toFixed(2)} Tax</div>
-          <div style={{ 'grid-row': '2', 'grid-column': '3' }}>{this.props.total.toFixed(2)} subTotal</div>
-          <div style={{ 'grid-row': '3', 'grid-column': '3' }}>{(this.props.total + this.props.tax).toFixed(2)} Total</div>
+          <div style={{ gridRow: '1', gridColumn: '4' }}>{this.props.tax.toFixed(2)} Tax </div>
+          <div style={{ gridRow: '2', gridColumn: '4' }}>{this.props.total.toFixed(2)} subTotal </div>
+          <div style={{ gridRow: '3', gridColumn: '4' }}>{(this.props.total + this.props.tax - ((this.props.total + this.props.tax) * (this.props.discount / 100))).toFixed(2)} Total </div>
+          {showDiscount}
         </div>
+
       </div>
     )
   }
 }
-
-
-
-// (<ReactModal
-//                 isOpen={this.state.modalIsOpen}
-//                 onAfterOpen={this.afterOpenModal}
-//                 onRequestClose={this.closeModal}
-//                 contentLabel="Example Modal"
-//               >
-//                 <button onClick={this.closeModal}>close</button>
-//                <div>I am a modal</div>
-//              </ReactModal>, )
