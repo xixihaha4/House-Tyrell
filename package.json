@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/server.js",
     "react-dev": "webpack -d --watch",
-    "main": "./index.js"
+    "main": "./index.js",
+    "init": "webpack -d && node server/server.js"
   },
   "repository": {
     "type": "git",
