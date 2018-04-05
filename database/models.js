@@ -84,8 +84,8 @@ const Voiditem = db.define('Voiditems', {
   order_number: Sequelize.STRING,
   void_items: Sequelize.STRING,
 });
-
-// 
+//
+//
 // db.sync({ force: true }).then(() => {
 //   Employee.create({
 //     employee_id: '5', employee_name: 'Manos', employee_img: 'https://avatars3.githubusercontent.com/u/32654968?s=460&v=4', manager_privilege: true,

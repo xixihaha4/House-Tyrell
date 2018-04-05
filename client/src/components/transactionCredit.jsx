@@ -48,6 +48,7 @@ class TransactionCredit extends React.Component {
           sale_date: results.data.sale_date,
           sale_discount: results.data.sale_discount,
           sale_type: results.data.sale_type,
+          transactionItems: this.props.location.state.transactionItems,
         },
       );
       this.props.history.push('/salesScreen');
