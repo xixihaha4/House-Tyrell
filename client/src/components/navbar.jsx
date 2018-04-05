@@ -155,7 +155,7 @@ class Navbar extends React.Component {
           <a onClick={this.alertManager}>Alert Manager</a>
           <a onClick={() => this.clockout()}>Clock Out</a>
         </nav>
-        <span className="navBack" onClick={() => this.props.history.goBack()}><i className="fas fa-chevron-circle-left" /></span>
+        <span className="navBack" onClick={this.state.isManager ? () => this.props.history.push('/managerhome') : () => this.props.history.push('/salesScreen')}><i className="fas fa-home" /></span>
         {this.state.isManager &&
           <span
             onClick={() => this.notice()}
