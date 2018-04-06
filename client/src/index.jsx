@@ -15,6 +15,7 @@ import TransactionCashConfirm from './components/transactionCashConfirm.jsx';
 import SaleControl from './components/saleControl.jsx';
 import KitchenLog from './components/kitchenLog.jsx';
 import ManagerCustomize from './components/managerCustomize.jsx';
+import HomePage from '../landingPage/homepage.jsx';
 
 const history = createHistory();
 
@@ -22,7 +23,8 @@ ReactDOM.render(
   <div>
     <Router history={history}>
       <div>
-        <Route exact path="/" component={Login} status={401} />
+        <Route exact path="/" component={HomePage} />
+        <Route path="/login" component={Login} status={401} />
         <Route path="/salesScreen" component={App} />
         <Route path="/managerhome" component={ManagerHome} />
         <Route path="/employeeinfo" component={EmployeeInfo} />
