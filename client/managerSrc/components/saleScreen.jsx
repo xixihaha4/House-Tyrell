@@ -77,7 +77,7 @@ const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, to
             transactionClear={transactionClear}
           />
         </div>
-        <div className="saleCategoryGrid" style={{ gridRow: '2 / 2', gridColumn: '1 / 4' }}>
+        <div className="saleCategoryGrid">
           <SaleCategory
             menuCategories={menuCategories}
             removeCategoryConfirm={removeCategoryConfirm}
