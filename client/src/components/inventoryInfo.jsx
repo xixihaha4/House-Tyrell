@@ -284,7 +284,6 @@ class InventoryInfo extends React.Component {
     const item = this.state.ingredientToRemove.label;
     axios.get('/fetch/items')
       .then((menuItems) => {
-        console.log(menuItems.data)
         var menuitems = [];
         menuItems.data.map((menuItem) => {
           if (this.containIngredient(menuItem, this.getIngredientID(item))) {
@@ -293,23 +292,19 @@ class InventoryInfo extends React.Component {
         });
         this.setState({
           alertItems: menuitems.join(', '),
-        }, () => {
-          console.log(this.state.alertItems)
         });
         const isinMenu = menuItems.data.some((menuItem) => {
           return this.containIngredient(menuItem, this.getIngredientID(item));
         });
         if (isinMenu) {
-          console.log('GOT HERE');
           this.openModal('alertRemovalModal');
-
         } else {
-          // axios.post('/removeIngredient', {
-          //   ingredient: item,
-          // })
-          //   .then(this.setState({
-          //     ingredientToRemove: '',
-          //   }));
+          axios.post('/removeIngredient', {
+            ingredient: item,
+          })
+            .then(this.setState({
+              ingredientToRemove: '',
+            }));
         }
       });
   }
