@@ -66,7 +66,7 @@ class TransactionCredit extends React.Component {
     let renderThis = <div></div>;
     if (this.state.sigConfirm === false) {
       renderThis =
-      <div>
+      <div className="transactionCreditConfirmed animated fadeIn">
         <h1>Total Sale</h1>
         <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.total}</h1>
         <SignatureCanvas

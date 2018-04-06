@@ -667,7 +667,7 @@ input[type="file"] {
   margin: 1.5%;
 }
 
-.transactionC#f05b47it {
+.transactionCredit {
   text-align: center;
   top: 50%;
   left: 50%;
@@ -678,7 +678,7 @@ input[type="file"] {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.transactionC#f05b47it button {
+.transactionCredit button {
   padding: 2.5%;
   margin: 5%;
   background-color: #71c9ff;
@@ -687,16 +687,16 @@ input[type="file"] {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.transactionC#f05b47itConfirmed {
+.transactionCreditConfirmed {
   padding: 15%;
 }
 
-.transactionC#f05b47itConfirmed button {
+.transactionCreditConfirmed button {
   font-size: 1em;
   margin: 1.5%;
 }
 
-.transactionC#f05b47itConfirmed input {
+.transactionCreditConfirmed input {
   border: none;
   width: 100%;
 }
@@ -725,6 +725,7 @@ input[type="file"] {
   color: white;
   border: 1px solid #919191;
   border-radius: 2%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .wrapper * {
@@ -742,6 +743,7 @@ input[type="file"] {
   top: 35%;
   transform: translate(-50%, -50%);
   display: inline-block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /*
   margin: 0;
   background-color: #349eff; */
@@ -752,6 +754,7 @@ input[type="file"] {
   margin: 0;
   background-color: #349eff; */
   border-bottom: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
  .wrapper div:nth-child(13) {

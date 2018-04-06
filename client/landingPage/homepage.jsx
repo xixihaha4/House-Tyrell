@@ -14,6 +14,22 @@ class HomePage extends React.Component {
     };
   }
 
+  handleClick(e) {
+    if (e.key === '3') {
+      this.props.history.push('/login');
+    }
+    if (e.key === '2') {
+      this.setState({
+        nextPage: true,
+      });
+    }
+    if (e.key === '1') {
+      this.setState({
+        nextPage: false,
+      });
+    }
+  }
+
   render() {
     let showThis = <div></div>
     if (this.state.nextPage === false) {
@@ -25,7 +41,7 @@ class HomePage extends React.Component {
             mode="horizontal"
             defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px' }}
-            onClick={() => this.props.history.push('/login')}
+            onClick={(e) => this.handleClick(e)}
           >
             <Menu.Item key="1">Home</Menu.Item>
             <Menu.Item key="2">About</Menu.Item>
@@ -80,6 +96,31 @@ class HomePage extends React.Component {
           © Team-Tyrell 2018
         </Footer>
       </Layout>)
+    } else if (this.state.nextPage === true) {
+      showThis = (<Layout className="layout">
+        <Header style={{ 'padding': '0 0' }}>
+          <div className="logo" />
+          <Menu
+            theme="light"
+            mode="horizontal"
+            defaultSelectedKeys={['1']}
+            style={{ lineHeight: '64px' }}
+            onClick={(e) => this.handleClick(e)}
+          >
+            <Menu.Item key="1">Home</Menu.Item>
+            <Menu.Item key="2">About</Menu.Item>
+            <Menu.Item key="3">Demo</Menu.Item>
+          </Menu>
+        </Header>
+        <Content style={{ padding: '0 50px' }}>
+          <div style={{ background: 'rgba(240, 242, 245, 1)', padding: 24, minHeight: '85vh' }}>
+
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          © Team-Tyrell 2018
+        </Footer>
+      </Layout>)
     }
     return (
       <div>
@@ -88,22 +129,5 @@ class HomePage extends React.Component {
     );
   }
 }
-
-{/* <Card.Grid
-  style={{
-    width: '50%',
-    height: '35vh',
-    backgroundImage: 'url("https://s3.amazonaws.com/tyrell-pos/landingpage2.png")',
-    backgroundSize: '100% 100%'
-  }}>
-</Card.Grid>
-<Card.Grid
-  style={{
-    width: '50%',
-    height: '35vh',
-    backgroundImage: 'url("https://s3.amazonaws.com/tyrell-pos/Meet.png")',
-    backgroundSize: '100% 100%'
-  }}>
-</Card.Grid> */}
 
 export default withRouter(HomePage);

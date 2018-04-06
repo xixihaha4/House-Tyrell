@@ -37,6 +37,7 @@ class ManagerHome extends React.Component {
       dropdownOptions: [],
       lowStockPercent: 20,
       totalCash: 0,
+      loading: true,
     };
     this.getAllClockedIn = this.getAllClockedIn.bind(this);
     this.getAllSalesToday = this.getAllSalesToday.bind(this);
@@ -55,6 +56,7 @@ class ManagerHome extends React.Component {
 
   initSocket() {
     socket.on('madeSale', (sale) => {
+      console.log("THIS IS SOCKET MANAGER", sale);
       let allSales = this.state.allSales;
       allSales.push({ sale });
       this.setState({
@@ -131,7 +133,6 @@ class ManagerHome extends React.Component {
         })
         let totalCash = 0;
         todaySales.forEach((sale) => {
-          console.log("CASH SALE", sale);
           if (sale.sale_cash === true) {
             totalCash += parseFloat(sale.sale_amount);
           }
@@ -140,6 +141,7 @@ class ManagerHome extends React.Component {
           allSales: todaySales,
           totalSales: totalAmount.toFixed(2),
           totalCash: totalCash.toFixed(2),
+          loading: false,
         });
       })
       .catch((error) => {
@@ -176,61 +178,73 @@ class ManagerHome extends React.Component {
         lowIngredients.push(ingredient);
       }
     });
-    return (
-      <div>
+
+    let content;
+    if (this.state.loading) {
+      content = <div className="loading"><img src="https://s3.amazonaws.com/tyrell-pos/octopus-loading.gif" /></div>
+    } else {
+      content =
+      (
         <div>
-          <Navbar />
-        </div>
-        <div className="managerScreenGrid-home">
-          <div className="manager-navigation"><Navigation /></div>
-          <div id="card" className="managerCard-1">
-            <h1>{this.state.allEmployees.length}</h1>
-            <h2>Clocked In</h2>
+          <div>
+            <Navbar />
           </div>
-          <div id="card" className="managerCard-2">
-            <h1>{this.state.allSales.length}</h1>
-            <h2>Total Transactions</h2>
-          </div>
-          <div id="card" className="managerCard-3">
-            <h1><i className="fas fa-dollar-sign" /> {this.state.totalSales}</h1>
-            <h2>Total Sales</h2>
-          </div>
-          <div id="card" className="managerCard-5">
-            <h1><i className="fas fa-dollar-sign" /> {this.state.totalCash}</h1>
-            <h2>Total Cash</h2>
-          </div>
-          <div id="card" className="managerCard-4">
-            {
-              lowIngredients.length > 0
-              ?
-              lowIngredients.map(ingredient =>
-                (<h4><i className='fas fa-exclamation-circle' /> {ingredient.ingredient_name} </h4>))
-              :
-              (<h2 style={{ gridRow: '3', gridColumn: '1 / 6' }}><i className='fas fa-thumbs-up' /> No Low Ingredients</h2>)
-            }
-            <div style={{ gridRow: '1', gridColumn: '1 / 6', color: 'black' }}>
-              <Select
-                placeholder='Choose a Low Stock Percentage, default is set to 20%'
-                options={this.state.dropdownOptions}
-                matchProp="any"
-                searchable="false"
-                onChange={value => this.setState({ lowStockPercent: value.value })}
+          <div className="managerScreenGrid-home">
+            <div className="manager-navigation"><Navigation /></div>
+            <div id="card" className="managerCard-1">
+              <h1>{this.state.allEmployees.length}</h1>
+              <h2>Clocked In</h2>
+            </div>
+            <div id="card" className="managerCard-2">
+              <h1>{this.state.allSales.length}</h1>
+              <h2>Total Transactions</h2>
+            </div>
+            <div id="card" className="managerCard-3">
+              <h1><i className="fas fa-dollar-sign" /> {this.state.totalSales}</h1>
+              <h2>Total Sales</h2>
+            </div>
+            <div id="card" className="managerCard-5">
+              <h1><i className="fas fa-dollar-sign" /> {this.state.totalCash}</h1>
+              <h2>Total Cash</h2>
+            </div>
+            <div id="card" className="managerCard-4">
+              {
+                lowIngredients.length > 0
+                ?
+                lowIngredients.map(ingredient =>
+                  (<h4><i className='fas fa-exclamation-circle' /> {ingredient.ingredient_name} </h4>))
+                :
+                (<h2 style={{ gridRow: '3', gridColumn: '1 / 6' }}><i className='fas fa-thumbs-up' /> No Low Ingredients</h2>)
+              }
+              <div style={{ gridRow: '1', gridColumn: '1 / 6', color: 'black' }}>
+                <Select
+                  placeholder='Choose a Low Stock Percentage, default is set to 20%'
+                  options={this.state.dropdownOptions}
+                  matchProp="any"
+                  searchable="false"
+                  onChange={value => this.setState({ lowStockPercent: value.value })}
+                />
+              </div>
+            </div>
+            <div className="managerClockTable">
+              <ReactTable
+                columns={columns}
+                data={this.state.tableData}
+                defaultPageSize={5}
+                className="-striped -highlight"
+                style={{ color: 'black' }}
               />
             </div>
-          </div>
-          <div className="managerClockTable">
-            <ReactTable
-              columns={columns}
-              data={this.state.tableData}
-              defaultPageSize={5}
-              className="-striped -highlight"
-              style={{ color: 'black' }}
-            />
-          </div>
-          <div style={{ gridColumn: '3 / 9', gridRow: '2 / 3', padding: '3% 0' }}>
-            <ManagerHomeBar />
+            <div style={{ gridColumn: '3 / 9', gridRow: '2 / 3', padding: '3% 0' }}>
+              <ManagerHomeBar />
+            </div>
           </div>
         </div>
+      )
+    }
+    return (
+      <div>
+        {content}
       </div>
     );
   }
