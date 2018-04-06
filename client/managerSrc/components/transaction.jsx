@@ -44,9 +44,9 @@ export default class Transaction extends React.Component {
 
       <div className='transactionGrid'>
 
-        <div className='transactionGridItems'>
-          <button onClick={() => this.props.openModal('confirmationModal')} className='saveChanges' style={{ gridRow: '4 / 6', gridColumn: '1 / 4' }}>Save Changes</button>
-          <button onClick={() => this.props.openModal('discardModal')} className='discardChanges'  style={{ gridRow: '7 / 9', gridColumn: '1 / 4' }}>Discard Changes</button>
+        <div className='transactionGridItemsManager'>
+          <button onClick={() => this.props.openModal('confirmationModal')} className='saveChanges'>Save Changes</button>
+          <button onClick={() => this.props.openModal('discardModal')} className='discardChanges'>Discard Changes</button>
         </div>
 
         <div className='transactionGridFooter'>
