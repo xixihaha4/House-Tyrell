@@ -223,7 +223,12 @@ app.post('/completed/transaction', (req, res) => {
   }
 
   return Promise.all(req.body.transactionItems.map((item) => {
-    const parseItem = JSON.parse(item.item_ingredients);
+    let parseItem = item.item_ingredients;
+    while (typeof parseItem === 'string') {
+      parseItem = JSON.parse(parseItem);
+    }
+    console.log(parseItem, 'apwefjopwajfoiawheof parse item', typeof parseItem)
+
     return Promise.all(parseItem.map((ingredient) => {
       return db.Ingredient.findAll({
         where: {
