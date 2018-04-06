@@ -30,10 +30,13 @@ class InventoryUsagePie extends React.Component {
         ],
         type: 'pie',
         colors: {
-          Inventory_Left: '#f05b47',
-          Inventory_Used: '#349eff',
+          Inventory_Left: '#e65959',
+          Inventory_Used: '#5959e6',
         },
       },
+      // tooltip: {
+      //   show: false,
+      // },
       axis: {
         x: {
           type: 'category',

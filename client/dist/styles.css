@@ -77,7 +77,7 @@ html {
 .transactionClearButton {
   grid-row: 1;
   grid-column: 4;
-  color: #f05b47;
+  color: #e65959;
   border-radius: 5%;
   padding-top: 3%
 
@@ -154,7 +154,9 @@ html {
   padding-bottom: 3.2% !important;
 }
 
-
+.c3-tooltip-container {
+  color: black !important;
+}
 
 .saleScreenGrid {
   display: grid;
@@ -189,7 +191,7 @@ html {
 }
 
 .innerSaleGrid button:nth-child(1) {
-  background-color: #31c23d;
+  background-color: #59ce4a;
   font-size: 1.3em;
   grid-column: 1 / 3;
   grid-row: 1 / 4;
@@ -294,7 +296,7 @@ html {
 }
 
 .managerCard-1 {
-  background-color: rgb(54, 122, 214);
+  background-color: #5959e6;
   grid-column: 2 / 4;
   grid-row: 1 /1;
   width: 90%;
@@ -304,7 +306,7 @@ html {
 }
 
 .managerCard-2 {
-  background-color: rgb(242, 131, 59);
+  background-color: #e6a059;
   grid-column: 4 / 6;
   grid-row: 1 /1;
   width: 90%;
@@ -314,7 +316,7 @@ html {
 }
 
 .managerCard-3 {
-  background-color: rgb(154, 34, 179);
+  background-color: #a059e6;
   grid-column: 6 / 8;
   grid-row: 1 /1;
   width: 90%;
@@ -324,7 +326,7 @@ html {
 }
 
 .managerCard-4 {
-  background-color: rgb(187, 72, 61);
+  background-color: #e65959;
   grid-column: 6 / 10;
   grid-row: 3;
   margin: 2% 0 0 3%;
@@ -337,7 +339,7 @@ html {
 }
 
 .managerCard-5 {
-  background-color: rgb(71, 177, 66);
+  background-color: #a0e659;
   grid-column: 8 / 10;
   grid-row: 1 /1;
   width: 90%;
@@ -375,7 +377,7 @@ html {
 }
 
 .kitchenOldOrder {
-  /* background: #f05b47 */
+  /* background: #e65959 */
   -webkit-animation: warningFlash 1s infinite
 }
 
@@ -384,7 +386,7 @@ html {
     background: rgb(255, 78, 113)
   }
   50%, 100% {
-    background: #f05b47
+    background: #e65959
   }
 }
 
@@ -440,14 +442,14 @@ html {
   margin-bottom: 0.5%;
   margin-right: 1%;
   font-size: 1em;
-  border: 1px solid #5493ff;
+  border: 1px solid #5959e6;
   font-family: 'Catamaran', sans-serif;
   color: black;
 }
 
 .addInventoryForm span {
   grid-row: 2 / 2;
-  color: #349eff;
+  color: #5959e6;
   font-size: 1.2em;
   border: none;
   padding-left: 2%;
@@ -475,7 +477,7 @@ html {
 .removeInventoryForm span {
   grid-row: 2 / 2;
   grid-column:  2 / 2;
-  color: #f05b47;
+  color: #e65959;
   font-size: 1.2em;
   border: none;
   padding-top: 2%;
@@ -560,7 +562,7 @@ html {
   margin: 1%;
   border-radius: 5%;
   border: none;
-  background-color: #5493ff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -667,7 +669,7 @@ input[type="file"] {
   margin: 1.5%;
 }
 
-.transactionC#f05b47it {
+.transactionC#e65959it {
   text-align: center;
   top: 50%;
   left: 50%;
@@ -678,7 +680,7 @@ input[type="file"] {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.transactionC#f05b47it button {
+.transactionC#e65959it button {
   padding: 2.5%;
   margin: 5%;
   background-color: #71c9ff;
@@ -687,16 +689,16 @@ input[type="file"] {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.transactionC#f05b47itConfirmed {
+.transactionC#e65959itConfirmed {
   padding: 15%;
 }
 
-.transactionC#f05b47itConfirmed button {
+.transactionC#e65959itConfirmed button {
   font-size: 1em;
   margin: 1.5%;
 }
 
-.transactionC#f05b47itConfirmed input {
+.transactionC#e65959itConfirmed input {
   border: none;
   width: 100%;
 }
@@ -708,7 +710,7 @@ input[type="file"] {
 /* variables to keep color themes constant? */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/:root */
 :root {
-  --main-highlight: #f05b47;
+  --main-highlight: #e65959;
 }
 
 .wrapper {
@@ -721,14 +723,14 @@ input[type="file"] {
   position: absolute;
   margin: 0;
   transform: translate(-50%, -15%);
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
-  border: 1px solid #919191;
+  border: 1px solid #394049;
   border-radius: 2%;
 }
 
 .wrapper * {
-  border: 1px solid #605e5e;
+  border: 1px solid #394049;
   border-radius: 2%;
 }
 
@@ -744,13 +746,13 @@ input[type="file"] {
   display: inline-block;
   /*
   margin: 0;
-  background-color: #349eff; */
+  background-color: #5959e6; */
 }
 
 .pinNumber {
   /*
   margin: 0;
-  background-color: #349eff; */
+  background-color: #5959e6; */
   border-bottom: 1px solid black;
 }
 
@@ -758,16 +760,18 @@ input[type="file"] {
    grid-column: 1 / 4;
    /* padding: 20px 20px; */
    background-color: var(--main-highlight);
-   background-color: rgb(112, 198, 60);
+   background-color: #59a0e6;
    padding: 10px;
  }
 
  .wrapper div:nth-child(10) {
-   background-color: rgb(238, 153, 64);
+   background-color: #5959e6;
+   color: #e6e659;
  }
 
  .wrapper div:nth-child(12) {
-   background-color: rgb(240, 91, 71);
+   background-color: #5959e6;
+   color: #e6e659;
  }
 
 
@@ -885,7 +889,7 @@ input[type="file"] {
   .sidenav a {font-size: 18px;}
 }
 
-/**** Alert Manager about Ing#f05b47ient Removal Modal ****/
+/**** Alert Manager about Ing#e65959ient Removal Modal ****/
 
 .alertRemovalModal {
   display: none; /* Hidden by default */
@@ -905,7 +909,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -935,7 +939,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 50% 50%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
   grid-column-gap: 1%;
   grid-row-gap: 1%;
@@ -972,7 +976,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1041,7 +1045,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 33% 34% 33%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
   grid-column-gap: 1%;
   grid-row-gap: 1%;
@@ -1115,7 +1119,7 @@ input[type="file"] {
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1123,7 +1127,7 @@ input[type="file"] {
 
 .modal-footer {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 
@@ -1131,7 +1135,7 @@ input[type="file"] {
 
 /***        MANAGER CUSTOMIZATION       **/
 .addItem {
-  background-color: #f05b47 !important;
+  background-color: #e65959 !important;
 
 }
 
@@ -1198,7 +1202,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 98% 10%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1210,7 +1214,7 @@ input[type="file"] {
   border-radius: 5%;
 }
 
-.modal-ing#f05b47ient-grid {
+.modal-ing#e65959ient-grid {
   display: grid;
   color: black;
   grid-template-rows: repeat(3, 31.3%);
@@ -1221,7 +1225,7 @@ input[type="file"] {
   overflow-x: scroll;
 }
 
-.modal-ing#f05b47ient-item {
+.modal-ing#e65959ient-item {
 
 }
 
@@ -1242,7 +1246,7 @@ input[type="file"] {
 
 .modal-footer-manager {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 .modal-content-manager {
@@ -1280,7 +1284,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 98% 10%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1313,7 +1317,7 @@ input[type="file"] {
 
 .modal-footer-category {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 .modal-content-category {
@@ -1344,7 +1348,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 98% 10%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1398,7 +1402,7 @@ input[type="file"] {
 
 .modal-footer-confirmation {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 .modal-content-confirmation {
@@ -1429,7 +1433,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 98% 10%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1483,7 +1487,7 @@ input[type="file"] {
 
 .modal-footer-removeItem {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 .modal-content-removeItem {
@@ -1514,7 +1518,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 98% 10%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1568,7 +1572,7 @@ input[type="file"] {
 
 .modal-footer-removeCat {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 .modal-content-removeCat {
@@ -1601,7 +1605,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 98% 10%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1655,7 +1659,7 @@ input[type="file"] {
 
 .modal-footer-discard {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 .modal-content-discard {
@@ -1729,7 +1733,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 98% 10%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1757,7 +1761,7 @@ input[type="file"] {
 
 .modal-footer-deleteEmployee {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 .modal-content-deleteEmployee {
@@ -1830,7 +1834,7 @@ input[type="file"] {
   display: grid;
   grid-template-columns: 98% 10%;
   padding: 2px 16px;
-  background-color: #349eff;
+  background-color: #5959e6;
   color: white;
 }
 
@@ -1902,7 +1906,7 @@ input[type="file"] {
 
 .modal-footer-notification {
     padding: 2px 16px;
-    background-color: #349eff;
+    background-color: #5959e6;
     color: white;
 }
 .modal-content-notification {

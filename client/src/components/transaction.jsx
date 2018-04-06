@@ -54,7 +54,7 @@ export default class Transaction extends React.Component {
               onClick={() => {this.props.transactionRemove(i)}}
               style={{ gridRow: `${i + 1}`, gridColumn: '1', verticalAlign: 'top' }}
             >
-              <i className="fas fa-times-circle" style={{ color: '#f05b47' }} />
+              <i className="fas fa-times-circle" style={{ color: '#e65959' }} />
             </div>
           ))}
           {this.props.transactionItems.map((item, i) =>

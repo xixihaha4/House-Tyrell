@@ -30,7 +30,7 @@ class EmployeeBar extends React.Component {
         // columns: columns, // data
         // type: 'bar',
         colors: {
-          Sales: '#349eff',
+          Sales: '#5959e6',
         },
       },
       axis: {

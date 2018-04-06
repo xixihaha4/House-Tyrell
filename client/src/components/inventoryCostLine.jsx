@@ -24,7 +24,7 @@ class InventoryCostLine extends React.Component {
         columns: [this.props.cost],
         type: 'line',
         colors: {
-          Total_Inventory_Cost: '#349eff',
+          Total_Inventory_Cost: '#5959e6',
         },
       },
       size: {

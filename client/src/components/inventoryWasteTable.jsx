@@ -59,14 +59,14 @@ class InventoryWasteTable extends React.Component {
     return (
       <div>
         <ReactTable
-        data={this.state.tableData}
-        columns={columns}
-        defaultPageSize={10}
-        style={{color: 'black'}}
-        sorted={[{
-          id: 'orderdate',
-          desc: true,
-        }]}
+          data={this.state.tableData}
+          columns={columns}
+          defaultPageSize={10}
+          style={{ color: 'black' }}
+          sorted={[{
+            id: 'orderdate',
+            desc: true,
+          }]}
         />
       </div>
     );

@@ -10,11 +10,11 @@ export default class KitchenLog extends React.Component {
     this.state = {
       ordersPlaced: [],
       menuItems: [],
-      ingredients: []
+      ingredients: [],
     };
     this.orderUp = this.orderUp.bind(this);
     // this.getOrders = this.getOrders.bind(this);
-    this.getMenuItems = this.getMenuItems.bind(this)
+    this.getMenuItems = this.getMenuItems.bind(this);
     this.getIngredients = this.getIngredients.bind(this);
   }
 
@@ -89,7 +89,7 @@ export default class KitchenLog extends React.Component {
       id: orderNum,
     })
       .then((response) => {
-        this.getOrders()
+        this.getOrders();
       });
   }
 
@@ -158,6 +158,6 @@ export default class KitchenLog extends React.Component {
             </div>))}
         </div>
       </div>
-    )
+    );
   }
 }
