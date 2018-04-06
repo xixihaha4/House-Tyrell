@@ -1210,7 +1210,7 @@ input[type="file"] {
   border-radius: 5%;
 }
 
-.modal-ing#f05b47ient-grid {
+.modal-ingredient-grid {
   display: grid;
   color: black;
   grid-template-rows: repeat(3, 31.3%);
@@ -1221,7 +1221,12 @@ input[type="file"] {
   overflow-x: scroll;
 }
 
-.modal-ing#f05b47ient-item {
+.modal-ingredient-input {
+  border: 1px solid #5959e6;
+}
+
+
+.modal-ingredient-item {
 
 }
 

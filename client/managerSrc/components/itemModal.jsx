@@ -122,12 +122,14 @@ export default class itemModal extends React.Component {
           <div className="modal-body-manager">
             <input
               type="text"
+              className="modal-ingredient-input"
               value={this.state.item_name}
               onChange={(e) => this.setState({ item_name: e.target.value })}
               placeholder="Enter new Item Name"
             />
             <input
               type="Number"
+              className="modal-ingredient-input"
               value={this.state.item_price}
               onChange={(e) => this.setState({ item_price: e.target.value })}
               placeholder="Enter Item Price"
@@ -152,6 +154,7 @@ export default class itemModal extends React.Component {
                   <div>
                     <input
                       id={`modal-item_input${i}`}
+                      className="modal-ingredient-input"
                       type="Number"
                       onChange={(e) => this.handleIngredientInput(e.target.value, i)}
                       readOnly
@@ -171,7 +174,7 @@ export default class itemModal extends React.Component {
               />
             </div>
             <button type="button" onClick={this.createItem}>
-              <h3>Create Item</h3>
+              <h3 style={{color: 'white'}}>Create Item</h3>
             </button>
           </div>
           <div className="modal-footer-manager">Please Pick</div>
