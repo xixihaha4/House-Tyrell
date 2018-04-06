@@ -877,12 +877,12 @@ input[type="file"] {
 .navBack {
   position: relative;
   left: 1%;
-  top: 1%;
+  top: 0.5%;
   font-size: 1.5em;
 }
 .navAlert {
   position: relative;
-  left: 4%;
+  left: 2.5%;
   top: 1%;
   font-size: 1.5em;
 }
@@ -1217,7 +1217,8 @@ input[type="file"] {
   border-radius: 5%;
 }
 
-.modal-ing#e65959ient-grid {
+
+.modal-ingredient-grid {
   display: grid;
   color: black;
   grid-template-rows: repeat(3, 31.3%);
@@ -1228,8 +1229,14 @@ input[type="file"] {
   overflow-x: scroll;
 }
 
-.modal-ing#e65959ient-item {
 
+.modal-ingredient-input {
+  border: 1px solid #5959e6;
+}
+
+
+.modal-ingredient-item {
+  
 }
 
 .modal-category-select {
