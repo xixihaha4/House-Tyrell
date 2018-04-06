@@ -15,6 +15,7 @@ export default class App extends React.Component {
       total: 0,
       discount: 0,
       discountOptions: [],
+      loading: true,
     };
     this.itemClick = this.itemClick.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);
@@ -42,6 +43,7 @@ export default class App extends React.Component {
       .then((results) => {
         this.setState({
           menuItems: results.data,
+          loading: false,
         });
       });
   }
@@ -51,6 +53,7 @@ export default class App extends React.Component {
       .then((results) => {
         this.setState({
           menuCategories: results.data,
+          loading: false,
         });
       });
   }
@@ -190,28 +193,36 @@ export default class App extends React.Component {
       });
   }
   render() {
+    let content;
+
+    if (this.state.loading) {
+      content = <div><img src="https://s3.amazonaws.com/tyrell-pos/octopus-loading.gif" /></div>
+    } else {
+      content =
+      (<SaleScreen
+        menuItems={this.state.menuItems}
+        itemClick={this.itemClick}
+        menuCategories={this.state.menuCategories}
+        transactionItems={this.state.transactionItems}
+        total={this.state.total}
+        tax={this.state.tax}
+        discount={this.state.discount}
+        openModal={this.openModal}
+        closeModal={this.closeModal}
+        transactionRemove={this.transactionRemove}
+        filterByCategory={this.filterByCategory}
+        removeIng={this.removeIng}
+        transactionComplete={this.transactionComplete}
+        discountOptions={this.state.discountOptions}
+        updateDiscount={this.updateDiscount}
+        transactionClear={this.transactionClear}
+        addIng={this.addIng}
+      />)
+    }
     return (
       <div>
 
-        <SaleScreen
-          menuItems={this.state.menuItems}
-          itemClick={this.itemClick}
-          menuCategories={this.state.menuCategories}
-          transactionItems={this.state.transactionItems}
-          total={this.state.total}
-          tax={this.state.tax}
-          discount={this.state.discount}
-          openModal={this.openModal}
-          closeModal={this.closeModal}
-          transactionRemove={this.transactionRemove}
-          filterByCategory={this.filterByCategory}
-          removeIng={this.removeIng}
-          transactionComplete={this.transactionComplete}
-          discountOptions={this.state.discountOptions}
-          updateDiscount={this.updateDiscount}
-          transactionClear={this.transactionClear}
-          addIng={this.addIng}
-        />
+        {content}
 
       </div>
     );
