@@ -85,3 +85,32 @@
   50%  { opacity: 0; }
   100% { opacity: 1; }
 }
+
+@media all and (max-width: 1690px) {
+  .titleCard div {
+    font-size: 5em;
+  }
+}
+
+@media all and (max-width: 1280px) {
+  .titleCard div {
+    font-size: 4em;
+  }
+}
+
+@media all and (max-width: 980px) {
+  .titleCard div {
+    font-size: 3em;
+  }
+}
+
+@media all and (max-width: 736px) {
+  .titleCard div {
+    font-size: 2em;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .titleCard div {
+    font-size: 1em;
+  } 

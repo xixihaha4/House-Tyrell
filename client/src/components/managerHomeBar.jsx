@@ -119,7 +119,7 @@ class ManagerHomeBar extends React.Component {
         columns: this.state.sales_X,
         type: 'bar',
         colors: {
-          Sales: '#349eff',
+          Sales: '#5959e6',
         },
       },
       axis: {

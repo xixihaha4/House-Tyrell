@@ -435,7 +435,7 @@ class EmployeeInfo extends React.Component {
               />
               <br />
               <label className="newEmployeeNameLabel">Enter Employee Name: </label>
-              <input style={{ border: '2px solid #5493ff', padding: '2%' }} type="text" onBlur={(e) => this.handleNameInput(e)} />
+              <input style={{ border: '2px solid #5959e6', padding: '2%' }} type="text" onBlur={(e) => this.handleNameInput(e)} />
               <br />
               <div>
                 <button onClick={e => this.generateEmployeeId(e)}>Generate Employee ID</button>

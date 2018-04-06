@@ -368,8 +368,8 @@ class InventoryInfo extends React.Component {
                 onChange={value => this.setState({ viewType: value.value })}
               />
             </div>
-            <div><button onClick={this.showAddInventory} style={{ backgroundColor: '#349eff', paddingLeft: '11%', paddingRight: '11%' }}>Add An Ingredient</button></div>
-            <div><button onClick={this.showRemoveInventory} style={{ backgroundColor: '#f05b47', paddingLeft: '6%', paddingRight: '6%' }}>Remove An Ingredient</button></div>
+            <div><button onClick={this.showAddInventory} style={{ backgroundColor: '#5959e6', paddingLeft: '11%', paddingRight: '11%' }}>Add An Ingredient</button></div>
+            <div><button onClick={this.showRemoveInventory} style={{ backgroundColor: '#e65959', paddingLeft: '6%', paddingRight: '6%' }}>Remove An Ingredient</button></div>
           </div>
 
           { (showAdd === true) ? (
@@ -409,8 +409,8 @@ class InventoryInfo extends React.Component {
             </div>
             <div className="alert-removal-modal-body">This ingredient cannot be removed. It is currently used in {this.state.alertItems}. You may change your menu items first.</div>
             <div className="alert-removal-modal-footer">
-              <button onClick={() => this.props.history.push("/managercustomize")} style={{ color: '#349eff' }}>Change Menu Items</button>
-              <button onClick={() => this.closeModal('alertRemovalModal')} style={{ color: '#f05b47' }}>Cancel</button>
+              <button onClick={() => this.props.history.push("/managercustomize")} style={{ color: '#5959e6' }}>Change Menu Items</button>
+              <button onClick={() => this.closeModal('alertRemovalModal')} style={{ color: '#e65959' }}>Cancel</button>
             </div>
           </div>
 

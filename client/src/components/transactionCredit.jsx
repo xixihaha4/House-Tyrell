@@ -70,7 +70,7 @@ class TransactionCredit extends React.Component {
         <h1>Total Sale</h1>
         <h1><i className="fas fa-dollar-sign" /> {this.props.location.state.total}</h1>
         <SignatureCanvas
-          penColor="rgb(52, 158, 255)"
+          penColor="#5959e6"
           canvasProps={{ width: 500, height: 100, className: 'sigCanvas' }}
           ref={(ref) => { this.sigCanvas = ref; }}
         />

@@ -26,8 +26,8 @@ class InventoryWastePie extends React.Component {
           ],
           type: 'pie',
           colors: {
-            Order_Wasted: '#f05b47',
-            Order_Used: '#349eff',
+            Order_Wasted: '#e65959',
+            Order_Used: '#5959e6',
           },
         },
         size: {

@@ -49,9 +49,10 @@ export default class CategoryModal extends React.Component {
               value={this.state.category_name}
               onChange={(e) => this.setState({ category_name: e.target.value }, () => console.log(this.state.category_name))}
               placeholder="Enter new Category Name"
+              style={{ color: 'black' }}
             />
-            <button type="button" onClick={this.createCategory}>
-              <h3>Create Category</h3>
+            <button type="button" onClick={this.createCategory} >
+              <h3 style={{ color: 'white' }}>Create Category</h3>
             </button>
           </div>
           <div className="modal-footer-category">Please Pick</div>

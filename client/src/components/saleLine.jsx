@@ -138,8 +138,8 @@ class SaleLine extends React.Component {
         columns: [this.state.revenueArray],
         type: 'line',
         colors: {
-          Revenue: '#f05b47',
-          // Profit: '#349eff',
+          Revenue: '#e65959',
+          // Profit: '#5959e6',
           // Cost: '#45d645',
         },
       },

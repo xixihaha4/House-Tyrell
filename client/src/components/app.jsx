@@ -142,7 +142,7 @@ export default class App extends React.Component {
       transactionItems: remove,
       total: tempTotal,
       tax: parseFloat(tempTax),
-    }))
+    }));
   }
 
   transactionClear() {
@@ -151,7 +151,7 @@ export default class App extends React.Component {
       total: 0,
       tax: 0,
       discount: 0,
-    })
+    });
   }
 
 // Below are all the functions for the discount modal and also to update discount.
