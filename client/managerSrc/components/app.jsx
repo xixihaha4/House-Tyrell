@@ -303,7 +303,6 @@ export default class App extends React.Component {
       items[i].item_ingredients = '' + JSON.stringify(items[i].item_ingredients)
       formData.append('item_name', items[i].item_name);
       formData.append('item_price', items[i].item_price);
-      formData.append('item_image', items[i].item_image);
       formData.append('item_ingredients', items[i].item_ingredients);
       formData.append('item_category', items[i].item_category);
       axios.post('/create/item', formData);
