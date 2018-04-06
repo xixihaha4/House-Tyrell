@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router';
+import { withRouter } from 'react-router';
 import Navigation from './managerNav.jsx';
 import InventoryUsagePie from './inventoryUsagePie.jsx';
 import InventoryCostLine from './inventoryCostLine.jsx';
@@ -360,14 +360,16 @@ class InventoryInfo extends React.Component {
             )}
           </div>
           
-          <div className="sales-graph-options" style={{ color: 'black' }}>
-            <Select
-              options={[{ value: 'usage', label: 'Usage' }, { value: 'cost', label: 'Cost' }, { value: 'waste', label: 'Waste' }]}
-              placeholder="Select a graph"
-              onChange={value => this.setState({ viewType: value.value })}
-            />
-            <button onClick={this.showAddInventory}>Add An Ingredient</button>
-            <button onClick={this.showRemoveInventory}>Remove An Ingredient</button>
+          <div className="inventory-graph-options" style={{ color: 'black' }}>
+            <div>
+              <Select
+                options={[{ value: 'usage', label: 'Usage' }, { value: 'cost', label: 'Cost' }, { value: 'waste', label: 'Waste' }]}
+                placeholder="Select a graph"
+                onChange={value => this.setState({ viewType: value.value })}
+              />
+            </div>
+            <div><button onClick={this.showAddInventory} style={{ backgroundColor: '#349eff', paddingLeft: '11%', paddingRight: '11%' }}>Add An Ingredient</button></div>
+            <div><button onClick={this.showRemoveInventory} style={{ backgroundColor: '#f05b47', paddingLeft: '6%', paddingRight: '6%' }}>Remove An Ingredient</button></div>
           </div>
 
           { (showAdd === true) ? (
@@ -390,13 +392,15 @@ class InventoryInfo extends React.Component {
           </div>
           ) : ( 
             <div className="removeInventoryForm">
-              <Select
-                options={this.state.ingredientDropDown}
-                placeholder="Select an ingredient"
-                value={this.state.ingredientToRemove}
-                onChange={value => this.setState({ ingredientToRemove: value })}
-              />
-              <button onClick={this.handleRemoveIngredient}>Remove</button>
+              <div className="removeInventoryForm-dropdown">
+                <Select
+                  options={this.state.ingredientDropDown}
+                  placeholder="Select an ingredient"
+                  value={this.state.ingredientToRemove}
+                  onChange={value => this.setState({ ingredientToRemove: value })}
+                />
+              </div>
+              <span onClick={this.handleRemoveIngredient}><i class="fas fa-minus-circle" /></span>
             </div>) 
           }
           <div id="alertRemovalModal" className="alertRemovalModal animated fadeIn">
@@ -405,8 +409,8 @@ class InventoryInfo extends React.Component {
             </div>
             <div className="alert-removal-modal-body">This ingredient cannot be removed. It is currently used in {this.state.alertItems}. You may change your menu items first.</div>
             <div className="alert-removal-modal-footer">
-              <button onClick={() => <Redirect to="/managercustomize" />}>Change Menu Items</button>
-              <button onClick={() => this.closeModal('alertRemovalModal')}>Cancel</button>
+              <button onClick={() => this.props.history.push("/managercustomize")} style={{ color: '#349eff' }}>Change Menu Items</button>
+              <button onClick={() => this.closeModal('alertRemovalModal')} style={{ color: '#f05b47' }}>Cancel</button>
             </div>
           </div>
 
@@ -429,4 +433,4 @@ class InventoryInfo extends React.Component {
   }
 }
 
-export default InventoryInfo;
+export default withRouter(InventoryInfo);
