@@ -8,7 +8,8 @@ import axios from 'axios';
 import { withRouter } from 'react-router';
 import ReactTable from 'react-table';
 import ConfirmationModal from './confirmationModal.jsx';
-import socket from '../socket.js'
+import socket from '../socket.js';
+import { Upload, message, Button, Icon } from 'antd';
 
 const columns =
 [
@@ -434,21 +435,33 @@ class EmployeeInfo extends React.Component {
               />
               <br />
               <label className="newEmployeeNameLabel">Enter Employee Name: </label>
-              <input type="text" onBlur={(e) => this.handleNameInput(e)} />
-              <br /><br />
-              <button onClick={e => this.generateEmployeeId(e)}>Generate Employee ID</button>
-              <label className="employeeIdLabel">{this.state.newEmployeeId}</label>
-              <br /><br />
+              <input style={{ border: '2px solid #5493ff', padding: '2%' }} type="text" onBlur={(e) => this.handleNameInput(e)} />
+              <br />
               <div>
+                <button onClick={e => this.generateEmployeeId(e)}>Generate Employee ID</button>
+                <label className="employeeIdLabel">{this.state.newEmployeeId}</label>
+              </div>
+              <div>
+                <label for="file-upload" class="custom-file-upload">
+                  <i class="fas fa-upload"></i> Image Upload
+                </label>
+                <label style={{ marginLeft: '1%' }}>
+                  {
+                    this.state.newEmployeeImage ? this.state.newEmployeeImage[0].name : ''
+                  }
+                </label>
                 <input
+                  id="file-upload"
                   type="file"
                   onChange={e => this.setState({ newEmployeeImage: e.target.files })}
                   placeholder="Upload a photo"
                   accept='image/*'
                 />
               </div>
-              <button onClick={(e) => this.submitEmployee(e)}>Submit</button>
-              <button onClick={(e) => this.openConfirmation(e,'deleteEmployeeModal')}>Delete Employee</button>
+              <div>
+                <button onClick={(e) => this.submitEmployee(e)}>Submit</button>
+                <button onClick={(e) => this.openConfirmation(e,'deleteEmployeeModal')}>Delete Employee</button>
+              </div>
             </form>
           </div>
           <div>
