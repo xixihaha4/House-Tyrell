@@ -165,7 +165,6 @@ app.post('/create/item', upload.any(), (req, res) => {
   db.Item.create({
     item_name: req.body.item_name,
     item_price: req.body.item_price,
-    item_image: req.files[0].location,
     item_ingredients: JSON.stringify(req.body.item_ingredients),
     item_category: req.body.item_category
   }).then(() => {
