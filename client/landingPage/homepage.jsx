@@ -42,7 +42,7 @@ class HomePage extends React.Component {
                 <span className="secondHeader">
                   Are
                 </span>
-                <span className="thirdHeader">
+                <span className="thirdHeader" style={{ color: '#e75a5b' }}>
                   OctoPOS
                 </span>
               </div>

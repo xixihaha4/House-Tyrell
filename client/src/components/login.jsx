@@ -91,10 +91,12 @@ export default class Login extends React.Component {
         </audio>
         <h1 >
           <div className="animated fadeIn">
-            <div className="logo">
-              <span className="logo-text">House</span><i className="fas fa-circle-notch" ></i><span className="logo-text">Tyrell</span>
-            </div>
-            <div className="pinNumber-wrapper"><i className="far fa-keyboard"> </i>Enter your pin <i className="fas fa-hashtag"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
+            <div><img style={{ width: '50%', height: '50%'}} src='https://s3.amazonaws.com/tyrell-pos/octopus-Large.png' /></div>
+            <div className="pinNumber-wrapper">
+              <i className="far fa-keyboard" style={{ paddingRight: '2%' }} />
+              Enter your pin
+              <i className="fas fa-hashtag" style={{ paddingLeft: '2%' }} /> : <span className="pinNumber">{this.state.identification}</span>
+            </div><br />
             <Pinpad
               pinpadOptions={this.state.pinpadOptions}
               handlePin={this.handlePin}

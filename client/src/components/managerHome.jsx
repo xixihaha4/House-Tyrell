@@ -204,7 +204,7 @@ class ManagerHome extends React.Component {
               lowIngredients.length > 0
               ?
               lowIngredients.map(ingredient =>
-                (<h6><i className='fas fa-exclamation-circle' /> {ingredient.ingredient_name} </h6>))
+                (<h4><i className='fas fa-exclamation-circle' /> {ingredient.ingredient_name} </h4>))
               :
               (<h2 style={{ gridRow: '3', gridColumn: '1 / 6' }}><i className='fas fa-thumbs-up' /> No Low Ingredients</h2>)
             }
@@ -227,7 +227,7 @@ class ManagerHome extends React.Component {
               style={{ color: 'black' }}
             />
           </div>
-          <div style={{ gridColumn: '3 / 9', gridRow: '2 / 3' }}>
+          <div style={{ gridColumn: '3 / 9', gridRow: '2 / 3', padding: '3% 0' }}>
             <ManagerHomeBar />
           </div>
         </div>
