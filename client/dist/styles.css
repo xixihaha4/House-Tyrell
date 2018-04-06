@@ -77,7 +77,7 @@ html {
 .transactionClearButton {
   grid-row: 1;
   grid-column: 4;
-  color: red;
+  color: #f05b47;
   border-radius: 5%;
   padding-top: 3%
 
@@ -87,7 +87,7 @@ html {
   grid-row: 1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding-bottom: 1% 0;
+  padding-bottom: 8%;
 }
 
 .transactionGridItems {
@@ -95,7 +95,8 @@ html {
   overflow-y: scroll;
   max-height: 55vh;
   display:grid;
-  grid-template-rows: repeat(13, auto);
+  grid-template-rows: repeat(13, 1fr);
+  grid-row-gap: 5.5%;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -194,7 +195,7 @@ html {
   grid-row: 1 / 4;
 }
 .innerSaleGrid button:nth-child(2) {
-  background-color: #1778dc;
+  background-color: #348be6;
   font-size: 1.3em;
   grid-column: 3 / 5;
   grid-row: 1 / 4;
@@ -246,6 +247,7 @@ html {
   grid-row: 1 / 5;
   display: grid;
   grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh;
+  grid-row-gap: 6%;
   background-color: #333;
   height: 100%;
 }
@@ -1608,16 +1610,33 @@ html {
 /********discardModal********/
 
 /*****MANAGER TRANSACTION BUTTONS SAVEALL AND DISCARDALL ***/
+
+.transactionGridItemsManager {
+  position: relative;
+  grid-row: 2 / 5;
+  overflow-y: scroll;
+  display:grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 25% 50% 25%;
+  grid-row-gap: 5%;
+}
+
 .saveChanges {
-  text-align: center;
-  background-color: #1778dc;
+  position: relative;
+  background-color: #348be6;
   color: white;
+  font-size: 18px;
+  grid-row: 3;
+  grid-column: 2;
 }
 
 .discardChanges {
-  text-align: center;
-  background-color: #fc4747;
+  position: relative;
+  background-color: rgb(240, 91, 71);
   color: white;
+  font-size: 18px;
+  grid-row: 4;
+  grid-column: 2;
 }
 
 

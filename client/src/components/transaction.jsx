@@ -42,9 +42,9 @@ export default class Transaction extends React.Component {
       <div className='transactionGrid'>
 
         <div className='transactionGridHeader'>
-          <div style={{ 'gridRow': '1', 'gridColumn': '1' }}>Name</div>
-          <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Price</div>
-          <div style={{ 'gridRow': '1', 'gridColumn': '3' }} onClick={this.props.transactionClear} className='transactionClearButton'><i className="far fa-trash-alt"></i></div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '1' }} onClick={this.props.transactionClear} className='transactionClearButton'><i className="far fa-trash-alt"></i></div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '2' }}>Name</div>
+          <div style={{ 'gridRow': '1', 'gridColumn': '3' }}>Price</div>
         </div>
 
         <div className='transactionGridItems'>
@@ -54,7 +54,7 @@ export default class Transaction extends React.Component {
               onClick={() => {this.props.transactionRemove(i)}}
               style={{ gridRow: `${i + 1}`, gridColumn: '1', verticalAlign: 'top' }}
             >
-              <i className="fas fa-times-circle" style={{ color: 'rgb(224, 94, 94)' }} />
+              <i className="fas fa-times-circle" style={{ color: '#f05b47' }} />
             </div>
           ))}
           {this.props.transactionItems.map((item, i) =>
