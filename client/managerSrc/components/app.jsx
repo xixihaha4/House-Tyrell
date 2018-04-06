@@ -189,6 +189,15 @@ export default class App extends React.Component {
 
   handleNewItem(item) {
     let temp = this.state.newItems.slice();
+    let categoryName = item.item_category;
+    let tempCategories = this.state.menuCategories.slice();
+    for (let i = 0; i < tempCategories.length; i ++) {
+      if (tempCategories[i].category_name === item.item_category) {
+        item.item_category = tempCategories[i].id;
+        console.log('if block running', item.item_category)
+      }
+    }
+    console.log('this is the item now', item);
     temp.push(item);
     this.setState({ newItems: temp });
   }
@@ -298,6 +307,7 @@ export default class App extends React.Component {
     let categories = this.state.newCategories.slice();
     let removeItems = this.state.removedItems.slice();
     let removeCategories = this.state.removedCategories.slice();
+    console.log('this is new items', items)
     for (let i = 0; i < items.length; i += 1) {
       let formData = new FormData();
       items[i].item_ingredients = '' + JSON.stringify(items[i].item_ingredients)
