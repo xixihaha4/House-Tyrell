@@ -870,12 +870,12 @@ input[type="file"] {
 .navBack {
   position: relative;
   left: 1%;
-  top: 1%;
+  top: 0.5%;
   font-size: 1.5em;
 }
 .navAlert {
   position: relative;
-  left: 4%;
+  left: 2.5%;
   top: 1%;
   font-size: 1.5em;
 }
