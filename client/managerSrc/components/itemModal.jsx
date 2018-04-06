@@ -122,6 +122,7 @@ export default class itemModal extends React.Component {
           <div className="modal-body-manager">
             <input
               type="text"
+              className="modal-ingredient-input"
               value={this.state.item_name}
               onChange={(e) => this.setState({ item_name: e.target.value })}
               placeholder="Enter new Item Name"
@@ -129,6 +130,7 @@ export default class itemModal extends React.Component {
             />
             <input
               type="Number"
+              className="modal-ingredient-input"
               value={this.state.item_price}
               onChange={(e) => this.setState({ item_price: e.target.value })}
               placeholder="Enter Item Price"
@@ -154,6 +156,7 @@ export default class itemModal extends React.Component {
                   <div>
                     <input
                       id={`modal-item_input${i}`}
+                      className="modal-ingredient-input"
                       type="Number"
                       onChange={(e) => this.handleIngredientInput(e.target.value, i)}
                       readOnly
