@@ -1,7 +1,8 @@
 import React from 'react';
 import Alert from 'react-s-alert';
+import axios from 'axios';
 import Pinpad from './pinpad.jsx';
-import axios from 'axios'
+
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -92,7 +93,7 @@ export default class Login extends React.Component {
         <h1 >
           <div className="animated fadeIn">
             <div className="logo">
-              <span className="logo-text">House</span><i className="fas fa-circle-notch" ></i><span className="logo-text">Tyrell</span>
+              <span className="logo-text">Octo</span><i className="fas fa-circle-notch" ></i><span className="logo-text">POS</span>
             </div>
             <div className="pinNumber-wrapper"><i className="far fa-keyboard"> </i>Enter your pin <i className="fas fa-hashtag"></i>: <span className="pinNumber">{this.state.identification}</span></div><br />
             <Pinpad
