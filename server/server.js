@@ -219,7 +219,7 @@ app.post('/completed/transaction', (req, res) => {
           where: {
             id: itemList[i],
           },
-        }
+        },
       ).catch((error) => {
         res.send(error);
       });
@@ -299,7 +299,7 @@ app.post('/completed/transaction', (req, res) => {
 });
 
 app.post('/clockout', (req, res) => {
-  console.log('this is running', req.session.employee)
+  console.log('this is running', req.session.employee);
   db.Timesheet.update({
     check_out: moment().format('MM/DD/YYYY, hh:mm:ss a'),
   }, {
@@ -319,7 +319,7 @@ app.post('/clockout', (req, res) => {
 
 
 app.post('/newEmployee', upload.any(), (req, res) => {
-  console.log('this is req.files', req.files)
+  console.log('this is req.files', req.files);
   db.Employee.create({
     employee_id: req.body.newEmployeeId,
     employee_name: req.body.newEmployeeName,
@@ -614,7 +614,7 @@ app.get('/fetch/allitems', (req, res) => {
 
 app.get('/fetch/employee', (req, res) => {
   let employee;
-  console.log('hello')
+  console.log('hello');
   db.Employee.findAll({
     where: {
       employee_id: req.query.PIN,
@@ -624,10 +624,10 @@ app.get('/fetch/employee', (req, res) => {
       if (data.length === 0) {
         res.status(404).send();
       } else {
-        console.log('this is data', data)
+        console.log('this is data', data);
         employee = JSON.parse(JSON.stringify(data));
         employee = employee[0]
-        console.log('this is employee', employee)
+        console.log('this is employee', employee);
         db.Timesheet.findOne({
           where: {
             employee_id: req.query.PIN,
@@ -637,7 +637,7 @@ app.get('/fetch/employee', (req, res) => {
           // if (!emp) {
             req.session.regenerate(() => {
               req.session.employee = req.query.PIN;
-              console.log('this is req.session', req.session.employee)
+              console.log('this is req.session', req.session.employee);
               res.send([employee])
               db.Timesheet.create({
                 employee_id: req.query.PIN,
@@ -766,7 +766,7 @@ app.post('/cronTest', (req, res) => {
             items = menu;
             for (let i = 0; i < ingredients.length; i += 1) {
               if (currentTimeParse > Date.parse(ingredients[i].ingredient_expire)) {
-                expired.push(ingredients[i])
+                expired.push(ingredients[i]);
               }
             }
 
