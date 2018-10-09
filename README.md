@@ -1,6 +1,6 @@
 # OctoPOS
 
-A customizable Point of Sales system that seamlessly integrates real-time sales interface, inventory tracking, and graphical sales data analysis. 
+> A customizable Point of Sales system that seamlessly integrates real-time sales interface, inventory tracking, and graphical sales data analysis. 
 
 ## Table of Contents
 1. [Requirements](#requirements) 
@@ -25,6 +25,13 @@ From within the root directory, run the following:
 npm install -g webpack
 npm install
 ```
+
+### Steps
+Run
+``` 
+npm start
+```
+In a browser navigate to localhost:3000
 
 ### MySQL Database
 The current MySQL database connection is configured with AWS RDS with a read only Replica database to elastically scale out beyond the capacity constraints of a single database.
