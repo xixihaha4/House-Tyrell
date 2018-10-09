@@ -6,17 +6,17 @@ export default class confirmationModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      'dummy': 'dummy'
-    }
+      'dummy': 'dummy',
+    };
     this.saveChanges = this.saveChanges.bind(this);
   }
 
   saveChanges() {
-    axios.post('/delete/employee', {employee_id: this.props.employeeId})
+    axios.post('/delete/employee', { employee_id: this.props.employeeId })
       .then(() => {
         this.props.deletedEmployee();
         this.props.closeDelete('deleteEmployeeModal');
-      })
+      });
   }
 
   render() {
@@ -45,9 +45,8 @@ export default class confirmationModal extends React.Component {
             </div>
           </div>
           <div className="modal-footer-deleteEmployee">Delete Employee Information</div>
-
+        </div>
       </div>
-     </div>
-    )
+    );
   }
 }

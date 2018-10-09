@@ -5,7 +5,7 @@ export default class CustomizeIngredients extends React.Component {
     super(props);
     this.state = {
       crossed: false,
-    }
+    };
     this.crossOutItem = this.crossOutItem.bind(this);
     this.remove = this.remove.bind(this);
     this.add = this.add.bind(this);
@@ -18,13 +18,13 @@ export default class CustomizeIngredients extends React.Component {
   remove() {
     this.setState({ crossed: !this.state.crossed}, () => {
       this.props.removeIng(this.props.ingredient, this.props.i, this.state.crossed, this.props.index)
-    })
+    });
   }
 
   add() {
     this.setState({ crossed: !this.state.crossed}, () => {
       this.props.addIng(this.props.ingredient, this.props.i, this.state.crossed, this.props.index)
-    })
+    });
   }
 
   crossOutItem() {
@@ -34,7 +34,7 @@ export default class CustomizeIngredients extends React.Component {
       } else {
         this.add()
       }
-    })
+    });
 
   }
 

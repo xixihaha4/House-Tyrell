@@ -8,9 +8,9 @@ class SaleControl extends React.Component {
     super(props);
     this.state = {
       dummy: 'dummy',
-    }
+    };
     this.testingCron = this.testingCron.bind(this);
-  };
+  }
 
   testingCron() {
   axios.post('/cronTest')

@@ -9,9 +9,8 @@ export default class ManagerCustomize extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      'dummy': 'dummy'
-    }
-
+      'dummy': 'dummy',
+    };
   }
 
   render() {
@@ -27,6 +26,6 @@ export default class ManagerCustomize extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

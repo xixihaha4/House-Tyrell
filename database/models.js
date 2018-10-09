@@ -13,7 +13,7 @@ const db = new Sequelize(DB_NAME, null, null, {
     ],
     write: { host: DB_URL, username: DB_UN, password: DB_PW },
   },
-});
+}); 
 
 const Employee = db.define('Employees', {
   employee_id: Sequelize.INTEGER,

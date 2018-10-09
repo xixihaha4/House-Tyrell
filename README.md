@@ -10,6 +10,7 @@ React.js
 MySQL
 Sequelize
 Socket.io
+C3
 React-Table
 
 ### Installing Dependencies
@@ -29,6 +30,6 @@ Eric Sin,
 Manos Kourkoulakos
 
 ## Style Guide
-This codebase follows the AirBnB style guide incorporated using a linter.  All submitted Pull Requests should also follow AirBnB's style guide.  If you don't have a linter installed,
+This codebase follows the AirBnB style guide incorporated using a linter. All submitted Pull Requests should also follow AirBnB's style guide.
 
 Two examples for configuring your environment to adhere to this style guide can be found [here](http://www.acuriousanimal.com/2016/08/14/configuring-atom-with-eslint.html) for Atom and [here](https://travishorn.com/setting-up-eslint-on-vs-code-with-airbnb-javascript-style-guide-6eb78a535ba6) for VSCode.

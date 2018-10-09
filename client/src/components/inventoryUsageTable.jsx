@@ -94,7 +94,7 @@ class InventoryUsageTable extends React.Component {
         }]}
         />
       </div>
-    )
+    );
   }
 }
 

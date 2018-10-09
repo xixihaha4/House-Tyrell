@@ -39,9 +39,8 @@ class TransactionCash extends React.Component {
     this.setState({
       tendered: (this.state.tendered === '')? '' : parseFloat(this.state.tendered).toFixed(2),
       completed: !this.state.completed,
-      pinpadOn: !this.state.pinpadOn
+      pinpadOn: !this.state.pinpadOn,
     });
-
   }
 
   transactionComplete() {
@@ -58,7 +57,7 @@ class TransactionCash extends React.Component {
     if (val === 'enter') {
       this.verifyTotal();
     } else if (val === 'clear') {
-      this.setState({ tendered: '', decimal: false })
+      this.setState({ tendered: '', decimal: false });
     } else if (this.state.tendered.length < 12) {
       if (val === '.') {
         if (this.state.decimal === false) {
@@ -67,7 +66,7 @@ class TransactionCash extends React.Component {
         }
       } else {
         const temp = this.state.tendered;
-        this.setState({ tendered: temp + val })
+        this.setState({ tendered: temp + val });
       }
     }
   }
