@@ -18,6 +18,7 @@
 * Socket.io
 * C3
 * React-Table
+* Cron
 
 ### Installing Dependencies
 From within the root directory, run the following:
