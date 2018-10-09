@@ -27,7 +27,6 @@ npm install
 ```
 
 ### Steps
-Run
 ``` 
 npm start
 ```
