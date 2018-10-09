@@ -1,33 +1,33 @@
 # OctoPOS
 
-A customizable Point of Sales system that seamlessly integrates real-time sales interface, inventory tracking, and graphical sales data analysis.  
+A customizable Point of Sales system that seamlessly integrates real-time sales interface, inventory tracking, and graphical sales data analysis. 
+
+## Table of Contents
+1. [Requirements](#requirements) 
+1. [Installing Dependencies](#installing-dependencies)
+1. [MySQL Database](#mysql-database)
+1. [Style Guide](#style-guide)
 
 ## Getting Started
 
 ### Requirements
-Node.js
-React.js
-MySQL
-Sequelize
-Socket.io
-C3
-React-Table
+* Node.js
+* React.js
+* MySQL
+* Sequelize
+* Socket.io
+* C3
+* React-Table
 
 ### Installing Dependencies
 From within the root directory, run the following:
 ``` 
+npm install -g webpack
 npm install
 ```
 
 ### MySQL Database
-The current MySQL database connection is configured with AWS RDS.
-It is also set up with a Master-Replica structure, where the Replica database only reads data, while the Master database reads and writes data. This feature makes it easy to elastically scale out beyond the capacity constraints of a single DB instance for read-heavy database workloads. 
-
-## Team
-Xixi Chen,
-Jerry Chen,
-Eric Sin,
-Manos Kourkoulakos
+The current MySQL database connection is configured with AWS RDS with a read only Replica database to elastically scale out beyond the capacity constraints of a single database.
 
 ## Style Guide
 This codebase follows the AirBnB style guide incorporated using a linter. All submitted Pull Requests should also follow AirBnB's style guide.
