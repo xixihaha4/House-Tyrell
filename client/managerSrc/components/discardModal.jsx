@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default class discardModal extends React.Component {
+export default class DiscardModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

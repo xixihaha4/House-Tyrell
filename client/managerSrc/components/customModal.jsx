@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import CustomizeIngredients from './customizeIngredients.jsx'
+import CustomizeIngredients from './CustomizeIngredients.jsx'
 
 export default class CustomModal extends React.Component {
   constructor(props) {

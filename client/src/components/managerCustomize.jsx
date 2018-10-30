@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Navbar from './navbar.jsx';
-import Navigation from './managerNav.jsx';
-import App from '../../managerSrc/components/app.jsx'
+import Navbar from './Navbar.jsx';
+import Navigation from './ManagerNav.jsx';
+import App from '../../managerSrc/components/App.jsx'
 
 
 export default class ManagerCustomize extends React.Component {

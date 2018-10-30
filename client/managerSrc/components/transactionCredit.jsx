@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import SignatureCanvas from 'react-signature-canvas';
 import axios from 'axios';
-import Navbar from './navbar.jsx';
+import Navbar from './Navbar.jsx';
 
 class TransactionCredit extends React.Component {
   constructor(props) {

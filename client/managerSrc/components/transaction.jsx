@@ -1,9 +1,8 @@
-  import React from 'react';
+import React from 'react';
 // import ReactModal from 'react-modal';
-import CustomModal from './customModal.jsx';
-import TransactionItem from './transactionItem.jsx'
-import SaleControl from './saleControl.jsx';
-
+import CustomModal from './CustomModal.jsx';
+import TransactionItem from './TransactionItem.jsx'
+import SaleControl from './SaleControl.jsx';
 
 
 export default class Transaction extends React.Component {
@@ -31,10 +30,6 @@ export default class Transaction extends React.Component {
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
-
-
-
-
   render() {
     let showDiscount = null;
     if (this.props.discount > 0) {

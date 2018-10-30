@@ -660,7 +660,7 @@ app.get('/fetch/employee', (req, res) => {
 
 });
 
-app.get('/fetch/employeeInfo', auth, (req, res) => {
+app.get('/fetch/EmployeeInfo', auth, (req, res) => {
   db.Employee.findAll({
     where: {
       employee_id: req.session.employee,

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
-import VoidList from './voidList.jsx';
+import VoidList from './VoidList.jsx';
 import socket from '../socket.js';
 
 export default class VoidModal extends React.Component {

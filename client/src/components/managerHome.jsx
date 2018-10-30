@@ -3,9 +3,9 @@ import axios from 'axios';
 import moment from 'moment';
 import ReactTable from 'react-table';
 import Select from 'react-select';
-import Navigation from './managerNav.jsx';
-import Navbar from './navbar.jsx';
-import ManagerHomeBar from './managerHomeBar.jsx';
+import Navigation from './ManagerNav.jsx';
+import Navbar from './Navbar.jsx';
+import ManagerHomeBar from './ManagerHomeBar.jsx';
 import socket from '../socket.js';
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router';
-import Navbar from './navbar.jsx';
+import Navbar from './Navbar.jsx';
 
 class TransactionCashConfirm extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class TransactionCashConfirm extends React.Component {
       discount: this.props.location.state.discount,
       type: this.state.type
     }).then(() => {
-      this.props.history.push('/managercustomize');
+      this.props.history.push('/ManagerCustomize');
     })
   }
 

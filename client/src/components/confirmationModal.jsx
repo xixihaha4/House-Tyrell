@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 
-export default class confirmationModal extends React.Component {
+export default class ConfirmationModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

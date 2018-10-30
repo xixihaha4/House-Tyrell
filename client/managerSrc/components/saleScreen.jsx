@@ -1,16 +1,16 @@
 import React from 'react';
-import SaleItems from './saleItems.jsx';
-import SaleCategory from './saleCategory.jsx';
-import Transaction from './transaction.jsx';
-import SaleControl from './saleControl.jsx';
-// import Navbar from './navbar.jsx';
-import ItemModal from './itemModal.jsx';
+import SaleItems from './SaleItems.jsx';
+import SaleCategory from './SaleCategory.jsx';
+import Transaction from './Transaction.jsx';
+import SaleControl from './SaleControl.jsx';
+// import Navbar from './Navbar.jsx';
+import ItemModal from './ItemModal.jsx';
 import Select from 'react-select';
 import CategoryModal from './categoryModal.jsx';
-import ConfirmationModal from './confirmationModal.jsx';
-import DiscardModal from './discardModal.jsx';
-import RemoveItemModal from './removeItemModal.jsx';
-import RemoveCategoryConfirm from './removeCategoryConfirm.jsx'
+import ConfirmationModal from './ConfirmationModal.jsx';
+import DiscardModal from './DiscardModal.jsx';
+import RemoveItemModal from './RemoveItemModal.jsx';
+import RemoveCategoryConfirm from './RemoveCategoryConfirm.jsx'
 
 const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear, getMenuItems, getCategories, openModal, closeModal, handleNewItem, handleNewCategory, saveChanges, discardChanges, categories, ingredients, catOptions, removeItem, handleRemoveConfirm, removeCategoryConfirm, confirmCategoryConfirm }) =>
   (

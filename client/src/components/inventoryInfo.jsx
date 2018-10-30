@@ -1,14 +1,14 @@
 import React from 'react';
-import Navigation from './managerNav.jsx';
-import InventoryUsagePie from './inventoryUsagePie.jsx';
-import InventoryCostLine from './inventoryCostLine.jsx';
-import InventoryWastePie from './inventoryWastePie.jsx';
+import Navigation from './ManagerNav.jsx';
+import InventoryUsagePie from './InventoryUsagePie.jsx';
+import InventoryCostLine from './InventoryCostLine.jsx';
+import InventoryWastePie from './InventoryWastePie.jsx';
 import Select from 'react-select';
-import Navbar from './navbar.jsx';
+import Navbar from './Navbar.jsx';
 import axios from 'axios';
-import InventoryUsageTable from './inventoryUsageTable.jsx';
-import InventoryCostTable from './inventoryCostTable.jsx';
-import InventoryWasteTable from './inventoryWasteTable.jsx';
+import InventoryUsageTable from './InventoryUsageTable.jsx';
+import InventoryCostTable from './InventoryCostTable.jsx';
+import InventoryWasteTable from './InventoryWasteTable.jsx';
 
 class InventoryInfo extends React.Component {
   constructor(props) {

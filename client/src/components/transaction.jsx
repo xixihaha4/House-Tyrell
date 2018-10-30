@@ -1,8 +1,8 @@
 import React from 'react';
 // import ReactModal from 'react-modal';
-import CustomModal from './customModal.jsx';
-import TransactionItem from './transactionItem.jsx'
-import SaleControl from './saleControl.jsx';
+import CustomModal from './CustomModal.jsx';
+import TransactionItem from './TransactionItem.jsx'
+import SaleControl from './SaleControl.jsx';
 
 
 

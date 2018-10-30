@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 
-export default class itemModal extends React.Component {
+export default class ItemModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

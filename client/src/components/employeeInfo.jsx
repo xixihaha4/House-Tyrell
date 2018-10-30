@@ -1,13 +1,13 @@
 import React from 'react';
-import Navigation from './managerNav.jsx';
-import EmployeeBar from './employeeBar.jsx';
-import Navbar from './navbar.jsx';
+import Navigation from './ManagerNav.jsx';
+import EmployeeBar from './EmployeeBar.jsx';
+import Navbar from './Navbar.jsx';
 import moment from 'moment'
 import Select from 'react-select';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 import ReactTable from 'react-table';
-import ConfirmationModal from './confirmationModal.jsx';
+import ConfirmationModal from './ConfirmationModal.jsx';
 import socket from '../socket.js'
 
 const columns =

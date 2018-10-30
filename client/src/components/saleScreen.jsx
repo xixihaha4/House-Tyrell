@@ -1,11 +1,11 @@
 import React from 'react';
 import Select from 'react-select';
-import SaleItems from './saleItems.jsx';
-import SaleCategory from './saleCategory.jsx';
-import Transaction from './transaction.jsx';
-import SaleControl from './saleControl.jsx';
-import Navbar from './navbar.jsx';
-import VoidModal from './voidModal.jsx';
+import SaleItems from './SaleItems.jsx';
+import SaleCategory from './SaleCategory.jsx';
+import Transaction from './Transaction.jsx';
+import SaleControl from './SaleControl.jsx';
+import Navbar from './Navbar.jsx';
+import VoidModal from './VoidModal.jsx';
 
 const SaleScreen = ({ menuItems, itemClick, menuCategories, transactionItems, total, tax, discount, openModal, closeModal, discountOptions, updateDiscount, transactionRemove, filterByCategory, removeIng, transactionComplete, transactionClear, addIng }) =>
   (

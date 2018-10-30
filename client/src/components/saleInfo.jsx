@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import Navigation from './managerNav.jsx';
-import SaleLine from './saleLine.jsx';
-import SaleTable from './saleTable.jsx';
-import Navbar from './navbar.jsx';
+import Navigation from './ManagerNav.jsx';
+import SaleLine from './SaleLine.jsx';
+import SaleTable from './SaleTable.jsx';
+import Navbar from './Navbar.jsx';
 import Select from 'react-select';
 
 class SaleInfo extends React.Component {

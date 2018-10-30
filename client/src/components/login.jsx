@@ -1,7 +1,7 @@
 import React from 'react';
 import Alert from 'react-s-alert';
 import axios from 'axios';
-import Pinpad from './pinpad.jsx';
+import Pinpad from './Pinpad.jsx';
 
 
 export default class Login extends React.Component {
@@ -29,7 +29,7 @@ export default class Login extends React.Component {
   verifyLogin() {
     if(this.state.identification !== '') {
       if (this.state.identification === '1') {
-        this.props.history.push('/managerHome');
+        this.props.history.push('/ManagerHome');
       } else if (this.state.identification === '2') {
         this.props.history.push('/salesScreen');
       } else if (this.state.identification === '548') {
@@ -39,7 +39,7 @@ export default class Login extends React.Component {
           .then((results) => {
             console.log('this is results.data', results.data)
             if (results.data[0].manager_privilege === true) {
-              this.props.history.push('/managerHome');
+              this.props.history.push('/ManagerHome');
             } else {
               //socket.emit(employeelogin)
 

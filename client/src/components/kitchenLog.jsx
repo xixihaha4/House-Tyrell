@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import OrderKitchenView from './orderKitchenView.jsx';
+import OrderKitchenView from './OrderKitchenView.jsx';
 import socket from '../socket.js';
-import Navbar from './navbar.jsx';
+import Navbar from './Navbar.jsx';
 
 export default class KitchenLog extends React.Component {
   constructor(props) {

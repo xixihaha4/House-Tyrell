@@ -3,8 +3,8 @@ import { withRouter } from 'react-router';
 import SignatureCanvas from 'react-signature-canvas';
 import axios from 'axios';
 import Alert from 'react-s-alert';
-import Pinpad from './pinpad.jsx';
-import Navbar from './navbar.jsx';
+import Pinpad from './Pinpad.jsx';
+import Navbar from './Navbar.jsx';
 
 class TransactionCash extends React.Component {
   constructor(props) {

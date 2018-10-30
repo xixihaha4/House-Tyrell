@@ -1,7 +1,7 @@
 import React from 'react';
-import SaleScreen from './saleScreen.jsx';
+import SaleScreen from './SaleScreen.jsx';
 import axios from 'axios';
-// import Login from './login.jsx';
+// import Login from './Login.jsx';
 import Alert from 'react-s-alert';
 
 export default class App extends React.Component {

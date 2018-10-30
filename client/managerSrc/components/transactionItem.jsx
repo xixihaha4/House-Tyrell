@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomModal from './customModal.jsx'
+import CustomModal from './CustomModal.jsx'
 
 export default class TransactionItem extends React.Component {
   constructor(props) {

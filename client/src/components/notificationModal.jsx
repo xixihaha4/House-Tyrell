@@ -14,14 +14,14 @@ export default class NotificationModal extends React.Component {
   }
 
   render() {
-    console.log('this is props in notificationModal', this.props)
+    console.log('this is props in NotificationModal', this.props)
     return (
       this.props.isManager ?
       <div id="notificationModal" className="notificationModal animated fadeIn">
         <div className="modal-content-notification">
           <div className="modal-header-notification">
             <div className="modal-title">Alerts from Employees</div>
-            <div className="modal-close" onClick={() => this.props.closeNotification('notificationModal')}><i className="fas fa-times-circle"></i></div>
+            <div className="modal-close" onClick={() => this.props.closeNotification('NotificationModal')}><i className="fas fa-times-circle"></i></div>
           </div>
           <div className="modal-body-notification">
             <h3>These are the current alerts.</h3>
@@ -66,7 +66,7 @@ export default class NotificationModal extends React.Component {
         <div className="modal-content-notification">
           <div className="modal-header-notification">
             <div className="modal-title">Alerts from Manager</div>
-            <div className="modal-close" onClick={() => this.props.closeNotification('notificationModal')}><i className="fas fa-times-circle"></i></div>
+            <div className="modal-close" onClick={() => this.props.closeNotification('NotificationModal')}><i className="fas fa-times-circle"></i></div>
           </div>
           <div className="modal-body-notification">
             <h3 style={{textAlign: 'center'}}>A Manager has seen your alert.</h3>

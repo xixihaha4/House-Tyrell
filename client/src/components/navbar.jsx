@@ -4,7 +4,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router';
 import moment from 'moment';
 import socket from '../socket.js'
-import NotificationModal from './notificationModal.jsx';
+import NotificationModal from './NotificationModal.jsx';
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -78,7 +78,7 @@ class Navbar extends React.Component {
   }
 
   onEmployeeLogin() {
-    axios.get('/fetch/employeeInfo', ({}))
+    axios.get('/fetch/EmployeeInfo', ({}))
       .then((results) => {
         console.log('this is employee info', results.data, results.data.manager_privilege)
         this.setState({
@@ -149,7 +149,7 @@ class Navbar extends React.Component {
           isManager={this.state.isManager}
           employeeAcknowledge={this.employeeAcknowledge}
         />
-        <span className="navbar-bars"style={{fontSize:"30px", cursor:"pointer"}} onClick={() => this.openNav()}><i className="fas fa-bars" /></span>
+        <span className="Navbar-bars"style={{fontSize:"30px", cursor:"pointer"}} onClick={() => this.openNav()}><i className="fas fa-bars" /></span>
         <nav id="mySidenav" className="sidenav">
           <a href="javascript:void(0)" className="closebtn" onClick={() => this.closeNav()}>&times;</a>
           <a onClick={this.alertManager}>Alert Manager</a>
@@ -164,8 +164,8 @@ class Navbar extends React.Component {
             <div className="fas fa-exclamation"></div>
           </span>
         }
-        <span className="navbar-time"><Moment interval={1000} format={"MM/DD/YYYY hh:mm:ss a"} /></span>
-        <span className="navbar-employee">{this.state.employeeName}</span>
+        <span className="Navbar-time"><Moment interval={1000} format={"MM/DD/YYYY hh:mm:ss a"} /></span>
+        <span className="Navbar-employee">{this.state.employeeName}</span>
       </div>
     );
   }
